@@ -16,6 +16,6 @@ npm install class-transformer --save
 npm i @nestjs/mapped-types --save
 npm install --save @nestjs/swagger
 npm install --save @nestjs/config
-npm install dotenv --save
+npm install dotenv
 ```
 
