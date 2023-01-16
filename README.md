@@ -23,7 +23,7 @@ npm install dotenv --save
 ### CLIENT
 Dentro de la carpeta /client/:
 ```
-npm install @angular/cli@6.2.1
+npm install @angular/cli
 npm install
 npm install @angular/material --save
 npm install @angular/animations --save
