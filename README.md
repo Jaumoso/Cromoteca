@@ -4,6 +4,8 @@ Cromoteca es una aplicación web para la colección e intercambio de cromos.
 
 ## Requerimientos para que todo funcione
 
+NODE Version: 16.10
+
 ```
 npm i -g @nestjs/cli
 ```
@@ -25,7 +27,7 @@ Dentro de la carpeta /client/:
 ```
 npm install @angular/cli
 npm install
-npm install @angular/material --save
+npm install @angular/material@14.2 --save
 npm install @angular/animations --save
 npm install hammerjs --save
 npm install @angular/flex-layout --save
@@ -76,4 +78,12 @@ Importar font awesome en styles.scss:
 ```
 @import 'variables';
 @import '../node_modules/font-awesome/scss/font-awesome.scss';
+```
+
+# TO-DO:
+
+En login.component.html:
+Hacer que 'required' funcione
+```
+<mat-error *ngIf="username.errors?.required">Username is required.</mat-error>
 ```
