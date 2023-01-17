@@ -79,3 +79,11 @@ Importar font awesome en styles.scss:
 @import 'variables';
 @import '../node_modules/font-awesome/scss/font-awesome.scss';
 ```
+
+# TODO:
+
+En login.component.html:
+Hacer que 'required' funcione
+```
+<mat-error *ngIf="username.errors?.required">Username is required.</mat-error>
+```
