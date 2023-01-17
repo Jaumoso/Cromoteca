@@ -80,7 +80,7 @@ Importar font awesome en styles.scss:
 @import '../node_modules/font-awesome/scss/font-awesome.scss';
 ```
 
-# TODO:
+# TO-DO:
 
 En login.component.html:
 Hacer que 'required' funcione
