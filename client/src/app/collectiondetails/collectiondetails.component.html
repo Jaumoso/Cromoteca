@@ -1,0 +1,65 @@
+<!-- Título y filtros -->
+<div class="top-header" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign.xs="start center"
+    fxLayoutAlign.sm="start center" fxLayoutAlign.gt-sm="center center" fxLayoutGap="10px">
+    <div>
+        <h2>Detalles de la colección</h2>
+    </div>
+</div>
+<div class="back" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" 
+fxLayoutAlign.xs="start center" fxLayoutAlign.sm="start center" fxLayoutAlign.gt-sm="center start" 
+fxLayoutGap="10px">
+    <div class="left-details" fxFlex="60%" fxFlex.gt-sm="100%">
+        <h2>{{collection?.name}}</h2>
+        <img src={{collection?.image}} alt={{collection?.name}}>
+        <div>
+             <!-- TODO: -->
+            <button mat-button>AÑADIR A LA BIBLIOTECA</button>
+        </div>
+    </div>
+    <div fxFlex="40%" fxFlex.gt-sm="100%" class="right-details">
+        <div class="table-container">
+            <table class="details-table">
+                <tr>
+                    <th colspan="2" id="tabletitle">Datos</th>
+                </tr>
+                <tr>
+                    <th>Nombre de la colección</th>
+                    <td>{{collection?.name}}</td>
+                </tr>
+                <tr>
+                    <th>Descripción</th>
+                    <td class="td-grey">{{collection?.description}}</td>
+                </tr>
+                <tr>
+                    <th>Formato</th>
+                    <td>{{collection?.format}}</td>
+                </tr>
+                <tr>
+                    <th>Tema</th>
+                    <td class="td-grey">{{collection?.theme}}</td>
+                    </tr>
+                <tr>
+                    <th>Tamaño de la colección</th>
+                    <td>{{collection?.size}}</td>
+                </tr>
+                <tr>
+                    <th>Año de publicación</th>
+                    <td class="td-grey">{{collection?.year}}</td>
+                </tr>
+                <tr>
+                    <th>Editora</th>
+                    <td>{{collection?.publisher}}</td>
+                </tr>
+                <tr>
+                    <th>Idioma</th>
+                    <td class="td-grey">{{collection?.language}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign.xs="start center"
+    fxLayoutAlign.sm="start center" fxLayoutAlign.gt-sm="center center" fxLayoutGap="10px">
+    <button class="go-back" mat-button [routerLink]="['/collections']" routerLinkActive="router-link-active">ATRÁS</button>
+</div>
+<br>

@@ -27,6 +27,7 @@ $text-color: midnightblue;
     mat-card {
         margin-bottom: 16px;
         box-shadow: 1px 1px 5px 2px rgb(99, 99, 99);
+        overflow: hidden;
 
         mat-card-header {
             min-height: 50px;
@@ -40,20 +41,30 @@ $text-color: midnightblue;
                 height: 40px;
             }
         }
-        img {
-            object-fit: cover;
-/*             object-fit: scale-down;
-            object-fit: contain; */
-            height: 300px;
+
+        .img-contain {
+            overflow: hidden;
         }
 
-        img:hover {
-            -moz-transform: scale(1.1);
-            -webkit-transform: scale(1.1);
-            transform: scale(1.1);
-            transition: ease-in-out;
+        img {
+            object-fit: cover;
+/*          object-fit: scale-down;
+            object-fit: contain; */
+            height: 300px;
+            transition: all 0.3s;
+            transform: scale(1,1) rotate(0deg);
         }
-        
+
+/*         img:hover {
+            transition: all 0.3s;
+            transform: scale(1.1,1.1) rotate(3deg);
+        } */
+
+/*         mat-card:hover ~ img {
+            transition: all 0.3s;
+            transform: scale(1.2,1.2) rotate(5deg);
+        }
+         */
         mat-card-actions {
             
             button {
@@ -62,11 +73,21 @@ $text-color: midnightblue;
                 color: white;
                 padding: 10px;
                 margin-bottom: 5px;
+                font-weight: bold;
             }
             button:hover {
                 background-color: mix($background-dark, black, 80%);
+                font-weight: bold;
+            }
+            .button:active {
+                background-color: mix($background-dark, black, 70%);
+                font-weight: bold;
             }
         }
+    }
+    mat-card:hover img{
+        transition: all 0.3s;
+        transform: scale(1.1,1.1) rotate(3deg);
     }
 
 }

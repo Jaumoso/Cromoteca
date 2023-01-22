@@ -40,6 +40,17 @@ import { ProcessHTTPMsgService } from './process-httpmsg.service';
         });
     }
 
+    getCollection(collectionId: string): Promise<Collection> {
+      return new Promise((resolve, reject) => {
+        this.http.get<{collectionData: Collection}>(baseURL + 'collection/' + collectionId)
+        .subscribe(collection => {
+          resolve(collection.collectionData); console.log(collection.collectionData);
+        }, err => {
+          reject(err);
+        });
+      });
+    }
+
     // FUNCIONES PARA ADMINISTRADORES
     createCollection(collection: Collection): Promise<Collection> {
       const httpOptions = {

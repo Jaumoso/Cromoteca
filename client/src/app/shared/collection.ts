@@ -1,5 +1,5 @@
 export class Collection {
-    id: string | undefined;
+    _id: string | undefined;
     name: string | undefined;
     format: string | undefined;
     theme: string | undefined;

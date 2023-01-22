@@ -13,7 +13,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatCardModule } from '@angular/material/card';
 import { HttpClientModule } from '@angular/common/http';
 import { MatCommonModule } from '@angular/material/core';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatTableModule} from '@angular/material/table';
 
 import { baseURL } from './shared/baseurl';
 import 'hammerjs';
@@ -29,6 +30,7 @@ import { MarketComponent } from './market/market.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AboutComponent } from './about/about.component';
 import { FilterComponent } from './filter/filter.component';
+import { CollectiondetailsComponent } from './collectiondetails/collectiondetails.component';
 
 
 @NgModule({
@@ -44,6 +46,7 @@ import { FilterComponent } from './filter/filter.component';
     ProfileComponent,
     AboutComponent,
     FilterComponent,
+    CollectiondetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,6 +64,7 @@ import { FilterComponent } from './filter/filter.component';
     HttpClientModule,
     MatCommonModule,
     MatProgressSpinnerModule,
+    MatTableModule,
   ],
   providers: [
     { provide: 'BaseURL', useValue: baseURL },

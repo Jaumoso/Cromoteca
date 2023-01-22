@@ -1,0 +1,85 @@
+$background-light: powderblue;
+$background-dark: cornflowerblue;
+$background: steelblue;
+$text-color: midnightblue;
+$header-table-background: rgb(194, 194, 194);
+$data-table-background: rgb(219, 219, 219);
+
+@mixin zero-margin($pad-up-down, $pad-left-right) {
+    margin: 0px auto;
+    padding: $pad-up-down $pad-left-right;
+}
+
+.top-header {
+    @include zero-margin(10px,30px);
+    background: $background-light;
+    color: $text-color;
+    min-height: 75px;
+    border-radius: 0 0 15px 15px;
+}
+
+.left-details {
+    text-align: center;
+    img {
+        max-width: 400px;
+        max-height: 400px;
+    }
+
+    button {
+        width: 400px;
+        background-color: $background-dark;
+        color: white;
+        padding: 10px;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+    button:hover {
+        background-color: mix($background-dark, black, 80%);
+        font-weight: bold;
+    }
+    .button:active {
+        background-color: mix($background-dark, black, 70%);
+        font-weight: bold;
+    }
+}
+
+.right-details {
+    vertical-align:middle;
+
+    table {
+        margin-top:5%;
+        border: 3px solid $header-table-background;
+
+        #tabletitle {
+            text-align: center;
+        }
+
+        th {
+            background-color: $header-table-background;
+            padding: 10px;
+            text-align: left;
+        }
+        .td-grey {
+            background-color: $data-table-background;
+        }
+    }
+}
+
+.go-back {
+    width: 100px;
+    background-color: white;
+    color: black;
+    padding: 10px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+.go-back:hover {
+    background-color: mix($background-dark, black, 80%);
+    color: white;
+    font-weight: bold;
+}
+.go-back:active {
+    background-color: mix($background-dark, black, 70%);
+    font-weight: bold;
+}
+

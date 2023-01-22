@@ -1,0 +1,6 @@
+Añadir filtros de busqueda a las colecciones.
+Habilitar boton de añadir coleccion a la biblioteca, en la lista de colecciones.
+Auth Guard para usuarios registrados.
+Interceptor
+Logging
+Corregir los estilos en styles.scss

@@ -5,6 +5,7 @@ import { AboutComponent } from '../about/about.component';
 import { CollectionsComponent } from '../collections/collections.component';
 import { MarketComponent } from '../market/market.component';
 import { ProfileComponent } from '../profile/profile.component';
+import { CollectiondetailsComponent } from '../collectiondetails/collectiondetails.component';
 
 /* import { ContactComponent } from '../contact/contact.component';
 import { DishdetailComponent } from '../dishdetail/dishdetail.component';  */
@@ -13,6 +14,7 @@ export const routes: Routes = [
     { path: 'home', component: HomeComponent},
     { path: 'about', component: AboutComponent},
     { path: 'collections', component: CollectionsComponent},
+    { path: 'collectiondetails/:id', component: CollectiondetailsComponent},
     { path: 'market', component: MarketComponent},
     { path: 'profile', component: ProfileComponent},
     

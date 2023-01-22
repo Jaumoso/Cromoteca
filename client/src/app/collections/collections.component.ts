@@ -17,7 +17,7 @@ export class CollectionsComponent implements OnInit {
 
   ngOnInit() {
     this.collectionService.getCollections()
-      .then(collections => {this.collections = collections;     console.log(this.collections)})
+      .then(collections => {this.collections = collections; /* console.log(this.collections) */})
       .catch(err => this.errmsg = err);
   }
 
