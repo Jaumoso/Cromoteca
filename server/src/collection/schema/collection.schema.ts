@@ -29,6 +29,9 @@ export class Collection {
     theme: string;
 
     @Prop()
+    size: number;
+
+    @Prop()
     description: string;
 
     @Prop()

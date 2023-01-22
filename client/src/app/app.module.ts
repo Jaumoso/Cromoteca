@@ -9,6 +9,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
 import { MatListModule } from '@angular/material/list';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { MatCardModule } from '@angular/material/card';
+import { HttpClientModule } from '@angular/common/http';
+import { MatCommonModule } from '@angular/material/core';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 import { baseURL } from './shared/baseurl';
 import 'hammerjs';
@@ -18,6 +23,12 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { SideMenuComponent } from './side-menu/side-menu.component';
+import { CollectionsComponent } from './collections/collections.component';
+import { MarketComponent } from './market/market.component';
+import { ProfileComponent } from './profile/profile.component';
+import { AboutComponent } from './about/about.component';
+import { FilterComponent } from './filter/filter.component';
 
 
 @NgModule({
@@ -27,6 +38,12 @@ import { LoginComponent } from './login/login.component';
     FooterComponent,
     HomeComponent,
     LoginComponent,
+    SideMenuComponent,
+    CollectionsComponent,
+    MarketComponent,
+    ProfileComponent,
+    AboutComponent,
+    FilterComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,6 +56,11 @@ import { LoginComponent } from './login/login.component';
     MatCheckboxModule,
     FormsModule,
     MatListModule,
+    FontAwesomeModule,
+    MatCardModule,
+    HttpClientModule,
+    MatCommonModule,
+    MatProgressSpinnerModule,
   ],
   providers: [
     { provide: 'BaseURL', useValue: baseURL },

@@ -68,6 +68,24 @@ body {
 ```
 ### Font Awesome
 ```
+NONONONO
+npm install @fortawesome/angular-fontawesome
+```
+```
+npm i @fortawesome/fontawesome-free
+```
+I en angular.json:
+```
+"styles": [
+  ...
+  "node_modules/@fortawesome/fontawesome-free/css/all.css"
+  ...
+]
+```
+
+
+### Font Awesome (deprecated)
+```
 npm install font-awesome@4.7.0 --save
 ```
 Crear archivo _variables.scss en root del proyecto:

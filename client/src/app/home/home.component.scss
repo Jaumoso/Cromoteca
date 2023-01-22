@@ -1,0 +1,22 @@
+$background-light: powderblue;
+$background-dark: cornflowerblue;
+$background: steelblue;
+$text-color: midnightblue;
+
+.logo {
+     height: 150px;
+     width: 150px;
+}
+
+@mixin zero-margin($pad-up-down, $pad-left-right) {
+    margin: 0px auto;
+    padding: $pad-up-down $pad-left-right;
+}
+
+.top-header {
+    @include zero-margin(70px,30px);
+    background: $background-light;
+    color: $text-color;
+    min-height: 150px;
+    border-radius: 0 0 15px 15px;
+}

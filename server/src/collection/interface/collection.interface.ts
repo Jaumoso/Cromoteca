@@ -6,6 +6,7 @@ export interface ICollection extends Document {
     readonly theme: CollectionTheme; */
     readonly format: string;
     readonly theme: string;
+    readonly size: number;
     readonly description: string;
     readonly year: number;
     readonly publisher: string;
