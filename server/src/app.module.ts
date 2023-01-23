@@ -2,20 +2,25 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
-
-require('dotenv').config();
-
 import { MongooseModule } from '@nestjs/mongoose';
 import { AddressModule } from './address/address.module';
 import { CollectionModule } from './collection/collection.module';
 import { TypeModule } from './type/type.module';
+import { GoogleModule } from './google/google.module';
+import { ConfigModule } from '@nestjs/config';
+import { NewsModule } from './news/news.module';
+
+require('dotenv').config();
+
 @Module({
   imports: [
-    /* MongooseModule.forRoot( process.env.MONGO_CONNECTION_STRING ,{dbName: 'Cromoteca'}), */
-    MongooseModule.forRoot('mongodb+srv://jaumoso:7iZuK4Xue9fWHlVh@cromoteca.raohzgx.mongodb.net/test',{dbName: 'Cromoteca'}),
+    ConfigModule.forRoot(),
+    MongooseModule.forRoot('mongodb+srv://' + process.env.DB_USER + ':' + process.env.DB_PASSWORD + '@cromoteca.raohzgx.mongodb.net/test',{dbName: 'Cromoteca'}),
     UserModule,
     AddressModule,
     CollectionModule,
+    GoogleModule,
+    NewsModule,
     /* TypeModule */
   ],
   controllers: [AppController],

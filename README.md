@@ -21,6 +21,18 @@ npm install --save @nestjs/swagger
 npm install --save @nestjs/config
 npm install dotenv --save
 ```
+Authentication: 
+```
+npm install --save @nestjs/passport passport
+npm install --save passport-google-oauth20
+npm install -D @types/passport-google-oauth20
+
+npm install --save passport-local
+npm install --save-dev @types/passport-local
+
+npm install --save @nestjs/jwt passport-jwt
+npm install --save-dev @types/passport-jwt
+```
 
 ### CLIENT
 Dentro de la carpeta /client/:

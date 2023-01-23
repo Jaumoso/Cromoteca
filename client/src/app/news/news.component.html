@@ -1,0 +1,25 @@
+<div *ngFor="let newsdata of news; let i=index">
+    <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" 
+    fxLayoutAlign.xs="start center" fxLayoutAlign.sm="start center" fxLayoutAlign.gt-sm="center center" 
+    fxLayoutGap="10px">
+        <div *ngIf="i % 2 != 0">
+            <div class="container" fxFlex="30%">
+                <h3>{{newsdata.title}}</h3>
+                <p><i>{{newsdata.date | date}}</i></p>
+            </div>
+            <div class="container" fxFlex="70%">
+                {{newsdata.newsbody}}
+            </div>
+        </div>
+        <div *ngIf="i % 2 == 0">
+            <div class="container" fxFlex="70%">
+                {{newsdata.newsbody}}
+            </div>
+            <div class="container" fxFlex="30%">
+                <h3>{{newsdata.title}}</h3>
+                <p><i>{{newsdata.date | date}}</i></p>
+            </div>
+        </div>
+    </div>
+    <hr color="black">
+</div>

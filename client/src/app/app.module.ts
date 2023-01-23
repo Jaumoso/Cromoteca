@@ -14,7 +14,7 @@ import { MatCardModule } from '@angular/material/card';
 import { HttpClientModule } from '@angular/common/http';
 import { MatCommonModule } from '@angular/material/core';
 import { MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {MatTableModule} from '@angular/material/table';
+import { MatTableModule} from '@angular/material/table';
 
 import { baseURL } from './shared/baseurl';
 import 'hammerjs';
@@ -24,13 +24,13 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
-import { SideMenuComponent } from './side-menu/side-menu.component';
 import { CollectionsComponent } from './collections/collections.component';
 import { MarketComponent } from './market/market.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AboutComponent } from './about/about.component';
 import { FilterComponent } from './filter/filter.component';
 import { CollectiondetailsComponent } from './collectiondetails/collectiondetails.component';
+import { NewsComponent } from './news/news.component';
 
 
 @NgModule({
@@ -40,13 +40,13 @@ import { CollectiondetailsComponent } from './collectiondetails/collectiondetail
     FooterComponent,
     HomeComponent,
     LoginComponent,
-    SideMenuComponent,
     CollectionsComponent,
     MarketComponent,
     ProfileComponent,
     AboutComponent,
     FilterComponent,
     CollectiondetailsComponent,
+    NewsComponent,
   ],
   imports: [
     BrowserModule,

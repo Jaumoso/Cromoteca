@@ -15,11 +15,10 @@ export class CollectiondetailsComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   collection: Collection | undefined;
-  errMsg: string | undefined;
-  subscription: Subscription | undefined;
+  errMsg: string | undefined; // TODO:
 
   ngOnInit() {
-    this.subscription = this.route.paramMap.pipe(
+    this.route.paramMap.pipe(
       switchMap((params: Params) => {
         return this.collectionService.getCollection(params['get']('id'));
       }))

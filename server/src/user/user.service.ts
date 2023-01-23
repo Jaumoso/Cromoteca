@@ -18,6 +18,18 @@ export class UserService {
       return userData;
     }
 
+    async getUser(userId: string): Promise<IUser> {
+        const userData = await this.userModel.findById(userId)
+        if (!userData) {
+            throw new NotFoundException('User data not found!');
+        }
+        return userData;
+    }
+
+    async findOne(username: string): Promise<IUser> {
+        return this.userModel.findOne({ username: username});
+    }
+
     async createUser(userDto: CreateUserDto ): Promise<IUser> {
         const newUser = await this.userModel.create(userDto);
         if (!newUser) {
