@@ -1,1 +1,17 @@
-<p>filter works!</p>
+<mat-form-field>
+    <div fxFlex class="search">
+        <span style="color: white;" class="fa fa-search fa-2x"></span>
+        <div fxFlex> 
+            <input matInput class="searchbox" type="text" matInput placeholder="Buscar colección">
+        </div>
+        {{searchText}}
+    </div>
+</mat-form-field>
+<mat-form-field appearance="fill">
+    <mat-label>Categoría</mat-label>
+    <mat-select>
+        <mat-option *ngFor="let option of options" [value]="option.value">
+            {{option.value}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>

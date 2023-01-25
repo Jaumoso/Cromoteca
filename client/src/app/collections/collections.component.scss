@@ -19,6 +19,7 @@ $text-color: midnightblue;
     color: $text-color;
     min-height: 75px;
     border-radius: 0 0 15px 15px;
+    text-align: center;
 }
 
 .content {
@@ -89,6 +90,41 @@ $text-color: midnightblue;
         transition: all 0.3s;
         transform: scale(1.1,1.1) rotate(3deg);
     }
+}
 
+.dialogbutton {
+    #yes {
+        background-color: $background-dark;
+        color: white;
+        padding: 10px;
+        margin: 10px;
+        font-weight: bold;
+    }
+    #yes:hover {
+        background-color: mix($background-dark, black, 80%);
+        color: white;
+        font-weight: bold;
+    }
+
+    #yes:active {
+        background-color: mix($background-dark, black, 70%);
+        font-weight: bold;
+    }
+    #no {
+        background-color: rgb(255, 86, 86);
+        color: white;
+        padding: 10px;
+        font-weight: bold;
+    }
+    #no:hover {
+        background-color: mix(rgb(255, 86, 86), black, 80%);
+        color: white;
+        font-weight: bold;
+    }
+
+    #no:active {
+        background-color: mix(rgb(255, 86, 86), black, 70%);
+        font-weight: bold;
+    }
 }
 

@@ -1,0 +1,48 @@
+<div class="top-header" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign.xs="start center"
+    fxLayoutAlign.sm="start center" fxLayoutAlign.gt-sm="center center" fxLayoutGap="10px">
+    <div class="header" fxFlex>
+        <br>
+        <h2><b>Actualizar Información de perfil</b></h2>
+        <hr color="black">
+    </div>
+</div>
+<div class="content" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign.xs="start center"
+    fxLayoutAlign.sm="start center" fxLayoutAlign.gt-sm="center center" fxLayoutGap="10px">
+    <div fxFlex>
+   <!--      <div>
+            <p>{{updateForm.value | json }} {{updateForm.status}}</p>
+            <form nonvalidate [formGroup]="updateForm" #cform="ngForm" (ngSubmit)="onSubmit()">
+                <p>
+                    <mat-form-field>
+                        <input matInput formControlName="firstName" type="text" placeholder="nombre" required>
+                        <mat-error *ngIf="formErrors.firstName">
+                            {{formErrors.firstName}}
+                        </mat-error>
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field>
+                        <input matInput formControlName="lastName" type="text" placeholder="Apellidos" required>
+                        <mat-error *ngIf="formErrors.lastName">
+                            {{formErrors.lastName}}
+                        </mat-error>
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field>
+                        <input matInput formControlName="email" type="email" placeholder="email" required>
+                        <mat-error *ngIf="formErrors.email">
+                            {{formErrors.email}}
+                        </mat-error>
+                    </mat-form-field>
+                </p>
+                <button type="submit" mat-button class="background-primary text-floral-white"
+                    [disabled]="updateForm.invalid">Submit</button>
+            </form>
+        </div> -->
+    </div>
+</div>
+
+
+<button mat-button [routerLink]="['/editprofile']" routerLinkActive="router-link-active">ACTUALIZAR</button>
+<button mat-button (click)="goBack()" routerLinkActive="router-link-active">CANCELAR</button>

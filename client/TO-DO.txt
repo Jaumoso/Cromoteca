@@ -4,3 +4,4 @@ Auth Guard para usuarios registrados.
 Interceptor
 Logging
 Corregir los estilos en styles.scss
+Paginator en la seccion de colecciones

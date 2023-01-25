@@ -4,7 +4,7 @@
     fxLayoutGap="10px">
         <div *ngIf="i % 2 != 0">
             <div class="container" fxFlex="30%">
-                <h3>{{newsdata.title}}</h3>
+                <h3><b>{{newsdata.title}}</b></h3>
                 <p><i>{{newsdata.date | date}}</i></p>
             </div>
             <div class="container" fxFlex="70%">
@@ -16,10 +16,13 @@
                 {{newsdata.newsbody}}
             </div>
             <div class="container" fxFlex="30%">
-                <h3>{{newsdata.title}}</h3>
+                <h3><b>{{newsdata.title}}</b></h3>
                 <p><i>{{newsdata.date | date}}</i></p>
             </div>
         </div>
     </div>
     <hr color="black">
+</div>
+<div [hidden]="news" >
+    <mat-spinner></mat-spinner><h4>Loading...</h4>
 </div>

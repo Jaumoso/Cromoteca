@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { expand, Observable } from 'rxjs';
 import { CollectionService } from '../services/collection.service';
 import { Collection } from '../shared/collection';
@@ -9,9 +10,12 @@ import { Collection } from '../shared/collection';
   styleUrls: ['./collections.component.scss'],
 })
 export class CollectionsComponent implements OnInit {
-  constructor(private collectionService: CollectionService) { }
+  constructor(
+    private collectionService: CollectionService,
+    public dialog: MatDialog,
+    ) { }
 
-  collections: Collection[] | undefined;
+  collections: Collection[] = [];
   errmsg: string | undefined;
   gridColumns = 4; // cantdad de colecciones en una fila
 
@@ -21,6 +25,15 @@ export class CollectionsComponent implements OnInit {
       .catch(err => this.errmsg = err);
   }
 
+  openDialog(id: number):void {
+    const dialogRef = this.dialog.open(AddToLibraryDialog, {
+      data: { collectionName: this.collections[id].name }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
 
   /*   ngOnInit() {
     this.collectionService.getCollections()
@@ -31,4 +44,25 @@ export class CollectionsComponent implements OnInit {
     this.gridColumns = this.gridColumns === 3? 4 : 3;
   } */
 
+}
+
+
+export interface DialogData {
+  collectionName: string;
+}
+
+@Component({
+  selector: 'dialog-content',
+  templateUrl: 'dialog-add-to-library.html',
+  styleUrls: ['./collections.component.scss']
+})
+export class AddToLibraryDialog {
+  constructor(
+    public dialogRef: MatDialogRef<AddToLibraryDialog>, 
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+  ) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
 }

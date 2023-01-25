@@ -1,5 +1,3 @@
-import { Address } from './address';
-
 export class User{
     _id: string | undefined;
     firstName: string | undefined;
@@ -9,5 +7,5 @@ export class User{
     username: string | undefined;
     entryDate: Date | undefined;
     admin: boolean | undefined;
-    address: Address | undefined;
+    address!: string;
 }

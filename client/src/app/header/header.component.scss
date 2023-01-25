@@ -6,16 +6,15 @@ $text-color: midnightblue;
 
 .toolbar {
     background: $background;
-    border-radius: 0 0 15px 15;
     a {
         text-decoration: none;
         color: white;
         margin: 0 15px 0 15px;
     }
     .logo {
-        height: 65px;
-        width: 65px;
-        margin: 5px;
+        height: 60px;
+        width: 60px;
+        margin-top: 8px;
     }
     .sidenav {
         text-decoration: none;

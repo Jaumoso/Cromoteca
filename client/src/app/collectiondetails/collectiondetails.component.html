@@ -13,7 +13,7 @@ fxLayoutGap="10px">
         <img src={{collection?.image}} alt={{collection?.name}}>
         <div>
              <!-- TODO: -->
-            <button mat-button>AÑADIR A LA BIBLIOTECA</button>
+            <button mat-button (click)="openDialog()">AÑADIR A LA BIBLIOTECA</button>
         </div>
     </div>
     <div fxFlex="40%" fxFlex.gt-sm="100%" class="right-details">
@@ -58,8 +58,10 @@ fxLayoutGap="10px">
         </div>
     </div>
 </div>
+<br>
+<br>
 <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign.xs="start center"
     fxLayoutAlign.sm="start center" fxLayoutAlign.gt-sm="center center" fxLayoutGap="10px">
-    <button class="go-back" mat-button [routerLink]="['/collections']" routerLinkActive="router-link-active">ATRÁS</button>
+    <button class="go-back" mat-button (click)="goBack()" routerLinkActive="router-link-active">ATRÁS</button>
 </div>
 <br>

@@ -1,0 +1,19 @@
+$background-light: powderblue;
+$background-dark: cornflowerblue;
+$background: steelblue;
+$text-color: midnightblue;
+
+.search {
+    border-radius: 5px;
+    background-color: $background-dark;
+
+    .searchbox {
+        padding: 14px;
+        border: none;
+        border-radius: 5px;
+    }
+    span {
+        padding: 7px;
+    }
+
+}

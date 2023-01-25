@@ -6,6 +6,7 @@ import { CollectionsComponent } from '../collections/collections.component';
 import { MarketComponent } from '../market/market.component';
 import { ProfileComponent } from '../profile/profile.component';
 import { CollectiondetailsComponent } from '../collectiondetails/collectiondetails.component';
+import { EditprofileComponent } from '../editprofile/editprofile.component';
 
 /* import { ContactComponent } from '../contact/contact.component';
 import { DishdetailComponent } from '../dishdetail/dishdetail.component';  */
@@ -17,6 +18,7 @@ export const routes: Routes = [
     { path: 'collectiondetails/:id', component: CollectiondetailsComponent},
     { path: 'market', component: MarketComponent},
     { path: 'profile', component: ProfileComponent},
+    { path: 'editprofile/:id', component: EditprofileComponent},
     
     { path: '', redirectTo: '/home', pathMatch: 'full'}
 ];

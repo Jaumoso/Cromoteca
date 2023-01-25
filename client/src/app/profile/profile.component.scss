@@ -1,0 +1,50 @@
+$background-light: powderblue;
+$background-dark: cornflowerblue;
+$background: steelblue;
+$text-color: midnightblue;
+
+
+@mixin zero-margin($pad-up-down, $pad-left-right) {
+    margin: 0px auto;
+    padding: $pad-up-down $pad-left-right;
+}
+
+.top-header {
+    @include zero-margin(10px,30px);
+    background: $background-light;
+    color: $text-color;
+    min-height: 75px;
+    border-radius: 0 0 15px 15px;
+    text-align: center;
+}
+
+.content {
+    text-align: center;
+}
+
+.card {
+    border: 2px solid black;
+
+
+    button {
+        background-color: $background-dark;
+        color: white;
+        padding: 10px;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+    button:hover {
+        background-color: mix($background-dark, black, 80%);
+        font-weight: bold;
+    }
+    .button:active {
+        background-color: mix($background-dark, black, 70%);
+        font-weight: bold;
+    }
+
+    .profileinfo {
+        text-align: left;
+        margin-left: 5%;
+    }
+
+}

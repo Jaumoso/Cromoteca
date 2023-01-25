@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { switchMap } from 'rxjs';
+import { mergeMap, switchMap } from 'rxjs';
+import { AddressService } from '../services/address.service';
 import { UserService } from '../services/user.service';
+import { Address } from '../shared/address';
 import { User } from '../shared/user';
 
 @Component({
@@ -11,19 +13,23 @@ import { User } from '../shared/user';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(private userService: UserService,
-    private route: ActivatedRoute) { }
+  constructor(
+    private userService: UserService,
+    private addressService: AddressService,
+    private route: ActivatedRoute
+    ) { }
 
   user: User | undefined;
+  address: Address | undefined;
   errMsg: string | undefined; // TODO:
 
-  ngOnInit() {
+  async ngOnInit() {
+    // GET User y Address
     this.route.paramMap.pipe(
-      switchMap((params: Params) => {
-        return this.userService.getUser(params['get']('id'));
-      }))
-      .subscribe(userData => {
-        this.user = userData;
+      mergeMap((params: Params) => { return this.userService.getUser('63bb22866e873bed253924fe') }),
+      mergeMap((userData) => { this.user = userData; return this.addressService.getAddress(userData.address)}))
+      .subscribe(addressData => {
+        this.address = addressData;
       });
+    }
   }
-}
