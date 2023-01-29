@@ -7,7 +7,20 @@
     </div>
     <!-- FILTROS TODO: -->
     <div fxFlex fxFlex.gt-sm="70%">
-        <app-filter></app-filter>
+        <!-- <app-filter></app-filter> -->
+        <mat-form-field>
+            <mat-label>Buscar colección</mat-label>
+            <input matInput type="text" [(ngModel)]="searchText" (change)="filterSearch()">
+            <mat-icon matPrefix>search</mat-icon>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Categoría</mat-label>
+            <mat-select>
+                <mat-option *ngFor="let option of options" [value]="option.value" (onSelectionChange)="filterSearch()" >
+                    {{option.viewValue}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
     </div>
     <div fxFlex></div>
 </div>
@@ -37,6 +50,9 @@
         </mat-card>
     </div>
 </div>
-<div [hidden]="collections" >
+<div [hidden]="collections" *ngIf="!errmsg">
     <mat-spinner></mat-spinner><h4>Loading...</h4>
+</div>
+<div class="collection-not-found" [hidden]="!errmsg">
+    <h2>{{errmsg}}</h2>
 </div>

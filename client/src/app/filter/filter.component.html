@@ -1,17 +1,14 @@
 <mat-form-field>
-    <div fxFlex class="search">
-        <span style="color: white;" class="fa fa-search fa-2x"></span>
-        <div fxFlex> 
-            <input matInput class="searchbox" type="text" matInput placeholder="Buscar colección">
-        </div>
-        {{searchText}}
-    </div>
+    <mat-label>Buscar colección</mat-label>
+    <input matInput type="text" [(ngModel)]="searchText">
+    {{searchText}}
+    <mat-icon matPrefix>search</mat-icon>
 </mat-form-field>
 <mat-form-field appearance="fill">
     <mat-label>Categoría</mat-label>
     <mat-select>
         <mat-option *ngFor="let option of options" [value]="option.value">
-            {{option.value}}
+            {{option.viewValue}}
         </mat-option>
     </mat-select>
 </mat-form-field>

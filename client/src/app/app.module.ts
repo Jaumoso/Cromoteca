@@ -17,6 +17,7 @@ import { MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { MatTableModule} from '@angular/material/table';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
+import {MatIconModule} from '@angular/material/icon';
 
 import { baseURL } from './shared/baseurl';
 import 'hammerjs';
@@ -73,6 +74,7 @@ import { LibraryComponent } from './library/library.component';
     MatTableModule,
     MatSelectModule,
     MatInputModule,
+    MatIconModule,
   ],
   providers: [
     { provide: 'BaseURL', useValue: baseURL },

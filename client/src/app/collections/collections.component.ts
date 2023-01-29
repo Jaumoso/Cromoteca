@@ -4,6 +4,11 @@ import { expand, Observable } from 'rxjs';
 import { CollectionService } from '../services/collection.service';
 import { Collection } from '../shared/collection';
 
+interface Options {
+  value: string;
+  viewValue: string;
+}
+
 @Component({
   selector: 'app-collections',
   templateUrl: './collections.component.html',
@@ -19,10 +24,47 @@ export class CollectionsComponent implements OnInit {
   errmsg: string | undefined;
   gridColumns = 4; // cantdad de colecciones en una fila
 
+  searchText: string = '';
+  selectedCategory: string = '';
+
+    options: Options[] = [
+    {value: '', viewValue: '--'},
+    {value: 'CARTAS', viewValue: 'Cartas'},
+    {value: 'CROMOS', viewValue: 'Cromos'},
+    {value: 'STAKS', viewValue: 'Staks'},
+  ];
+
   ngOnInit() {
     this.collectionService.getCollections()
       .then(collections => {this.collections = collections; /* console.log(this.collections) */})
       .catch(err => this.errmsg = err);
+  }
+
+  // TODO: tiene que coger texto y categoria al mismo tiempo
+/*   filterSearch() {
+    console.log(this.selectedCategory)
+    this.collectionService.filterCollection(this.searchText, this.selectedCategory);
+  } */
+
+  filterSearch() {
+    console.log(this.searchText)
+
+    // si el texto está vacío, aparecen de nuevo todas las colecciones
+    if(this.searchText.length == 0){
+      this.ngOnInit();
+    }
+    // si no está vacío, se ejecuta la búsqueda
+    else{
+      this.collectionService.filterCollection(this.searchText)
+      .then(collections => { 
+        this.collections = collections; 
+        /* console.log(collections); */
+        if(collections.length == 0){
+          this.errmsg = 'No se han encontrado colecciones!'
+        }
+      })
+      .catch(err => this.errmsg = err);
+    }
   }
 
   openDialog(id: number):void {
@@ -34,18 +76,7 @@ export class CollectionsComponent implements OnInit {
       console.log(`Dialog result: ${result}`);
     });
   }
-
-  /*   ngOnInit() {
-    this.collectionService.getCollections()
-      .subscribe((collections) => this.collections = collections, errmsg => this.errmsg= <any>errmsg);
-  } */
-
-  /*   toggleGridColumns() {
-    this.gridColumns = this.gridColumns === 3? 4 : 3;
-  } */
-
 }
-
 
 export interface DialogData {
   collectionName: string;

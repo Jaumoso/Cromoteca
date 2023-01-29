@@ -13,22 +13,6 @@ import { ProcessHTTPMsgService } from './process-httpmsg.service';
     constructor(private http: HttpClient,
         private processHTTPMsgService: ProcessHTTPMsgService) { }
 
-/*     getCollections(): Observable<Collection[]> {
-        return this.http.get<Collection[]>(baseURL + 'collection')
-        .pipe(this.processHTTPMsgService.handleError);
-    } */
-
-/*     getCollection(): Promise<Collection[]> {
-        return new Promise((resolve, reject) => {
-          this.http.get<Collection[]>(baseURL + 'collection')
-          .subscribe(collections => {
-            resolve(collections);
-          }, err => {
-            reject(err);
-          });
-        });
-    } */
-
     getCollections(): Promise<Collection[]> {
         return new Promise((resolve, reject) => {
           this.http.get<{collectionData: Collection[]}>(baseURL + 'collection')
@@ -38,6 +22,29 @@ import { ProcessHTTPMsgService } from './process-httpmsg.service';
             reject(err);
           });
         });
+    }
+
+    // TODO: rework this
+/*     filterCollection(search: string, category: string): Promise<Collection> {
+      return new Promise((resolve, reject) => {
+        this.http.get<Collection>(baseURL + 'collection/search/' + search + '/' + category)
+        .subscribe(collections => {
+          resolve(collections);
+        }, err => {
+          reject(err);
+        });
+      });
+    } */
+
+    filterCollection(search: string): Promise<Collection[]> {
+      return new Promise((resolve, reject) => {
+        this.http.get<{collectionData: Collection[]}>(baseURL + 'collection/search/' + search)
+        .subscribe(collections => {
+          resolve(collections.collectionData);
+        }, err => {
+          reject(err);
+        });
+      });
     }
 
     getCollection(collectionId: string): Promise<Collection> {
@@ -94,4 +101,20 @@ import { ProcessHTTPMsgService } from './process-httpmsg.service';
         });
       });
     }
+
+    /*     getCollections(): Observable<Collection[]> {
+        return this.http.get<Collection[]>(baseURL + 'collection')
+        .pipe(this.processHTTPMsgService.handleError);
+    } */
+
+/*     getCollection(): Promise<Collection[]> {
+        return new Promise((resolve, reject) => {
+          this.http.get<Collection[]>(baseURL + 'collection')
+          .subscribe(collections => {
+            resolve(collections);
+          }, err => {
+            reject(err);
+          });
+        });
+    } */
 }

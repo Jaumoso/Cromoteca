@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSelectChange } from '@angular/material/select';
 
 interface Options {
   value: string;
@@ -18,11 +19,16 @@ export class FilterComponent implements OnInit {
   }
 
   searchText: String = '';
+  selectedCategory: String = '';
 
     options: Options[] = [
+    {value: '', viewValue: '--'},
     {value: 'CARTAS', viewValue: 'Cartas'},
     {value: 'CROMOS', viewValue: 'Cromos'},
     {value: 'STAKS', viewValue: 'Staks'},
   ];
 
+  filterSearch() {
+
+  }
 }
