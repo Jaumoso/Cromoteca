@@ -76,9 +76,9 @@ export class CreateUserDto {
 
 
     @ApiProperty({ 
-        type: [mongoose.Types.ObjectId], 
+        type: mongoose.Types.ObjectId, 
         description: 'Array of type: ObjectId. Relation 1 user to many accounts.',
-        example: [/* new mongoose.Types.ObjectId() */]
+        example: new mongoose.Types.ObjectId()
     })
-    addressId: mongoose.Types.ObjectId[];
+    addressId: mongoose.Types.ObjectId;
 }

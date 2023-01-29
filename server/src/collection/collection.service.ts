@@ -25,6 +25,37 @@ export class CollectionService {
         return collectionData;
     }
 
+        // TODO: rework this
+/*     async filterCollection(searchString: string, category: string): Promise<any> { // PROMISE <any> !!??
+        const collectionData = await this.collectionModel.find({
+            $or: [
+              { name: { $regex: searchString, $options: "i" } },
+              { description: { $regex: searchString, $options: "i" } },
+              { category: { $regex: category, $options: "i" } }
+            ]
+          }).exec();
+
+        if (!collectionData) {
+            throw new NotFoundException('Collection data not found!');
+        }
+        return collectionData;
+    } */
+
+    // SOLO BUSCA POR STRING
+    async filterCollection(searchString: string): Promise<any> { // PROMISE <any> !!??
+        const collectionData = await this.collectionModel.find({
+            $or: [
+              { name: { $regex: searchString, $options: "i" } },
+              { description: { $regex: searchString, $options: "i" } }
+            ]
+          }).exec();
+
+        if (!collectionData) {
+            throw new NotFoundException('Collection data not found!');
+        }
+        return collectionData;
+    }
+
     // NO NECESITO createCollection
     // NO NECESITO updateCollection
     // NO NECESITO deleteCollection

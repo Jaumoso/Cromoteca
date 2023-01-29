@@ -23,6 +23,20 @@ export class AddressController {
         }
     }
 
+    @Get(':id')
+    @ApiCreatedResponse({ description: 'This function will get ONE ADDRESS from the database.' })
+    async getAddress(@Res() response, @Param('id') addressId: string) {
+        try {
+            const addressData = await this.addressService.getAddress(addressId);
+            return response.status(HttpStatus.OK).json({
+                message: 'Address data found successfully', addressData,
+            });
+        }
+        catch (err) {
+            return response.status(err.status).json(err.response);
+        }
+    }
+
     @Post('new')
     @ApiCreatedResponse({ description: 'Creation of a NEW ADDRESS and insertion in the database.' })
     async createAddress(@Res() response, @Body() createAddressDto: CreateAddressDto) {

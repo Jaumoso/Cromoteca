@@ -17,6 +17,14 @@ export class AddressService {
         return addressData;
     }
 
+    async getAddress(addressId: string): Promise<IAddress> {
+        const addressData = await this.addressModel.findById(addressId);
+        if (!addressData) {
+            throw new NotFoundException('Address data not found!');
+        }
+        return addressData;
+    }
+
     async createAddress(addressDto: CreateAddressDto ): Promise<IAddress> {
         const newAddress = await this.addressModel.create(addressDto);
         if (!newAddress) {
