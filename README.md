@@ -32,6 +32,9 @@ npm i google-auth-library --save
 npm install --save passport-local
 npm install --save-dev @types/passport-local
 
+npm install --save @types/bcrypt
+npm install --save bcrypt
+
 npm install --save @nestjs/jwt passport-jwt
 npm install --save-dev @types/passport-jwt
 ```

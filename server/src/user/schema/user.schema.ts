@@ -3,7 +3,7 @@ import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose"
 import { Address } from "cluster";
 import mongoose from "mongoose";
 
-/* export type UserDocument = User & Document; */
+export type UserDocument = User & Document;
 
 @Schema()
 export class User {
@@ -32,4 +32,5 @@ export class User {
     @Prop({type: mongoose.Schema.Types.ObjectId, ref: 'Address'})
     addressId: Address;
 }
+
 export const UserSchema = SchemaFactory.createForClass(User);

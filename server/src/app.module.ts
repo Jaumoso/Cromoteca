@@ -9,6 +9,7 @@ import { TypeModule } from './type/type.module';
 import { GoogleModule } from './google/google.module';
 import { ConfigModule } from '@nestjs/config';
 import { NewsModule } from './news/news.module';
+import { AuthModule } from './auth/auth.module';
 
 require('dotenv').config();
 
@@ -24,6 +25,7 @@ require('dotenv').config();
     CollectionModule,
     GoogleModule,
     NewsModule,
+    AuthModule,
     /* TypeModule */
   ],
   controllers: [AppController],

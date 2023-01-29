@@ -4,6 +4,7 @@ import { Model } from 'mongoose';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { IUser } from './interface/user.interface';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UserService {
@@ -26,11 +27,18 @@ export class UserService {
         return userData;
     }
 
-    async findOne(username: string): Promise<IUser> {
-        return this.userModel.findOne({ username: username});
+    async findUser(username: string): Promise<IUser> {
+        const userData = this.userModel.findOne({ username: username});
+        if (!userData) {
+            throw new NotFoundException('User data not found!');
+        }
+        return userData;
     }
 
     async createUser(userDto: CreateUserDto ): Promise<IUser> {
+        const saltOrRounds = 10;
+        const hashedPassword = await bcrypt.hash(userDto.password, saltOrRounds);
+        userDto.password = hashedPassword;
         const newUser = await this.userModel.create(userDto);
         if (!newUser) {
             throw new NotFoundException('Could not create user!');
