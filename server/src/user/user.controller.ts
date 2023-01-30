@@ -1,5 +1,6 @@
-import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Res } from "@nestjs/common";
+import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Res, UseGuards } from "@nestjs/common";
 import { ApiCreatedResponse, ApiTags } from "@nestjs/swagger";
+import { JwtAuthGuard } from "src/auth/jwt-auth.guard";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { UpdateUserDto } from "./dto/update-user.dto";
 import { UserService } from "./user.service";
@@ -24,6 +25,7 @@ export class UserController {
         }
     }
 
+    @UseGuards(JwtAuthGuard)
     @Get(':id')
     @ApiCreatedResponse({ description: 'This function will get ONE USER INFO from the database.' })
     async getUser(@Res() response, @Param('id') userId: string) {
@@ -56,6 +58,7 @@ export class UserController {
         }
     }
 
+    @UseGuards(JwtAuthGuard)
     @Put('update/:id')
     @ApiCreatedResponse({ description: 'UPDATE te data of the USER into the database.' })
     async updateUser(@Res() response, @Param('id') userId: string, @Body() updateUserDto: UpdateUserDto) {
@@ -71,6 +74,7 @@ export class UserController {
         }
     }
 
+    @UseGuards(JwtAuthGuard)
     @Delete('delete/:id')
     @ApiCreatedResponse({ description: 'This function will DELETE the USER with the ID passed as parameter from the database.' })
     async deleteUser(@Res() response, @Param('id') userId: string) {

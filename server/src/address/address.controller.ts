@@ -1,5 +1,6 @@
-import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Res } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Res, UseGuards } from '@nestjs/common';
 import { ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { AddressService } from './address.service';
 import { CreateAddressDto } from './dto/createAddress.dto';
 import { UpdateAddressDto } from './dto/updateAddress.dto';
@@ -23,6 +24,7 @@ export class AddressController {
         }
     }
 
+    @UseGuards(JwtAuthGuard)
     @Get(':id')
     @ApiCreatedResponse({ description: 'This function will get ONE ADDRESS from the database.' })
     async getAddress(@Res() response, @Param('id') addressId: string) {
@@ -55,6 +57,7 @@ export class AddressController {
         }
     }
 
+    @UseGuards(JwtAuthGuard)
     @Put('update/:id')
     @ApiCreatedResponse({ description: 'UPDATE te data of the ADDRESS into the database.' })
     async updateAddress(@Res() response, @Param('id') addressId: string, @Body() updateAddressDto: UpdateAddressDto) {
@@ -69,7 +72,7 @@ export class AddressController {
             return response.status(err.status).json(err.response);
         }
     }
-
+    
     @Delete('delete/:id')
     @ApiCreatedResponse({ description: 'This function will DELETE the Address with the ID passed as parameter from the database.' })
     async deleteAddress(@Res() response, @Param('id') addressId: string) {

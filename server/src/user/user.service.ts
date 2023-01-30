@@ -27,6 +27,7 @@ export class UserService {
         return userData;
     }
 
+    // FUNCTION FOR CHECKING USER LOGIN
     async findUser(username: string): Promise<IUser> {
         const userData = this.userModel.findOne({ username: username});
         if (!userData) {
