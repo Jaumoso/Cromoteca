@@ -74,7 +74,7 @@ export class UserController {
         }
     }
 
-    @UseGuards(JwtAuthGuard)
+    /* @UseGuards(JwtAuthGuard) */
     @Delete('delete/:id')
     @ApiCreatedResponse({ description: 'This function will DELETE the USER with the ID passed as parameter from the database.' })
     async deleteUser(@Res() response, @Param('id') userId: string) {

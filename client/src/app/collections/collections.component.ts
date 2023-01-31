@@ -52,6 +52,7 @@ export class CollectionsComponent implements OnInit {
     // si el texto está vacío, aparecen de nuevo todas las colecciones
     if(this.searchText.length == 0){
       this.ngOnInit();
+      this.errmsg = undefined;
     }
     // si no está vacío, se ejecuta la búsqueda
     else{

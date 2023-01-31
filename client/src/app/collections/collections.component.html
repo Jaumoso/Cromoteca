@@ -53,6 +53,6 @@
 <div [hidden]="collections" *ngIf="!errmsg">
     <mat-spinner></mat-spinner><h4>Loading...</h4>
 </div>
-<div class="collection-not-found" [hidden]="!errmsg">
+<div class="collection-not-found" *ngIf="errmsg">
     <h2>{{errmsg}}</h2>
 </div>
