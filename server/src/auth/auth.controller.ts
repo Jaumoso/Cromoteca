@@ -16,7 +16,8 @@ export class AuthController {
     @ApiCreatedResponse({ description: 'Función de LOGIN' })
     @Post('/login')
     async login(@Request() req) {
-        return this.authService.login(req.user);
+        /* console.log(req.user._doc) */
+        return this.authService.login(req.user._doc);
     }
 
     @UseGuards(JwtAuthGuard)

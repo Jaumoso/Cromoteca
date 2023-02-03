@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { LoginStatusService } from '../services/loginStatus.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,8 @@ export class LoginComponent implements OnInit {
     public dialogRef: MatDialogRef<LoginComponent>,
     private formBuilder: FormBuilder,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private loginStatusService: LoginStatusService
     ) { 
       this.form = this.formBuilder.group({
         username: ['', Validators.required],
@@ -29,25 +31,29 @@ export class LoginComponent implements OnInit {
 
   form: FormGroup;
 
-  ngOnInit() {
+  ngOnInit() {}
 
+  closeDialog(): void {
+    this.dialogRef.close();
   }
 
-  onClick(): void {
-    this.dialogRef.close();
+  setSession(token: string) {
+    this.authService.setSession(token);
   }
 
   onSubmit() {
     if (this.user.username && this.user.password) {
-      const user = { username: this.user.username, password: this.user.password };
-      this.authService.login(user)
+      this.authService.login(this.user.username, this.user.password)
       .then(
-        (user) => {
+        (token) => {
+          console.log(token);
           console.log("User logged in successfully");
-          this.router.navigateByUrl('/home');
-          if(user){
-            this.onClick();
+/*           this.router.navigateByUrl('/home'); */
+          if(token){
+            this.loginStatusService.loggedIn = true;
+            this.closeDialog();
           }
+          this.setSession(token);
         }
       )
     }

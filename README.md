@@ -25,9 +25,11 @@ Authentication:
 ```
 npm install --save @nestjs/passport passport
 
+//NO UTILIZADO DE MOMENTO
 npm install --save passport-google-oauth20
 npm install -D @types/passport-google-oauth20
 npm i google-auth-library --save
+// ---
 
 npm install --save passport-local
 npm install --save-dev @types/passport-local
@@ -37,6 +39,8 @@ npm install --save bcrypt
 
 npm install --save @nestjs/jwt passport-jwt
 npm install --save-dev @types/passport-jwt
+
+npm install --save @auth0/angular-jwt
 ```
 
 ### CLIENT

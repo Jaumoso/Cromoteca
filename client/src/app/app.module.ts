@@ -11,7 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatListModule } from '@angular/material/list';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatCardModule } from '@angular/material/card';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatCommonModule } from '@angular/material/core';
 import { MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { MatTableModule} from '@angular/material/table';
@@ -36,6 +36,7 @@ import { CollectiondetailsComponent } from './collectiondetails/collectiondetail
 import { NewsComponent } from './news/news.component';
 import { EditprofileComponent } from './editprofile/editprofile.component';
 import { LibraryComponent } from './library/library.component';
+import { AuthInterceptorService } from './services/authInterceptor.service';
 
 
 @NgModule({
@@ -79,6 +80,10 @@ import { LibraryComponent } from './library/library.component';
   ],
   providers: [
     { provide: 'BaseURL', useValue: baseURL },
+    { provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptorService,
+    multi: true 
+  },
   ],
   bootstrap: [AppComponent]
 })

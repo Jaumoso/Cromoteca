@@ -3,20 +3,20 @@
   <span class="flex-spacer"></span>
   <button class="cancel" mat-button mat-dialog-close>&times;</button>
 </mat-toolbar>
-<p>{{user | json}}</p>
-<p>logintest 1234567890</p>
+<!-- <p>{{user | json}}</p>
+<p>logintest 1234567890</p> -->
 
 <form novalidate #loginForm="ngForm" (ngSubmit)="onSubmit()">
   <mat-dialog-content>
       <mat-form-field>
         <input matInput required #username="ngModel" placeholder="Username" type="text" [(ngModel)]="user.username"
           name="username">
-        <mat-error *ngIf="username.errors">Username is required.</mat-error>
+        <mat-error *ngIf="username.errors">Usuario requerido.</mat-error>
       </mat-form-field>
       <mat-form-field>
         <input matInput required #password="ngModel" placeholder="Password" type="password"
           [(ngModel)]="user.password" name="password">
-        <mat-error *ngIf="password.errors">Password is required.</mat-error>
+        <mat-error *ngIf="password.errors">Contraseña requerida.</mat-error>
       </mat-form-field>
   </mat-dialog-content>
   <mat-dialog-actions>

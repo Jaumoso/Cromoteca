@@ -28,8 +28,8 @@ $text-color: midnightblue;
     border-radius: 10px;
 }
 
-.example-spacer {
-    flex: 1 1 auto;
+.flex-spacer {
+    flex-grow: 1;
 }
 
 /* ::ng-deep .login-form {

@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose"
 
-/* export type CollectionDocument = Collection & Document; */
+export type CollectionDocument = Collection & Document;
 
 /* export enum CollectionFormat {
     STACKS = 'STACKS',

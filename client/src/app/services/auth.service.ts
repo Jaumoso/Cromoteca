@@ -12,20 +12,27 @@ export class AuthService {
     constructor(private http: HttpClient,
         private processHTTPMsgService: ProcessHTTPMsgService) { }
     
-    login(user: Object): Promise<any> {
+    login(username: string, password: string): Promise<any> {
         const httpOptions = {
             headers: new HttpHeaders({
             'Content-Type': 'application/json'
             })
         };
-        console.log(user);
         return new Promise((resolve, reject) => {
-            this.http.post<any>(baseURL + 'auth/login', user, httpOptions)
-            .subscribe(login => {
-            resolve(login);
+            this.http.post<any>(baseURL + 'auth/login', { username, password }, httpOptions)
+            .subscribe(token => {
+            resolve(token = token.access_token);
             }, err => {
             reject(err);
             });
         });
+    }
+    
+    setSession(token: string) {
+        localStorage.setItem('token', token);
+    }
+    
+    closeSession(): void {
+        localStorage.removeItem('token');
     }
 }

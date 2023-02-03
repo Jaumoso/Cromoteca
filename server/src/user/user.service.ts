@@ -3,15 +3,15 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { IUser } from './interface/user.interface';
 import * as bcrypt from 'bcrypt';
+import { UserDocument } from './schema/user.schema';
 
 @Injectable()
 export class UserService {
 
-    constructor(@InjectModel('User') private userModel:Model<IUser>) { }
+    constructor(@InjectModel('User') private userModel:Model<UserDocument>) { }
 
-    async getAllUsers(): Promise<IUser[]> {
+    async getAllUsers(): Promise<UserDocument[]> {
       const userData = await this.userModel.find()
       if (!userData || userData.length == 0) {
           throw new NotFoundException('Users data not found!');
@@ -19,7 +19,7 @@ export class UserService {
       return userData;
     }
 
-    async getUser(userId: string): Promise<IUser> {
+    async getUser(userId: string): Promise<UserDocument> {
         const userData = await this.userModel.findById(userId)
         if (!userData) {
             throw new NotFoundException('User data not found!');
@@ -28,7 +28,7 @@ export class UserService {
     }
 
     // FUNCTION FOR CHECKING USER LOGIN
-    async findUser(username: string): Promise<IUser> {
+    async findUser(username: string): Promise<UserDocument> {
         const userData = this.userModel.findOne({ username: username});
         if (!userData) {
             throw new NotFoundException('User data not found!');
@@ -36,7 +36,7 @@ export class UserService {
         return userData;
     }
 
-    async createUser(userDto: CreateUserDto ): Promise<IUser> {
+    async createUser(userDto: CreateUserDto ): Promise<UserDocument> {
         const saltOrRounds = 10;
         const hashedPassword = await bcrypt.hash(userDto.password, saltOrRounds);
         userDto.password = hashedPassword;
@@ -55,7 +55,7 @@ export class UserService {
         return updatedUser;
     }
 
-    async deleteUser(userId: string): Promise<IUser> {
+    async deleteUser(userId: string): Promise<UserDocument> {
         const deletedUser = await this.userModel.findByIdAndDelete(userId);
       if (!deletedUser) {
         throw new NotFoundException(`User #${userId} not found`);

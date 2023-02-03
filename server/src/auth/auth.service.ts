@@ -26,9 +26,23 @@ export class AuthService {
     }
 
     async login(user: any) {
-        const payload = { username: user.username, sub: user._id };
+        const payload = { 
+            _id: user._id,
+            email: user.email,
+            password: user.password,
+            username: user.username,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            entryDate: user.entryDate,
+            admin: user.admin,
+            addressId: user.addressId
+        };
         return {
-            access_token: this.jwtService.sign(payload),
+            access_token: this.jwtService.sign(payload, {
+                algorithm: 'HS256',
+                secret: process.env.JWT_SECRET,
+                expiresIn: '120m'
+            })
         };
     }
 }

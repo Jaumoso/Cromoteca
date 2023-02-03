@@ -3,6 +3,7 @@ import { User } from '../shared/user';
 import { HttpClient, HttpHeaderResponse, HttpHeaders } from '@angular/common/http';
 import { baseURL } from '../shared/baseurl';
 import { ProcessHTTPMsgService } from './process-httpmsg.service';
+import { AuthService } from './auth.service';
 
 @Injectable({
     providedIn: 'root'

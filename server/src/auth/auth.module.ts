@@ -15,10 +15,7 @@ import { JwtStrategy } from "./jwt.strategy";
   imports: [
     UserModule, 
     PassportModule,
-    JwtModule.register({
-    secret: process.env.JWT_SECRET,
-    signOptions: { expiresIn: '60s' },
-    }), 
+    JwtModule, 
     MongooseModule.forFeature([{ name: "User", schema: UserSchema }
   ])
   ],

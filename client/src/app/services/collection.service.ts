@@ -5,6 +5,7 @@ import { baseURL } from '../shared/baseurl';
 import { of, Observable } from 'rxjs';
 import { delay, map, catchError } from 'rxjs/operators';
 import { ProcessHTTPMsgService } from './process-httpmsg.service';
+import { AuthService } from './auth.service';
 
 @Injectable({
     providedIn: 'root'
@@ -58,11 +59,12 @@ import { ProcessHTTPMsgService } from './process-httpmsg.service';
       });
     }
 
+    // ! borrar al desplegar
     // FUNCIONES PARA ADMINISTRADORES
     createCollection(collection: Collection): Promise<Collection> {
       const httpOptions = {
         headers: new HttpHeaders({
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         })
       };
       return new Promise((resolve, reject) => {
@@ -78,7 +80,7 @@ import { ProcessHTTPMsgService } from './process-httpmsg.service';
     editCollection(collectionId: string, collection: Collection): Promise<Collection> {
       const httpOptions = {
         headers: new HttpHeaders({
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         })
       };
       return new Promise((resolve, reject) => {
@@ -101,20 +103,4 @@ import { ProcessHTTPMsgService } from './process-httpmsg.service';
         });
       });
     }
-
-    /*     getCollections(): Observable<Collection[]> {
-        return this.http.get<Collection[]>(baseURL + 'collection')
-        .pipe(this.processHTTPMsgService.handleError);
-    } */
-
-/*     getCollection(): Promise<Collection[]> {
-        return new Promise((resolve, reject) => {
-          this.http.get<Collection[]>(baseURL + 'collection')
-          .subscribe(collections => {
-            resolve(collections);
-          }, err => {
-            reject(err);
-          });
-        });
-    } */
 }

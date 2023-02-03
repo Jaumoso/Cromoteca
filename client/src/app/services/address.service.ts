@@ -5,6 +5,7 @@ import { of, Observable } from 'rxjs';
 import { delay, map, catchError } from 'rxjs/operators';
 import { ProcessHTTPMsgService } from './process-httpmsg.service';
 import { Address } from '../shared/address';
+import { AuthService } from './auth.service';
 
 @Injectable({
     providedIn: 'root'
@@ -24,21 +25,21 @@ import { Address } from '../shared/address';
       });
     }
 
-    createAddress(addressId: string, address: Address): Promise<Address> {
-        const httpOptions = {
-          headers: new HttpHeaders({
-            'Content-Type': 'application/json'
-          })
-        };
-        return new Promise((resolve, reject) => {
-          this.http.post<{addressData: Address}>(baseURL + 'address/new', address, httpOptions)
-          .subscribe(address => {
-            resolve(address.addressData);
-          }, err => {
-            reject(err);
-          });
+    createAddress(address: Address): Promise<Address> {
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+      };
+      return new Promise((resolve, reject) => {
+        this.http.post<{addressData: Address}>(baseURL + 'address/new', address, httpOptions)
+        .subscribe(address => {
+          resolve(address.addressData);
+        }, err => {
+          reject(err);
         });
-      }
+      });
+    }
 
     updateAddress(addressId: string, address: Address): Promise<Address> {
       const httpOptions = {
@@ -47,7 +48,7 @@ import { Address } from '../shared/address';
         })
       };
       return new Promise((resolve, reject) => {
-        this.http.put<{addressData: Address}>(baseURL + 'address/update/' + addressId, address, httpOptions)
+        this.http.put<{addressData: Address}>(baseURL + 'address/update/' + addressId, address)
         .subscribe(address => {
           resolve(address.addressData);
         }, err => {
