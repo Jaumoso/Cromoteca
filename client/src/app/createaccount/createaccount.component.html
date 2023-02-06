@@ -1,0 +1,103 @@
+<div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign.xs="start center"
+    fxLayoutAlign.sm="start center" fxLayoutAlign.gt-sm="center center" fxLayoutGap="10px">
+    <div class="header" fxFlex="40%" fxFlex.gt-sm="100%">
+        <br>
+        <h2>Registro de nuevo usuario</h2>
+        <hr color="black">
+    </div>
+</div>
+
+<div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign.xs="start center"
+    fxLayoutAlign.sm="start center" fxLayoutAlign.gt-sm="center center" fxLayoutGap="10px">
+    <form nonvalidate #loginForm="ngForm" (ngSubmit)="onSubmit()">
+
+        <div fxFlex="50" fxFlex.gt-sm="100%">
+
+            <label for="firstname">Nombre: </label><br>
+            <mat-form-field>
+                <input matInput required #firstName="ngModel" placeholder="Nombre" type="text" [(ngModel)]="user.firstName"
+                    name="firstname">
+                    <mat-error *ngIf="firstName.errors">Nombre requerido.</mat-error>
+            </mat-form-field>
+            <br>
+            <label for="lastname">Apellidos: </label><br>
+            <mat-form-field>
+                <input matInput required #lastName="ngModel" placeholder="Apellidos" type="text" [(ngModel)]="user.lastName"
+                    name="lastname">
+                    <mat-error *ngIf="lastName.errors">Apellidos requeridos.</mat-error>
+            </mat-form-field>
+            <br>
+            <label for="email">Correo electrónico: </label><br>
+            <mat-form-field>
+                <input matInput required #email="ngModel" placeholder="example@example.com" type="email"
+                    [(ngModel)]="user.email" name="email">
+                    <mat-error *ngIf="email.errors">Correo requerido.</mat-error>
+            </mat-form-field>
+            <br>
+            <label for="password">Contraseña: </label><br>
+            <mat-form-field>
+                <input matInput required #password="ngModel" placeholder="Contraseña" type="password"
+                    [(ngModel)]="user.password" name="password">
+                    <mat-error *ngIf="password.errors">Contraseña requerida.</mat-error>
+            </mat-form-field>
+            <br>
+            <label for="repeatpassword">Repita la Contraseña: </label><br>
+            <mat-form-field>
+                <input matInput required #passwordConfirmation="ngModel" placeholder="Contraseña" type="password"
+                    [(ngModel)]="user.passwordConfirmation" name="password2">
+                    <mat-error *ngIf="passwordConfirmation.errors">Es necesario repetir la contraseña.</mat-error>
+            </mat-form-field>
+            <br>
+            <label for="username">Nombre de Usuario: </label><br>
+            <mat-form-field>
+                <input matInput required #username="ngModel" placeholder="Usuario" type="text" [(ngModel)]="user.username"
+                    name="username">
+                    <mat-error *ngIf="username.errors">Usuario requerido.</mat-error>
+            </mat-form-field>
+            <br>
+
+        </div>
+        <div fxFlex="50%">&nbsp;</div>
+        <div fxFlex.gt-sm="100%">
+
+            <label for="street">Dirección: </label><br>
+            <mat-form-field>
+                <input matInput required #street="ngModel" placeholder="Dirección" type="text"
+                    [(ngModel)]="user.address.street" name="street">
+                    <mat-error *ngIf="street.errors">Dirección requerida.</mat-error>
+            </mat-form-field>
+            <br>
+            <label for="postalCode">Código Postal: </label><br>
+            <mat-form-field>
+                <input matInput required #postalCode="ngModel" placeholder="XXXXX" type="text"
+                    [(ngModel)]="user.address.postalCode" name="postalCode">
+                    <mat-error *ngIf="postalCode.errors">Código postal requerido.</mat-error>
+            </mat-form-field>
+            <br>
+            <label for="city">Ciudad: </label><br>
+            <mat-form-field>
+                <input matInput required #city="ngModel" placeholder="Ciudad" type="text"
+                    [(ngModel)]="user.address.city" name="city">
+                    <mat-error *ngIf="city.errors">Ciudad requerida.</mat-error>
+            </mat-form-field>
+            <br>
+            <label for="province">Provincia: </label><br>
+            <mat-form-field>
+                <input matInput required #province="ngModel" placeholder="Provincia" type="text"
+                    [(ngModel)]="user.address.province" name="province">
+                    <mat-error *ngIf="province.errors">Provincia requerida.</mat-error>
+            </mat-form-field>
+            <br>
+            <label for="country">País: </label><br>
+            <mat-form-field>
+                <input matInput required #country="ngModel" placeholder="País" type="text"
+                    [(ngModel)]="user.address.country" name="country">
+                    <mat-error *ngIf="country.errors">País requerido.</mat-error>
+            </mat-form-field>
+            <br>
+            <button (click)="goBack()" mat-button>Cancel</button>
+            <button mat-button type="submit">Crear Cuenta</button>
+        </div>
+    </form>
+
+</div>

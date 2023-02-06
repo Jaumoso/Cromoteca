@@ -29,7 +29,7 @@
 <!-- Grid de colecciones -->
 <div class="content" fxLayout="row wrap" fxLayoutGap="16px grid" *ngIf="collections">
     <div [fxFlex]="(100/gridColumns) + '%'" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let collection of collections; let i=index">
-        <mat-card>
+        <mat-card class="scale-up-center">
             <mat-card-header>
                 <mat-card-title>Colección {{collection.name}}</mat-card-title>
             </mat-card-header>

@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ActivatedRoute, Params } from '@angular/router';
-import { catchError, of, Subscription, switchMap } from 'rxjs';
+import { /* catchError, of, Subscription, */ switchMap } from 'rxjs';
 import { CollectionService } from '../services/collection.service';
 import { Collection } from '../shared/collection';
 import { Location } from '@angular/common';

@@ -37,6 +37,8 @@ import { NewsComponent } from './news/news.component';
 import { EditprofileComponent } from './editprofile/editprofile.component';
 import { LibraryComponent } from './library/library.component';
 import { AuthInterceptorService } from './services/authInterceptor.service';
+import { PasswordchangeComponent } from './passwordchange/passwordchange.component';
+import { CreateaccountComponent } from './createaccount/createaccount.component';
 
 
 @NgModule({
@@ -55,6 +57,8 @@ import { AuthInterceptorService } from './services/authInterceptor.service';
     NewsComponent,
     EditprofileComponent,
     LibraryComponent,
+    PasswordchangeComponent,
+    CreateaccountComponent,
   ],
   imports: [
     BrowserModule,

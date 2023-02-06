@@ -19,10 +19,12 @@
         <mat-error *ngIf="password.errors">Contraseña requerida.</mat-error>
       </mat-form-field>
   </mat-dialog-content>
+  <a [routerLink]="['/passwordchange']" (click)="closeDialog()" >¿Has olvidado tu contraseña?</a>
   <mat-dialog-actions>
+    <button [routerLink]="['/createaccount']" (click)="closeDialog()" type="button" class="accept">Crear Cuenta</button>
     <span class="flex-spacer"></span>
     <button class="cancel" mat-button mat-dialog-close>Cancel</button>
-    <button class="accept" mat-button type="submit" class="background-primary text-floral-white"
+    <button class="accept" mat-button type="submit"
       [disabled]="loginForm.form.invalid">Login</button>
   </mat-dialog-actions>
 </form>

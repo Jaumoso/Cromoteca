@@ -5,7 +5,7 @@ export class User{
     email: string | undefined;
     password: string | undefined;
     username: string | undefined;
-    entryDate: Date | undefined;
+    entryDate: string | undefined; // ! he cambiado esto!!
     admin: boolean | undefined;
     address!: string;
 }
