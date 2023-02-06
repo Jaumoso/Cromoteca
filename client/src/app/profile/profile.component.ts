@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { mergeMap, switchMap } from 'rxjs';
 import { AddressService } from '../services/address.service';
+import { AuthService } from '../services/auth.service';
 import { JwtService } from '../services/jwt.service';
 import { UserService } from '../services/user.service';
 import { Address } from '../shared/address';
@@ -18,7 +20,10 @@ export class ProfileComponent implements OnInit {
     private userService: UserService,
     private addressService: AddressService,
     private route: ActivatedRoute,
-    private jwtService: JwtService
+    private router: Router,
+    private jwtService: JwtService,
+    private authService: AuthService,
+    public dialog: MatDialog,
     ) { }
 
   user: User | undefined;
@@ -37,9 +42,29 @@ export class ProfileComponent implements OnInit {
     // GET User y Address
     this.route.paramMap.pipe(
       mergeMap((params: Params) => { return this.userService.getUser(this.decodedToken._id) }),
-      mergeMap((userData) => { this.user = userData; return this.addressService.getAddress(userData.address)}))
+      mergeMap((userData) => { this.user = userData; return this.addressService.getAddress(this.decodedToken.addressId)}))
       .subscribe(addressData => {
         this.address = addressData;
       });
     }
+
+    logOut(){
+      this.dialog.open(CloseSessionDialog)
+      this.router.navigateByUrl('/home');
+      this.authService.closeSession();
+    }
+
+}
+
+@Component({
+  selector: 'close-session-dialog',
+  template: '<h1 mat-dialog-title>Sesión Cerrada</h1><p mat-dialog-content><button (click)="closeDialog()">ACEPTAR</button></p>',
+  styles: ['button { padding: 5px; color: white; background-color: cornflowerblue;} p { text-align: center;}']
+})
+export class CloseSessionDialog {
+  constructor(private dialogRef: MatDialogRef<CloseSessionDialog>) {}
+
+  closeDialog(){
+    this.dialogRef.close();
   }
+}

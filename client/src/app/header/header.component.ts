@@ -5,6 +5,7 @@ import { Subject, Subscription } from 'rxjs';
 import { DialogData } from '../collections/collections.component';
 import { LoginComponent } from '../login/login.component';
 import { AuthService } from '../services/auth.service';
+import { JwtService } from '../services/jwt.service';
 import { LoginStatusService } from '../services/loginStatus.service';
 
 @Component({
@@ -17,7 +18,8 @@ export class HeaderComponent implements OnInit {
   constructor(public dialog: MatDialog,
     private router: Router,
     private authService: AuthService,
-    private loginStatusService: LoginStatusService) { }
+    private loginStatusService: LoginStatusService,
+    private jwtService: JwtService) { }
 
     loginSubscription: Subscription | undefined;
     loggedIn: boolean = false;
@@ -30,8 +32,14 @@ export class HeaderComponent implements OnInit {
   }
 
   goToProfile(){
-    if(localStorage.getItem('token') != null) {
-      this.router.navigateByUrl('/profile');
+    const token = localStorage.getItem('token');
+    if(token != null) {
+      if(this.jwtService.isTokenExpired(token) == false){
+        this.router.navigateByUrl('/profile');
+      }
+      else {
+        this.openLoginForm();
+      }
     }
     else {
       this.openLoginForm();
