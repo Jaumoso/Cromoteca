@@ -121,4 +121,7 @@ Importar font awesome en styles.scss:
 
 # TO-DO:
 
-Aún por añadir
+- Si un usuario esta registrado y tiene una colección en la biblioteca, quitar el botón de añadir biblioteca
+- Añadir filtros de busqueda a las colecciones. (falta la busqueda por categoria)
+- Añadir colecciones a tu biblioteca
+- Paginator en la seccion de colecciones
