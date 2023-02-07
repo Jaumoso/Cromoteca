@@ -29,7 +29,7 @@ export class User {
     admin: boolean;
 
     @Prop({type: mongoose.Schema.Types.ObjectId, ref: 'Address'})
-    addressId: Address;
+    addressId: mongoose.Schema.Types.ObjectId;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

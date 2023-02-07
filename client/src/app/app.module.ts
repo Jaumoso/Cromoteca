@@ -31,7 +31,6 @@ import { CollectionsComponent } from './collections/collections.component';
 import { MarketComponent } from './market/market.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AboutComponent } from './about/about.component';
-import { FilterComponent } from './filter/filter.component';
 import { CollectiondetailsComponent } from './collectiondetails/collectiondetails.component';
 import { NewsComponent } from './news/news.component';
 import { EditprofileComponent } from './editprofile/editprofile.component';
@@ -52,7 +51,6 @@ import { CreateaccountComponent } from './createaccount/createaccount.component'
     MarketComponent,
     ProfileComponent,
     AboutComponent,
-    FilterComponent,
     CollectiondetailsComponent,
     NewsComponent,
     EditprofileComponent,
