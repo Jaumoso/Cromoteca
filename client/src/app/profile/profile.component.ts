@@ -5,6 +5,7 @@ import { mergeMap } from 'rxjs';
 import { AddressService } from '../services/address.service';
 import { AuthService } from '../services/auth.service';
 import { JwtService } from '../services/jwt.service';
+import { LoginStatusService } from '../services/loginStatus.service';
 import { UserService } from '../services/user.service';
 import { Address } from '../shared/address';
 import { User } from '../shared/user';
@@ -23,6 +24,7 @@ export class ProfileComponent implements OnInit {
     private router: Router,
     private jwtService: JwtService,
     private authService: AuthService,
+    private loginStatusService: LoginStatusService,
     public dialog: MatDialog,
     ) { }
 
@@ -50,6 +52,7 @@ export class ProfileComponent implements OnInit {
 
     logOut(){
       this.dialog.open(CloseSessionDialog)
+      this.loginStatusService.loggedIn = false;
       this.router.navigateByUrl('/home');
       this.authService.closeSession();
     }

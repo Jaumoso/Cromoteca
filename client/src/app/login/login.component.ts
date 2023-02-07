@@ -37,10 +37,6 @@ export class LoginComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  setSession(token: string) {
-    this.authService.setSession(token);
-  }
-
   onSubmit() {
     if (this.user.username && this.user.password) {
       this.authService.login(this.user.username, this.user.password)
@@ -53,7 +49,7 @@ export class LoginComponent implements OnInit {
             this.loginStatusService.loggedIn = true;
             this.closeDialog();
           }
-          this.setSession(token);
+          this.authService.setSession(token);
         }
       )
     }

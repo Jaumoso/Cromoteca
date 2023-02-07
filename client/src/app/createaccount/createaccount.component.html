@@ -9,10 +9,10 @@
 
 <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign.xs="start center"
     fxLayoutAlign.sm="start center" fxLayoutAlign.gt-sm="center center" fxLayoutGap="10px">
-    <form nonvalidate #loginForm="ngForm" (ngSubmit)="onSubmit()">
+    <form class="form" nonvalidate #loginForm="ngForm" (ngSubmit)="onSubmit()">
 
-        <div fxFlex="50" fxFlex.gt-sm="100%">
-
+        <div fxFlex="50" fxLayout="column" fxFlex.gt-xs="100%">
+            <br>
             <label for="firstname">Nombre: </label><br>
             <mat-form-field>
                 <input matInput required #firstName="ngModel" placeholder="Nombre" type="text" [(ngModel)]="user.firstName"
@@ -26,6 +26,17 @@
                     name="lastname">
                     <mat-error *ngIf="lastName.errors">Apellidos requeridos.</mat-error>
             </mat-form-field>
+            <br>
+            <label for="username">Nombre de Usuario: </label><br>
+            <mat-form-field>
+                <input matInput required #username="ngModel" placeholder="Usuario" type="text" [(ngModel)]="user.username"
+                    name="username">
+                    <mat-error *ngIf="username.errors">Usuario requerido.</mat-error>
+            </mat-form-field>
+            <br>
+        </div>
+
+        <div fxFlex="50" fxFlex.gt-xs="100%" fxLayout="column">
             <br>
             <label for="email">Correo electrónico: </label><br>
             <mat-form-field>
@@ -48,18 +59,10 @@
                     <mat-error *ngIf="passwordConfirmation.errors">Es necesario repetir la contraseña.</mat-error>
             </mat-form-field>
             <br>
-            <label for="username">Nombre de Usuario: </label><br>
-            <mat-form-field>
-                <input matInput required #username="ngModel" placeholder="Usuario" type="text" [(ngModel)]="user.username"
-                    name="username">
-                    <mat-error *ngIf="username.errors">Usuario requerido.</mat-error>
-            </mat-form-field>
-            <br>
-
         </div>
-        <div fxFlex="50%">&nbsp;</div>
-        <div fxFlex.gt-sm="100%">
 
+        <div fxFlex="50" fxFlex.gt-xs="100%" fxLayout="column">
+            <br>
             <label for="street">Dirección: </label><br>
             <mat-form-field>
                 <input matInput required #street="ngModel" placeholder="Dirección" type="text"

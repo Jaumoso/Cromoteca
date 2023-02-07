@@ -5,6 +5,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../services/user.service';
 import { Address } from '../shared/address';
 import { AddressService } from '../services/address.service';
+import { Router } from '@angular/router';
+import { LoginComponent } from '../login/login.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-createaccount',
@@ -17,11 +20,13 @@ export class CreateaccountComponent implements OnInit {
     private location: Location,
     private formBuilder: FormBuilder,
     private userService: UserService,
-    private addressService: AddressService
+    private addressService: AddressService,
+    private router: Router,
+    public dialog: MatDialog,
   ) {
     this.form = this.formBuilder.group({
-      firstName: ['', Validators.required, Validators.pattern('[a-zA-Z ]')],
-      lastName: ['', Validators.required, Validators.pattern('[a-zA-Z ]')],
+      firstName: ['', Validators.required, Validators.pattern('[a-zA-Z ]'), Validators.minLength(2)],
+      lastName: ['', Validators.required, Validators.pattern('[a-zA-Z ]'), Validators.minLength(2)],
       email: ['', Validators.required, Validators.email],
       password: ['', Validators.required, Validators.minLength(8)],
       password2: ['', Validators.required, Validators.minLength(8)],
@@ -30,15 +35,17 @@ export class CreateaccountComponent implements OnInit {
       // admin
       // Address:
       street: ['', Validators.required],
-      postalCode: ['', Validators.required],
-      city: ['', Validators.required, Validators.pattern('[a-zA-Z ]')],
-      province: ['', Validators.required, Validators.pattern('[a-zA-Z ]')],
-      country: ['', Validators.required, Validators.pattern('[a-zA-Z ]')],
+      postalCode: ['', Validators.required, Validators.pattern('[a-zA-Z0-9][ ]')],
+      city: ['', Validators.required, Validators.pattern('[a-zA-Z][ ]')],
+      province: ['', Validators.required, Validators.pattern('[a-zA-Z][ ]')],
+      country: ['', Validators.required, Validators.pattern('[a-zA-Z][ ]')],
     });
    }
 
   ngOnInit(): void {
   }
+
+  form: FormGroup;
 
   user = {
     firstName: '',
@@ -57,9 +64,87 @@ export class CreateaccountComponent implements OnInit {
       country: '',
     }
   }
-  // ! entry date // admin
 
-  form: FormGroup;
+  formErrors: any = {
+    'firstName': '',
+    'lastName': '',
+    'email': '',
+    'password': '',
+    'passwordConfirmation': '',
+    'username': '',
+    'street': '',
+    'postalCode': '',
+    'city': '',
+    'province': '',
+    'country': '',
+  };
+
+  validationMessages: any = {
+    'firstName': {
+      'required': 'Nombre requerido',
+      'minlength': 'Mínimo 2 caracteres',
+      'pattern': 'No se admiten símbolos',
+    },
+    'lastName': {
+      'required': 'Apellidos requeridos',
+      'minlength': 'Mínimo 2 caracteres',
+      'pattern': 'No se admiten símbolos',
+    },
+    'email': {
+      'required': 'Correo requerido',
+      'email': 'Formato email obligatorio',
+    },
+    'password': {
+      'required': 'Contraseña requerida',
+    },
+    'passwordConfirmation': {
+      'required': 'Confirma la contraseña',
+    },
+    'username': {
+      'required': 'Usuario requerido',
+      'minlength': 'Mínimo 2 caracteres',
+      /* 'pattern': 'No se admiten símbolos', */
+    },
+    'street': {
+      'required': 'Dirección requerida',
+    },
+    'postalCode': {
+      'required': 'Código Postal requerido',
+      'pattern': 'Solo letras y números',
+    },
+    'city': {
+      'required': 'Ciudad requerida',
+      'pattern': 'Solo letras',
+    },
+    'province': {
+      'required': 'Provincia requerida',
+      'pattern': 'Solo letras',
+    },
+    'country': {
+      'required': 'País requerido',
+      'pattern': 'Solo letras',
+    },
+  };
+
+  onValueChanged(data?: any) {
+    if (!this.form) { return;}
+    const form = this.form;
+    for (const field in this.formErrors) {
+      if (this.formErrors.hasOwnProperty(field)) {
+        // clear previous error message (if any)
+        this.formErrors[field] = '';
+        const control = form.get(field);
+        if (control && control.dirty && !control.valid) {
+          const messages = this.validationMessages[field];
+          for (const key in control.errors) {
+            if (control.errors.hasOwnProperty(key)) {
+              this.formErrors[field] += messages[key] + ' ';
+            }
+          }
+        }
+      }
+    }
+  }
 
   onSubmit() {
     if(
@@ -83,21 +168,24 @@ export class CreateaccountComponent implements OnInit {
         this.addressService.createAddress(address)
         .then(
           (address) => {
-            console.log('Dirección' + address);
-            console.log('ID Dirección' + address._id);
+            console.log('Dirección ' + address);
+            console.log('ID Dirección: ' + address._id);
             let user = new User;
             user.firstName = this.user.firstName;
             user.lastName = this.user.lastName;
             user.email = this.user.email;
             user.password = this.user.password;
             user.username = this.user.username;
-            user.entryDate = Date.toString();
+            user.entryDate = new Date;
             user.admin = false;
-            user.address = address._id! // ! assertion
+            user.addressId = address._id;
+            console.log(user.addressId);
             this.userService.createUser(user)
             .then((user) => {
               console.log('Usuario' + user);
               console.log('Usuario creado');
+              this.router.navigateByUrl('/home');
+              this.dialog.open(LoginComponent);
             });
           }
         );

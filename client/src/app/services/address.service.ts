@@ -15,7 +15,7 @@ import { Address } from '../shared/address';
       return new Promise((resolve, reject) => {
         this.http.get<{addressData: Address}>(baseURL + 'address/' + addressId)
         .subscribe(address => {
-          resolve(address.addressData); console.log(address.addressData);
+          resolve(address.addressData);
         }, err => {
           reject(err);
         });
@@ -29,9 +29,10 @@ import { Address } from '../shared/address';
         })
       };
       return new Promise((resolve, reject) => {
-        this.http.post<{addressData: Address}>(baseURL + 'address/new', address, httpOptions)
+        this.http.post<{newAddress: Address}>(baseURL + 'address/new', address, httpOptions)
         .subscribe(address => {
-          resolve(address.addressData);
+          resolve(address.newAddress);
+          console.log(address);
         }, err => {
           reject(err);
         });

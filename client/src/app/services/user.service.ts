@@ -29,9 +29,9 @@ import { ProcessHTTPMsgService } from './process-httpmsg.service';
         })
       };
       return new Promise((resolve, reject) => {
-        this.http.post<User>(baseURL + 'user/new', user, httpOptions)
+        this.http.post<{newUser: User}>(baseURL + 'user/new', user, httpOptions)
         .subscribe(user => {
-          resolve(user);
+          resolve(user.newUser);
         }, err => {
           reject(err);
         });

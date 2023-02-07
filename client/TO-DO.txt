@@ -1,6 +1,0 @@
-Añadir filtros de busqueda a las colecciones. (falta la busqueda por categoria)
-Habilitar boton de añadir coleccion a la biblioteca, en la lista de colecciones.
-Auth Guard para usuarios registrados.
-Interceptor
-Logging
-Paginator en la seccion de colecciones
