@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaderResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { baseURL } from '../shared/baseurl';
 import { ProcessHTTPMsgService } from './process-httpmsg.service';
-import { User } from '../shared/user';
 
 
 @Injectable({

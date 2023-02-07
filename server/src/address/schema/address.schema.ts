@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose"
 
 export type AddressDocument = Address & Document;

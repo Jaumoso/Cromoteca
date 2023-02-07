@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MatSelectChange } from '@angular/material/select';
 
 interface Options {
   value: string;

@@ -1,6 +1,5 @@
-/* eslint-disable prettier/prettier */
 import { ApiProperty } from "@nestjs/swagger";
-import { IsBoolean, IsDate, IsEmail, IsNotEmpty, IsString, IsStrongPassword, MaxLength, MinLength } from "class-validator";
+import { IsBoolean, IsEmail, IsNotEmpty, IsString, MaxLength, MinLength } from "class-validator";
 import mongoose from "mongoose";
 export class CreateUserDto {
 

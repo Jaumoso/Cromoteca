@@ -1,10 +1,8 @@
 import { Controller, Request, Post, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { AuthGuard } from '@nestjs/passport';
 import { ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 import { LocalAuthGuard } from './local-auth.guard';
 import { Get } from '@nestjs/common/decorators';
-import { request } from 'http';
 import { JwtAuthGuard } from './jwt-auth.guard';
 
 @ApiTags('Auth')

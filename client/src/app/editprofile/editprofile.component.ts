@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormGroupDirective } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { Location } from '@angular/common';
 import { User } from '../shared/user';
-import { switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-editprofile',

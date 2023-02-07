@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaderResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { baseURL } from '../shared/baseurl';
-import { of, Observable } from 'rxjs';
-import { delay, map, catchError } from 'rxjs/operators';
 import { ProcessHTTPMsgService } from './process-httpmsg.service';
 import { News } from '../shared/news';
 

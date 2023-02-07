@@ -98,9 +98,9 @@ export class CreateaccountComponent implements OnInit {
             .then((user) => {
               console.log('Usuario' + user);
               console.log('Usuario creado');
-            }).catch(() => {Error("No se ha podido crear usuario")});
+            });
           }
-        ).catch(() => {Error("No se ha podido crear Address")})
+        );
       }
   }
 

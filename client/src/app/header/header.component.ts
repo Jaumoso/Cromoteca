@@ -1,8 +1,7 @@
-import { Component, Inject, OnInit, Renderer2 } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Router, RouterLink } from '@angular/router';
-import { Subject, Subscription } from 'rxjs';
-import { DialogData } from '../collections/collections.component';
+import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Router, } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { LoginComponent } from '../login/login.component';
 import { AuthService } from '../services/auth.service';
 import { JwtService } from '../services/jwt.service';

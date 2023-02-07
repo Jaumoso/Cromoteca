@@ -1,7 +1,6 @@
-/* eslint-disable prettier/prettier */
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose"
 
-/* export type NewsDocument = News & Document; */
+export type NewsDocument = News & Document;
 
 @Schema()
 export class News {

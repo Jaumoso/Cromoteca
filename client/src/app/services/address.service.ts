@@ -1,11 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaderResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { baseURL } from '../shared/baseurl';
-import { of, Observable } from 'rxjs';
-import { delay, map, catchError } from 'rxjs/operators';
 import { ProcessHTTPMsgService } from './process-httpmsg.service';
 import { Address } from '../shared/address';
-import { AuthService } from './auth.service';
 
 @Injectable({
     providedIn: 'root'

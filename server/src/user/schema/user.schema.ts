@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose"
 import { Address } from "cluster";
 import mongoose from "mongoose";
