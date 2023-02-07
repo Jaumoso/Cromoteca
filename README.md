@@ -121,8 +121,4 @@ Importar font awesome en styles.scss:
 
 # TO-DO:
 
-En login.component.html:
-Hacer que 'required' funcione
-```
-<mat-error *ngIf="username.errors?.required">Username is required.</mat-error>
-```
+Aún por añadir
