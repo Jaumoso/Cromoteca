@@ -48,6 +48,11 @@ export class UserService {
     }
 
     async updateUser(userId: string, updateUserDto: UpdateUserDto) {
+        if(updateUserDto.password != undefined){
+            const saltOrRounds = 10;
+            const hashedPassword = await bcrypt.hash(userDto.password, saltOrRounds);
+            userDto.password = hashedPassword;   
+        }
         const updatedUser = await this.userModel.findByIdAndUpdate(userId, updateUserDto);
         if (!updatedUser) {
             throw new NotFoundException('User data not found!');
