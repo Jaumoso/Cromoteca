@@ -43,7 +43,7 @@ export class ProfileComponent implements OnInit {
 
     // GET User y Address
     this.route.paramMap.pipe(
-      mergeMap((params: Params) => { return this.userService.getUser(this.decodedToken._id) }),
+      mergeMap(() => { return this.userService.getUser(this.decodedToken._id) }),
       mergeMap((userData) => { this.user = userData; return this.addressService.getAddress(this.decodedToken.addressId)}))
       .subscribe(addressData => {
         this.address = addressData;

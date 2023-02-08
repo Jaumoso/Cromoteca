@@ -34,7 +34,7 @@ export class CreateaccountComponent implements OnInit {
       // entryDate
       // admin
       // Address:
-      street: ['', Validators.required],
+      street: ['', Validators.required, Validators.minLength(2)],
       postalCode: ['', Validators.required, Validators.pattern('[a-zA-Z0-9][ ]')],
       city: ['', Validators.required, Validators.pattern('[a-zA-Z][ ]')],
       province: ['', Validators.required, Validators.pattern('[a-zA-Z][ ]')],
@@ -72,6 +72,7 @@ export class CreateaccountComponent implements OnInit {
     'password': '',
     'passwordConfirmation': '',
     'username': '',
+    // address
     'street': '',
     'postalCode': '',
     'city': '',
@@ -107,6 +108,7 @@ export class CreateaccountComponent implements OnInit {
     },
     'street': {
       'required': 'Dirección requerida',
+      'minlength': 'Mínimo 2 caracteres',
     },
     'postalCode': {
       'required': 'Código Postal requerido',

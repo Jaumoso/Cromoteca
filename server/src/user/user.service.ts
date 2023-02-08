@@ -20,7 +20,7 @@ export class UserService {
     }
 
     async getUser(userId: string): Promise<UserDocument> {
-        const userData = await this.userModel.findById(userId)
+        const userData = await this.userModel.findById(userId);
         if (!userData) {
             throw new NotFoundException('User data not found!');
         }
@@ -50,8 +50,8 @@ export class UserService {
     async updateUser(userId: string, updateUserDto: UpdateUserDto) {
         if(updateUserDto.password != undefined){
             const saltOrRounds = 10;
-            const hashedPassword = await bcrypt.hash(userDto.password, saltOrRounds);
-            userDto.password = hashedPassword;   
+            const hashedPassword = await bcrypt.hash(updateUserDto.password, saltOrRounds);
+            updateUserDto.password = hashedPassword;   
         }
         const updatedUser = await this.userModel.findByIdAndUpdate(userId, updateUserDto);
         if (!updatedUser) {

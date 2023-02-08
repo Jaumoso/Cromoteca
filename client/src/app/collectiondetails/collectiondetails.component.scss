@@ -32,6 +32,7 @@ $data-table-background: rgb(219, 219, 219);
         padding: 10px;
         margin-bottom: 5px;
         font-weight: bold;
+        border-radius: 10px;
     }
     button:hover {
         background-color: mix($background-dark, black, 80%);
@@ -72,6 +73,7 @@ $data-table-background: rgb(219, 219, 219);
     padding: 10px;
     margin-bottom: 5px;
     font-weight: bold;
+    border-radius: 10px;
 }
 .go-back:hover {
     background-color: mix($background-dark, black, 80%);

@@ -1,3 +1,8 @@
+$background-light: powderblue;
+$background-dark: cornflowerblue;
+$background: steelblue;
+$text-color: midnightblue;
+
 .header {
     text-align: left;
     margin-left: 5%;
@@ -8,7 +13,36 @@
     }
 }
 
-.content {
-    text-align: left;
-    padding-left: 5%;
+.form {
+    
+    label {
+        color: $background;
+        font-weight: bold;
+        margin-left: 10px;
+    }
+
+    mat-form-field {
+        background-color: rgb(239, 239, 239);
+        border-radius: 10px;
+        padding: 10px;
+        margin: 10px;
+    }
+
+    button {
+        width: auto;
+        background-color: $background-dark;
+        color: white;
+        padding: 10px;
+        margin-bottom: 5px;
+        font-weight: bold;
+        border-radius: 10px;
+    }
+    button:hover {
+        background-color: mix($background-dark, black, 80%);
+        font-weight: bold;
+    }
+    .button:active {
+        background-color: mix($background-dark, black, 70%);
+        font-weight: bold;
+    }
 }

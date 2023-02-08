@@ -75,6 +75,7 @@ $text-color: midnightblue;
                 padding: 10px;
                 margin-bottom: 5px;
                 font-weight: bold;
+                border-radius: 10px;
             }
             button:hover {
                 background-color: mix($background-dark, black, 80%);
@@ -99,6 +100,7 @@ $text-color: midnightblue;
         padding: 10px;
         margin: 10px;
         font-weight: bold;
+        border-radius: 10px;
     }
     #yes:hover {
         background-color: mix($background-dark, black, 80%);

@@ -15,7 +15,7 @@ import { ProcessHTTPMsgService } from './process-httpmsg.service';
       return new Promise((resolve, reject) => {
         this.http.get<{userData: User}>(baseURL + 'user/' + userId)
         .subscribe(user => {
-          resolve(user.userData); console.log(user.userData);
+          resolve(user.userData);
         }, err => {
           reject(err);
         });
