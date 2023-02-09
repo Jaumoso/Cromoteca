@@ -125,4 +125,5 @@ Importar font awesome en styles.scss:
 - Añadir filtros de busqueda a las colecciones. (falta la busqueda por categoria)
 - Añadir colecciones a tu biblioteca
 - Paginator en la seccion de colecciones
-- Validación para la creación de los usuarios
+- Validación para la creación y edición de los usuarios
+- Layout para pantallas pequeñas y grandes
