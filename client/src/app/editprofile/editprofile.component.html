@@ -9,7 +9,10 @@
 <br>
 <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign.xs="start center"
     fxLayoutAlign.sm="start center" fxLayoutAlign.gt-sm="center center" fxLayoutGap="10px">
-    
+    <p>USER: {{user | json}}</p>
+    <br>
+    <br>
+    <p>UPDATED_USER: {{updatedUser | json}}</p>
     <form class="form" nonvalidate #updateUserForm="ngForm" (ngSubmit)="onSubmit()">
         
         <div fxFlex="50" fxFlex.gt-sm="100%" fxLayout="column">
@@ -98,7 +101,7 @@
                     <!-- <mat-error *ngIf="country.errors">País requerido.</mat-error> -->
             </mat-form-field>
             <br>
-            <button (click)="goBack()" mat-button>Cancel</button>
+            <button (click)="goBack()" type="button" mat-button>Cancel</button>
             <button mat-button [disabled]="updateUserForm.invalid" type="submit">Actualizar información</button>
         </div>
     </form>

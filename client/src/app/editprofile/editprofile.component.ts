@@ -10,6 +10,8 @@ import { Address } from '../shared/address';
 import { JwtService } from '../services/jwt.service';
 import { mergeMap } from 'rxjs';
 import { DialogData } from '../collections/collections.component';
+import { LoginComponent } from '../login/login.component';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-editprofile',
@@ -25,8 +27,10 @@ export class EditprofileComponent implements OnInit {
     private addressService: AddressService,
     private router: Router,
     public dialog: MatDialog,
+    public dialog2: MatDialog,
     private jwtService: JwtService,
     private route: ActivatedRoute,
+    private authService: AuthService
     ){
       this.form = this.formBuilder.group({
         firstName: ['', Validators.required, Validators.pattern('[a-zA-Z ]'), Validators.minLength(2)],
@@ -57,11 +61,12 @@ export class EditprofileComponent implements OnInit {
     this.route.paramMap.pipe(
       mergeMap(() => { return this.userService.getUser(this.decodedToken._id) }),
       mergeMap((userData) => { 
-        this.user = userData; 
+        this.user = userData;
         return this.addressService.getAddress(this.decodedToken.addressId)}))
       .subscribe(addressData => {
         this.address = addressData;
       });
+
   }
 
   private token: any;
@@ -90,96 +95,17 @@ export class EditprofileComponent implements OnInit {
     }
   }
 
-  formErrors: any = {
-    'firstName': '',
-    'lastName': '',
-    'email': '',
-    'password': '',
-    'username': '',
-    //address
-    'street': '',
-    'postalCode': '',
-    'city': '',
-    'province': '',
-    'country': ''
-  };
-
-  validationMessages: any = {
-    'firstName': {
-      'required': 'Nombre requerido',
-      'minlength': 'Mínimo 2 caracteres',
-      'pattern': 'No se admiten símbolos',
-    },
-    'lastName': {
-      'required': 'Apellidos requeridos',
-      'minlength': 'Mínimo 2 caracteres',
-      'pattern': 'No se admiten símbolos',
-    },
-    'email': {
-      'required': 'Correo requerido',
-      'email': 'Formato email obligatorio',
-    },
-    'password': {
-      'required': 'Contraseña requerida',
-    },
-    'passwordConfirmation': {
-      'required': 'Confirma la contraseña',
-    },
-    'username': {
-      'required': 'Usuario requerido',
-      'minlength': 'Mínimo 2 caracteres',
-      /* 'pattern': 'No se admiten símbolos', */
-    },
-    'street': {
-      'required': 'Dirección requerida',
-    },
-    'postalCode': {
-      'required': 'Código Postal requerido',
-      'pattern': 'Solo letras y números',
-    },
-    'city': {
-      'required': 'Ciudad requerida',
-      'pattern': 'Solo letras',
-    },
-    'province': {
-      'required': 'Provincia requerida',
-      'pattern': 'Solo letras',
-    },
-    'country': {
-      'required': 'País requerido',
-      'pattern': 'Solo letras',
-    },
-  };
-
-  onValueChanged(data?: any) {
-    if (!this.form) { return;}
-    const form = this.form;
-    for (const field in this.formErrors) {
-      if (this.formErrors.hasOwnProperty(field)) {
-        // clear previous error message (if any)
-        this.formErrors[field] = '';
-        const control = form.get(field);
-        if (control && control.dirty && !control.valid) {
-          const messages = this.validationMessages[field];
-          for (const key in control.errors) {
-            if (control.errors.hasOwnProperty(key)) {
-              this.formErrors[field] += messages[key] + ' ';
-            }
-          }
-        }
-      }
-    }
-  }
-
   onSubmit() {
 
     this.addressService.updateAddress(this.user!.addressId!, this.address!);
     this.userService.updateUser(this.user!._id!, this.user!)
     .then((user) => {
-      console.log('Usuario' + user);
+      this.authService.closeSession();
+      console.log('Contraseña: ' + user.password);
       console.log('Usuario creado');
       this.router.navigateByUrl('/profile');
       this.dialog.open(UpdatedProfileComponent);
+      this.dialog2.open(LoginComponent);
     });
   
   }

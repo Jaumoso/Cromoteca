@@ -71,7 +71,7 @@ export class CollectionController {
     // FUNCIONES PARA ADMINISTRADOR
     @Post('new')
     @ApiCreatedResponse({ description: 'Creation of a NEW COLLECTION and insertion in the database.' })
-    async createUser(@Res() response, @Body() collectionDto: CreateCollectionDto) {
+    async createCollection(@Res() response, @Body() collectionDto: CreateCollectionDto) {
         try {
             const newUser = await this.collectionService.createCollection(collectionDto);
             return response.status(HttpStatus.CREATED).json({
@@ -90,7 +90,7 @@ export class CollectionController {
 
     @Put('update/:id')
     @ApiCreatedResponse({ description: 'UPDATE te data of the COLLECTION into the database.' })
-    async updateUser(@Res() response, @Param('id') collectionId: string, @Body() updateCollectionDto: UpdateCollectionDto) {
+    async updateCollection(@Res() response, @Param('id') collectionId: string, @Body() updateCollectionDto: UpdateCollectionDto) {
         try {
             const existingUser = await this.collectionService.updateCollection(collectionId, updateCollectionDto);
             return response.status(HttpStatus.OK).json({
@@ -105,7 +105,7 @@ export class CollectionController {
 
     @Delete('delete/:id')
     @ApiCreatedResponse({ description: 'This function will DELETE the COLLECTION passed as parameter from the database.' })
-    async deleteUser(@Res() response, @Param('id') collectionId: string) {
+    async deleteCollection(@Res() response, @Param('id') collectionId: string) {
         try {
             const deletedUser = await this.collectionService.deleteCollection(collectionId);
             return response.status(HttpStatus.OK).json({

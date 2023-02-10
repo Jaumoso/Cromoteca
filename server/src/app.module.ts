@@ -9,7 +9,8 @@ import { GoogleModule } from './google/google.module';
 import { ConfigModule } from '@nestjs/config';
 import { NewsModule } from './news/news.module';
 import { AuthModule } from './auth/auth.module';
-import { LibraryModule } from './library/library.module';
+import { IntermediateModule } from './intermediate/intermediate.module';
+import { CardModule } from './card/card.module';
 
 require('dotenv').config();
 
@@ -26,7 +27,8 @@ require('dotenv').config();
     GoogleModule,
     NewsModule,
     AuthModule,
-    LibraryModule,
+    IntermediateModule,
+    CardModule,
   ],
   controllers: [AppController],
   providers: [AppService],

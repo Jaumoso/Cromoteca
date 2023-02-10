@@ -45,9 +45,9 @@ import { ProcessHTTPMsgService } from './process-httpmsg.service';
         })
       };
       return new Promise((resolve, reject) => {
-        this.http.put<User>(baseURL + 'user/update/' + userId, user, httpOptions)
+        this.http.put<{existingUser: User}>(baseURL + 'user/update/' + userId, user, httpOptions)
         .subscribe(user => {
-          resolve(user);
+          resolve(user.existingUser);
         }, err => {
           reject(err);
         });
