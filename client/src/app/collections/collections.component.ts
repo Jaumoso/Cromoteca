@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CollectionService } from '../services/collection.service';
+import { IntermediateService } from '../services/intermediate.service';
 import { Collection } from '../shared/collection';
 
 interface Options {
@@ -80,6 +81,7 @@ export class CollectionsComponent implements OnInit {
 
 export interface DialogData {
   collectionName: string;
+  collectionId: string;
 }
 
 @Component({
@@ -91,9 +93,14 @@ export class AddToLibraryDialog {
   constructor(
     public dialogRef: MatDialogRef<AddToLibraryDialog>, 
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    private intermediateService: IntermediateService,
   ) {}
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  addToLibrary(collectionId: string){
+    /* this.intermediateService.addToLibrary(collectionId); */
   }
 }

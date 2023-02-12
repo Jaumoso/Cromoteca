@@ -1,0 +1,65 @@
+$background-light: powderblue;
+$background-dark: cornflowerblue;
+$background: steelblue;
+$text-color: midnightblue;
+
+.content {
+    padding: 50px;
+    
+    mat-card {
+        margin-bottom: 16px;
+        box-shadow: 1px 1px 5px 2px rgb(99, 99, 99);
+        overflow: hidden;
+
+        mat-card-header {
+            min-height: 50px;
+            align-items: center;
+            margin: auto;
+            font-weight: bold;
+            
+            mat-card-title {
+                text-overflow: ellipsis;
+                overflow: hidden;
+                height: 40px;
+            }
+        }
+
+        .img-contain {
+            overflow: hidden;
+        }
+
+        img {
+            object-fit: cover;
+/*          object-fit: scale-down;
+            object-fit: contain; */
+            height: 300px;
+            transition: all 0.3s;
+            transform: scale(1,1) rotate(0deg);
+        }
+
+        mat-card-actions {
+            
+            button {
+                width: 100%;
+                background-color: $background-dark;
+                color: white;
+                padding: 10px;
+                margin-bottom: 5px;
+                font-weight: bold;
+                border-radius: 10px;
+            }
+            button:hover {
+                background-color: mix($background-dark, black, 80%);
+                font-weight: bold;
+            }
+            .button:active {
+                background-color: mix($background-dark, black, 70%);
+                font-weight: bold;
+            }
+        }
+    }
+    mat-card:hover img{
+        transition: all 0.3s;
+        transform: scale(1.1,1.1) rotate(3deg);
+    }
+}

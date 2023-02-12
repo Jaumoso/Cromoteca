@@ -38,15 +38,29 @@ export class IntermediateController {
         }
     }
 
+    @Get('/user/:id')
+    @ApiCreatedResponse({ description: 'This function will get the COLLECTIONS from the USERs LIBRARY with id passed as a parameter from the database.' })
+    async getUserIntermediate(@Res() response, @Param('id') userId: string) {
+        try {
+            const intermediateData = await this.intermediateService.getUserIntermediate(userId);
+            return response.status(HttpStatus.OK).json({
+                message: 'Intermediate data found successfully', intermediateData,
+            });
+        }
+        catch (err) {
+            return response.status(err.status).json(err.response);
+        }
+    }
+
     // FUNCIONES PARA ADMINISTRADOR
     @Post('new')
     @ApiCreatedResponse({ description: 'Creation of a NEW INTERMEDIATE and insertion in the database.' })
     async createIntermediate(@Res() response, @Body() intermediateDto: CreateIntermediateDto) {
         try {
-            const newUser = await this.intermediateService.createIntermediate(intermediateDto);
+            const newIntermediate = await this.intermediateService.createIntermediate(intermediateDto);
             return response.status(HttpStatus.CREATED).json({
                 message: 'Intermediate has been created successfully',
-                newUser,
+                newIntermediate,
             });
         }
         catch (err) {
@@ -62,10 +76,10 @@ export class IntermediateController {
     @ApiCreatedResponse({ description: 'UPDATE te data of the INTERMEDIATE into the database.' })
     async updateIntermediate(@Res() response, @Param('id') intermediateId: string, @Body() updateIntermediateDto: UpdateIntermediateDto) {
         try {
-            const existingUser = await this.intermediateService.updateIntermediate(intermediateId, updateIntermediateDto);
+            const updatedIntermediate = await this.intermediateService.updateIntermediate(intermediateId, updateIntermediateDto);
             return response.status(HttpStatus.OK).json({
                 message: 'Intermediate has been successfully updated',
-                existingUser,
+                updatedIntermediate,
             });
         }
         catch (err) {
@@ -77,10 +91,10 @@ export class IntermediateController {
     @ApiCreatedResponse({ description: 'This function will DELETE the INTERMEDIATE passed as parameter from the database.' })
     async deleteIntermediate(@Res() response, @Param('id') intermediateId: string) {
         try {
-            const deletedUser = await this.intermediateService.deleteIntermediate(intermediateId);
+            const deletedIntermediate = await this.intermediateService.deleteIntermediate(intermediateId);
             return response.status(HttpStatus.OK).json({
                 message: 'Intermediate deleted successfully',
-                deletedUser,
+                deletedIntermediate,
             });
         }
         catch (err) {

@@ -25,6 +25,15 @@ constructor(@InjectModel('Intermediate') private intermediateModel: Model<Interm
         return intermediateData;
     }
 
+    async getUserIntermediate(userId: string): Promise<IntermediateDocument> {
+        const intermediateData = await this.intermediateModel.findOne({userId: userId});
+        if (!intermediateData) {
+            throw new NotFoundException('Intermediate data not found!');
+        }
+        
+        return intermediateData;
+    }
+
     async createIntermediate(intermediateDto: CreateIntermediateDto): Promise<IntermediateDocument> {
         const intermediateData = await this.intermediateModel.create(intermediateDto);
         if (!intermediateData) {

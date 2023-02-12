@@ -1,33 +1,41 @@
-<div class="top-header" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign.xs="start center"
+<div class="top-header" fxLayout="column" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign.xs="start center"
     fxLayoutAlign.sm="start center" fxLayoutAlign.gt-sm="center center" fxLayoutGap="10px">
-    <div fxFlex>
-        <h2>Perfil</h2>
+    <div fxFlex fxLayoutAlign="center">
+        <h2>Perfil de {{user?.username | uppercase}}</h2>
     </div>
 </div>
 
-<div class="content" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign.xs="start center"
-    fxLayoutAlign.sm="start center" fxLayoutAlign.gt-sm="center center" fxLayoutGap="10px">
-
-    <div fxFlex="40%" fxLayout="row" class="card">
-        <div class="profileinfo" fxFlex FxLayout="column">
+<div class="content" fxLayout="row" fxLayout.sm="row" fxLayout.xs="column" fxLayoutAlign.xs="start center"
+    fxLayoutAlign.sm="start center" fxLayoutGap="10px">
+    <div fxFlex="40%" fxLayout="row" fxLayoutAlign="center center">
+        <div>
+            <img src="/assets/images/profile-default.png" height="150px" width="150px" alt="profile-pic" fxLayoutAlign="center">
+        </div>
+        <div fxLayoutAlign="center" fxLayout="column" fxLayoutGap="10px">
+            <button mat-button [routerLink]="['/editprofile',user?._id]" routerLinkActive="router-link-active">Actualizar Información</button>
+            <button mat-button (click)="logOut()" routerLinkActive="router-link-active">Cerrar Sesión</button>
+        </div>
+    </div>
+    <div fxFlex="60%" fxLayout="column">
+        <br>
+        <div fxLayout="column" fxLayoutGap="10px">
             <h2><b>{{user?.username}}</b></h2>
             <p><b>Nombre completo: </b>{{user?.firstName}} {{user?.lastName}}</p>
             <p><b>Dirección de correo: </b>{{user?.email}}</p>
             <p><b>Dirección de envío: </b>{{address?.street}} - {{address?.postalCode}} - {{address?.city}} - {{address?.province}} - {{address?.country}}</p>
             <p><b>Fecha de ingreso: </b>{{user?.entryDate | date}}</p>
-            <button mat-button [routerLink]="['/editprofile',user?._id]" routerLinkActive="router-link-active">Actualizar Información</button>
-            <button mat-button (click)="logOut()" routerLinkActive="router-link-active">Cerrar Sesión</button>
         </div>
-    </div>
-    <div fxFlex class="card">
-        <h3>Algo más aquí</h3>
+        <br>
     </div>
 </div>
+<br>
 <div class="content" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign.xs="start center"
     fxLayoutAlign.sm="start center" fxLayoutAlign.gt-sm="center center" fxLayoutGap="10px">
     <div fxFlex>
-        <h2>Biblioteca</h2>
-        <app-library></app-library>
+        <h2><b><u>Biblioteca de colecciones</u></b></h2>
+        <app-library ngon [userId]="user?._id"></app-library>
     </div>
 </div>
-<br><br>
+
+
+

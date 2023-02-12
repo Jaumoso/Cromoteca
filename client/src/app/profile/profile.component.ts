@@ -40,7 +40,7 @@ export class ProfileComponent implements OnInit {
     if (this.token) {
       this.decodedToken = this.jwtService.decodeToken(this.token);
     }
-
+    
     // GET User y Address
     this.route.paramMap.pipe(
       mergeMap(() => { return this.userService.getUser(this.decodedToken._id) }),
