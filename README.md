@@ -129,3 +129,4 @@ Importar font awesome en styles.scss:
 - Layout para pantallas pequeñas y grandes
 - Proteger las rutas
 - Buscador de colecciones en la librería
+- Borrar library Service
