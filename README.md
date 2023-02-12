@@ -128,3 +128,4 @@ Importar font awesome en styles.scss:
 - Validación para la creación y edición de los usuarios - comprobación de existencia en base de datos
 - Layout para pantallas pequeñas y grandes
 - Proteger las rutas
+- Buscador de colecciones en la librería
