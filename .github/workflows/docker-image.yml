@@ -15,7 +15,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --tag jtq-backend:$(date +%s) | docker build angular/. --tag jtq-frontend:$(date +%s)
+      run: docker build server/. --tag cromoteca-server:$(date +%s) | docker build client/. --tag cromoteca-client:$(date +%s)
     - name: Comprobar imagenes
       run: docker images
     #- name: Push images to GitHub Packages
