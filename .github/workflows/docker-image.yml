@@ -2,9 +2,9 @@ name: Crear imagenes de Docker y push a Packages
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "main" ]
 
 jobs:
 
