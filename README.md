@@ -119,6 +119,26 @@ Importar font awesome en styles.scss:
 @import '../node_modules/font-awesome/scss/font-awesome.scss';
 ```
 
+### SONARQUBE
+```
+npm install sonar-scanner --save-dev
+```
+Añadir sonar-scanner a los scripts en package.json:
+```
+"scripts": {
+  "ng": "ng",
+  "start": "ng serve",
+  "build": "ng build",
+  "watch": "ng build --watch --configuration development",
+  "test": "ng test",
+  "start:dev": "ng serve -o --watch",
+  "sonar": "sonar-scanner"
+```
+Para ejecutar un análisis:
+```
+npm run sonar
+```
+
 # TO-DO:
 
 - Si un usuario esta registrado y tiene una colección en la biblioteca, quitar el botón de añadir biblioteca

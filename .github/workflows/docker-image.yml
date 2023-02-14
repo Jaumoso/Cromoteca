@@ -1,0 +1,21 @@
+name: Crear imagenes de Docker y push a Packages
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build the Docker image
+      run: docker build . --tag jtq-backend:$(date +%s) | docker build angular/. --tag jtq-frontend:$(date +%s)
+    - name: Comprobar imagenes
+      run: docker images
+    #- name: Push images to GitHub Packages
