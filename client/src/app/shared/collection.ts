@@ -9,5 +9,4 @@ export class Collection {
     publisher: string | undefined;
     language: string | undefined;
     image: string | undefined;
-
 }

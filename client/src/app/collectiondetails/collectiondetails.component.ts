@@ -29,9 +29,6 @@ export class CollectiondetailsComponent implements OnInit {
       }))
       .subscribe(collectionData => {
         this.collection = collectionData;
-  /*  this.collectioncopy = collection; 
-      this.setPrevNext(dish.id);
-      this.visibility = 'shown';  */
       });
   }
 

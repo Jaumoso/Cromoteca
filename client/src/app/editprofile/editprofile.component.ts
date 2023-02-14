@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { Location } from '@angular/common';
 import { User } from '../shared/user';
@@ -62,6 +62,7 @@ export class EditprofileComponent implements OnInit {
       mergeMap(() => { return this.userService.getUser(this.decodedToken._id) }),
       mergeMap((userData) => { 
         this.user = userData;
+        this.user.password = '';
         return this.addressService.getAddress(this.decodedToken.addressId)}))
       .subscribe(addressData => {
         this.address = addressData;
@@ -72,40 +73,21 @@ export class EditprofileComponent implements OnInit {
   private token: any;
   private decodedToken: any;
   form: FormGroup;
-  errMsg: string | undefined; // TODO:
   updateForm: FormGroup | undefined;
   user: User | undefined;
   address: Address | undefined;
-
-  updatedUser = {
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-    passwordConfirmation: '',
-    username: '',
-    entryDate: Date,
-    admin: false,
-    address: {
-      street: '',
-      postalCode: '',
-      city: '',
-      province: '',
-      country: '',
-    }
-  }
+  confirmPassword: string | undefined;
 
   onSubmit() {
 
     this.addressService.updateAddress(this.user!.addressId!, this.address!);
     this.userService.updateUser(this.user!._id!, this.user!)
     .then((user) => {
+      console.log(user);
+      this.router.navigateByUrl('/home');
       this.authService.closeSession();
-      console.log('Contraseña: ' + user.password);
-      console.log('Usuario creado');
-      this.router.navigateByUrl('/profile');
-      this.dialog.open(UpdatedProfileComponent);
       this.dialog2.open(LoginComponent);
+      this.dialog.open(UpdatedProfileComponent);
     });
   
   }

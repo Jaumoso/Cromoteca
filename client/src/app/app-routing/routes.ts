@@ -10,9 +10,6 @@ import { EditprofileComponent } from '../editprofile/editprofile.component';
 import { PasswordchangeComponent } from '../passwordchange/passwordchange.component';
 import { CreateaccountComponent } from '../createaccount/createaccount.component';
 
-/* import { ContactComponent } from '../contact/contact.component';
-import { DishdetailComponent } from '../dishdetail/dishdetail.component';  */
-
 export const routes: Routes = [
     { path: 'home', component: HomeComponent},
     { path: 'about', component: AboutComponent},

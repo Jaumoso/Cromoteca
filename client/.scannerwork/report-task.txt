@@ -2,5 +2,5 @@ projectKey=CROMOTECA_CLIENT
 serverUrl=http://localhost:9000
 serverVersion=9.9.0.65466
 dashboardUrl=http://localhost:9000/dashboard?id=CROMOTECA_CLIENT
-ceTaskId=AYZQqlkbaOHDmjObvV-s
-ceTaskUrl=http://localhost:9000/api/ce/task?id=AYZQqlkbaOHDmjObvV-s
+ceTaskId=AYZQ1xE54jN9ZUerv0tC
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AYZQ1xE54jN9ZUerv0tC

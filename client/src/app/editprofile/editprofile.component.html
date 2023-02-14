@@ -3,7 +3,7 @@
     <div class="header" fxFlex="40%" fxFlex.gt-sm="100%">
         <br>
         <h2>Actualizar información de usuario</h2>
-        <hr color="black">
+        <hr>
     </div>
 </div>
 <br>
@@ -12,26 +12,26 @@
     <p>USER: {{user | json}}</p>
     <br>
     <br>
-    <p>UPDATED_USER: {{updatedUser | json}}</p>
+    <p>UPDATED_USER: {{user | json}}</p>
     <form class="form" nonvalidate #updateUserForm="ngForm" (ngSubmit)="onSubmit()">
         
         <div fxFlex="50" fxFlex.gt-sm="100%" fxLayout="column">
 
             <label for="firstname">Nombre: </label>
             <mat-form-field>
-                <input matInput #firstName="ngModel" value={{user?.firstName}} placeholder="Nombre" type="text" [(ngModel)]="updatedUser.firstName"
+                <input matInput #firstName="ngModel" placeholder="Nombre" type="text" [(ngModel)]="user!.firstName"
                     name="firstname">
                     <!-- <mat-error *ngIf="firstName.errors">Nombre requerido.</mat-error> -->
             </mat-form-field>
             <label for="lastname">Apellidos: </label>
             <mat-form-field>
-                <input matInput #lastName="ngModel" value={{user?.lastName}} placeholder="Apellidos" type="text" [(ngModel)]="updatedUser.lastName"
+                <input matInput #lastName="ngModel" placeholder="Apellidos" type="text" [(ngModel)]="user!.lastName"
                     name="lastname">
                     <!-- <mat-error *ngIf="lastName.errors">Apellidos requeridos.</mat-error> -->
             </mat-form-field>
             <label for="username">Nombre de Usuario: </label>
             <mat-form-field>
-                <input matInput #username="ngModel" value={{user?.username}} placeholder="Usuario" type="text" [(ngModel)]="updatedUser.username"
+                <input matInput #username="ngModel" placeholder="Usuario" type="text" [(ngModel)]="user!.username"
                     name="username">
                     <!-- <mat-error *ngIf="username.errors">Usuario requerido.</mat-error> -->
             </mat-form-field>
@@ -42,22 +42,22 @@
 
             <label for="email">Correo electrónico: </label>
             <mat-form-field>
-                <input matInput #email="ngModel" value={{user?.email}} placeholder="example@example.com" type="email"
-                    [(ngModel)]="updatedUser.email" name="email">
+                <input matInput #email="ngModel" placeholder="example@example.com" type="email"
+                    [(ngModel)]="user!.email" name="email">
                     <!-- <mat-error *ngIf="email.errors">Correo requerido.</mat-error> -->
             </mat-form-field>
 
             <label for="password">Contraseña: <span style="color:red;">*</span></label>
             <mat-form-field>
                 <input matInput required #password="ngModel" placeholder="Contraseña" type="password"
-                    [(ngModel)]="updatedUser.password" name="password">
+                    [(ngModel)]="user!.password" name="password">
                     <mat-error *ngIf="password.errors">Contraseña requerida.</mat-error>
             </mat-form-field>
 
             <label for="repeatpassword">Repita la Contraseña: <span style="color:red;">*</span></label>
             <mat-form-field>
                 <input matInput required #passwordConfirmation="ngModel" placeholder="Contraseña" type="password"
-                    [(ngModel)]="updatedUser.passwordConfirmation" name="password2">
+                    [(ngModel)]="confirmPassword" name="password2">
                     <mat-error *ngIf="passwordConfirmation.errors">Es necesario repetir la contraseña.</mat-error>
             </mat-form-field>
 
@@ -67,21 +67,21 @@
 
             <label for="street">Dirección: </label>
             <mat-form-field>
-                <input matInput #street="ngModel" value={{address?.street}} placeholder="Dirección" type="text"
-                    [(ngModel)]="updatedUser.address.street" name="street">
+                <input matInput #street="ngModel" placeholder="Dirección" type="text"
+                    [(ngModel)]="address!.street" name="street">
                     <!-- <mat-error *ngIf="street.errors">Dirección requerida.</mat-error> -->
             </mat-form-field>
             <label for="postalCode">Código Postal: </label>
             <mat-form-field>
-                <input matInput #postalCode="ngModel" value={{address?.postalCode}} placeholder="XXXXX" type="text"
-                    [(ngModel)]="updatedUser.address.postalCode" name="postalCode">
+                <input matInput #postalCode="ngModel" placeholder="XXXXX" type="text"
+                    [(ngModel)]="address!.postalCode" name="postalCode">
                     <!-- <mat-error *ngIf="postalCode.errors">Código postal requerido.</mat-error> -->
             </mat-form-field>
 
             <label for="city">Ciudad: </label>
             <mat-form-field>
-                <input matInput #city="ngModel" value={{address?.city}} placeholder="Ciudad" type="text"
-                    [(ngModel)]="updatedUser.address.city" name="city">
+                <input matInput #city="ngModel" placeholder="Ciudad" type="text"
+                    [(ngModel)]="address!.city" name="city">
                     <!-- <mat-error *ngIf="city.errors">Ciudad requerida.</mat-error> -->
             </mat-form-field>
         </div>
@@ -89,15 +89,15 @@
         <div fxFlex="50" fxFlex.gt-sm="100%" fxLayout="column">
             <label for="province">Provincia: </label>
             <mat-form-field>
-                <input matInput #province="ngModel" value={{address?.province}} placeholder="Provincia" type="text"
-                    [(ngModel)]="updatedUser.address.province" name="province">
+                <input matInput #province="ngModel" placeholder="Provincia" type="text"
+                    [(ngModel)]="address!.province" name="province">
                     <!-- <mat-error *ngIf="province.errors">Provincia requerida.</mat-error> -->
             </mat-form-field>
 
             <label for="country">País: </label>
             <mat-form-field>
-                <input matInput #country="ngModel" value={{address?.country}} placeholder="País" type="text"
-                    [(ngModel)]="updatedUser.address.country" name="country">
+                <input matInput #country="ngModel" placeholder="País" type="text"
+                    [(ngModel)]="address!.country" name="country">
                     <!-- <mat-error *ngIf="country.errors">País requerido.</mat-error> -->
             </mat-form-field>
             <br>

@@ -7,20 +7,10 @@
     </div>
     <!-- FILTROS TODO: -->
     <div fxFlex fxFlex.gt-sm="70%">
-        <!-- <app-filter></app-filter> -->
         <mat-form-field>
             <mat-label>Buscar colección</mat-label>
-            <input matInput type="text" [(ngModel)]="searchText" (change)="filterSearch()">
+            <input matInput type="text" [(ngModel)]="searchText" (ngModelChange)="searchCollections()">
             <mat-icon matPrefix>search</mat-icon>
-        </mat-form-field>
-        &nbsp;
-        <mat-form-field appearance="fill">
-            <mat-label>Categoría</mat-label>
-            <mat-select>
-                <mat-option *ngFor="let option of options" [value]="option.value" (onSelectionChange)="filterSearch()" >
-                    {{option.viewValue}}
-                </mat-option>
-            </mat-select>
         </mat-form-field>
     </div>
     <div fxFlex></div>
@@ -28,7 +18,7 @@
 
 <!-- Grid de colecciones -->
 <div class="content" fxLayout="row wrap" fxLayoutGap="16px grid" *ngIf="collections">
-    <div [fxFlex]="(100/gridColumns) + '%'" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let collection of collections; let i=index">
+    <div [fxFlex]="(100/gridColumns) + '%'" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let collection of filteredCollections; let i=index">
         <mat-card class="scale-up-center">
             <mat-card-header>
                 <mat-card-title>Colección {{collection.name}}</mat-card-title>
@@ -50,7 +40,7 @@
         </mat-card>
     </div>
 </div>
-<div [hidden]="collections" *ngIf="!errmsg">
+<div [hidden]="filteredCollections" *ngIf="!errmsg">
     <mat-spinner></mat-spinner><h4>Loading...</h4>
 </div>
 <div class="collection-not-found" *ngIf="errmsg">

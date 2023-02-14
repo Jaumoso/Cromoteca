@@ -2,26 +2,32 @@
     <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" 
     fxLayoutAlign.xs="start center" fxLayoutAlign.sm="start center" fxLayoutAlign.gt-sm="center center" 
     fxLayoutGap="10px">
-        <div *ngIf="i % 2 != 0">
-            <div class="container" fxFlex="30%">
+        <div *ngIf="i % 2 != 0" class="news">
+            <div class="container" fxFlex="30">
                 <h3><b>{{newsdata.title}}</b></h3>
                 <p><i>{{newsdata.date | date}}</i></p>
             </div>
-            <div class="container" fxFlex="70%">
+            <div class="container" fxFlex="auto" fxLayoutAlign="space-around center">
                 {{newsdata.newsbody}}
+            </div>
+            <div class="container" fxFlex="40">
+                <img class="news-image" src={{newsdata.image}} alt={{newsdata.title}}>
             </div>
         </div>
-        <div *ngIf="i % 2 == 0">
-            <div class="container" fxFlex="70%">
-                {{newsdata.newsbody}}
-            </div>
-            <div class="container" fxFlex="30%">
+        <div *ngIf="i % 2 == 0" class="news">
+            <div class="container" fxFlex="30">
                 <h3><b>{{newsdata.title}}</b></h3>
                 <p><i>{{newsdata.date | date}}</i></p>
+            </div>
+            <div class="container" fxFlex="auto" fxLayoutAlign="space-around center">
+                <img class="news-image" src={{newsdata.image}} alt={{newsdata.title}}>
+            </div>
+            <div class="container" fxFlex="40" fxLayoutAlign="space-around center">
+                {{newsdata.newsbody}}
             </div>
         </div>
     </div>
-    <hr color="black">
+
 </div>
 <div [hidden]="news" >
     <mat-spinner></mat-spinner><h4>Loading...</h4>

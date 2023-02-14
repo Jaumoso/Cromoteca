@@ -1,11 +1,6 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { mergeMap, switchMap } from 'rxjs';
 import { IntermediateService } from '../services/intermediate.service';
-import { JwtService } from '../services/jwt.service';
-import { UserService } from '../services/user.service';
 import { Collection } from '../shared/collection';
-import { User } from '../shared/user';
 
 @Component({
   selector: 'app-library',
@@ -43,9 +38,6 @@ export class LibraryComponent implements OnInit {
   deleteFromLibrary(collectionId: string){
     this.intermediateService.getIntermediate(this.userId)
     .then((intermediate) => {
-/*       console.log(intermediate._id);
-      console.log(intermediate.userId);
-      console.log(intermediate.collectionId); */
       if(intermediate.collectionId != undefined){
         const index = intermediate.collectionId.indexOf(collectionId)
         if(index !== -1) {

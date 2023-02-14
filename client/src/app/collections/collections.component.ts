@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, SimpleChanges } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CollectionService } from '../services/collection.service';
 import { IntermediateService } from '../services/intermediate.service';
@@ -21,32 +21,47 @@ export class CollectionsComponent implements OnInit {
     ) { }
 
   collections: Collection[] = [];
+  filteredCollections: Collection[] = [];
   errmsg: string | undefined;
   gridColumns = 4; // cantdad de colecciones en una fila
-
   searchText: string = '';
-  selectedCategory: string = '';
-
-    options: Options[] = [
-    {value: '', viewValue: '--'},
-    {value: 'CARTAS', viewValue: 'Cartas'},
-    {value: 'CROMOS', viewValue: 'Cromos'},
-    {value: 'STAKS', viewValue: 'Staks'},
-  ];
 
   ngOnInit() {
     this.collectionService.getCollections()
-      .then(collections => {this.collections = collections; /* console.log(this.collections) */})
+      .then(collections => {
+        this.collections = collections;
+        this.filteredCollections = collections;
+      })
       .catch(err => this.errmsg = err);
+
   }
 
-  // TODO: tiene que coger texto y categoria al mismo tiempo
-/*   filterSearch() {
-    console.log(this.selectedCategory)
-    this.collectionService.filterCollection(this.searchText, this.selectedCategory);
-  } */
+  searchCollections(): Collection[] {
 
-  filterSearch() {
+    // If no search text or category is provided, return all collections
+    if (this.searchText == undefined) {
+      return this.filteredCollections = this.collections;
+    }
+  
+    // Filter the collections based on the search text and category
+    return this.filteredCollections = this.collections.filter((collection) => {
+      const isMatch = (str: string) =>
+        str.toLowerCase().includes(this.searchText.toLowerCase());
+      
+      if(collection.name != undefined && collection.description != undefined){
+        this.errmsg = '';
+        return (
+          (!this.searchText || isMatch(collection.name) || isMatch(collection.description) || isMatch(collection.year!.toString()))
+        );
+      }
+      if(collection == undefined) {
+        this.errmsg = 'No se han encontrado colecciones!';
+      }
+      return this.collections;
+    });
+  }
+
+/*   filterSearch() {
     console.log(this.searchText)
 
     // si el texto está vacío, aparecen de nuevo todas las colecciones
@@ -59,14 +74,13 @@ export class CollectionsComponent implements OnInit {
       this.collectionService.filterCollection(this.searchText)
       .then(collections => { 
         this.collections = collections; 
-        /* console.log(collections); */
         if(collections.length == 0){
           this.errmsg = 'No se han encontrado colecciones!'
         }
       })
       .catch(err => this.errmsg = err);
     }
-  }
+  } */
 
   openDialog(id: number):void {
     const dialogRef = this.dialog.open(AddToLibraryDialog, {

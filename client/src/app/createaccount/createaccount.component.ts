@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { User } from '../shared/user';
 import { Location } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -7,7 +7,8 @@ import { Address } from '../shared/address';
 import { AddressService } from '../services/address.service';
 import { Router } from '@angular/router';
 import { LoginComponent } from '../login/login.component';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { DialogData } from '../collections/collections.component';
 
 @Component({
   selector: 'app-createaccount',
@@ -23,6 +24,7 @@ export class CreateaccountComponent implements OnInit {
     private addressService: AddressService,
     private router: Router,
     public dialog: MatDialog,
+    public dialog2: MatDialog
   ) {
     this.form = this.formBuilder.group({
       firstName: ['', Validators.required, Validators.pattern('[a-zA-Z ]'), Validators.minLength(2)],
@@ -188,6 +190,7 @@ export class CreateaccountComponent implements OnInit {
               console.log('Usuario creado');
               this.router.navigateByUrl('/home');
               this.dialog.open(LoginComponent);
+              this.dialog2.open(CreatedAccountDialogComponent);
             });
           }
         );
@@ -198,4 +201,19 @@ export class CreateaccountComponent implements OnInit {
     this.location.back();
   }
 
+}
+
+@Component({
+  selector: 'dialog-content',
+  template: '<h1 mat-dialog-title>Usuario Creado</h1><p mat-dialog-content><button (click)="closeDialog()">ACEPTAR</button></p>',
+  styles: ['button { padding: 5px; color: white; background-color: cornflowerblue;} p { text-align: center;}']
+})
+export class CreatedAccountDialogComponent {
+  constructor(
+    public dialogRef: MatDialogRef<CreatedAccountDialogComponent>, 
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+  ) {}
+  closeDialog(): void {
+    this.dialogRef.close();
+  }
 }
