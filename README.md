@@ -141,12 +141,12 @@ npm run sonar
 
 # TO-DO:
 
-- Si un usuario esta registrado y tiene una colección en la biblioteca, quitar el botón de añadir biblioteca
-- Añadir colecciones a tu biblioteca
 - Paginator en la seccion de colecciones
 - Validación para la creación y edición de los usuarios - comprobación de existencia en base de datos
 - Layout para pantallas pequeñas y grandes
 - Proteger las rutas
 - Buscador de colecciones en la librería
 - Mat Spinner
-- Rehacer createAccount component
+- Pattern validators en createaccount
+- Validación en editprofile
+- Botón de inicio de sesión cambia cuando se refresca la pagina
