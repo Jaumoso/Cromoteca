@@ -22,29 +22,6 @@ import { ProcessHTTPMsgService } from './process-httpmsg.service';
         });
     }
 
-    // TODO: rework this
-/*     filterCollection(search: string, category: string): Promise<Collection> {
-      return new Promise((resolve, reject) => {
-        this.http.get<Collection>(baseURL + 'collection/search/' + search + '/' + category)
-        .subscribe(collections => {
-          resolve(collections);
-        }, err => {
-          reject(err);
-        });
-      });
-    } */
-
-    filterCollection(search: string): Promise<Collection[]> {
-      return new Promise((resolve, reject) => {
-        this.http.get<{collectionData: Collection[]}>(baseURL + 'collection/search/' + search)
-        .subscribe(collections => {
-          resolve(collections.collectionData);
-        }, err => {
-          reject(err);
-        });
-      });
-    }
-
     getCollection(collectionId: string): Promise<Collection> {
       return new Promise((resolve, reject) => {
         this.http.get<{collectionData: Collection}>(baseURL + 'collection/' + collectionId)

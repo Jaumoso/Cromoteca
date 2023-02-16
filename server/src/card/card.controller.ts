@@ -25,7 +25,6 @@ export class CardController {
         }
     }
 
-    /* @UseGuards(JwtAuthGuard) */
     @Get(':id')
     @ApiCreatedResponse({ description: 'This function will get ONE CARD INFO from the database.' })
     async getCard(@Res() response, @Param('id') cardId: string) {
@@ -58,7 +57,6 @@ export class CardController {
         }
     }
 
-    /* @UseGuards(JwtAuthGuard) */
     @Put('update/:id')
     @ApiCreatedResponse({ description: 'UPDATE te data of the CARD into the database.' })
     async updateCard(@Res() response, @Param('id') cardId: string, @Body() updateCardDto: UpdateCardDto) {
@@ -74,7 +72,6 @@ export class CardController {
         }
     }
 
-    /* @UseGuards(JwtAuthGuard) */
     @Delete('delete/:id')
     @ApiCreatedResponse({ description: 'This function will DELETE the CARD with the ID passed as parameter from the database.' })
     async deleteCard(@Res() response, @Param('id') cardId: string) {

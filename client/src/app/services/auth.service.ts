@@ -20,7 +20,7 @@ export class AuthService {
         return new Promise((resolve, reject) => {
             this.http.post<any>(baseURL + 'auth/login', { username, password }, httpOptions)
             .subscribe(token => {
-            resolve(token = token.access_token);
+            resolve(token.access_token);
             }, err => {
             reject(err);
             });

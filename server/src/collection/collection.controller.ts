@@ -38,36 +38,6 @@ export class CollectionController {
         }
     }
 
-    // TODO: REWORK (does not work)
-/*     @Get('search/:searchString?/:searchCategory?')
-    @ApiCreatedResponse({ description: 'This function will get the COLLECTION data from the search string parameter.' })
-    async filterCollection(@Res() response, @Param('searchString') searchString: string,@Param('searchCategory') searchCategory: string){
-        try {
-            const collectionData = await this.collectionService.filterCollection(searchString, searchCategory);
-            return response.status(HttpStatus.OK).json({
-                message: 'Collection data found successfully', collectionData,
-            });
-        }
-        catch (err) {
-            return response.status(err.status).json(err.response);
-        }
-    } */
-
-    // SOLO BUSCA POR STRING
-    @Get('search/:searchString?')
-    @ApiCreatedResponse({ description: 'This function will get the COLLECTION data from the search string parameter.' })
-    async filterCollection(@Res() response, @Param('searchString') searchString: string){
-        try {
-            const collectionData = await this.collectionService.filterCollection(searchString);
-            return response.status(HttpStatus.OK).json({
-                message: 'Collection data found successfully', collectionData,
-            });
-        }
-        catch (err) {
-            return response.status(err.status).json(err.response);
-        }
-    }
-
     // FUNCIONES PARA ADMINISTRADOR
     @Post('new')
     @ApiCreatedResponse({ description: 'Creation of a NEW COLLECTION and insertion in the database.' })

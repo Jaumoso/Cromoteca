@@ -21,7 +21,7 @@ export class CollectiondetailsComponent implements OnInit {
     ) { }
 
   collection: Collection | undefined;
-  errMsg: string | undefined; // TODO:
+
   ngOnInit() {
     this.route.paramMap.pipe(
       switchMap((params: Params) => {

@@ -22,8 +22,8 @@ import { CollectionService } from './collection.service';
                 console.log('Collection IDs: ' + collectionIds);
                 var collections: Collection[] = [];
                 if(collectionIds != undefined) {
-                    for(var i= 0; i < collectionIds.length; i++) {
-                       this.collectionService.getCollection(collectionIds[i])
+                    for(let collectionId of collectionIds) {
+                       this.collectionService.getCollection(collectionId)
                        .then((collection) => collections.push(collection));
                     }
                 }

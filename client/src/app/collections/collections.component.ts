@@ -1,13 +1,8 @@
-import { Component, Inject, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CollectionService } from '../services/collection.service';
 import { IntermediateService } from '../services/intermediate.service';
 import { Collection } from '../shared/collection';
-
-interface Options {
-  value: string;
-  viewValue: string;
-}
 
 @Component({
   selector: 'app-collections',
@@ -22,7 +17,7 @@ export class CollectionsComponent implements OnInit {
 
   collections: Collection[] = [];
   filteredCollections: Collection[] = [];
-  errmsg: string | undefined;
+  errmsg: string = 'No se han encontrado colecciones!';
   gridColumns = 4; // cantdad de colecciones en una fila
   searchText: string = '';
 
@@ -39,7 +34,7 @@ export class CollectionsComponent implements OnInit {
   searchCollections(): Collection[] {
 
     // If no search text or category is provided, return all collections
-    if (this.searchText == undefined) {
+    if (this.searchText == '') {
       return this.filteredCollections = this.collections;
     }
   
@@ -49,38 +44,13 @@ export class CollectionsComponent implements OnInit {
         str.toLowerCase().includes(this.searchText.toLowerCase());
       
       if(collection.name != undefined && collection.description != undefined){
-        this.errmsg = '';
         return (
           (!this.searchText || isMatch(collection.name) || isMatch(collection.description) || isMatch(collection.year!.toString()))
         );
       }
-      if(collection == undefined) {
-        this.errmsg = 'No se han encontrado colecciones!';
-      }
       return this.collections;
     });
   }
-
-/*   filterSearch() {
-    console.log(this.searchText)
-
-    // si el texto está vacío, aparecen de nuevo todas las colecciones
-    if(this.searchText.length == 0){
-      this.ngOnInit();
-      this.errmsg = undefined;
-    }
-    // si no está vacío, se ejecuta la búsqueda
-    else{
-      this.collectionService.filterCollection(this.searchText)
-      .then(collections => { 
-        this.collections = collections; 
-        if(collections.length == 0){
-          this.errmsg = 'No se han encontrado colecciones!'
-        }
-      })
-      .catch(err => this.errmsg = err);
-    }
-  } */
 
   openDialog(id: number):void {
     const dialogRef = this.dialog.open(AddToLibraryDialog, {

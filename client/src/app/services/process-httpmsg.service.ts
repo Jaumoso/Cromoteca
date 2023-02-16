@@ -8,8 +8,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class ProcessHTTPMsgService {
 
-  constructor() { }
-
   public handleError(error: HttpErrorResponse |any) {
     let errMsg: string;
     if (error.error instanceof ErrorEvent) {

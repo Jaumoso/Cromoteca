@@ -46,7 +46,7 @@ import { Address } from '../shared/address';
         })
       };
       return new Promise((resolve, reject) => {
-        this.http.put<{addressData: Address}>(baseURL + 'address/update/' + addressId, address)
+        this.http.put<{addressData: Address}>(baseURL + 'address/update/' + addressId, address, httpOptions)
         .subscribe(address => {
           resolve(address.addressData);
         }, err => {

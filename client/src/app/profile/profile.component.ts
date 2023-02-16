@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { mergeMap } from 'rxjs';
 import { AddressService } from '../services/address.service';
 import { AuthService } from '../services/auth.service';
@@ -30,7 +30,6 @@ export class ProfileComponent implements OnInit {
 
   user: User | undefined;
   address: Address | undefined;
-  errMsg: string | undefined; // TODO:
   private token: any;
   private decodedToken: any;
 

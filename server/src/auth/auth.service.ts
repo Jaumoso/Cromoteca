@@ -14,9 +14,6 @@ export class AuthService {
         if (!user) {
             throw new NotAcceptableException('No se ha podido encontrar el usuario');
         }
-/*         if (user && passwordValid) {
-            return user;
-        } */
         // ! Devuelve el usuario sin username, password ni email, por seguridad.
         if (user && passwordValid) {
             const { password, username, email, ... rest } = user;

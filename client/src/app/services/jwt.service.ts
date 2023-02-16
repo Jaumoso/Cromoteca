@@ -7,8 +7,6 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 export class JwtService {
   private jwtHelper = new JwtHelperService();
 
-  constructor() { }
-
   decodeToken(token: string) {
     return this.jwtHelper.decodeToken(token);
   }

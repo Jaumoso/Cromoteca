@@ -12,7 +12,6 @@ export class CreateUserDto {
     @IsNotEmpty()
     email: string;
 
-/*     @IsStrongPassword() */
     @IsString()
     @ApiProperty({
         type: String, 
@@ -71,7 +70,7 @@ export class CreateUserDto {
     })
     @IsBoolean()
     @IsNotEmpty()
-    admin: Boolean;
+    admin: boolean;
 
 
     @ApiProperty({ 
