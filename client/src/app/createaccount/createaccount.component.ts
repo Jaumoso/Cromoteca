@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { User } from '../shared/user';
 import { Location } from '@angular/common';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../services/user.service';
 import { Address } from '../shared/address';
 import { AddressService } from '../services/address.service';
@@ -9,11 +9,13 @@ import { Router } from '@angular/router';
 import { LoginComponent } from '../login/login.component';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DialogData } from '../collections/collections.component';
+import { IntermediateService } from '../services/intermediate.service';
+import { Intermediate } from '../shared/intermediate';
 
 @Component({
   selector: 'app-createaccount',
   templateUrl: './createaccount.component.html',
-  styleUrls: ['./createaccount.component.scss']
+  styleUrls: ['./createaccount.component.scss'],
 })
 export class CreateaccountComponent implements OnInit {
 
@@ -22,30 +24,46 @@ export class CreateaccountComponent implements OnInit {
     private formBuilder: FormBuilder,
     private userService: UserService,
     private addressService: AddressService,
+    private intermediateService: IntermediateService,
     private router: Router,
     public dialog: MatDialog,
     public dialog2: MatDialog
   ) {
     this.form = this.formBuilder.group({
-      firstName: ['', Validators.required, Validators.pattern('[a-zA-Z ]'), Validators.minLength(2)],
-      lastName: ['', Validators.required, Validators.pattern('[a-zA-Z ]'), Validators.minLength(2)],
-      email: ['', Validators.required, Validators.email],
-      password: ['', Validators.required, Validators.minLength(8)],
-      password2: ['', Validators.required, Validators.minLength(8)],
-      username: ['', Validators.required],
+      firstName: this.firstName,
+      lastName: this.lastName,
+      email: this.email,
+      password: this.password,
+      passwordConfirmation: this.passwordConfirmation,
+      username: this.username,
       // entryDate
       // admin
       // Address:
-      street: ['', Validators.required, Validators.minLength(2)],
-      postalCode: ['', Validators.required, Validators.pattern('[a-zA-Z0-9][ ]')],
-      city: ['', Validators.required, Validators.pattern('[a-zA-Z][ ]')],
-      province: ['', Validators.required, Validators.pattern('[a-zA-Z][ ]')],
-      country: ['', Validators.required, Validators.pattern('[a-zA-Z][ ]')],
+      street: this.street,
+      postalCode: this.postalCode,
+      city: this.city,
+      province: this.province,
+      country: this.country
     });
    }
 
   ngOnInit(): void {
   }
+
+  firstName = new FormControl('', [Validators.required, /* Validators.pattern("/^[a-z ,.'-]+$/i"), */ Validators.minLength(4)]);
+  lastName = new FormControl('', [/* Validators.pattern("/^[a-z ,.'-]+$/i"), */ Validators.minLength(2)]);
+  email = new FormControl('', [ Validators.required, Validators.email]);
+  password = new FormControl('', [Validators.required, Validators.minLength(8)]);
+  passwordConfirmation = new FormControl('', [Validators.required, Validators.minLength(8)]);
+  username = new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(18)/* , Validators.pattern("^[A-Za-z][A-Za-z0-9_]$") */]);
+  // entryDate
+  // admin
+  // Address:
+  street = new FormControl('', [Validators.required/* , Validators.pattern('[a-zA-Z0-9][ ]') */]);
+  postalCode = new FormControl('', [Validators.required/* , Validators.pattern('[a-zA-Z0-9][ ]') */]);
+  city = new FormControl('', [Validators.required/* , Validators.pattern("/^[a-zA-Z\u0080-\u024F]+(?:([\ \-\']|(\.\ ))[a-zA-Z\u0080-\u024F]+)*$/") */]);
+  province = new FormControl('',[Validators.required/* , Validators.pattern('[a-zA-Z][ ]') */]);
+  country = new FormControl('', [Validators.required/* , Validators.pattern('[a-zA-Z][ ]') */]);
 
   form: FormGroup;
 
@@ -64,89 +82,6 @@ export class CreateaccountComponent implements OnInit {
       city: '',
       province: '',
       country: '',
-    }
-  }
-
-  formErrors: any = {
-    'firstName': '',
-    'lastName': '',
-    'email': '',
-    'password': '',
-    'passwordConfirmation': '',
-    'username': '',
-    // address
-    'street': '',
-    'postalCode': '',
-    'city': '',
-    'province': '',
-    'country': '',
-  };
-
-  validationMessages: any = {
-    'firstName': {
-      'required': 'Nombre requerido',
-      'minlength': 'Mínimo 2 caracteres',
-      'pattern': 'No se admiten símbolos',
-    },
-    'lastName': {
-      'required': 'Apellidos requeridos',
-      'minlength': 'Mínimo 2 caracteres',
-      'pattern': 'No se admiten símbolos',
-    },
-    'email': {
-      'required': 'Correo requerido',
-      'email': 'Formato email obligatorio',
-    },
-    'password': {
-      'required': 'Contraseña requerida',
-    },
-    'passwordConfirmation': {
-      'required': 'Confirma la contraseña',
-    },
-    'username': {
-      'required': 'Usuario requerido',
-      'minlength': 'Mínimo 2 caracteres',
-      /* 'pattern': 'No se admiten símbolos', */
-    },
-    'street': {
-      'required': 'Dirección requerida',
-      'minlength': 'Mínimo 2 caracteres',
-    },
-    'postalCode': {
-      'required': 'Código Postal requerido',
-      'pattern': 'Solo letras y números',
-    },
-    'city': {
-      'required': 'Ciudad requerida',
-      'pattern': 'Solo letras',
-    },
-    'province': {
-      'required': 'Provincia requerida',
-      'pattern': 'Solo letras',
-    },
-    'country': {
-      'required': 'País requerido',
-      'pattern': 'Solo letras',
-    },
-  };
-
-  onValueChanged(data?: any) {
-    if (!this.form) { return;}
-    const form = this.form;
-    for (const field in this.formErrors) {
-      if (this.formErrors.hasOwnProperty(field)) {
-        // clear previous error message (if any)
-        this.formErrors[field] = '';
-        const control = form.get(field);
-        if (control && control.dirty && !control.valid) {
-          const messages = this.validationMessages[field];
-          for (const key in control.errors) {
-            if (control.errors.hasOwnProperty(key)) {
-              this.formErrors[field] += messages[key] + ' ';
-            }
-          }
-        }
-      }
     }
   }
 
@@ -187,10 +122,17 @@ export class CreateaccountComponent implements OnInit {
             this.userService.createUser(user)
             .then((user) => {
               console.log('Usuario' + user);
-              console.log('Usuario creado');
-              this.router.navigateByUrl('/home');
-              this.dialog.open(LoginComponent);
-              this.dialog2.open(CreatedAccountDialogComponent);
+              let intermediate = new Intermediate;
+              intermediate.userId = user._id;
+              intermediate.collectionId = [];
+              this.intermediateService.createIntermediate(intermediate)
+              .then((intermediate) => {
+                console.log('Intermediate ' + intermediate);
+                console.log('Usuario creado');
+                this.router.navigateByUrl('/home');
+                this.dialog.open(LoginComponent);
+                this.dialog2.open(CreatedAccountDialogComponent);
+              })
             });
           }
         );

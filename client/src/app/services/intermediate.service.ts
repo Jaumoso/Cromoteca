@@ -47,6 +47,22 @@ import { CollectionService } from './collection.service';
       });
     }
 
+    createIntermediate(intermediate: Intermediate): Promise<Intermediate> {
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+      };
+      return new Promise((resolve, reject) => {
+        this.http.post<{newIntermediate: Intermediate}>(baseURL + 'intermediate/new/', intermediate, httpOptions)
+        .subscribe(intermediate => {
+          resolve(intermediate.newIntermediate);
+        }, err => {
+          reject(err);
+        });
+      });
+    }
+
 
     updateIntermediate(intermediateId: string, intermediate: Intermediate): Promise<Intermediate> {
         const httpOptions = {

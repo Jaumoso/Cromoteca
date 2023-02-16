@@ -39,7 +39,6 @@ import { AuthInterceptorService } from './services/authInterceptor.service';
 import { PasswordchangeComponent } from './passwordchange/passwordchange.component';
 import { CreateaccountComponent } from './createaccount/createaccount.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,

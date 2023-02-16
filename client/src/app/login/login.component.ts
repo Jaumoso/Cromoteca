@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
           console.log(token);
           console.log("User logged in successfully");
           if(token){
-            this.router.navigateByUrl('/profile');
+            /* this.router.navigateByUrl('/profile'); */
             this.loginStatusService.loggedIn = true;
             this.closeDialog();
           }

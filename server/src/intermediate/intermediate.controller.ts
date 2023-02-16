@@ -52,7 +52,6 @@ export class IntermediateController {
         }
     }
 
-    // FUNCIONES PARA ADMINISTRADOR
     @Post('new')
     @ApiCreatedResponse({ description: 'Creation of a NEW INTERMEDIATE and insertion in the database.' })
     async createIntermediate(@Res() response, @Body() intermediateDto: CreateIntermediateDto) {
