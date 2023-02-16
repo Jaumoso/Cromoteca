@@ -148,4 +148,5 @@ npm run sonar
 - Buscador de colecciones en la librería
 - Mat Spinner
 - Pattern validators en createaccount
+- Validación en editprofile
 - Botón de inicio de sesión cambia cuando se refresca la pagina
