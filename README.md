@@ -150,3 +150,4 @@ npm run sonar
 - Buscador de colecciones en la librería
 - Borrar library Service
 - Mat Spinner
+- Rehacer createAccount component
