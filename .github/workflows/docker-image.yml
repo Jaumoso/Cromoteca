@@ -22,11 +22,11 @@ jobs:
        id: docker_build
        uses: docker/build-push-action@v2
        with:
-         context: .
+         context: client/.
          push: true
          tags: |
            ghcr.io/jaumoso/cromoteca/cromoteca-client:latest
-           ghcr.io/jaumoso/cromoteca/cromoteca-server:latest
+           
      - name: Print Image Digests
        run: |
          echo ${{ steps.docker_build.outputs.digests }}
