@@ -1,8 +1,6 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Router } from '@angular/router';
-import { LoginComponent } from '../login/login.component';
-import { AuthService } from '../services/auth.service';
+import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { AddToLibraryComponent } from '../add-to-library-dialog/add-to-library-dialog.component';
 import { CollectionService } from '../services/collection.service';
 import { IntermediateService } from '../services/intermediate.service';
 import { JwtService } from '../services/jwt.service';
@@ -67,61 +65,12 @@ export class CollectionsComponent implements OnInit {
   }
 
   openDialog(id: number):void {
-    const dialogRef = this.dialog.open(AddToLibraryDialog, {
+    const dialogRef = this.dialog.open(AddToLibraryComponent, {
       data: { collectionName: this.collections[id].name, collectionId: this.collections[id]._id }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });
-  }
-}
-
-export interface DialogData {
-  collectionName: string;
-  collectionId: string;
-}
-
-@Component({
-  selector: 'dialog-content',
-  templateUrl: 'dialog-add-to-library.html',
-  styleUrls: ['./collections.component.scss']
-})
-export class AddToLibraryDialog {
-  
-  constructor(
-    public dialogRef: MatDialogRef<AddToLibraryDialog>, 
-    @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    private intermediateService: IntermediateService,
-    private jwtService: JwtService,
-    private dialog: MatDialog,
-  ) {}
-
-  closeDialog(): void {
-    this.dialogRef.close();
-  }
-
-  addToLibrary(collectionId: string){
-    const token = localStorage.getItem('token');
-    if(token){
-      const decodedToken = this.jwtService.decodeToken(token);
-      this.intermediateService.getIntermediate(decodedToken._id)
-      .then((intermediate) => {
-        if(intermediate.collectionId?.filter(str => str.includes(collectionId)).length === 0){
-          intermediate.userId = decodedToken._id;
-          intermediate.collectionId?.push(collectionId);
-          if(intermediate._id != undefined){
-            this.intermediateService.updateIntermediate(intermediate._id, intermediate)
-            .then(() => {
-              this.closeDialog()
-            });
-          }
-        }
-      });
-    }
-    else{
-      this.closeDialog();
-      this.dialog.open(LoginComponent);
-    }
   }
 }

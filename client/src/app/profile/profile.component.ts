@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { mergeMap } from 'rxjs';
+import { CloseSessionDialogComponent } from '../close-session-dialog/close-session-dialog.component';
 import { AddressService } from '../services/address.service';
 import { AuthService } from '../services/auth.service';
 import { JwtService } from '../services/jwt.service';
@@ -50,23 +51,10 @@ export class ProfileComponent implements OnInit {
     }
 
     logOut(){
-      this.dialog.open(CloseSessionDialog)
+      this.dialog.open(CloseSessionDialogComponent)
       this.loginStatusService.loggedIn = false;
       this.router.navigateByUrl('/home');
       this.authService.closeSession();
     }
 
-}
-
-@Component({
-  selector: 'close-session-dialog',
-  template: '<h1 mat-dialog-title>Sesión Cerrada</h1><p mat-dialog-content><button (click)="closeDialog()">ACEPTAR</button></p>',
-  styles: ['button { padding: 5px; color: white; background-color: cornflowerblue;} p { text-align: center;}']
-})
-export class CloseSessionDialog {
-  constructor(private dialogRef: MatDialogRef<CloseSessionDialog>) {}
-
-  closeDialog(){
-    this.dialogRef.close();
-  }
 }

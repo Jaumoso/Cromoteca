@@ -1,0 +1,20 @@
+
+
+::ng-deep.mat-dialog-container {
+    padding: 0px !important;
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+.wraper {
+    padding: 20px;
+    button { 
+        padding: 10px; 
+        color: white; 
+        background-color: cornflowerblue;
+        border-radius: 10px;
+    } 
+    p { 
+        text-align: center;
+    }
+}

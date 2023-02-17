@@ -9,7 +9,6 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { Address } from '../shared/address';
 import { JwtService } from '../services/jwt.service';
 import { mergeMap } from 'rxjs';
-import { DialogData } from '../collections/collections.component';
 import { LoginComponent } from '../login/login.component';
 import { AuthService } from '../services/auth.service';
 
@@ -105,7 +104,6 @@ export class EditprofileComponent implements OnInit {
 export class UpdatedProfileComponent {
   constructor(
     public dialogRef: MatDialogRef<UpdatedProfileComponent>, 
-    @Inject(MAT_DIALOG_DATA) public data: DialogData,
   ) {}
   closeDialog(): void {
     this.dialogRef.close();

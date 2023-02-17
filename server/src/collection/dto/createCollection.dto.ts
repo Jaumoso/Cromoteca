@@ -67,7 +67,7 @@ export class CreateCollectionDto {
   @ApiProperty({
     type: String,
     description: 'Imagen de portada de la colección. Requerido.',
-    example: 'http://url-to-image.jpg'
+    example: 'https://url-to-image.jpg'
   })
   @IsString()
   @IsNotEmpty()

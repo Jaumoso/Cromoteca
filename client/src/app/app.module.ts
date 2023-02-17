@@ -38,6 +38,8 @@ import { LibraryComponent } from './library/library.component';
 import { AuthInterceptorService } from './services/authInterceptor.service';
 import { PasswordchangeComponent } from './passwordchange/passwordchange.component';
 import { CreateaccountComponent } from './createaccount/createaccount.component';
+import { AddToLibraryComponent } from './add-to-library-dialog/add-to-library-dialog.component';
+import { CloseSessionDialogComponent } from './close-session-dialog/close-session-dialog.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +58,8 @@ import { CreateaccountComponent } from './createaccount/createaccount.component'
     LibraryComponent,
     PasswordchangeComponent,
     CreateaccountComponent,
+    AddToLibraryComponent,
+    CloseSessionDialogComponent,
   ],
   imports: [
     BrowserModule,

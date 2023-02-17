@@ -8,7 +8,6 @@ import { AddressService } from '../services/address.service';
 import { Router } from '@angular/router';
 import { LoginComponent } from '../login/login.component';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DialogData } from '../collections/collections.component';
 import { IntermediateService } from '../services/intermediate.service';
 import { Intermediate } from '../shared/intermediate';
 
@@ -153,7 +152,6 @@ export class CreateaccountComponent implements OnInit {
 export class CreatedAccountDialogComponent {
   constructor(
     public dialogRef: MatDialogRef<CreatedAccountDialogComponent>, 
-    @Inject(MAT_DIALOG_DATA) public data: DialogData,
   ) {}
   closeDialog(): void {
     this.dialogRef.close();
