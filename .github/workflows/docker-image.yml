@@ -18,15 +18,30 @@ jobs:
          registry: ghcr.io
          username: ${{ github.actor }}
          password: ${{ secrets.GITHUB_TOKEN }}
-     - name: Build and Publish Docker images
-       id: docker_build
+     - name: Build and Publish Docker CLIENT
+       id: docker_build_client
        uses: docker/build-push-action@v2
        with:
          context: client/.
          push: true
          tags: |
            ghcr.io/jaumoso/cromoteca/cromoteca-client:latest
-           
+     - name: Build and Publish Docker SERVER
+       id: docker_build_server
+       uses: docker/build-push-action@v2
+       with:
+         context: server/.
+         push: true
+         tags: |
+           ghcr.io/jaumoso/cromoteca/cromoteca-server:latest
+      - name: Build and Publish Docker ALL
+       id: docker_build_all
+       uses: docker/build-push-action@v2
+       with:
+         context: .
+         push: true
+         tags: |
+           ghcr.io/jaumoso/cromoteca/cromoteca:latest
      - name: Print Image Digests
        run: |
          echo ${{ steps.docker_build.outputs.digests }}
