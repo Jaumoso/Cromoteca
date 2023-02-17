@@ -41,7 +41,7 @@ export class LibraryComponent implements OnInit {
       if(intermediate.collectionId != undefined){
         const index = intermediate.collectionId.indexOf(collectionId)
         if(index !== -1) {
-          intermediate.collectionId?.splice(index, 1);
+          intermediate.collectionId.splice(index, 1);
         }
       }
       if(intermediate._id != undefined){

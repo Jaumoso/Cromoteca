@@ -9,10 +9,13 @@ export class AuthService {
 
     async validateUser(username: string, password: string): Promise<any> {
         const user = await this.userService.findUser(username);
-        if (!user) return null;
-        const passwordValid = await bcrypt.compare(password, user.password)
         if (!user) {
             throw new NotAcceptableException('No se ha podido encontrar el usuario');
+        }
+
+        const passwordValid = await bcrypt.compare(password, user.password)
+        if (!passwordValid) {
+            throw new NotAcceptableException('La contraseña no es válida');
         }
         // ! Devuelve el usuario sin username, password ni email, por seguridad.
         if (user && passwordValid) {

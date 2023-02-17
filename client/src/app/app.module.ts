@@ -18,6 +18,7 @@ import { MatTableModule} from '@angular/material/table';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule} from '@angular/material/icon';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 import { baseURL } from './shared/baseurl';
 import 'hammerjs';
@@ -81,7 +82,8 @@ import { CloseSessionDialogComponent } from './close-session-dialog/close-sessio
     MatSelectModule,
     MatInputModule,
     MatIconModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSnackBarModule
   ],
   providers: [
     { provide: 'BaseURL', useValue: baseURL },
