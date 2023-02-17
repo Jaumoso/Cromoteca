@@ -34,7 +34,7 @@ jobs:
          push: true
          tags: |
            ghcr.io/jaumoso/cromoteca/cromoteca-server:latest
-      - name: Build and Publish Docker ALL
+     - name: Build and Publish Docker ALL
        id: docker_build_all
        uses: docker/build-push-action@v2
        with:
