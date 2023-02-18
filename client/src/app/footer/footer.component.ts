@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { LoginComponent } from '../login/login.component';
+import { JwtService } from '../services/jwt.service';
 
 @Component({
   selector: 'app-footer',
@@ -7,6 +11,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
+  constructor(
+    private jwtService: JwtService,
+    private router: Router,
+    private dialog: MatDialog
+  ){}
   ngOnInit() {}
 
+  goToProfile(){
+    const token = localStorage.getItem('token');
+    if(token != null) {
+      if(this.jwtService.isTokenExpired(token) == false){
+        this.router.navigateByUrl('/profile');
+      }
+      else {
+        this.openLoginForm();
+      }
+    }
+    else {
+      this.openLoginForm();
+    }
+  }
+
+  openLoginForm() {
+    this.dialog.open(LoginComponent);
+  }
 }

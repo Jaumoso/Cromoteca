@@ -1,8 +1,6 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { LoginStatusService } from '../services/loginStatus.service';
 import {MatSnackBar} from "@angular/material/snack-bar";
@@ -16,7 +14,6 @@ export class LoginComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<LoginComponent>,
     private formBuilder: FormBuilder,
-    private router: Router,
     private authService: AuthService,
     private loginStatusService: LoginStatusService,
     private snackBar: MatSnackBar

@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { User } from '../shared/user';
 import { Location } from '@angular/common';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -7,7 +7,7 @@ import { Address } from '../shared/address';
 import { AddressService } from '../services/address.service';
 import { Router } from '@angular/router';
 import { LoginComponent } from '../login/login.component';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { IntermediateService } from '../services/intermediate.service';
 import { Intermediate } from '../shared/intermediate';
 

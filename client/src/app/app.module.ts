@@ -41,6 +41,7 @@ import { PasswordchangeComponent } from './passwordchange/passwordchange.compone
 import { CreateaccountComponent } from './createaccount/createaccount.component';
 import { AddToLibraryComponent } from './add-to-library-dialog/add-to-library-dialog.component';
 import { CloseSessionDialogComponent } from './close-session-dialog/close-session-dialog.component';
+import { FillCollectionComponent } from './fill-collection/fill-collection.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { CloseSessionDialogComponent } from './close-session-dialog/close-sessio
     CreateaccountComponent,
     AddToLibraryComponent,
     CloseSessionDialogComponent,
+    FillCollectionComponent,
   ],
   imports: [
     BrowserModule,

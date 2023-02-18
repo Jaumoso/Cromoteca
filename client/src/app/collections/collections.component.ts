@@ -25,7 +25,7 @@ export class CollectionsComponent implements OnInit {
   errmsg: string = 'No se han encontrado colecciones!';
   gridColumns = 4; // cantdad de colecciones en una fila
   searchText: string = '';
-  userCollections: string[] = [];
+  collectionIds: string[] = [];
 
   ngOnInit() {
 
@@ -34,7 +34,7 @@ export class CollectionsComponent implements OnInit {
       const decodedToken = this.jwtService.decodeToken(token);
       this.intermediateService.getIntermediate(decodedToken._id)
       .then((intermediate) => {
-        this.userCollections = intermediate.collectionId!
+        this.collectionIds = intermediate.collectionId!
       })
     }
     this.collectionService.getCollections()
@@ -47,7 +47,7 @@ export class CollectionsComponent implements OnInit {
 
   searchCollections(): Collection[] {
     // If no search text or category is provided, return all collections
-    if (this.searchText == '') {
+    if (this.searchText == undefined) {
       return this.filteredCollections = this.collections;
     }
     // Filter the collections based on the search text and category

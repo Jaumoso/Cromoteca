@@ -6,6 +6,8 @@ import { CollectionService } from '../services/collection.service';
 import { Collection } from '../shared/collection';
 import { Location } from '@angular/common';
 import { AddToLibraryComponent } from '../add-to-library-dialog/add-to-library-dialog.component';
+import { JwtService } from '../services/jwt.service';
+import { IntermediateService } from '../services/intermediate.service';
 
 
 export interface DialogData {
@@ -23,19 +25,33 @@ export class CollectiondetailsComponent implements OnInit {
   constructor(
     private collectionService: CollectionService,
     private route: ActivatedRoute,
-    public dialog: MatDialog,
+    private dialog: MatDialog,
     private location: Location,
+    private jwtService: JwtService,
+    private intermediateService: IntermediateService
     ) { }
 
   collection: Collection | undefined;
+  collectionIds: string[] | undefined;
 
   ngOnInit() {
+
+    const token = localStorage.getItem('token');
+    if(token){
+      const decodedToken = this.jwtService.decodeToken(token);
+      this.intermediateService.getIntermediate(decodedToken._id)
+      .then((intermediate) => {
+        this.collectionIds = intermediate.collectionId;
+      })
+    }
+
     this.route.paramMap.pipe(
       switchMap((params: Params) => {
         return this.collectionService.getCollection(params['get']('id'));
       }))
       .subscribe(collectionData => {
         this.collection = collectionData;
+        console.log(this.collection._id)
       });
   }
 

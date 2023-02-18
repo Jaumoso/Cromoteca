@@ -12,7 +12,7 @@
           <mat-list-item><a mat-button [routerLink]="['/home']" routerLinkActive="router-link-active" >Inicio</a></mat-list-item>
           <mat-list-item><a mat-button [routerLink]="['/collections']" routerLinkActive="router-link-active" >Colecciones</a></mat-list-item>
           <mat-list-item><a mat-button [routerLink]="['/market']" routerLinkActive="router-link-active" >Mercado</a></mat-list-item>
-          <mat-list-item><a mat-button [routerLink]="['/profile']" routerLinkActive="router-link-active" >Perfil</a></mat-list-item>
+          <mat-list-item><a mat-button (click)="goToProfile()" routerLinkActive="router-link-active" >Perfil</a></mat-list-item>
           <mat-list-item><a mat-button [routerLink]="['/about']" routerLinkActive="router-link-active" >Más Información</a></mat-list-item>
         </mat-list>
       </div>

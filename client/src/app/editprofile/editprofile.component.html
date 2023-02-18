@@ -9,31 +9,33 @@
 <br>
 <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign.xs="start center"
     fxLayoutAlign.sm="start center" fxLayoutAlign.gt-sm="center center" fxLayoutGap="10px">
-    <p>USER: {{user | json}}</p>
-    <br>
-    <br>
-    <p>UPDATED_USER: {{user | json}}</p>
-    <form class="form" nonvalidate #updateUserForm="ngForm" (ngSubmit)="onSubmit()">
+    <form class="form" nonvalidate [formGroup]="form" (ngSubmit)="onSubmit()">
         
         <div fxFlex="50" fxFlex.gt-sm="100%" fxLayout="column">
 
             <label for="firstname">Nombre: </label>
             <mat-form-field>
-                <input matInput #firstName="ngModel" placeholder="Nombre" type="text" [(ngModel)]="user!.firstName"
+                <input matInput placeholder="Nombre" type="text" [formControl]="firstName" [(ngModel)]="user!.firstName"
                     name="firstname">
-                    <!-- <mat-error *ngIf="firstName.errors">Nombre requerido.</mat-error> -->
+                    <mat-error *ngIf="this.form.get('firstName')?.errors?.['required']">Nombre requerido.</mat-error>
+                    <mat-error *ngIf="this.form.get('firstName')?.errors?.['minlength']">Mínimo 4 caracteres.</mat-error>
+                    <!-- <mat-error *ngIf="this.form.get('firstName')?.errors?.['pattern']">Símbolos y números no permitidos.</mat-error> -->
             </mat-form-field>
             <label for="lastname">Apellidos: </label>
             <mat-form-field>
-                <input matInput #lastName="ngModel" placeholder="Apellidos" type="text" [(ngModel)]="user!.lastName"
+                <input matInput placeholder="Apellidos" type="text" [formControl]="lastName" [(ngModel)]="user!.lastName"
                     name="lastname">
-                    <!-- <mat-error *ngIf="lastName.errors">Apellidos requeridos.</mat-error> -->
+                    <mat-error *ngIf="this.form.get('lastName')?.errors?.['minlength']">Mínimo 2 caracteres.</mat-error>
+                    <!-- <mat-error *ngIf="this.form.get('lastName')?.errors?.['pattern']">Símbolos y números no permitidos.</mat-error> -->
             </mat-form-field>
             <label for="username">Nombre de Usuario: </label>
             <mat-form-field>
-                <input matInput #username="ngModel" placeholder="Usuario" type="text" [(ngModel)]="user!.username"
+                <input matInput placeholder="Usuario" type="text" [formControl]="username" [(ngModel)]="user!.username"
                     name="username">
-                    <!-- <mat-error *ngIf="username.errors">Usuario requerido.</mat-error> -->
+                    <mat-error *ngIf="this.form.get('username')?.errors?.['required']">Usuario requerido.</mat-error>
+                    <!-- <mat-error *ngIf="this.form.get('username')?.errors?.['pattern']">Formato inválido.</mat-error> -->
+                    <mat-error *ngIf="this.form.get('username')?.errors?.['minlength']">Mínimo 4 caracteres.</mat-error>
+                    <mat-error *ngIf="this.form.get('username')?.errors?.['maxlength']">Máximo 18 caracteres.</mat-error>
             </mat-form-field>
 
         </div>
@@ -42,23 +44,27 @@
 
             <label for="email">Correo electrónico: </label>
             <mat-form-field>
-                <input matInput #email="ngModel" placeholder="example@example.com" type="email"
-                    [(ngModel)]="user!.email" name="email">
-                    <!-- <mat-error *ngIf="email.errors">Correo requerido.</mat-error> -->
+                <input matInput placeholder="example@example.com" type="email"
+                [formControl]="email" [(ngModel)]="user!.email" name="email">
+                    <mat-error *ngIf="this.form.get('email')?.errors?.['required']">Email requerido.</mat-error>
+                    <mat-error *ngIf="this.form.get('email')?.errors?.['email']">Formato inválido.</mat-error>
             </mat-form-field>
 
             <label for="password">Contraseña: <span style="color:red;">*</span></label>
             <mat-form-field>
-                <input matInput required #password="ngModel" placeholder="Contraseña" type="password"
-                    [(ngModel)]="user!.password" name="password">
-                    <mat-error *ngIf="password.errors">Contraseña requerida.</mat-error>
+                <input matInput required placeholder="Contraseña" type="password"
+                [formControl]="password" [(ngModel)]="user!.password" name="password">
+                    <mat-error *ngIf="this.form.get('password')?.errors?.['required']">Contraseña requerida.</mat-error>
+                    <mat-error *ngIf="this.form.get('password')?.errors?.['minlength']">Mínimo 8 caracteres.</mat-error>
+                    <mat-error *ngIf="this.form.get('password')?.errors?.['mismatch']">Repita bien la contraseña.</mat-error>
             </mat-form-field>
 
             <label for="repeatpassword">Repita la Contraseña: <span style="color:red;">*</span></label>
             <mat-form-field>
-                <input matInput required #passwordConfirmation="ngModel" placeholder="Contraseña" type="password"
-                    [(ngModel)]="confirmPassword" name="password2">
-                    <mat-error *ngIf="passwordConfirmation.errors">Es necesario repetir la contraseña.</mat-error>
+                <input matInput required placeholder="Contraseña" type="password"
+                [formControl]="passwordConfirmation" [(ngModel)]="confirmPassword" name="password2">
+                    <mat-error *ngIf="this.form.get('passwordConfirmation')?.errors?.['required']">Es necesario repetir la contraseña.</mat-error>
+                    <mat-error *ngIf="this.form.get('passwordConfirmation')?.errors?.['minlength']">Mínimo 8 caracteres.</mat-error>
             </mat-form-field>
 
         </div>
@@ -67,42 +73,47 @@
 
             <label for="street">Dirección: </label>
             <mat-form-field>
-                <input matInput #street="ngModel" placeholder="Dirección" type="text"
-                    [(ngModel)]="address!.street" name="street">
-                    <!-- <mat-error *ngIf="street.errors">Dirección requerida.</mat-error> -->
+                <input matInput placeholder="Dirección" type="text"
+                [formControl]="street" [(ngModel)]="address!.street" name="street">
+                    <mat-error *ngIf="this.form.get('street')?.errors?.['required']">Dirección requerida.</mat-error>
+                    <!-- <mat-error *ngIf="this.form.get('postalCode')?.errors?.['pattern']">Formato inválido.</mat-error> -->
             </mat-form-field>
             <label for="postalCode">Código Postal: </label>
             <mat-form-field>
-                <input matInput #postalCode="ngModel" placeholder="XXXXX" type="text"
-                    [(ngModel)]="address!.postalCode" name="postalCode">
-                    <!-- <mat-error *ngIf="postalCode.errors">Código postal requerido.</mat-error> -->
+                <input matInput placeholder="XXXXX" type="text"
+                [formControl]="postalCode" [(ngModel)]="address!.postalCode" name="postalCode">
+                    <mat-error *ngIf="this.form.get('postalCode')?.errors?.['required']">Código postal requerido.</mat-error>
+                    <!-- <mat-error *ngIf="this.form.get('postalCode')?.errors?.['pattern']">Formato inválido.</mat-error> -->
             </mat-form-field>
 
             <label for="city">Ciudad: </label>
             <mat-form-field>
-                <input matInput #city="ngModel" placeholder="Ciudad" type="text"
-                    [(ngModel)]="address!.city" name="city">
-                    <!-- <mat-error *ngIf="city.errors">Ciudad requerida.</mat-error> -->
+                <input matInput placeholder="Ciudad" type="text"
+                [formControl]="city" [(ngModel)]="address!.city" name="city">
+                    <mat-error *ngIf="this.form.get('city')?.errors?.['required']">Ciudad requerida.</mat-error>
+                    <!-- <mat-error *ngIf="this.form.get('city')?.errors?.['pattern']">Símbolos y números no permitidos.</mat-error> -->
             </mat-form-field>
         </div>
 
         <div fxFlex="50" fxFlex.gt-sm="100%" fxLayout="column">
             <label for="province">Provincia: </label>
             <mat-form-field>
-                <input matInput #province="ngModel" placeholder="Provincia" type="text"
-                    [(ngModel)]="address!.province" name="province">
-                    <!-- <mat-error *ngIf="province.errors">Provincia requerida.</mat-error> -->
+                <input matInput placeholder="Provincia" type="text"
+                [formControl]="province" [(ngModel)]="address!.province" name="province">
+                    <mat-error *ngIf="this.form.get('province')?.errors?.['required']">Provincia requerido.</mat-error>
+                    <!-- <mat-error *ngIf="this.form.get('province')?.errors?.['pattern']">Símbolos y números no permitidos.</mat-error> -->
             </mat-form-field>
 
             <label for="country">País: </label>
             <mat-form-field>
-                <input matInput #country="ngModel" placeholder="País" type="text"
-                    [(ngModel)]="address!.country" name="country">
-                    <!-- <mat-error *ngIf="country.errors">País requerido.</mat-error> -->
+                <input matInput placeholder="País" type="text"
+                [formControl]="country" [(ngModel)]="address!.country" name="country">
+                    <mat-error *ngIf="this.form.get('country')?.errors?.['required']">País requerido.</mat-error>
+                    <!-- <mat-error *ngIf="this.form.get('country')?.errors?.['pattern']">Símbolos y números no permitidos.</mat-error> -->
             </mat-form-field>
             <br>
             <button (click)="goBack()" type="button" mat-button>Cancel</button>
-            <button mat-button [disabled]="updateUserForm.invalid" type="submit">Actualizar información</button>
+            <button mat-button [disabled]="form.invalid" class="submit-button shake-horizontal" type="submit">Actualizar información</button>
         </div>
     </form>
 </div>

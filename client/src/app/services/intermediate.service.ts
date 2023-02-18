@@ -20,7 +20,7 @@ import { CollectionService } from './collection.service';
             .subscribe(intermediate => {
                 const collectionIds = intermediate.intermediateData.collectionId;
                 console.log('Collection IDs: ' + collectionIds);
-                var collections: Collection[] = [];
+                let collections: Collection[] = [];
                 if(collectionIds != undefined) {
                     for(let collectionId of collectionIds) {
                        this.collectionService.getCollection(collectionId)

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router, } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -19,13 +19,24 @@ export class HeaderComponent implements OnInit {
     private router: Router,
     private authService: AuthService,
     private loginStatusService: LoginStatusService,
-    private jwtService: JwtService) { }
+    private jwtService: JwtService,
+    private elRef: ElementRef,
+    private renderer: Renderer2
+    ) { }
 
     loginSubscription: Subscription | undefined;
-    loggedIn: boolean | undefined;
+    loggedIn: boolean = false;
     
 
   ngOnInit() {
+    
+    if(localStorage.getItem('token')){
+      this.loggedIn = true;
+    }
+    else {
+      this.loggedIn = false;
+    }
+    
     this.loginSubscription = this.loginStatusService.loginChanges.subscribe((loggedIn) => {
       this.loggedIn = loggedIn;
     });

@@ -10,7 +10,7 @@
 <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign.xs="start center"
     fxLayoutAlign.sm="start center" fxLayoutAlign.gt-sm="center center" fxLayoutGap="10px">
     <br>
-    <form class="form" nonvalidate #createUserForm="ngForm" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <form class="form" nonvalidate [formGroup]="form" (ngSubmit)="onSubmit()">
 
         <div fxFlex="50" fxFlex.gt-sm="100%">
 
@@ -48,7 +48,7 @@
             <label for="email">Correo electrónico: </label>
             <mat-form-field>
                 <input matInput placeholder="example@example.com" type="email"
-                    [(ngModel)]="user.email" name="email" appEmailValidation [formControl]="email">
+                    [(ngModel)]="user.email" name="email" [formControl]="email">
                         <mat-error *ngIf="this.form.get('email')?.errors?.['required']">Email requerido.</mat-error>
                         <mat-error *ngIf="this.form.get('email')?.errors?.['email']">Formato inválido.</mat-error>
             </mat-form-field>

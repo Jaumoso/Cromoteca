@@ -14,8 +14,10 @@ export class LibraryComponent implements OnInit {
   ) { }
 
   collections: Collection[] = [];
-  errmsg: string | undefined;
+  filteredCollections: Collection[] = [];
+  errmsg: string = 'No se han encontrado colecciones!';
   gridColumns = 4; // cantdad de colecciones en una fila
+  searchText: string = '';
   @Input() userId: any;
 
   ngOnInit() {
@@ -23,6 +25,7 @@ export class LibraryComponent implements OnInit {
       this.intermediateService.getCollections(this.userId)
       .then((collections: Collection[]) => {
         this.collections = collections;
+        this.filteredCollections = collections;
         console.log(this.collections);
       })
       .catch(err => this.errmsg = err);
@@ -33,6 +36,25 @@ export class LibraryComponent implements OnInit {
     if(changes['userId']){
       this.ngOnInit();
     }
+  }
+
+  searchCollections(): Collection[] {
+    // If no search text or category is provided, return all collections
+    if (this.searchText == undefined) {
+      return this.filteredCollections = this.collections;
+    }
+    // Filter the collections based on the search text and category
+    return this.filteredCollections = this.collections.filter((collection) => {
+      const isMatch = (str: string) =>
+        str.toLowerCase().includes(this.searchText.toLowerCase());
+      
+      if(collection.name != undefined && collection.description != undefined){
+        return (
+          (!this.searchText || isMatch(collection.name) || isMatch(collection.description) || isMatch(collection.year!.toString()))
+        );
+      }
+      return this.collections;
+    });
   }
 
   deleteFromLibrary(collectionId: string){
@@ -50,7 +72,6 @@ export class LibraryComponent implements OnInit {
       }
     }
     )
-    this.ngOnInit();
   }
 
 }

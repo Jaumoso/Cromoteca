@@ -1,0 +1,24 @@
+$background-light: powderblue;
+$background-dark: cornflowerblue;
+$background: steelblue;
+$text-color: midnightblue;
+
+.go-back {
+    width: 100px;
+    background-color: white;
+    color: black;
+    padding: 10px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    border-radius: 10px;
+}
+.go-back:hover {
+    background-color: mix($background-dark, black, 80%);
+    color: white;
+    font-weight: bold;
+}
+
+.go-back:active {
+    background-color: mix($background-dark, black, 70%);
+    font-weight: bold;
+}

@@ -43,4 +43,9 @@ $text-color: midnightblue;
         background-color: mix(rgb(255, 86, 86), black, 70%);
         font-weight: bold;
     }
+
+    .flex-spacer {
+        flex-grow: 1;
+    }
 }
+

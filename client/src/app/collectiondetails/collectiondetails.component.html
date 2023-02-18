@@ -11,8 +11,7 @@ fxLayoutGap="10px">
     <div class="left-details" fxFlex="60%" fxFlex.gt-sm="100%">
         <h2>{{collection?.name}}</h2>
         <img src={{collection?.image}} alt={{collection?.name}}>
-        <div>
-             <!-- TODO: -->
+        <div *ngIf="!collectionIds?.includes(collection?._id!)">
             <button mat-button (click)="openDialog()">AÑADIR A LA BIBLIOTECA</button>
         </div>
     </div>

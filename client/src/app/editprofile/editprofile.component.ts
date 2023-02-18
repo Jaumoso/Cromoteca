@@ -1,11 +1,11 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { Location } from '@angular/common';
 import { User } from '../shared/user';
 import { AddressService } from '../services/address.service';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Address } from '../shared/address';
 import { JwtService } from '../services/jwt.service';
 import { mergeMap } from 'rxjs';
@@ -32,20 +32,20 @@ export class EditprofileComponent implements OnInit {
     private authService: AuthService
     ){
       this.form = this.formBuilder.group({
-        firstName: ['', Validators.required, Validators.pattern('[a-zA-Z ]'), Validators.minLength(2)],
-        lastName: ['', Validators.required, Validators.pattern('[a-zA-Z ]'), Validators.minLength(2)],
-        email: ['', Validators.required, Validators.email],
-        password: ['', Validators.required, Validators.minLength(8)],
-        password2: ['', Validators.required, Validators.minLength(8)],
-        username: ['', Validators.required],
+        firstName: this.firstName,
+        lastName: this.lastName,
+        email: this.email,
+        password: this.password,
+        passwordConfirmation: this.passwordConfirmation,
+        username: this.username,
         // entryDate
         // admin
         // Address:
-        street: ['', Validators.required],
-        postalCode: ['', Validators.required, Validators.pattern('[a-zA-Z0-9][ ]')],
-        city: ['', Validators.required, Validators.pattern('[a-zA-Z][ ]')],
-        province: ['', Validators.required, Validators.pattern('[a-zA-Z][ ]')],
-        country: ['', Validators.required, Validators.pattern('[a-zA-Z][ ]')],
+        street: this.street,
+        postalCode: this.postalCode,
+        city: this.city,
+        province: this.province,
+        country: this.country
       });
   }
 
@@ -68,6 +68,32 @@ export class EditprofileComponent implements OnInit {
       });
 
   }
+
+  firstName = new FormControl('', [Validators.required, /* Validators.pattern("/^[a-z ,.'-]+$/i"), */ Validators.minLength(4)]);
+  lastName = new FormControl('', [/* Validators.pattern("/^[a-z ,.'-]+$/i"), */ Validators.minLength(2)]);
+  email = new FormControl('', [ Validators.required, Validators.email]);
+  password = new FormControl('', [Validators.required, Validators.minLength(8), /* this.passwordMatchValidator */]);
+  passwordConfirmation = new FormControl('', [Validators.required, Validators.minLength(8)]);
+  username = new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(18)/* , Validators.pattern("^[A-Za-z][A-Za-z0-9_]$") */]);
+  // entryDate
+  // admin
+  // Address:
+  street = new FormControl('', [Validators.required/* , Validators.pattern('[a-zA-Z0-9][ ]') */]);
+  postalCode = new FormControl('', [Validators.required/* , Validators.pattern('[a-zA-Z0-9][ ]') */]);
+  city = new FormControl('', [Validators.required/* , Validators.pattern("/^[a-zA-Z\u0080-\u024F]+(?:([\ \-\']|(\.\ ))[a-zA-Z\u0080-\u024F]+)*$/") */]);
+  province = new FormControl('',[Validators.required/* , Validators.pattern('[a-zA-Z][ ]') */]);
+  country = new FormControl('', [Validators.required/* , Validators.pattern('[a-zA-Z][ ]') */]);
+
+/*   passwordMatchValidator(group: FormGroup) {
+    const password = group.get('password')?.value;
+    const passwordConfirmation = group.get('passwordConfirmation')?.value;
+    // Check if both password and passwordConfirmation have values before comparing
+    if (password != null && passwordConfirmation != null) {
+        return password === passwordConfirmation ? null : { 'mismatch': true };
+    }
+    // Return null if either password or passwordConfirmation is null
+    return null;
+  } */
 
   private token: any;
   private decodedToken: any;

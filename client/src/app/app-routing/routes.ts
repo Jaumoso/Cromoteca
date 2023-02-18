@@ -9,6 +9,7 @@ import { CollectiondetailsComponent } from '../collectiondetails/collectiondetai
 import { EditprofileComponent } from '../editprofile/editprofile.component';
 import { PasswordchangeComponent } from '../passwordchange/passwordchange.component';
 import { CreateaccountComponent } from '../createaccount/createaccount.component';
+import { FillCollectionComponent } from '../fill-collection/fill-collection.component';
 
 export const routes: Routes = [
     { path: 'home', component: HomeComponent},
@@ -20,6 +21,7 @@ export const routes: Routes = [
     { path: 'editprofile/:id', component: EditprofileComponent},
     { path: 'passwordchange', component: PasswordchangeComponent},
     { path: 'createaccount', component: CreateaccountComponent},
+    { path: 'fillcollection/:id', component: FillCollectionComponent},
     
     { path: '', redirectTo: '/home', pathMatch: 'full'}
 ];
