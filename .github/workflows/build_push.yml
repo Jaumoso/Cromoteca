@@ -25,6 +25,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
   
   build-run-test-client:
+       needs: sonar-cloud
        if: ${{github.repository == 'jaumoso/cromoteca'}}
        runs-on: ubuntu-latest
        steps:
@@ -44,6 +45,7 @@ jobs:
             npm run test
           
   build-run-test-server:
+       needs: build-run-test-client
        if: ${{github.repository == 'jaumoso/cromoteca'}}
        runs-on: ubuntu-latest
        steps:
@@ -63,6 +65,7 @@ jobs:
             npm run test
 
   build-docker-image-and-publish:
+     needs: build-run-test-server
      runs-on: ubuntu-latest
      steps:
      - uses: actions/checkout@v3
