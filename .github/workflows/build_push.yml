@@ -67,7 +67,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
   build-docker-image-and-publish:
-     needs: build-run-test-server
+     needs: sonar-cloud
      runs-on: ubuntu-latest
      steps:
      - uses: actions/checkout@v3
