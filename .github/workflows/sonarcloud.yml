@@ -39,7 +39,7 @@ permissions:
   pull-requests: read # allows SonarCloud to decorate PRs with analysis results
 
 jobs:
-  sonar-client:
+  sonar-cloud:
     name: Sonar Analysis
     runs-on: ubuntu-latest
     steps:
@@ -51,7 +51,7 @@ jobs:
         with:
           # Additional arguments to the sonarcloud scanner
           args: 
-            -Dsonar.projectKey=jaumoso_jtqj-angular
+            -Dsonar.projectKey=Jaumoso_Cromoteca
             -Dsonar.organization=jaumoso
           # Set the sonar.projectBaseDir analysis property
           projectBaseDir: .
