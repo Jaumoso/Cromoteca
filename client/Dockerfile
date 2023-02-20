@@ -3,8 +3,7 @@ FROM node:16.10 AS build
 WORKDIR /usr/src/app/
 COPY package*.json ./
 RUN --mount=type=cache,target=/root/.npm npm install
-COPY src/ ./src/
-COPY public/ ./public/
+COPY . .
 RUN --mount=type=cache,target=/root/.npm npm run build
 
 FROM docker.io/nginx:latest
