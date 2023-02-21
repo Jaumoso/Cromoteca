@@ -11,7 +11,7 @@ Cromoteca es una aplicación web para la colección e intercambio de cromos.
 NODE Version: 16.10
 
 ```
-npm i -g @nestjs/cli
+npm install -g @nestjs/cli
 ```
 
 ### SERVER
@@ -20,7 +20,7 @@ Dentro de la carpeta /server/:
 npm install --save @nestjs/mongoose mongoose
 npm install class-validator --save
 npm install class-transformer --save
-npm i @nestjs/mapped-types --save
+npm install @nestjs/mapped-types --save
 npm install --save @nestjs/swagger
 npm install --save @nestjs/config
 npm install dotenv --save
@@ -32,7 +32,7 @@ npm install --save @nestjs/passport passport
 //NO UTILIZADO DE MOMENTO
 npm install --save passport-google-oauth20
 npm install -D @types/passport-google-oauth20
-npm i google-auth-library --save
+npm install google-auth-library --save
 // ---
 
 npm install --save passport-local
@@ -51,7 +51,7 @@ npm install --save @auth0/angular-jwt
 Dentro de la carpeta /client/:
 ```
 npm install @angular/cli
-npm install
+yarn install
 npm install @angular/material@14.2 --save
 npm install @angular/animations --save
 npm install hammerjs --save
@@ -93,8 +93,8 @@ body {
 ```
 ### Font Awesome
 ```
-npm i @fortawesome/fontawesome-free
-npm i @fortawesome/fontawesome-svg-core
+npm install @fortawesome/fontawesome-free --save
+npm install @fortawesome/fontawesome-svg-core --save
 ```
 I en angular.json:
 ```
@@ -137,12 +137,12 @@ Añadir sonar-scanner a los scripts en package.json:
 ```
 Para ejecutar un análisis:
 ```
-npm run sonar
+yarn sonar
 ```
 
 ### Envío de Emails
 ```
-
+// TO-DO
 ```
 
 # TO-DO:
@@ -157,5 +157,3 @@ npm run sonar
 - Unificar CSS en variables globales
 - RECUPERACIÓN DE CONTRASEÑA A MEDIAS
 
-npm i @fortawesome/fontawesome-free --save
-npm i @fortawesome/fontawesome-svg-core --save
