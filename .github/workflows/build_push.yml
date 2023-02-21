@@ -23,7 +23,7 @@ jobs:
          - name: test
            run: |
             cd client
-            yarn test --watch=false --code-coverage
+            yarn test --no-watch --code-coverage
 
   build-run-test-server:
        needs: build-run-test-client
