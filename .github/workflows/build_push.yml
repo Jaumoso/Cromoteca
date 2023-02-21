@@ -46,7 +46,7 @@ jobs:
             yarn test --watch=false --coverage
             
   sonar-client:
-    needs: build-run-test-client
+    needs: build-run-test-server
     name: Sonar Analyze ANGULAR
     runs-on: ubuntu-latest
     steps:
@@ -96,7 +96,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_SERVER }}
 
   build-docker-image-and-publish:
-     needs: sonar-cloud
+     needs: sonar-server
      runs-on: ubuntu-latest
      steps:
      - uses: actions/checkout@v3
