@@ -143,6 +143,11 @@ Para ejecutar un análisis:
 npm run sonar
 ```
 
+### Envío de Emails
+```
+
+```
+
 # TO-DO:
 
 - Paginator en la seccion de colecciones
