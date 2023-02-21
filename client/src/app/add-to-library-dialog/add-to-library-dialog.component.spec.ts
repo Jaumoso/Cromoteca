@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddToLibraryDialogComponent } from './add-to-library-dialog.component';
+import { AddToLibraryComponent } from './add-to-library-dialog.component';
 
-describe('AddToLibraryDialogComponent', () => {
-  let component: AddToLibraryDialogComponent;
-  let fixture: ComponentFixture<AddToLibraryDialogComponent>;
+describe('AddToLibraryComponent', () => {
+  let component: AddToLibraryComponent;
+  let fixture: ComponentFixture<AddToLibraryComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddToLibraryDialogComponent ]
+      declarations: [ AddToLibraryComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(AddToLibraryDialogComponent);
+    fixture = TestBed.createComponent(AddToLibraryComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -93,11 +93,8 @@ body {
 ```
 ### Font Awesome
 ```
-NONONONO
-npm install @fortawesome/angular-fontawesome
-```
-```
 npm i @fortawesome/fontawesome-free
+npm i @fortawesome/fontawesome-svg-core
 ```
 I en angular.json:
 ```
@@ -154,9 +151,11 @@ npm run sonar
 - Validación para la creación y edición de los usuarios - comprobación de existencia en base de datos
 - Layout para pantallas pequeñas y grandes
 - Proteger las rutas
-- Buscador de colecciones en la librería
 - Mat Spinner
 - Pattern validators en createaccount
 - Validación en editprofile
 - Unificar CSS en variables globales
 - RECUPERACIÓN DE CONTRASEÑA A MEDIAS
+
+npm i @fortawesome/fontawesome-free --save
+npm i @fortawesome/fontawesome-svg-core --save
