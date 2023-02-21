@@ -40,6 +40,20 @@ export class UserController {
         }
     }
 
+    @Get('checkemail/:id')
+    @ApiCreatedResponse({ description: 'This function will get ONE USER INFO from the database.' })
+    async checkEmail(@Res() response, @Param('id') email: string) {
+        try {
+            const userData = await this.userService.checkEmail(email);
+            return response.status(HttpStatus.OK).json({
+                message: 'User data found successfully', userData,
+            });
+        }
+        catch (err) {
+            return response.status(err.status).json(err.response);
+        }
+    }
+
     @Post('new')
     @ApiCreatedResponse({ description: 'Creation of a NEW USER and insertion in the database.' })
     async createUser(@Res() response, @Body() createUserDto: CreateUserDto) {

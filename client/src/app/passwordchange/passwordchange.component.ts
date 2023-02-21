@@ -36,8 +36,10 @@ export class PasswordchangeComponent implements OnInit {
   sendEmail() {
     console.log(this.sendEmailForm.value.email);
     this.userService.checkEmail(this.sendEmailForm.value.email)
-    .then((user) => {
-      // ENDPOINT EN FRONT Y BACK NO IMPLEMENTADO
+    .then((userExists) => {
+      if(userExists){
+        // FALTA IMPLEMENTAR
+      }
     });
   }
 
@@ -49,4 +51,11 @@ export class PasswordchangeComponent implements OnInit {
     this.location.back();
   }
 
+  generateCode(){
+    let token: string = '';
+    for(var i=0; i < 10; i++){
+      token = token + Math.random().toString();
+    }
+    return token;
+  }
 }

@@ -36,6 +36,14 @@ export class UserService {
         return userData;
     }
 
+    async checkEmail(email: string): Promise<UserDocument> {
+        const userData = this.userModel.findOne({ email: email});
+        if (!userData) {
+            throw new NotFoundException('User data not found!');
+        }
+        return userData;
+    }
+
     async createUser(userDto: CreateUserDto ): Promise<UserDocument> {
         const saltOrRounds = 10;
         const hashedPassword = await bcrypt.hash(userDto.password, saltOrRounds);

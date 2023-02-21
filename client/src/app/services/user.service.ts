@@ -65,11 +65,16 @@ import { ProcessHTTPMsgService } from './process-httpmsg.service';
       });
     }
 
-    checkEmail(email: string): Promise<User> {
+    checkEmail(email: string): Promise<Boolean> {
       return new Promise((resolve, reject) => {
-        this.http.get<{userData: User}>(baseURL + 'user/checkemail' + email)
+        this.http.get<{userData: User}>(baseURL + 'user/checkemail/' + email)
         .subscribe(user => {
-          resolve(user.userData);
+          if(user){
+            resolve(true);
+          }
+          else{
+             resolve(false);
+          }
         }, err => {
           reject(err);
         });
