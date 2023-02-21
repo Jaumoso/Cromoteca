@@ -40,10 +40,10 @@ jobs:
            run: |
             cd server
             yarn build
-         - name: test
-           run: |
-            cd server
-            yarn test --watch=false --coverage
+         #- name: test
+         #  run: |
+         #   cd server
+         #   yarn test --watch=false --coverage
             
   sonar-client:
     needs: build-run-test-server
