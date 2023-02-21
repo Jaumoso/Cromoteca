@@ -23,8 +23,8 @@ jobs:
          - name: test
            run: |
             cd client
-            npm run test --code-coverage --no-watch
-          
+            npm run test --no-watch
+
   build-run-test-server:
        needs: build-run-test-client
        if: ${{github.repository == 'jaumoso/cromoteca'}}
@@ -43,7 +43,7 @@ jobs:
          - name: test
            run: |
             cd server
-            npm run test --code-coverage --no-watch
+            npm run test --no-watch
             
   sonar-cloud:
     needs: build-run-test-server
