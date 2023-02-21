@@ -23,7 +23,7 @@ jobs:
          - name: test
            run: |
             cd client
-            npm run test --watch false
+            npm run test --watch=false
 
   build-run-test-server:
        needs: build-run-test-client
@@ -43,7 +43,7 @@ jobs:
          - name: test
            run: |
             cd server
-            npm run test --watch false
+            npm run test --watch=false
             
   sonar-cloud:
     needs: build-run-test-server
