@@ -33,14 +33,14 @@ export class FillCollectionComponent implements OnInit {
       })
     } */
 
-    this.route.paramMap.pipe(
+/*     this.route.paramMap.pipe(
       switchMap((params: Params) => {
         return this.collectionService.getCollection(params['get']('id'));
       }))
       .subscribe(collectionData => {
         this.collection = collectionData;
         console.log(this.collection._id)
-      });
+      }); */
   }
 
   goBack() {

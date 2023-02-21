@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CollectiondetailsComponent } from './collectiondetails.component';
+import { ActivatedRoute } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
 
 describe('CollectiondetailsComponent', () => {
   let component: CollectiondetailsComponent;
@@ -8,7 +10,12 @@ describe('CollectiondetailsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CollectiondetailsComponent ]
+      declarations: [ CollectiondetailsComponent ],
+      imports: [ HttpClientTestingModule ],
+      providers: [ 
+        { provide: ActivatedRoute, useValue: {} },
+        { provide: MatDialog, useValue: {} },
+       ],
     })
     .compileComponents();
 

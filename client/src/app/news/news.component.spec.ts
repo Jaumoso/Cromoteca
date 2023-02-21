@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { NewsComponent } from './news.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('NewsComponent', () => {
   let component: NewsComponent;
@@ -8,7 +10,12 @@ describe('NewsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NewsComponent ]
+      declarations: [ NewsComponent ],
+      imports: [ 
+        HttpClientTestingModule,
+        MatProgressSpinnerModule,
+        HttpClientModule,
+       ],
     })
     .compileComponents();
 

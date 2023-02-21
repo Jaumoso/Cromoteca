@@ -1,6 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { MatDialog } from '@angular/material/dialog';
 import { CollectionsComponent } from './collections.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('CollectionsComponent', () => {
   let component: CollectionsComponent;
@@ -8,7 +14,16 @@ describe('CollectionsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CollectionsComponent ]
+      declarations: [ CollectionsComponent ],
+      imports: [ 
+        HttpClientTestingModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatIconModule,
+        FormsModule,
+        BrowserAnimationsModule
+       ],
+      providers: [ { provide: MatDialog, useValue: {} } ],
     })
     .compileComponents();
 

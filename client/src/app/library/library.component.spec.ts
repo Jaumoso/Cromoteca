@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { LibraryComponent } from './library.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 describe('LibraryComponent', () => {
   let component: LibraryComponent;
@@ -8,7 +10,15 @@ describe('LibraryComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LibraryComponent ]
+      declarations: [ LibraryComponent ],
+      providers: [
+        { provide: MatDialogRef, useValue: {}},
+        { provide: MAT_DIALOG_DATA, useValue: {}}
+      ],
+      imports: [ 
+        HttpClientTestingModule,
+        MatFormFieldModule
+       ],
     })
     .compileComponents();
 

@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CloseSessionDialogComponent } from './close-session-dialog.component';
 
 describe('CloseSessionDialogComponent', () => {
@@ -8,7 +8,11 @@ describe('CloseSessionDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CloseSessionDialogComponent ]
+      declarations: [ CloseSessionDialogComponent ],
+      providers: [
+        { provide: MatDialogRef, useValue: {}},
+        { provide: MAT_DIALOG_DATA, useValue: {}}
+      ],
     })
     .compileComponents();
 

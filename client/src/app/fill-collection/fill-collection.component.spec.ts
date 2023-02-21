@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ActivatedRoute } from '@angular/router';
 import { FillCollectionComponent } from './fill-collection.component';
 
 describe('FillCollectionComponent', () => {
@@ -8,7 +9,13 @@ describe('FillCollectionComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FillCollectionComponent ]
+      declarations: [ FillCollectionComponent ],
+      imports: [ 
+        HttpClientTestingModule,
+       ],
+      providers: [ 
+        { provide: ActivatedRoute, useValue:{} },
+      ],
     })
     .compileComponents();
 
