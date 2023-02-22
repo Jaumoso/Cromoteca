@@ -39,6 +39,20 @@ export class CardController {
         }
     }
 
+    @Get(':id1/:id2')
+    @ApiCreatedResponse({ description: 'This function will get ONE CARD INFO from the database.' })
+    async getUserCardsCollection(@Res() response, @Param('id1') userId: string,  @Param('id2') collectionId: string) {
+        try {
+            const cardData = await this.cardService.getUserCardsCollection(userId, collectionId);
+            return response.status(HttpStatus.OK).json({
+                message: 'Card data found successfully', cardData,
+            });
+        }
+        catch (err) {
+            return response.status(err.status).json(err.response);
+        }
+    }
+
     @Post('new')
     @ApiCreatedResponse({ description: 'Creation of a NEW CARD and insertion in the database.' })
     async createCard(@Res() response, @Body() createCardDto: CreateCardDto) {

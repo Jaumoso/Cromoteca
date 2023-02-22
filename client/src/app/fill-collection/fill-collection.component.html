@@ -1,7 +1,49 @@
-<p>{{collection?.name}}</p>
-
+<div class="content" fxLayout="row" fxLayout.sm="row" fxLayout.xs="column" fxLayoutAlign.xs="start center"
+    fxLayoutAlign.sm="start center" fxLayoutGap="10px">
+    <div fxFlex="40%" fxLayout="row" fxLayoutAlign="center center">
+        <div>
+            <img class="collection-image" src={{collection?.image}} alt="profile-pic" fxLayoutAlign="center">
+        </div>
+        <div fxFlex="2"></div>
+        <div fxLayoutAlign="center" fxLayout="column" fxLayoutGap="10px">
+            <button mat-button [routerLink]="['/addelement']" routerLinkActive="router-link-active">HACER ALGO</button>
+            <button mat-button routerLinkActive="router-link-active">HACER ALGO</button>
+        </div>
+    </div>
+    <div fxFlex="60" fxLayout="column">
+        <br>
+        <div fxLayout="column" fxLayoutGap="10px" fxFlex="80">
+            <h2><b>{{collection?.name}}</b></h2>
+            <p>{{collection?.description}}</p>
+            <br>
+            <p><b>Total de elementos en la colección: </b>{{collection?.size}}</p>
+            <p><b>Total de elementos reunídos:  <span id="green">{{completed}}</span> / <span id="red">{{collection?.size}}</span></b></p>
+            <p><b>Faltan: </b> {{ missing }}</p>
+        </div>
+        <br>
+    </div>
+</div>
 <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign.xs="start center"
     fxLayoutAlign.sm="start center" fxLayoutAlign.gt-sm="center center" fxLayoutGap="10px">
     <button class="go-back" mat-button (click)="goBack()" routerLinkActive="router-link-active">ATRÁS</button>
 </div>
-<br>
+<div class="element-list" fxLayout="column" fxLayoutAlign="space-around center" fxLayoutGap="10px">
+    <div fxFlex="auto" fxLayoutAlign="center start">
+        <h2><b><u>Elementos</u></b></h2>
+    </div>
+    <div fxLayout="row" fxLayoutGap="10px" style="height: 3cm;" *ngFor="let element of grid; let i=index" style="border: 1px solid black">
+        <div fxFlex="25%" fxLayoutAlign="center center" style="background-color: #eee;">
+            #{{i + 1}}
+        </div>
+        <div fxFlex="25%" fxLayoutAlign="center center" style="background-color: #eee;">
+            Nombre
+        </div>
+        
+        <div fxFlex="25%" fxLayoutAlign="center center" style="background-color: #eee;">
+            Algo más
+        </div>
+        <div fxFlex="25%" fxLayoutAlign="center center" style="background-color: #eee;">
+            <button>Añadir Elemento</button>
+        </div>
+      </div>
+</div>

@@ -26,6 +26,14 @@ export class CardService {
         return cardData;
     }
 
+    async getUserCardsCollection(userId: string, collectionId: string): Promise<CardDocument[]> {
+        const cardData = await this.cardModel.find({ userId: userId, collectionId: collectionId});
+        if (!cardData) {
+            throw new NotFoundException('Card data not found!');
+        }
+        return cardData;
+    }
+
     async createCard(cardDto: CreateCardDto ): Promise<CardDocument> {
         const newCard = await this.cardModel.create(cardDto);
         if (!newCard) {

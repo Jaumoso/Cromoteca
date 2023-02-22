@@ -3,6 +3,32 @@ $background-dark: cornflowerblue;
 $background: steelblue;
 $text-color: midnightblue;
 
+.content {
+    margin-top: 20px;
+
+    button {
+        width: auto;
+        background-color: $background-dark;
+        color: white;
+        padding: 10px;
+        margin-bottom: 5px;
+        font-weight: bold;
+        border-radius: 10px;
+    }
+    button:hover {
+        background-color: mix($background-dark, black, 80%);
+        font-weight: bold;
+    }
+    .button:active {
+        background-color: mix($background-dark, black, 70%);
+        font-weight: bold;
+    }
+
+    #green{color: rgb(87, 243, 87);}
+    #red {color:rgb(221, 72, 72);}
+
+}
+
 .go-back {
     width: 100px;
     background-color: white;
@@ -21,4 +47,14 @@ $text-color: midnightblue;
 .go-back:active {
     background-color: mix($background-dark, black, 70%);
     font-weight: bold;
+}
+
+.collection-image {
+    max-height: 300px;
+    max-width: 300px;
+    border-radius: 10px;
+}
+
+.element-list {
+    margin-top: 20px;
 }
