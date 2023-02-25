@@ -58,7 +58,7 @@ export class PasswordchangeComponent implements OnInit {
   generateCode(){
     let token: string = '';
     for(var i=0; i < 10; i++){
-      token = token + Math.random().toString();
+      token += Math.floor(Math.random() * 10).toString();
     }
     return token;
   }
