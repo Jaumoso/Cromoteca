@@ -7,7 +7,7 @@
         <div fxFlex="2"></div>
         <div fxLayoutAlign="center" fxLayout="column" fxLayoutGap="10px">
             <button mat-button [routerLink]="['/addelement']" routerLinkActive="router-link-active">HACER ALGO</button>
-            <button mat-button routerLinkActive="router-link-active">HACER ALGO</button>
+            <button mat-button (click)="goBack()" routerLinkActive="router-link-active">Atrás</button>
         </div>
     </div>
     <div fxFlex="60" fxLayout="column">
@@ -23,27 +23,40 @@
         <br>
     </div>
 </div>
-<div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign.xs="start center"
-    fxLayoutAlign.sm="start center" fxLayoutAlign.gt-sm="center center" fxLayoutGap="10px">
-    <button class="go-back" mat-button (click)="goBack()" routerLinkActive="router-link-active">ATRÁS</button>
-</div>
+
 <div class="element-list" fxLayout="column" fxLayoutAlign="space-around center" fxLayoutGap="10px">
     <div fxFlex="auto" fxLayoutAlign="center start">
         <h2><b><u>Elementos</u></b></h2>
     </div>
-    <div fxLayout="row" fxLayoutGap="10px" style="height: 3cm;" *ngFor="let element of grid; let i=index" style="border: 1px solid black">
-        <div fxFlex="25%" fxLayoutAlign="center center" style="background-color: #eee;">
-            #{{i + 1}}
-        </div>
-        <div fxFlex="25%" fxLayoutAlign="center center" style="background-color: #eee;">
-            Nombre
-        </div>
-        
-        <div fxFlex="25%" fxLayoutAlign="center center" style="background-color: #eee;">
-            Algo más
-        </div>
-        <div fxFlex="25%" fxLayoutAlign="center center" style="background-color: #eee;">
-            <button>Añadir Elemento</button>
-        </div>
-      </div>
 </div>
+<!-- Grid de colecciones -->
+<section>
+<!-- Grid de colecciones -->
+<div class="content" fxLayout="row wrap" fxLayoutGap="16px grid">
+    <div [fxFlex]="(100/gridColumns) + '%'" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let card of cardList; let i=index">
+
+            <mat-card class="scale-in-center" fxLayout="row" *ngIf="cardList[i] == 1">
+                <mat-card-header>
+                    <mat-card-title><mat-checkbox></mat-checkbox></mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                </mat-card-content>
+                <mat-card-actions>
+                </mat-card-actions>
+            </mat-card>
+
+
+        <mat-card class="scale-in-center" fxLayout="row" *ngIf="cardList[i] != 1">
+            <mat-card-header>
+                <mat-card-title>NO EXISTE</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+            </mat-card-content>
+            <mat-card-actions>
+            </mat-card-actions>
+        </mat-card>
+
+    </div>
+</div>
+</section>
+<br><br>

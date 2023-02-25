@@ -19,6 +19,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule} from '@angular/material/icon';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import {ScrollingModule} from '@angular/cdk/scrolling';
 
 import { baseURL } from './shared/baseurl';
 import 'hammerjs';
@@ -85,7 +86,8 @@ import { FillCollectionComponent } from './fill-collection/fill-collection.compo
     MatInputModule,
     MatIconModule,
     ReactiveFormsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    ScrollingModule,
   ],
   providers: [
     { provide: 'BaseURL', useValue: baseURL },

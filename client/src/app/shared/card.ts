@@ -2,7 +2,7 @@ export class Card {
     _id: string | undefined;
     userId: string | undefined;
     collectionId: string | undefined;
-    cardId: string | undefined;
+    cardId: number | undefined;
     name: string | undefined;
     repeated: number | undefined;
     description: string | undefined;

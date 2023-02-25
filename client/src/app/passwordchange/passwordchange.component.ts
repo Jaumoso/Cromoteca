@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
 import { UserService } from '../services/user.service';
+import { HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-passwordchange',
@@ -9,6 +10,7 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./passwordchange.component.scss']
 })
 export class PasswordchangeComponent implements OnInit {
+  http: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -34,13 +36,15 @@ export class PasswordchangeComponent implements OnInit {
   code: string | undefined;
 
   sendEmail() {
+    if(this.sendEmailForm.valid){
     console.log(this.sendEmailForm.value.email);
     this.userService.checkEmail(this.sendEmailForm.value.email)
     .then((userExists) => {
       if(userExists){
-        // FALTA IMPLEMENTAR
+        // TODO: FALTA IMPLEMENTAR
       }
     });
+    }
   }
 
   checkCode() {
