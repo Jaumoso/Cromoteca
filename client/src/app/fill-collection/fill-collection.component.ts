@@ -55,6 +55,8 @@ export class FillCollectionComponent implements OnInit {
           const collectionSize = this.collection?.size || 0;
           this.cardList = Array(collectionSize).fill(0);
           this.cards = cards;
+          this.completed = cards.length;
+          this.missing = this.collection!.size! - this.completed;
           // Verificar si cada carta está en el array de cartas
           cards.forEach((card) => {
             const cardIndex = card.cardId;

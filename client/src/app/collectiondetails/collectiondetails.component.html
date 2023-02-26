@@ -14,6 +14,9 @@ fxLayoutGap="10px">
         <div *ngIf="!collectionIds?.includes(collection?._id!)">
             <button mat-button (click)="openDialog()">AÑADIR A LA BIBLIOTECA</button>
         </div>
+        <div *ngIf="collectionIds?.includes(collection?._id!)">
+            <button mat-button [routerLink]="['/fillcollection',collection?._id]">Ver progreso</button>
+        </div>
     </div>
     <div fxFlex="40%" fxFlex.gt-sm="100%" class="right-details">
         <div class="table-container">
