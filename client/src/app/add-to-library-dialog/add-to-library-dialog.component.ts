@@ -23,7 +23,7 @@ export class AddToLibraryComponent implements OnInit {
     private dialog: MatDialog,
   ) {}
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    
   }
 
   closeDialog(): void {

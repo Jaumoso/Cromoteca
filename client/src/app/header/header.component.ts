@@ -15,13 +15,12 @@ import { LoginStatusService } from '../services/loginStatus.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(public dialog: MatDialog,
+  constructor(
+    public dialog: MatDialog,
     private router: Router,
     private authService: AuthService,
     private loginStatusService: LoginStatusService,
-    private jwtService: JwtService,
-    private elRef: ElementRef,
-    private renderer: Renderer2
+    private jwtService: JwtService
     ) { }
 
     loginSubscription: Subscription | undefined;

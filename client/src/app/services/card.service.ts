@@ -45,6 +45,7 @@ import { ProcessHTTPMsgService } from './process-httpmsg.service';
     }
 
     createCard(card: Card): Promise<Card> {
+      console.log(card);
       const httpOptions = {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
@@ -77,8 +78,9 @@ import { ProcessHTTPMsgService } from './process-httpmsg.service';
     }
 
     deleteCard(cardId: string): Promise<Card> {
+      console.log(cardId)
       return new Promise((resolve, reject) => {
-        this.http.delete<Card>(baseURL + 'card/delete' + cardId)
+        this.http.delete<Card>(baseURL + 'card/delete/' + cardId)
         .subscribe(cards => {
           resolve(cards);
         }, err => {

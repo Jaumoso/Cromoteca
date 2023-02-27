@@ -57,18 +57,24 @@ export class LibraryComponent implements OnInit {
     });
   }
 
-  deleteFromLibrary(collectionId: string){
+  deleteFromLibrary(collection: Collection){
     this.intermediateService.getIntermediate(this.userId)
     .then((intermediate) => {
       if(intermediate.collectionId != undefined){
-        const index = intermediate.collectionId.indexOf(collectionId)
+        const index = intermediate.collectionId.indexOf(collection._id!)
         if(index !== -1) {
           intermediate.collectionId.splice(index, 1);
         }
       }
       if(intermediate._id != undefined){
         this.intermediateService.updateIntermediate(intermediate._id, intermediate)
-        .then(() => console.log("Elemento borrado de la biblioteca."));
+        .then(() => {
+          
+          const index = this.collections.indexOf(collection);
+          this.collections.splice(index, 1);
+          
+        })
+        .finally(() => console.log("Elemento borrado de la biblioteca."));
       }
     }
     )

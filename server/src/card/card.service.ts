@@ -27,7 +27,7 @@ export class CardService {
     }
 
     async getUserCardsCollection(userId: string, collectionId: string): Promise<CardDocument[]> {
-        const cardData = await this.cardModel.find({ userId: userId, collectionId: collectionId});
+        const cardData = await this.cardModel.find({ userId: userId, collectionId: collectionId}).sort({ "cardId":1});
         if (!cardData) {
             throw new NotFoundException('Card data not found!');
         }

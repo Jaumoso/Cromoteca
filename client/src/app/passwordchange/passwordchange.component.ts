@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
 import { UserService } from '../services/user.service';
-import { HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-passwordchange',

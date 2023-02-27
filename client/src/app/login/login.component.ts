@@ -50,6 +50,16 @@ export class LoginComponent implements OnInit {
             this.closeDialog();
           }
           this.authService.setSession(token);
+
+          this.snackBar.open(
+            "Sesión Iniciada", 
+            "Aceptar",
+            {
+              verticalPosition: 'top',
+              duration: 4000,
+              panelClass: ['snackbar']
+            }
+            );
         }
       ).catch(() => {
         this.snackBar.open(

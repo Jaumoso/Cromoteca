@@ -64,7 +64,9 @@ export class CreateCardDto {
   @IsString()
   image: string; */
 
-  @ApiProperty({
+
+// ! NO TIENEN SENTIDO ESTAS DOS
+/*   @ApiProperty({
     type: Boolean,
     description: 'Bool de si tengo el cromo o no.',
     example: true
@@ -80,7 +82,7 @@ export class CreateCardDto {
   })
   @IsNotEmpty()
   @IsBoolean()
-  iwantit: boolean;
+  iwantit: boolean; */
 
   @ApiProperty({
     type: String,

@@ -1,12 +1,12 @@
-<div class="content" fxLayout="row" fxLayout.sm="row" fxLayout.xs="column" fxLayoutAlign.xs="start center"
-    fxLayoutAlign.sm="start center" fxLayoutGap="10px">
+<div class="content" fxLayout="row" fxLayout.gt-md="row" fxLayout.lt-md="column" fxLayout.xs="column"
+    fxLayoutAlign.lt-sm="start center" fxLayoutGap="10px">
     <div fxFlex="40%" fxLayout="row" fxLayoutAlign="center center">
         <div>
             <img class="collection-image" src={{collection?.image}} alt="profile-pic" fxLayoutAlign="center">
         </div>
         <div fxFlex="2"></div>
         <div fxLayoutAlign="center" fxLayout="column" fxLayoutGap="10px">
-            <button mat-button [routerLink]="['/addelement']" routerLinkActive="router-link-active">HACER ALGO</button>
+            <button mat-button (click)="addElement()" routerLinkActive="router-link-active">Añadir Elemento</button>
             <button mat-button (click)="goBack()" routerLinkActive="router-link-active">Atrás</button>
         </div>
     </div>
@@ -17,136 +17,73 @@
             <p>{{collection?.description}}</p>
             <br>
             <p><b>Total de elementos en la colección: </b>{{collection?.size}}</p>
-            <p><b>Total de elementos reunídos:  <span id="green">{{completed}}</span> / <span id="red">{{collection?.size}}</span></b></p>
+            <p><b>Total de elementos reunídos:  <span id="green">{{completed}}</span> / <span id="red">{{collection?.size}}</span> - {{percentage}}%</b></p>
             <p><b>Faltan: </b> {{ missing }}</p>
+        </div>
+        <div fxLayout="row wrap">
+          <div *ngFor="let item of cardList; let i=index"  class="completion-grid" style="border: 1px solid black">
+            <div class="yes" id="ihaveit" *ngIf="item == 1" (click)="scroll(i+1)">
+              {{i+1}}
+            </div>
+            <div class="no" id="idonothaveit" *ngIf="item == 0">
+              {{i+1}}
+            </div>
+          </div>
         </div>
         <br>
     </div>
 </div>
 
-<!-- OPCIÓN 1 -->
-<!-- <div class="element-list" fxLayout.gt-md="row" fxLayout.lt-md="column" fxLayoutAlign="space-around center" fxLayoutGap="10px">
-    <div fxFlex.gt-md="auto" fxFlex.lt-md="100" fxLayoutAlign="center start">
-      <div fxLayout="column">
-        <div fxLayoutAlign="center start">
-            <h2><b><u>Tengo</u></b></h2>
-        </div>
-        
-        <div fxLayoutAlign="center">
-            <div fxFlex="auto" fxLayoutAlign="center">
-              <cdk-virtual-scroll-viewport itemSize="100" class="viewport">
-                <div fxLayout="row wrap" fxLayoutAlign="center">
-                  <div fxFlex="100%" fxFlex.xs="100%" fxFlex.sm="33%" *cdkVirtualFor="let card of cards">
-                    <mat-card class="scale-in-center" fxLayout="row">
-                      <mat-card-header>
-                        <mat-card-title># {{card.cardId}}<mat-checkbox></mat-checkbox></mat-card-title>
-                      </mat-card-header>
-                      <mat-card-content>
-                        <div fxLayout="column">
-                            <div>{{card.name}}</div>
-                            <div>{{card.description}}</div>
-                        </div>
-                      </mat-card-content>
-                      <mat-card-actions>
-                      </mat-card-actions>
-                    </mat-card>
-                  </div>
-                </div>
-              </cdk-virtual-scroll-viewport>
-            </div>
-          </div>
-      </div>
-    </div>
-
-    <div fxFlex.gt-md="auto" fxFlex.lt-md="100" fxLayoutAlign="center start">
-        <div fxLayout="column">
-          <div fxLayoutAlign="center start">
-              <h2><b><u>Falta</u></b></h2>
-          </div>
-          
-          <div fxLayoutAlign="center">
-              <div fxFlex="auto" fxLayoutAlign="center">
-                <cdk-virtual-scroll-viewport itemSize="100" class="viewport">
-                  <div fxLayout="row wrap" fxLayoutAlign="center">
-                    <div fxFlex="100%" fxFlex.xs="100%" fxFlex.sm="33%" *cdkVirtualFor="let item of cardList; let i=index">
-                      <mat-card class="scale-in-center" fxLayout="row" *ngIf="item == 0">
-                        <mat-card-header>
-                          <mat-card-title># {{i+1}}<mat-checkbox></mat-checkbox></mat-card-title>
-                        </mat-card-header>
-                        <mat-card-content>
-                            <div fxLayout="column">
-                                Añadir elemento # {{i+1}}
-                            </div>
-                        </mat-card-content>
-                        <mat-card-actions>
-                        </mat-card-actions>
-                      </mat-card>
-                    </div>
-                  </div>
-                </cdk-virtual-scroll-viewport>
-              </div>
-            </div>
-        </div>
-    </div>
-</div> -->
-
 <div class="element-list" fxLayout.gt-md="row" fxLayout.lt-md="column" fxLayoutAlign="space-around center" fxLayoutGap="10px">
-    <div fxFlex.gt-md="auto" fxFlex.lt-md="100" fxLayoutAlign="center start" style="border: 1px solid black">
+    <div fxFlex.gt-md="auto" fxFlex.lt-md="100" fxLayoutAlign="center start">
       <div fxLayout="column">
         <div fxLayoutAlign="center start">
-            <h2><b><u>Tengo</u></b></h2>
+            <h2><b><u>Elementos Adquiridos</u></b></h2>
         </div>
         <div fxLayoutAlign="center">
-            <div fxFlex="auto" fxLayoutAlign="center">
-              <div fxLayout="row wrap" fxLayoutAlign="center">
-                <div [fxFlex]="(100/gridColumns) + '%'" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let card of cards let i=index">
-                  <mat-card fxLayout="row">
+          <div fxFlex="auto" fxLayoutAlign="center">
+            <div fxLayout="row wrap" fxLayoutAlign="center">
+              <div [fxFlex]="(100/3)" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let card of cards let i=index">
+                <mat-card fxLayout="row" id={{card.cardId}}>
+                  <div fxFlex="auto">
                     <mat-card-header>
-                      <mat-card-title># {{card.cardId}}<mat-checkbox value="checked"></mat-checkbox></mat-card-title>
+                      <mat-card-title># {{card.cardId}}</mat-card-title>
                     </mat-card-header>
+                  </div>
+                  <div fxFlex="auto">
                     <mat-card-content>
-                      {{card.name}}
+                      <div fxLayout="column">
+                        <b>{{card.name}}</b>
+                        <p>{{card.description}}</p>
+                        <p>
+                          <span *ngIf="card.repeated != 0" class="repeated"><b>{{card.repeated}}</b></span>
+
+                          <span *ngIf="card.state == 'NUEVO'" class="nuevo"><b>{{card.state}}</b></span>
+                          <span *ngIf="card.state == 'SEMINUEVO'" class="seminuevo"><b>{{card.state}}</b></span>
+                          <span *ngIf="card.state == 'GASTADO'" class="gastado"><b>{{card.state}}</b></span>
+                          <span *ngIf="card.state == 'ROTO'" class="roto"><b>{{card.state}}</b></span>
+                          
+                          <span *ngIf="card.price != 0" class="price">
+                           {{card.price}}€
+                          </span>
+                        </p>
+                      </div>
                     </mat-card-content>
-                    <mat-card-actions>
+                  </div>
+                  <div fxFlex="28">
+                    <mat-card-actions style="text-align: right;">
+                      <div fxLayout="column">
+                        <button>Crear Anuncio</button>
+                        <button (click)="deleteElement(card)">Eliminar</button>
+                      </div>
                     </mat-card-actions>
-                  </mat-card>
-                </div>
+                  </div>
+                </mat-card>
               </div>
             </div>
           </div>
+        </div>
       </div>
     </div>
 </div>
-
-
-<!-- Grid de colecciones -->
-<!-- <section>
-<div class="content" fxLayout="row wrap" fxLayoutGap="16px grid">
-    <div [fxFlex]="(100/gridColumns) + '%'" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let card of cardList; let i=index">
-
-            <mat-card class="scale-in-center" fxLayout="row" *ngIf="cardList[i] == 1">
-                <mat-card-header>
-                    <mat-card-title># {{i+1}}<mat-checkbox></mat-checkbox></mat-card-title>
-                </mat-card-header>
-                <mat-card-content>
-                    {{cards[i].name}}
-                </mat-card-content>
-                <mat-card-actions>
-                </mat-card-actions>
-            </mat-card>
-
-
-        <mat-card class="scale-in-center" fxLayout="row" *ngIf="cardList[i] != 1">
-            <mat-card-header>
-                <mat-card-title># {{i+1}}<mat-checkbox></mat-checkbox></mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
-            </mat-card-content>
-            <mat-card-actions>
-            </mat-card-actions>
-        </mat-card>
-
-    </div>
-</div>
-</section> -->
 <br><br>

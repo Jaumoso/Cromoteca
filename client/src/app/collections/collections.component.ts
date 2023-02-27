@@ -70,7 +70,7 @@ export class CollectionsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      this.collectionIds.push(result.collectionId);
     });
   }
 }

@@ -7,8 +7,6 @@ export class Card {
     repeated: number | undefined;
     description: string | undefined;
     // image: string | undefined;
-    ihaveit: boolean | undefined;
-    iwantit: boolean | undefined;
     state: string | undefined;
     price: number | undefined;
 }

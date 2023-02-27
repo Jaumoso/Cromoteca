@@ -27,6 +27,26 @@ $text-color: midnightblue;
     #green{color: rgb(87, 243, 87);}
     #red {color:rgb(221, 72, 72);}
 
+    .completion-grid{
+        height: 15px;
+        line-height: 15px;
+        width: 15px;
+        border-radius: 3px;
+        margin: 2px;
+        font-size: xx-small;
+        text-align: center;
+        overflow: hidden;
+
+        .yes {
+            background-color: rgb(87, 243, 87);
+            color: black;
+        }
+
+        .no {
+            background-color: rgb(221, 72, 72);
+            color: white;
+        }
+    }
 }
 
 .go-back {
@@ -59,18 +79,66 @@ $text-color: midnightblue;
     margin-top: 20px;
 }
 
-mat-checkbox {
-    margin: 0 12px;
-    font-size: 20px;
-    transform: scale(2);
-}
-
 mat-card {
-  margin-bottom: 10px;
   box-shadow: 1px 1px 5px 2px rgb(99, 99, 99);
-}
-
-.viewport {
-    height: 600px;
-    width: 600px;
+  margin: 10px 50px 0px 50px;
+  mat-card-content{
+    
+    .repeated {
+        color: white;
+        background-color: $text-color;
+        padding: 5px;
+        border-radius: 50%;
+        justify-content: center;
+        align-items: center;
+    }
+    .nuevo {
+        margin-left: 10px;
+        border-radius: 3px;
+        padding: 3px;
+        background-color: rgb(87, 243, 87);
+    }
+    .seminuevo {
+        margin-left: 10px;
+        border-radius: 3px;
+        padding: 3px;
+        background-color: rgb(250, 237, 54);
+    }
+    .gastado {
+        margin-left: 10px;
+        border-radius: 3px;
+        padding: 3px;
+        background-color: rgb(255, 166, 33);
+    }
+    .roto {
+        margin-left: 10px;
+        border-radius: 3px;
+        padding: 3px;
+        background-color: rgb(221, 72, 72);
+    }
+    .price {
+        margin-left: 10px;
+        border-radius: 3px;
+        padding: 3px;
+        background-color: rgb(201, 201, 201);
+    }
+  }
+  mat-card-actions {
+    button {
+        width: auto;
+        background-color: $background-light;
+        padding: 5px;
+        margin-bottom: 10px;
+        font-weight: bold;
+        border-radius: 5px;
+    }
+    button:hover {
+        background-color: mix($background-light, black, 80%);
+        font-weight: bold;
+    }
+    .button:active {
+        background-color: mix($background-light, black, 70%);
+        font-weight: bold;
+    }
+  }
 }
