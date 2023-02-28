@@ -25,12 +25,13 @@ jobs:
       # Next, the node orb's install-packages step will install the dependencies from a package.json.
       # The orb install-packages step will also automatically cache them for faster future runs.
       - node/install-packages:
-          app-dir: server
+          app-dir: client
+          cache-version: v1
           # If you are using yarn, change the line below from "npm" to "yarn"
           pkg-manager: npm
       - run:
           name: Run tests CLIENT
-          command: cd client && npm run test
+          command: npm run test
 
   # Below is the definition of your job to build and test your app, you can rename and customize it as you want.
   build-and-test-SERVER:
@@ -49,11 +50,12 @@ jobs:
       # The orb install-packages step will also automatically cache them for faster future runs.
       - node/install-packages:
           app-dir: server
+          cache-version: v1
           # If you are using yarn, change the line below from "npm" to "yarn"
           pkg-manager: npm
       - run:
           name: Run tests SERVER
-          command: cd server && npm run test
+          command: npm run test
 
 workflows:
   # Below is the definition of your workflow.
