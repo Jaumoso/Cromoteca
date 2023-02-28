@@ -44,7 +44,7 @@ export class HeaderComponent implements OnInit {
   goToProfile(){
     const token = localStorage.getItem('token');
     if(token != null) {
-      if(this.jwtService.isTokenExpired(token) == false){
+      if(!this.jwtService.isTokenExpired(token)){
         this.router.navigateByUrl('/profile');
       }
       else {

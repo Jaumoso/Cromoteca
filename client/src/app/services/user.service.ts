@@ -65,7 +65,7 @@ import { ProcessHTTPMsgService } from './process-httpmsg.service';
       });
     }
 
-    checkEmail(email: string): Promise<Boolean> {
+    checkEmail(email: string): Promise<boolean> {
       return new Promise((resolve, reject) => {
         this.http.get<{userData: User}>(baseURL + 'user/checkemail/' + email)
         .subscribe(user => {

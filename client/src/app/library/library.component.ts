@@ -40,17 +40,21 @@ export class LibraryComponent implements OnInit {
 
   searchCollections(): Collection[] {
     // If no search text or category is provided, return all collections
-    if (this.searchText == undefined) {
-      return this.filteredCollections = this.collections;
+    if (!this.searchText) {
+      return this.collections;
     }
     // Filter the collections based on the search text and category
     return this.filteredCollections = this.collections.filter((collection) => {
       const isMatch = (str: string) =>
-        str.toLowerCase().includes(this.searchText.toLowerCase());
+        str
+        .toLowerCase()
+        .normalize('NFD') // descomponer caracteres acentuados en componentes Unicode
+        .replace(/[\u0300-\u036f]/g, '') // eliminar diacríticos mediante una expresión regular
+        .includes(this.searchText.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')); // realizar comparación
       
       if(collection.name != undefined && collection.description != undefined){
         return (
-          (!this.searchText || isMatch(collection.name) || isMatch(collection.description) || isMatch(collection.year!.toString()))
+          (!this.searchText || isMatch(collection.name) || isMatch(collection.description) || isMatch(collection.theme!) || isMatch(collection.format!) || isMatch(collection.year!.toString()))
         );
       }
       return this.collections;

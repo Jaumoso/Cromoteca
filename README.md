@@ -161,4 +161,3 @@ Generación de códigos de seguridad de recuperación
 - Unificar CSS en variables globales
 - RECUPERACIÓN DE CONTRASEÑA A MEDIAS
 - Cuando se borra una colección de library, tiene que borrar los cromos guardados
-

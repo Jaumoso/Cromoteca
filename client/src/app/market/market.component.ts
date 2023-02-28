@@ -7,8 +7,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MarketComponent implements OnInit {
 
-  constructor() { }
-
   ngOnInit(): void {
     // Vacío de forma intencional
   }

@@ -30,7 +30,9 @@ export class LoginComponent implements OnInit {
   errMsg = '';
   form: FormGroup;
 
-  ngOnInit() {}
+  ngOnInit() {
+    // Vacío de forma intencional
+  }
 
   closeDialog(): void {
     this.dialogRef.close();
@@ -44,7 +46,6 @@ export class LoginComponent implements OnInit {
           console.log(token);
           console.log("User logged in successfully");
           if(token){
-            /* this.router.navigateByUrl('/profile'); */
             this.loginStatusService.loggedIn = true;
             this.closeDialog();
           }
