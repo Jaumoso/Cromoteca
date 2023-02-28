@@ -9,7 +9,9 @@ import { MatDialogRef } from '@angular/material/dialog';
 export class CloseSessionDialogComponent implements OnInit {
 
   constructor(private dialogRef: MatDialogRef<CloseSessionDialogComponent>) {}
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // Vacío de forma intencional
+  }
 
   closeDialog(){
     this.dialogRef.close();

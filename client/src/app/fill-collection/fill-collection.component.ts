@@ -105,5 +105,5 @@ export class FillCollectionComponent implements OnInit {
   scroll(id: number) {
     let element = document.getElementById(id.toString());
     element!.scrollIntoView({behavior: 'smooth'});
-}
+  }
 }

@@ -23,7 +23,7 @@ export class AddToLibraryComponent implements OnInit {
     private dialog: MatDialog,
   ) {}
   ngOnInit(): void {
-    
+    // Vacío de forma intencional
   }
 
   closeDialog(): void {

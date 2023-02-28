@@ -10,6 +10,7 @@ export class MarketComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    // Vacío de forma intencional
   }
 
 }

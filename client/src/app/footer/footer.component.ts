@@ -16,7 +16,9 @@ export class FooterComponent implements OnInit {
     private router: Router,
     private dialog: MatDialog
   ){}
-  ngOnInit() {}
+  ngOnInit(): void {
+    // Vacío de forma intencional
+  }
 
   goToProfile(){
     const token = localStorage.getItem('token');

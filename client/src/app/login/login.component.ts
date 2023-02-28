@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { AuthService } from '../services/auth.service';
 import { LoginStatusService } from '../services/loginStatus.service';
@@ -19,15 +19,14 @@ export class LoginComponent implements OnInit {
     private snackBar: MatSnackBar
     ) { 
       this.form = this.formBuilder.group({
-        username: ['', Validators.required],
-        password: ['', Validators.required]
+        username: this.username,
+        password: this.password
       });
     }
-  
-  user = {
-    username: '',
-    password: '',
-  };
+
+  username = new FormControl('', [Validators.required]);
+  password = new FormControl('', [Validators.required]);
+
   errMsg = '';
   form: FormGroup;
 
@@ -38,8 +37,8 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.user.username && this.user.password) {
-      this.authService.login(this.user.username, this.user.password)
+    if (this.username.value && this.password.value) {
+      this.authService.login(this.username.value, this.password.value)
       .then(
         (token) => {
           console.log(token);

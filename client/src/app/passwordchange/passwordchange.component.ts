@@ -25,7 +25,7 @@ export class PasswordchangeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    // Vacío de forma intencional
   }
 
   emailValidation = new FormControl('', [Validators.required, Validators.email]);
@@ -41,6 +41,8 @@ export class PasswordchangeComponent implements OnInit {
     .then((userExists) => {
       if(userExists){
         // TODO: FALTA IMPLEMENTAR
+        this.code = this.generateCode();
+        console.log(this.code);
       }
     });
     }

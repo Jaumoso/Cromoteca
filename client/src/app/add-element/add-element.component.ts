@@ -1,4 +1,4 @@
-import { Component, Inject, Input, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -49,6 +49,7 @@ export class AddElementComponent implements OnInit {
   states: string[] = ['NUEVO','SEMINUEVO','GASTADO','ROTO'];
 
   ngOnInit(): void {
+    // Vacío de forma intencional
   }
 
   onSubmit() {

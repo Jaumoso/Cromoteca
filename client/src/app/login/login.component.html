@@ -4,17 +4,17 @@
   <button class="cancel" mat-button mat-dialog-close>&times;</button>
 </mat-toolbar>
 
-<form novalidate #loginForm="ngForm" (ngSubmit)="onSubmit()">
+<form novalidate [formGroup]="form" (ngSubmit)="onSubmit()">
   <mat-dialog-content>
       <mat-form-field>
-        <input matInput required #username="ngModel" placeholder="Username" type="text" [(ngModel)]="user.username"
-          name="username">
-        <mat-error *ngIf="username.errors">Usuario requerido.</mat-error>
+        <input matInput required [formControl]="username" placeholder="Username" 
+          type="text" name="username">
+          <mat-error *ngIf="this.form.get('username')?.errors?.['required']">Usuario Requerido.</mat-error>
       </mat-form-field>
       <mat-form-field>
-        <input matInput required #password="ngModel" placeholder="Password" type="password"
-          [(ngModel)]="user.password" name="password">
-        <mat-error *ngIf="password.errors">Contraseña requerida.</mat-error>
+        <input matInput required placeholder="Password" type="password"
+          [formControl]="password" name="password">
+          <mat-error *ngIf="this.form.get('password')?.errors?.['required']">Contraseña Requerida.</mat-error>
       </mat-form-field>
   </mat-dialog-content>
   <a [routerLink]="['/passwordchange']" (click)="closeDialog()" >¿Has olvidado tu contraseña?</a>
@@ -23,6 +23,6 @@
     <span class="flex-spacer"></span>
     <button class="cancel" mat-button mat-dialog-close>Cancel</button>
     <button class="accept" mat-button type="submit"
-      [disabled]="loginForm.form.invalid">Login</button>
+      [disabled]="form.invalid">Login</button>
   </mat-dialog-actions>
 </form>

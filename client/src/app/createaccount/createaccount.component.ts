@@ -47,6 +47,7 @@ export class CreateaccountComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    // Vacío de forma intencional
   }
 
   firstName = new FormControl('', [Validators.required, /* Validators.pattern("/^[a-z ,.'-]+$/i"), */ Validators.minLength(4)]);
