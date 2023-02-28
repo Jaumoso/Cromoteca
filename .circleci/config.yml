@@ -28,16 +28,7 @@ jobs:
           pkg-manager: npm
       - run:
           name: Run tests CLIENT
-          command: |
-            ls
-            cd client
-            npm run test
-      - run:
-          name: Run tests SERVER
-          command: |
-            ls
-            cd server
-            npm run test
+          command: cd client/ | npm run test
 
 workflows:
   # Below is the definition of your workflow.
