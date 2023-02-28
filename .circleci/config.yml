@@ -29,12 +29,14 @@ jobs:
       - run:
           name: Run tests CLIENT
           command: |
-            cd /client
+            ls
+            cd client
             npm run test
       - run:
           name: Run tests SERVER
           command: |
-            cd /server
+            ls
+            cd server
             npm run test
 
 workflows:
