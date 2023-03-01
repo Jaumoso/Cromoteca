@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { Location } from '@angular/common';
@@ -11,6 +11,7 @@ import { JwtService } from '../services/jwt.service';
 import { mergeMap } from 'rxjs';
 import { LoginComponent } from '../login/login.component';
 import { AuthService } from '../services/auth.service';
+import { ErrorStateMatcher } from '@angular/material/core';
 
 @Component({
   selector: 'app-editprofile',
@@ -46,8 +47,34 @@ export class EditprofileComponent implements OnInit {
         city: this.city,
         province: this.province,
         country: this.country
+      },
+      {
+        validator: this.checkPasswords
       });
   }
+  matcher = new MyErrorStateMatcher();
+
+  firstName = new FormControl('', [Validators.required, Validators.pattern(/^\s*([a-zñA-ZÀ-ÿ]{1,}([\.,] |[-']| )?)+[a-zñA-ZÀ-ÿ]+\.?\s*$/g), Validators.minLength(2), Validators.maxLength(15)]);
+  lastName = new FormControl('', [Validators.pattern(/^\s*([a-zñA-ZÀ-ÿ]{1,}([\.,] |[-']| )?)+[a-zñA-ZÀ-ÿ]+\.?\s*$/g), Validators.minLength(2), Validators.maxLength(25)]);
+  email = new FormControl('', [ Validators.required, Validators.email]);
+  password = new FormControl('', [Validators.required, Validators.minLength(8), /* this.passwordMatchValidator */]);
+  passwordConfirmation = new FormControl('');
+  username = new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(18), Validators.pattern(/^[a-zA-Z0-9_-]{1,}$/g)]);
+  // entryDate
+  // admin
+  // Address:
+  street = new FormControl('', [Validators.required , Validators.pattern(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ.,\s,.]+[\d,\s]+$/g)]);
+  postalCode = new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z0-9\-]+$/g)]);  
+  city = new FormControl('', [Validators.required, Validators.pattern(/^[a-zñA-ZÀ-ÿ ]+$/g)]);
+  province = new FormControl('',[Validators.required, Validators.pattern(/^[a-zñA-ZÀ-ÿ ]+$/g)]);
+  country = new FormControl('', [Validators.required, Validators.pattern(/^[a-zñA-ZÀ-ÿ ]+$/g)]);
+
+  checkPasswords: ValidatorFn = (group: AbstractControl):  ValidationErrors | null => { 
+    let pass = group.get('password')!.value;
+    let confirmPass = group.get('passwordConfirmation')!.value
+    return pass === confirmPass ? null : { notSame: true }
+  }
+
 
   ngOnInit(): void {
       
@@ -66,35 +93,7 @@ export class EditprofileComponent implements OnInit {
       .subscribe(addressData => {
         this.address = addressData;
       });
-
   }
-
-  firstName = new FormControl('', [Validators.required, /* Validators.pattern("/^[a-z ,.'-]+$/i"), */ Validators.minLength(4)]);
-  lastName = new FormControl('', [/* Validators.pattern("/^[a-z ,.'-]+$/i"), */ Validators.minLength(2)]);
-  email = new FormControl('', [ Validators.required, Validators.email]);
-  password = new FormControl('', [Validators.required, Validators.minLength(8), /* this.passwordMatchValidator */]);
-  passwordConfirmation = new FormControl('', [Validators.required, Validators.minLength(8)]);
-  username = new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(18)/* , Validators.pattern("^[A-Za-z][A-Za-z0-9_]$") */]);
-  // entryDate
-  // admin
-  // Address:
-  street = new FormControl('', [Validators.required/* , Validators.pattern('[a-zA-Z0-9][ ]') */]);
-  postalCode = new FormControl('', [Validators.required/* , Validators.pattern('[a-zA-Z0-9][ ]') */]);
-  city = new FormControl('', [Validators.required/* , Validators.pattern("/^[a-zA-Z\u0080-\u024F]+(?:([\ \-\']|(\.\ ))[a-zA-Z\u0080-\u024F]+)*$/") */]);
-  province = new FormControl('',[Validators.required/* , Validators.pattern('[a-zA-Z][ ]') */]);
-  country = new FormControl('', [Validators.required/* , Validators.pattern('[a-zA-Z][ ]') */]);
-
-/*   passwordMatchValidator(group: FormGroup) {
-    const password = group.get('password')?.value;
-    const passwordConfirmation = group.get('passwordConfirmation')?.value;
-    // Check if both password and passwordConfirmation have values before comparing
-    if (password != null && passwordConfirmation != null) {
-        return password === passwordConfirmation ? null : { 'mismatch': true };
-    }
-    // Return null if either password or passwordConfirmation is null
-    return null;
-  } */
-
   private token: any;
   private decodedToken: any;
   form: FormGroup;
@@ -133,5 +132,14 @@ export class UpdatedProfileComponent {
   ) {}
   closeDialog(): void {
     this.dialogRef.close();
+  }
+}
+
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const invalidCtrl = !!(control?.invalid && control?.parent?.dirty);
+    const invalidParent = !!(control?.parent?.invalid && control?.parent?.dirty);
+
+    return invalidCtrl || invalidParent;
   }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../shared/user';
 import { Location } from '@angular/common';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { UserService } from '../services/user.service';
 import { Address } from '../shared/address';
 import { AddressService } from '../services/address.service';
@@ -10,6 +10,7 @@ import { LoginComponent } from '../login/login.component';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { IntermediateService } from '../services/intermediate.service';
 import { Intermediate } from '../shared/intermediate';
+import { ErrorStateMatcher } from '@angular/material/core';
 
 @Component({
   selector: 'app-createaccount',
@@ -43,6 +44,9 @@ export class CreateaccountComponent implements OnInit {
       city: this.city,
       province: this.province,
       country: this.country
+    },
+    {
+      validator: this.checkPasswords
     });
    }
 
@@ -50,11 +54,13 @@ export class CreateaccountComponent implements OnInit {
     // Vacío de forma intencional
   }
 
+  matcher = new MyErrorStateMatcher();
+
   firstName = new FormControl('', [Validators.required, /* Validators.pattern("/^[a-z ,.'-]+$/i"), */ Validators.minLength(4)]);
   lastName = new FormControl('', [/* Validators.pattern("/^[a-z ,.'-]+$/i"), */ Validators.minLength(2)]);
   email = new FormControl('', [ Validators.required, Validators.email]);
   password = new FormControl('', [Validators.required, Validators.minLength(8)]);
-  passwordConfirmation = new FormControl('', [Validators.required, Validators.minLength(8)]);
+  passwordConfirmation = new FormControl('');
   username = new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(18)/* , Validators.pattern("^[A-Za-z][A-Za-z0-9_]$") */]);
   // entryDate
   // admin
@@ -64,6 +70,12 @@ export class CreateaccountComponent implements OnInit {
   city = new FormControl('', [Validators.required/* , Validators.pattern("/^[a-zA-Z\u0080-\u024F]+(?:([\ \-\']|(\.\ ))[a-zA-Z\u0080-\u024F]+)*$/") */]);
   province = new FormControl('',[Validators.required/* , Validators.pattern('[a-zA-Z][ ]') */]);
   country = new FormControl('', [Validators.required/* , Validators.pattern('[a-zA-Z][ ]') */]);
+
+  checkPasswords: ValidatorFn = (group: AbstractControl):  ValidationErrors | null => { 
+    let pass = group.get('password')!.value;
+    let confirmPass = group.get('passwordConfirmation')!.value
+    return pass === confirmPass ? null : { notSame: true }
+  }
 
   form: FormGroup;
 
@@ -156,5 +168,14 @@ export class CreatedAccountDialogComponent {
   ) {}
   closeDialog(): void {
     this.dialogRef.close();
+  }
+}
+
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const invalidCtrl = !!(control?.invalid && control?.parent?.dirty);
+    const invalidParent = !!(control?.parent?.invalid && control?.parent?.dirty);
+
+    return invalidCtrl || invalidParent;
   }
 }
