@@ -25,7 +25,6 @@ export class UserController {
         }
     }
 
-    @UseGuards(JwtAuthGuard)
     @Get(':id')
     @ApiCreatedResponse({ description: 'This function will get ONE USER INFO from the database.' })
     async getUser(@Res() response, @Param('id') userId: string) {
@@ -54,6 +53,20 @@ export class UserController {
         }
     }
 
+    @Get('checkexistinguser/:id1/:id2')
+    @ApiCreatedResponse({ description: 'This function will get ONE USER INFO from the database.' })
+    async checkExistingUser(@Res() response, @Param('id1') username: string, @Param('id2') email: string) {
+        try {
+            const userData = await this.userService.checkExistingUser(username, email);
+            return response.status(HttpStatus.OK).json({
+                message: 'User data found successfully', userData,
+            });
+        }
+        catch (err) {
+            return response.status(err.status).json(err.response);
+        }
+    }
+
     @Post('new')
     @ApiCreatedResponse({ description: 'Creation of a NEW USER and insertion in the database.' })
     async createUser(@Res() response, @Body() createUserDto: CreateUserDto) {
@@ -72,7 +85,6 @@ export class UserController {
         }
     }
 
-    @UseGuards(JwtAuthGuard)
     @Put('update/:id')
     @ApiCreatedResponse({ description: 'UPDATE te data of the USER into the database.' })
     async updateUser(@Res() response, @Param('id') userId: string, @Body() updateUserDto: UpdateUserDto) {
@@ -88,7 +100,6 @@ export class UserController {
         }
     }
 
-    /* @UseGuards(JwtAuthGuard) */
     @Delete('delete/:id')
     @ApiCreatedResponse({ description: 'This function will DELETE the USER with the ID passed as parameter from the database.' })
     async deleteUser(@Res() response, @Param('id') userId: string) {

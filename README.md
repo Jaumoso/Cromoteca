@@ -152,12 +152,12 @@ Generación de códigos de seguridad de recuperación
 # TO-DO:
 
 - Paginator en la seccion de colecciones
-- Validación para la creación y edición de los usuarios - comprobación de existencia en base de datos
 - Layout para pantallas pequeñas y grandes
 - Proteger las rutas
 - Mat Spinner
 - Pattern validators en createaccount
-- Validación en editprofile
 - Unificar CSS en variables globales
 - RECUPERACIÓN DE CONTRASEÑA A MEDIAS
 - Cuando se borra una colección de library, tiene que borrar los cromos guardados
+- Arreglar la validación de usuarios en createuser y updateuser
+- Quitar todos los console.log

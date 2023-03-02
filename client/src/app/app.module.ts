@@ -44,6 +44,7 @@ import { AddToLibraryComponent } from './add-to-library-dialog/add-to-library-di
 import { CloseSessionDialogComponent } from './close-session-dialog/close-session-dialog.component';
 import { FillCollectionComponent } from './fill-collection/fill-collection.component';
 import { AddElementComponent } from './add-element/add-element.component';
+import { DeleteAccountDialogComponent } from './delete-account-dialog/delete-account-dialog.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import { AddElementComponent } from './add-element/add-element.component';
     CloseSessionDialogComponent,
     FillCollectionComponent,
     AddElementComponent,
+    DeleteAccountDialogComponent,
   ],
   imports: [
     BrowserModule,

@@ -12,6 +12,22 @@ $text-color: midnightblue;
         margin-left: 0;
         border-top: 1px solid black;
     }
+
+    .flex-spacer {
+      flex-grow: 1;
+    }
+
+    .delete-account {
+      margin-right: 10%;
+
+      .delete-account-button:hover {
+        background-color: rgb(255, 86, 86);
+      }
+      .delete-account-button:active {
+        background-color: mix(rgb(255, 86, 86), black, $weight: 80%);
+      }
+    }
+
 }
 
 .form {
@@ -28,34 +44,34 @@ $text-color: midnightblue;
         padding: 10px;
         margin: 10px;
     }
+}
 
-    button {
-        width: auto;
-        background-color: $background-dark;
-        color: white;
-        padding: 10px;
-        margin-bottom: 5px;
-        font-weight: bold;
-        border-radius: 10px;
-    }
-    button:hover {
-        background-color: mix($background-dark, black, 80%);
-        font-weight: bold;
-    }
-    .button:active {
-        background-color: mix($background-dark, black, 70%);
-        font-weight: bold;
-    }
-    .cancel-button:hover {
-        background-color: rgb(255, 86, 86);
-    }
-    .cancel-button:active {
-        background-color: mix(rgb(255, 86, 86), black, $weight: 80%);
-    }
+button {
+  width: auto;
+  background-color: $background-dark;
+  color: white;
+  padding: 10px;
+  margin-bottom: 5px;
+  font-weight: bold;
+  border-radius: 10px;
+}
+button:hover {
+  background-color: mix($background-dark, black, 80%);
+  font-weight: bold;
+}
+.button:active {
+  background-color: mix($background-dark, black, 70%);
+  font-weight: bold;
+}
+.cancel-button:hover {
+  background-color: rgb(255, 86, 86);
+}
+.cancel-button:active {
+  background-color: mix(rgb(255, 86, 86), black, $weight: 80%);
+}
 
-    .submit-button:disabled {
-        background-color: rgb(168, 179, 192);
-    }
+.submit-button:disabled {
+  background-color: rgb(168, 179, 192);
 }
 
 .shake-horizontal:disabled:active {

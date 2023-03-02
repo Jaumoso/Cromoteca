@@ -12,6 +12,9 @@ import { mergeMap } from 'rxjs';
 import { LoginComponent } from '../login/login.component';
 import { AuthService } from '../services/auth.service';
 import { ErrorStateMatcher } from '@angular/material/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { DeleteAccountDialogComponent } from '../delete-account-dialog/delete-account-dialog.component';
+import { CardService } from '../services/card.service';
 
 @Component({
   selector: 'app-editprofile',
@@ -23,14 +26,14 @@ export class EditprofileComponent implements OnInit {
   constructor(
     private location: Location,
     private formBuilder: FormBuilder,
+    private authService: AuthService,
     private userService: UserService,
+    private jwtService: JwtService,
     private addressService: AddressService,
     private router: Router,
     public dialog: MatDialog,
-    public dialog2: MatDialog,
-    private jwtService: JwtService,
     private route: ActivatedRoute,
-    private authService: AuthService
+    private snackBar: MatSnackBar
     ){
       this.form = this.formBuilder.group({
         firstName: this.firstName,
@@ -54,20 +57,20 @@ export class EditprofileComponent implements OnInit {
   }
   matcher = new MyErrorStateMatcher();
 
-  firstName = new FormControl('', [Validators.required, Validators.pattern(/^\s*([a-zñA-ZÀ-ÿ]{1,}([\.,] |[-']| )?)+[a-zñA-ZÀ-ÿ]+\.?\s*$/g), Validators.minLength(2), Validators.maxLength(15)]);
-  lastName = new FormControl('', [Validators.pattern(/^\s*([a-zñA-ZÀ-ÿ]{1,}([\.,] |[-']| )?)+[a-zñA-ZÀ-ÿ]+\.?\s*$/g), Validators.minLength(2), Validators.maxLength(25)]);
+  firstName = new FormControl('', [Validators.required, /* Validators.pattern(/^\s*([a-zñA-ZÀ-ÿ]{1,}([\.,] |[-']| )?)+[a-zñA-ZÀ-ÿ]+\.?\s*$/g), */ Validators.minLength(2), Validators.maxLength(15)]);
+  lastName = new FormControl('', [Validators.required, /* Validators.pattern(/^\s*([a-zñA-ZÀ-ÿ]{1,}([\.,] |[-']| )?)+[a-zñA-ZÀ-ÿ]+\.?\s*$/g), */ Validators.minLength(2), Validators.maxLength(25)]);
   email = new FormControl('', [ Validators.required, Validators.email]);
-  password = new FormControl('', [Validators.required, Validators.minLength(8), /* this.passwordMatchValidator */]);
+  password = new FormControl('', [Validators.required, Validators.minLength(8)]);
   passwordConfirmation = new FormControl('');
-  username = new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(18), Validators.pattern(/^[a-zA-Z0-9_-]{1,}$/g)]);
+  username = new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(18), /* Validators.pattern(/^[a-zA-Z0-9_-]{20,}$/g) */]);
   // entryDate
   // admin
   // Address:
-  street = new FormControl('', [Validators.required , Validators.pattern(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ.,\s,.]+[\d,\s]+$/g)]);
-  postalCode = new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z0-9\-]+$/g)]);  
-  city = new FormControl('', [Validators.required, Validators.pattern(/^[a-zñA-ZÀ-ÿ ]+$/g)]);
-  province = new FormControl('',[Validators.required, Validators.pattern(/^[a-zñA-ZÀ-ÿ ]+$/g)]);
-  country = new FormControl('', [Validators.required, Validators.pattern(/^[a-zñA-ZÀ-ÿ ]+$/g)]);
+  street = new FormControl('', [Validators.required , /* Validators.pattern(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ.,\s,.]+[\d,\s]+$/g) */]);
+  postalCode = new FormControl('', [Validators.required, /* Validators.pattern(/^[a-zA-Z0-9\-]+$/g) */]);  
+  city = new FormControl('', [Validators.required, /* Validators.pattern(/^[a-zñA-ZÀ-ÿ ]+$/g) */]);
+  province = new FormControl('',[Validators.required, /* Validators.pattern(/^[a-zñA-ZÀ-ÿ ]+$/g) */]);
+  country = new FormControl('', [Validators.required, /* Validators.pattern(/^[a-zñA-ZÀ-ÿ ]+$/g) */]);
 
   checkPasswords: ValidatorFn = (group: AbstractControl):  ValidationErrors | null => { 
     let pass = group.get('password')!.value;
@@ -103,35 +106,55 @@ export class EditprofileComponent implements OnInit {
   confirmPassword: string | undefined;
 
   onSubmit() {
-
+    // Se actualiza la address
     this.addressService.updateAddress(this.user!.addressId!, this.address!);
+    // Se actualiza el usario
     this.userService.updateUser(this.user!._id!, this.user!)
     .then((user) => {
+      // Se cierra la sesión por seguridad y para actualizar el token
       console.log(user);
       this.router.navigateByUrl('/home');
       this.authService.closeSession();
-      this.dialog2.open(LoginComponent);
-      this.dialog.open(UpdatedProfileComponent);
+      this.dialog.open(LoginComponent);
+      this.snackBar.open(
+        "Datos de usuario actualizados.", 
+        "Aceptar",
+        {
+          verticalPosition: 'top',
+          duration: 8000,
+          panelClass: ['snackbar']
+        }
+        );
     });
-  
+  }
+
+  deleteAccount(){
+    const dialogRef = this.dialog.open(DeleteAccountDialogComponent, {
+      data: { deleteAccount: false }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result && result.deleteAccount){
+        // Se borra la cuenta y tods su información
+        this.userService.deleteAccount(this.user!._id!, this.user!.addressId!)
+        .then(() => {
+          this.router.navigateByUrl('/home');
+          this.snackBar.open(
+            "Datos de usuario actualizados.", 
+            "Aceptar",
+            {
+              verticalPosition: 'top',
+              duration: 8000,
+              panelClass: ['snackbar']
+            }
+            );
+        });
+      }
+    });
   }
 
   goBack() {
     this.location.back();
-  }
-}
-
-@Component({
-  selector: 'dialog-content',
-  template: '<h1 mat-dialog-title>Usuario Actualizado</h1><p mat-dialog-content><button (click)="closeDialog()">ACEPTAR</button></p>',
-  styles: ['button { padding: 5px; color: white; background-color: cornflowerblue;} p { text-align: center;}']
-})
-export class UpdatedProfileComponent {
-  constructor(
-    public dialogRef: MatDialogRef<UpdatedProfileComponent>, 
-  ) {}
-  closeDialog(): void {
-    this.dialogRef.close();
   }
 }
 

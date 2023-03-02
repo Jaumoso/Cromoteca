@@ -79,4 +79,15 @@ import { CollectionService } from './collection.service';
           });
         });
       }
+
+    deleteIntermediate(userId: string): Promise<Intermediate> {
+      return new Promise((resolve, reject) => {
+        this.http.delete<{intermediateData: Intermediate}>(baseURL + 'intermediate/deleteuser/' + userId)
+        .subscribe(intermediate => {
+          resolve(intermediate.intermediateData);
+        }, err => {
+          reject(err);
+        });
+      });
+    }
 }

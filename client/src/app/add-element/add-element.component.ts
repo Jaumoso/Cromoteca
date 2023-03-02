@@ -41,7 +41,7 @@ export class AddElementComponent implements OnInit {
   description = new FormControl('', [Validators.required]);
   // image
   state = new FormControl('',[Validators.required]);
-  price = new FormControl(null, [Validators.required]);
+  price = new FormControl(0, [Validators.required]);
 
   // VARIABLES
   errMsg = '';

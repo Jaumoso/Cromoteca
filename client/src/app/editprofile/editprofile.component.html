@@ -2,7 +2,15 @@
     fxLayoutAlign.sm="start center" fxLayoutAlign.gt-sm="center center" fxLayoutGap="10px">
     <div class="header" fxFlex="40%" fxFlex.gt-sm="100%">
         <br>
-        <h2>Actualizar información de usuario</h2>
+        <div fxLayout="row">
+            <div>
+                <h2>Actualizar información de usuario</h2>
+            </div>
+            <div class="flex-spacer"></div>
+            <div class="delete-account">
+                <button class="delete-account-button" (click)="deleteAccount()"><span class="fa fa-trash" aria-hidden="true"></span> Borrar cuenta</button>
+            </div>
+        </div>
         <hr>
     </div>
 </div>
@@ -26,6 +34,7 @@
             <mat-form-field>
                 <input matInput placeholder="Apellidos" type="text" [formControl]="lastName" [(ngModel)]="user!.lastName"
                     name="lastname">
+                    <mat-error *ngIf="this.form.get('lastName')?.errors?.['required']">Apellidos requeridos.</mat-error>
                     <mat-error *ngIf="this.form.get('lastName')?.errors?.['minlength']">Mínimo 2 caracteres.</mat-error>
                     <mat-error *ngIf="this.form.get('lastName')?.errors?.['maxlength']">Máximo 25 caracteres.</mat-error>
                     <mat-error *ngIf="this.form.get('lastName')?.errors?.['pattern']">Símbolos y números no permitidos.</mat-error>
@@ -33,7 +42,7 @@
             <label for="username">Nombre de Usuario: </label>
             <mat-form-field>
                 <input matInput placeholder="Usuario" type="text" [formControl]="username" [(ngModel)]="user!.username"
-                    name="username">
+                    name="username" [readonly]="true" [disabled]="true">
                     <mat-error *ngIf="this.form.get('username')?.errors?.['required']">Usuario requerido.</mat-error>
                     <mat-error *ngIf="this.form.get('username')?.errors?.['pattern']">Formato inválido.</mat-error>
                     <mat-error *ngIf="this.form.get('username')?.errors?.['minlength']">Mínimo 3 caracteres.</mat-error>
@@ -46,7 +55,7 @@
 
             <label for="email">Correo electrónico: </label>
             <mat-form-field>
-                <input matInput placeholder="example@example.com" type="email"
+                <input matInput placeholder="example@example.com" type="email" [readonly]="true" [disabled]="true"
                 [formControl]="email" [(ngModel)]="user!.email" name="email">
                     <mat-error *ngIf="this.form.get('email')?.errors?.['required']">Email requerido.</mat-error>
                     <mat-error *ngIf="this.form.get('email')?.errors?.['email']">Formato inválido.</mat-error>

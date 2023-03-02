@@ -44,6 +44,23 @@ export class UserService {
         return userData;
     }
 
+    
+    async checkExistingUser(username: string, email: string): Promise<UserDocument[]> {
+        var usernameRegex = new RegExp('^' + username + '$','i');
+        var emailRegex = new RegExp('^' + email + '$','i');
+        const userData = await this.userModel
+        .find({ $or: 
+            [ 
+                { username: usernameRegex }, 
+                { email: emailRegex } 
+            ]
+        });
+        if (!userData || userData.length == 0) {
+            throw new NotFoundException('Users data not found!');
+        }
+        return userData;
+      }
+
     async createUser(userDto: CreateUserDto ): Promise<UserDocument> {
         const saltOrRounds = 10;
         const hashedPassword = await bcrypt.hash(userDto.password, saltOrRounds);

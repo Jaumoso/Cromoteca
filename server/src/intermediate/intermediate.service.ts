@@ -58,4 +58,13 @@ constructor(@InjectModel('Intermediate') private intermediateModel: Model<Interm
         return intermediateData;
     }
 
+    async deleteUserIntermediate(userId: string): Promise<IntermediateDocument> {
+        const intermediateData = await this.intermediateModel.findOneAndDelete({ userId: userId });
+        if (!intermediateData) {
+            throw new NotFoundException('Intermediate data not found!');
+        }
+        return intermediateData;
+    }
+
+
 }

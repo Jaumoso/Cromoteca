@@ -101,4 +101,19 @@ export class CardController {
         }
     }
 
+    @Delete('deleteall/:id')
+    @ApiCreatedResponse({ description: 'Borrar todos los elementos de colecciones que contengan el id del usuario que se le pasa como argumento.' })
+    async deleteUserCards(@Res() response, @Param('id') userId: string) {
+        try {
+            const deletedCard = await this.cardService.deleteUserCards(userId);
+            return response.status(HttpStatus.OK).json({
+                message: 'Card deleted successfully',
+                deletedCard,
+            });
+        }
+        catch (err) {
+            return response.status(err.status).json(err.response);
+        }
+    }
+
 }

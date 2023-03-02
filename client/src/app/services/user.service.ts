@@ -3,13 +3,22 @@ import { User } from '../shared/user';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { baseURL } from '../shared/baseurl';
 import { ProcessHTTPMsgService } from './process-httpmsg.service';
+import { AddressService } from './address.service';
+import { IntermediateService } from './intermediate.service';
+import { CardService } from './card.service';
+import { LoginStatusService } from './loginStatus.service';
 
 @Injectable({
     providedIn: 'root'
   })
   export class UserService {
     constructor(private http: HttpClient,
-        private processHTTPMsgService: ProcessHTTPMsgService) { }
+        private processHTTPMsgService: ProcessHTTPMsgService,
+        private addressService: AddressService,
+        private cardService: CardService,
+        private intermediateService: IntermediateService,
+        private loginStatusService: LoginStatusService,
+        ) { }
 
     getUser(userId: string): Promise<User> {
       return new Promise((resolve, reject) => {
@@ -56,9 +65,9 @@ import { ProcessHTTPMsgService } from './process-httpmsg.service';
 
     deleteUser(userId: string): Promise<User> {
       return new Promise((resolve, reject) => {
-        this.http.delete<User>(baseURL + 'user/delete/' + userId)
+        this.http.delete<{userData: User}>(baseURL + 'user/delete/' + userId)
         .subscribe(user => {
-          resolve(user);
+          resolve(user.userData);
         }, err => {
           reject(err);
         });
@@ -79,5 +88,35 @@ import { ProcessHTTPMsgService } from './process-httpmsg.service';
           reject(err);
         });
       });
+    }
+
+    checkExistingUser(username: string, email: string): Promise<boolean> {
+      return new Promise((resolve, reject) => {
+        this.http.get<{userData: User[]}>(baseURL + 'user/checkexistinguser/' + username + '/' + email)
+        .subscribe(user => {
+          console.log(user)
+          if(user){
+            resolve(true);
+          }
+          else{
+             resolve(false);
+          }
+        }, err => {
+          resolve(false);
+          reject(err);
+        });
+      });
+    }
+
+    deleteAccount(userId: string, addressId: string): Promise<boolean> {
+      return this.cardService.deleteCards(userId)
+        .then(() => this.addressService.deleteAddress(addressId))
+        .then(() => this.intermediateService.deleteIntermediate(userId))
+        .then(() => this.deleteUser(userId))
+        .then(() => { 
+          localStorage.removeItem('token'); 
+          this.loginStatusService.loggedIn = false;
+          return true; })
+        .catch(() => false);
     }
 }

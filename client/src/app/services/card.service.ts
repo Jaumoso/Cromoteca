@@ -11,6 +11,7 @@ import { ProcessHTTPMsgService } from './process-httpmsg.service';
     constructor(private http: HttpClient,
         private processHTTPMsgService: ProcessHTTPMsgService) { }
 
+    // Buscar todas las cartas
     getCards(): Promise<Card[]> {
         return new Promise((resolve, reject) => {
           this.http.get<{cardData: Card[]}>(baseURL + 'card')
@@ -22,6 +23,7 @@ import { ProcessHTTPMsgService } from './process-httpmsg.service';
         });
     }
 
+    // Buscar una carta en concreto
     getCard(cardId: string): Promise<Card> {
       return new Promise((resolve, reject) => {
         this.http.get<{cardData: Card}>(baseURL + 'card/' + cardId)
@@ -33,6 +35,7 @@ import { ProcessHTTPMsgService } from './process-httpmsg.service';
       });
     }
 
+    // Buscar las cartas que tiene un usuario en concreto para una colección
     getUserCardsCollection(userId: string, collectionId: string): Promise<Card[]> {
         return new Promise((resolve, reject) => {
           this.http.get<{cardData: Card[]}>(baseURL + 'card/' + userId + '/' + collectionId)
@@ -44,6 +47,7 @@ import { ProcessHTTPMsgService } from './process-httpmsg.service';
         });
     }
 
+    // Crear una carta
     createCard(card: Card): Promise<Card> {
       console.log(card);
       const httpOptions = {
@@ -61,6 +65,7 @@ import { ProcessHTTPMsgService } from './process-httpmsg.service';
       });
     }
 
+    // Editar una carta
     editCard(cardId: string, card: Card): Promise<Card> {
       const httpOptions = {
         headers: new HttpHeaders({
@@ -77,12 +82,26 @@ import { ProcessHTTPMsgService } from './process-httpmsg.service';
       });
     }
 
+    // Borrar una carta en específico
     deleteCard(cardId: string): Promise<Card> {
       console.log(cardId)
       return new Promise((resolve, reject) => {
         this.http.delete<Card>(baseURL + 'card/delete/' + cardId)
         .subscribe(cards => {
           resolve(cards);
+        }, err => {
+          reject(err);
+        });
+      });
+    }
+
+    // Borrar cartas cuando se borra la cuenta
+    deleteCards(userId: string): Promise<Card[]> {
+      console.log(userId)
+      return new Promise((resolve, reject) => {
+        this.http.delete<{cardData: Card[]}>(baseURL + 'card/deleteall/' + userId)
+        .subscribe(cards => {
+          resolve(cards.cardData);
         }, err => {
           reject(err);
         });

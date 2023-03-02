@@ -100,4 +100,19 @@ export class IntermediateController {
             return response.status(err.status).json(err.response);
         }
     }
+
+    @Delete('deleteuser/:id')
+    @ApiCreatedResponse({ description: 'This function will DELETE the INTERMEDIATE passed as parameter from the database.' })
+    async deleteUserIntermediate(@Res() response, @Param('id') userId: string) {
+        try {
+            const deletedIntermediate = await this.intermediateService.deleteUserIntermediate(userId);
+            return response.status(HttpStatus.OK).json({
+                message: 'Intermediate deleted successfully',
+                deletedIntermediate,
+            });
+        }
+        catch (err) {
+            return response.status(err.status).json(err.response);
+        }
+    }
 }
