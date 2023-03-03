@@ -21,7 +21,6 @@
                     <mat-error *ngIf="this.form.get('firstName')?.errors?.['required']">Nombre requerido.</mat-error>
                     <mat-error *ngIf="this.form.get('firstName')?.errors?.['minlength']">Mínimo 2 caracteres.</mat-error>
                     <mat-error *ngIf="this.form.get('firstName')?.errors?.['maxlength']">Máximo 15 caracteres.</mat-error>
-                    <mat-error *ngIf="this.form.get('firstName')?.errors?.['pattern']">Símbolos y números no permitidos.</mat-error>
             </mat-form-field>
             <br>
             <label for="lastname">Apellidos: </label><br>
@@ -30,7 +29,6 @@
                     name="lastname" [(ngModel)]="user.lastName">
                     <mat-error *ngIf="this.form.get('lastName')?.errors?.['minlength']">Mínimo 2 caracteres.</mat-error>
                     <mat-error *ngIf="this.form.get('lastName')?.errors?.['maxlength']">Máximo 25 caracteres.</mat-error>
-                    <mat-error *ngIf="this.form.get('lastName')?.errors?.['pattern']">Símbolos y números no permitidos.</mat-error>
             </mat-form-field>
             <br>
             <label for="username">Nombre de Usuario: </label>
@@ -38,7 +36,6 @@
                 <input matInput placeholder="Usuario" type="text" [formControl]="username"
                     name="username" [(ngModel)]="user.username">
                     <mat-error *ngIf="this.form.get('username')?.errors?.['required']">Usuario requerido.</mat-error>
-                    <mat-error *ngIf="this.form.get('username')?.errors?.['pattern']">Formato inválido.</mat-error>
                     <mat-error *ngIf="this.form.get('username')?.errors?.['minlength']">Mínimo 3 caracteres.</mat-error>
                     <mat-error *ngIf="this.form.get('username')?.errors?.['maxlength']">Máximo 18 caracteres.</mat-error>
             </mat-form-field>
@@ -80,7 +77,6 @@
                 <input matInput placeholder="Dirección" type="text"
                     [(ngModel)]="user.address.street" name="street" [formControl]="street">
                     <mat-error *ngIf="this.form.get('street')?.errors?.['required']">Dirección requerida.</mat-error>
-                    <mat-error *ngIf="this.form.get('street')?.errors?.['pattern']">Formato inválido.</mat-error>
             </mat-form-field>
             <label for="postalCode">Código Postal: </label>
             <mat-form-field>
@@ -95,7 +91,6 @@
                 <input matInput placeholder="Ciudad" type="text"
                     [(ngModel)]="user.address.city" name="city" [formControl]="city">
                     <mat-error *ngIf="this.form.get('city')?.errors?.['required']">Ciudad requerida.</mat-error>
-                    <mat-error *ngIf="this.form.get('city')?.errors?.['pattern']">Símbolos y números no permitidos.</mat-error>
             </mat-form-field>
         </div>
 
@@ -105,7 +100,6 @@
                 <input matInput placeholder="Provincia" type="text"
                     [(ngModel)]="user.address.province" name="province" [formControl]="province">
                     <mat-error *ngIf="this.form.get('province')?.errors?.['required']">Provincia requerido.</mat-error>
-                    <mat-error *ngIf="this.form.get('province')?.errors?.['pattern']">Símbolos y números no permitidos.</mat-error>
             </mat-form-field>
 
             <label for="country">País: </label>
@@ -113,7 +107,6 @@
                 <input matInput placeholder="País" type="text"
                     [(ngModel)]="user.address.country" name="country" [formControl]="country">
                     <mat-error *ngIf="this.form.get('country')?.errors?.['required']">País requerido.</mat-error>
-                    <mat-error *ngIf="this.form.get('country')?.errors?.['pattern']">Símbolos y números no permitidos.</mat-error>
             </mat-form-field>
             <br>
             <button (click)="goBack()" class="cancel-button" mat-button>Cancel</button>
