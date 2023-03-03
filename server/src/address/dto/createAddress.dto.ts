@@ -10,7 +10,7 @@ export class CreateAddressDto {
     })
     @IsString()
     @IsNotEmpty()
-    readonly street: string;
+    street: string;
 
     @ApiProperty({
         type: String, 
@@ -19,7 +19,7 @@ export class CreateAddressDto {
     })
     @IsString()
     @IsNotEmpty()
-    readonly city: string;
+    city: string;
 
     @ApiProperty({
         type: String, 
