@@ -153,11 +153,16 @@ Generación de códigos de seguridad de recuperación
 
 - Paginator en la seccion de colecciones
 - Layout para pantallas pequeñas y grandes
-- Proteger las rutas
 - Mat Spinner
 - Pattern validators en createaccount
 - Unificar CSS en variables globales
 - RECUPERACIÓN DE CONTRASEÑA A MEDIAS
 - Cuando se borra una colección de library, tiene que borrar los cromos guardados
 - Arreglar la validación de usuarios en createuser y updateuser
+
+- Buscar información acerca de los tests
+
+### LATE-STAGE
+- Proteger las rutas y borrar endpoints de desarrollo
 - Quitar todos los console.log
+
