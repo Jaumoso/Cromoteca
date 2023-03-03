@@ -28,7 +28,6 @@
                     <mat-error *ngIf="this.form.get('firstName')?.errors?.['required']">Nombre requerido.</mat-error>
                     <mat-error *ngIf="this.form.get('firstName')?.errors?.['minlength']">Mínimo 2 caracteres.</mat-error>
                     <mat-error *ngIf="this.form.get('firstName')?.errors?.['maxlength']">Máximo 15 caracteres.</mat-error>
-                    <mat-error *ngIf="this.form.get('firstName')?.errors?.['pattern']">Símbolos y números no permitidos.</mat-error>
             </mat-form-field>
             <label for="lastname">Apellidos: </label>
             <mat-form-field>
@@ -37,14 +36,12 @@
                     <mat-error *ngIf="this.form.get('lastName')?.errors?.['required']">Apellidos requeridos.</mat-error>
                     <mat-error *ngIf="this.form.get('lastName')?.errors?.['minlength']">Mínimo 2 caracteres.</mat-error>
                     <mat-error *ngIf="this.form.get('lastName')?.errors?.['maxlength']">Máximo 25 caracteres.</mat-error>
-                    <mat-error *ngIf="this.form.get('lastName')?.errors?.['pattern']">Símbolos y números no permitidos.</mat-error>
             </mat-form-field>
             <label for="username">Nombre de Usuario: </label>
             <mat-form-field>
                 <input matInput placeholder="Usuario" type="text" [formControl]="username" [(ngModel)]="user!.username"
                     name="username" [readonly]="true" [disabled]="true">
                     <mat-error *ngIf="this.form.get('username')?.errors?.['required']">Usuario requerido.</mat-error>
-                    <mat-error *ngIf="this.form.get('username')?.errors?.['pattern']">Formato inválido.</mat-error>
                     <mat-error *ngIf="this.form.get('username')?.errors?.['minlength']">Mínimo 3 caracteres.</mat-error>
                     <mat-error *ngIf="this.form.get('username')?.errors?.['maxlength']">Máximo 18 caracteres.</mat-error>
             </mat-form-field>
@@ -88,14 +85,12 @@
                 <input matInput placeholder="Dirección" type="text"
                 [formControl]="street" [(ngModel)]="address!.street" name="street">
                     <mat-error *ngIf="this.form.get('street')?.errors?.['required']">Dirección requerida.</mat-error>
-                    <mat-error *ngIf="this.form.get('street')?.errors?.['pattern']">Formato inválido.</mat-error>
             </mat-form-field>
             <label for="postalCode">Código Postal: </label>
             <mat-form-field>
                 <input matInput placeholder="XXXXX" type="text"
                 [formControl]="postalCode" [(ngModel)]="address!.postalCode" name="postalCode">
                     <mat-error *ngIf="this.form.get('postalCode')?.errors?.['required']">Código postal requerido.</mat-error>
-                    <mat-error *ngIf="this.form.get('postalCode')?.errors?.['pattern']">Formato inválido.</mat-error>
             </mat-form-field>
 
             <label for="city">Ciudad: </label>
@@ -103,7 +98,6 @@
                 <input matInput placeholder="Ciudad" type="text"
                 [formControl]="city" [(ngModel)]="address!.city" name="city">
                     <mat-error *ngIf="this.form.get('city')?.errors?.['required']">Ciudad requerida.</mat-error>
-                    <mat-error *ngIf="this.form.get('city')?.errors?.['pattern']">Símbolos y números no permitidos.</mat-error>
             </mat-form-field>
         </div>
 
@@ -113,7 +107,6 @@
                 <input matInput placeholder="Provincia" type="text"
                 [formControl]="province" [(ngModel)]="address!.province" name="province">
                     <mat-error *ngIf="this.form.get('province')?.errors?.['required']">Provincia requerido.</mat-error>
-                    <mat-error *ngIf="this.form.get('province')?.errors?.['pattern']">Símbolos y números no permitidos.</mat-error>
             </mat-form-field>
 
             <label for="country">País: </label>
@@ -121,7 +114,6 @@
                 <input matInput placeholder="País" type="text"
                 [formControl]="country" [(ngModel)]="address!.country" name="country">
                     <mat-error *ngIf="this.form.get('country')?.errors?.['required']">País requerido.</mat-error>
-                    <mat-error *ngIf="this.form.get('country')?.errors?.['pattern']">Símbolos y números no permitidos.</mat-error>
             </mat-form-field>
             <br>
             <button (click)="goBack()" type="button" mat-button>Cancel</button>
