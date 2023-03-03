@@ -57,20 +57,20 @@ export class EditprofileComponent implements OnInit {
   }
   matcher = new MyErrorStateMatcher();
 
-  firstName = new FormControl('', [Validators.required, /* Validators.pattern(/^\s*([a-zñA-ZÀ-ÿ]{1,}([\.,] |[-']| )?)+[a-zñA-ZÀ-ÿ]+\.?\s*$/g), */ Validators.minLength(2), Validators.maxLength(15)]);
-  lastName = new FormControl('', [Validators.required, /* Validators.pattern(/^\s*([a-zñA-ZÀ-ÿ]{1,}([\.,] |[-']| )?)+[a-zñA-ZÀ-ÿ]+\.?\s*$/g), */ Validators.minLength(2), Validators.maxLength(25)]);
+  firstName = new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(15)]);
+  lastName = new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(25)]);
   email = new FormControl('', [ Validators.required, Validators.email]);
   password = new FormControl('', [Validators.required, Validators.minLength(8)]);
   passwordConfirmation = new FormControl('');
-  username = new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(18), /* Validators.pattern(/^[a-zA-Z0-9_-]{20,}$/g) */]);
+  username = new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(18)]);
   // entryDate
   // admin
   // Address:
-  street = new FormControl('', [Validators.required , /* Validators.pattern(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ.,\s,.]+[\d,\s]+$/g) */]);
-  postalCode = new FormControl('', [Validators.required, /* Validators.pattern(/^[a-zA-Z0-9\-]+$/g) */]);  
-  city = new FormControl('', [Validators.required, /* Validators.pattern(/^[a-zñA-ZÀ-ÿ ]+$/g) */]);
-  province = new FormControl('',[Validators.required, /* Validators.pattern(/^[a-zñA-ZÀ-ÿ ]+$/g) */]);
-  country = new FormControl('', [Validators.required, /* Validators.pattern(/^[a-zñA-ZÀ-ÿ ]+$/g) */]);
+  street = new FormControl('', [Validators.required]);
+  postalCode = new FormControl('', [Validators.required]);  
+  city = new FormControl('', [Validators.required]);
+  province = new FormControl('',[Validators.required]);
+  country = new FormControl('', [Validators.required]);
 
   checkPasswords: ValidatorFn = (group: AbstractControl):  ValidationErrors | null => { 
     let pass = group.get('password')!.value;
