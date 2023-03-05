@@ -1,4 +1,4 @@
-<div mat-dialog-content>
+<div mat-dialog-content class="wraper">
     <b>¿Seguro que quiere <span style="color: red">borrar</span> la cuenta? <br>Esta acción no se puede deshacer, 
         y borrará su perfil, 
         <br>dirección, cromos y colecciones guardadas.</b> 
@@ -8,4 +8,4 @@
     <span class="flex-spacer"></span>
     <button id="no" mat-button [mat-dialog-close]="data" (click)="closeDialog()">NO</button>
     <button id="yes" mat-button cdkFocusInitial [mat-dialog-close]="data" (click)="onSubmit()">SI</button>
-  </div>
+</div>

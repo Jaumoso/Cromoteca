@@ -5,7 +5,7 @@ import { UserService } from '../services/user.service';
 import { Location } from '@angular/common';
 import { User } from '../shared/user';
 import { AddressService } from '../services/address.service';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { Address } from '../shared/address';
 import { JwtService } from '../services/jwt.service';
 import { mergeMap } from 'rxjs';
@@ -14,7 +14,7 @@ import { AuthService } from '../services/auth.service';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DeleteAccountDialogComponent } from '../delete-account-dialog/delete-account-dialog.component';
-import { CardService } from '../services/card.service';
+import { AccountService } from '../services/account.service';
 
 @Component({
   selector: 'app-editprofile',
@@ -30,6 +30,7 @@ export class EditprofileComponent implements OnInit {
     private userService: UserService,
     private jwtService: JwtService,
     private addressService: AddressService,
+    private accountService: AccountService,
     private router: Router,
     public dialog: MatDialog,
     private route: ActivatedRoute,
@@ -106,13 +107,9 @@ export class EditprofileComponent implements OnInit {
   confirmPassword: string | undefined;
 
   onSubmit() {
-    // Se actualiza la address
-    this.addressService.updateAddress(this.user!.addressId!, this.address!);
-    // Se actualiza el usario
-    this.userService.updateUser(this.user!._id!, this.user!)
-    .then((user) => {
-      // Se cierra la sesión por seguridad y para actualizar el token
-      console.log(user);
+    // Se actualiza la información de la cuenta.
+    this.accountService.updateAccount(this.user?.addressId!, this.address!, this.user?._id!, this.user!)
+    .then(() => {
       this.router.navigateByUrl('/home');
       this.authService.closeSession();
       this.dialog.open(LoginComponent);
@@ -136,7 +133,7 @@ export class EditprofileComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if(result && result.deleteAccount){
         // Se borra la cuenta y tods su información
-        this.userService.deleteAccount(this.user!._id!, this.user!.addressId!)
+        this.accountService.deleteAccount(this.user!._id!, this.user!.addressId!)
         .then(() => {
           this.router.navigateByUrl('/home');
           this.snackBar.open(

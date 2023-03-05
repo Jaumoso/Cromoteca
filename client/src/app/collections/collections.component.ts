@@ -38,11 +38,10 @@ export class CollectionsComponent implements OnInit {
       })
     }
     this.collectionService.getCollections()
-    .then(collections => {
+    .subscribe(collections => {
       this.collections = collections;
       this.filteredCollections = collections;
-    })
-    .catch(err => this.errmsg = err);
+    });
   }
 
   searchCollections(): Collection[] {

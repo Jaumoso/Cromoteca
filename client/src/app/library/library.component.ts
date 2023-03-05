@@ -77,8 +77,7 @@ export class LibraryComponent implements OnInit {
           const index = this.collections.indexOf(collection);
           this.collections.splice(index, 1);
           
-        })
-        .finally(() => console.log("Elemento borrado de la biblioteca."));
+        });
       }
     }
     )

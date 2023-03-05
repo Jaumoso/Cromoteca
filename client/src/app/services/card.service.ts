@@ -2,63 +2,43 @@ import { Injectable } from '@angular/core';
 import { Card } from '../shared/card';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { baseURL } from '../shared/baseurl';
-import { ProcessHTTPMsgService } from './process-httpmsg.service';
+import { map, Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
   })
   export class CardService {
-    constructor(private http: HttpClient,
-        private processHTTPMsgService: ProcessHTTPMsgService) { }
+    constructor(private http: HttpClient) { }
 
     // Buscar todas las cartas
-    getCards(): Promise<Card[]> {
-        return new Promise((resolve, reject) => {
-          this.http.get<{cardData: Card[]}>(baseURL + 'card')
-          .subscribe(cards => {
-            resolve(cards.cardData);
-          }, err => {
-            reject(err);
-          });
-        });
+    getCards(): Observable<Card[]> {
+      return this.http.get<{cardData: Card[]}>(baseURL + 'card')
+      .pipe(map(cards => cards.cardData));
     }
 
     // Buscar una carta en concreto
-    getCard(cardId: string): Promise<Card> {
-      return new Promise((resolve, reject) => {
-        this.http.get<{cardData: Card}>(baseURL + 'card/' + cardId)
-        .subscribe(card => {
-          resolve(card.cardData); console.log(card.cardData);
-        }, err => {
-          reject(err);
-        });
-      });
+    getCard(cardId: string): Observable<Card> {
+      return this.http.get<{cardData: Card}>(baseURL + 'card/' + cardId)
+      .pipe(map(card => card.cardData));
     }
 
     // Buscar las cartas que tiene un usuario en concreto para una colección
-    getUserCardsCollection(userId: string, collectionId: string): Promise<Card[]> {
-        return new Promise((resolve, reject) => {
-          this.http.get<{cardData: Card[]}>(baseURL + 'card/' + userId + '/' + collectionId)
-          .subscribe(card => {
-            resolve(card.cardData); console.log(card.cardData);
-          }, err => {
-            reject(err);
-          });
-        });
+    getUserCardsCollection(userId: string, collectionId: string): Observable<Card[]> {
+      return this.http.get<{cardData: Card[]}>(baseURL + 'card/' + userId + '/' + collectionId)
+      .pipe(map(cards => cards.cardData));
     }
 
     // Crear una carta
-    createCard(card: Card): Promise<Card> {
-      console.log(card);
+    async createCard(card: Card): Promise<Card> {
       const httpOptions = {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
         })
       };
       return new Promise((resolve, reject) => {
-        this.http.post<Card>(baseURL + 'card/new', card, httpOptions)
-        .subscribe(cards => {
-          resolve(cards);
+        this.http.post<{cardData: Card}>(baseURL + 'card/new/', card, httpOptions)
+        .subscribe(card => {
+          resolve(card.cardData);
         }, err => {
           reject(err);
         });
@@ -66,37 +46,24 @@ import { ProcessHTTPMsgService } from './process-httpmsg.service';
     }
 
     // Editar una carta
-    editCard(cardId: string, card: Card): Promise<Card> {
+    editCard(cardId: string, card: Card): Observable<Card> {
       const httpOptions = {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
         })
       };
-      return new Promise((resolve, reject) => {
-        this.http.put<Card>(baseURL + 'card/edit' + cardId, card, httpOptions)
-        .subscribe(cards => {
-          resolve(cards);
-        }, err => {
-          reject(err);
-        });
-      });
+      return this.http.put<{cardData: Card}>(baseURL + 'card/edit' + cardId, card, httpOptions)
+      .pipe(map(card => card.cardData));
     }
 
     // Borrar una carta en específico
-    deleteCard(cardId: string): Promise<Card> {
-      console.log(cardId)
-      return new Promise((resolve, reject) => {
-        this.http.delete<Card>(baseURL + 'card/delete/' + cardId)
-        .subscribe(cards => {
-          resolve(cards);
-        }, err => {
-          reject(err);
-        });
-      });
+    deleteCard(cardId: string): Observable<Card> {
+      return this.http.delete<{cardData: Card}>(baseURL + 'card/delete/' + cardId)
+      .pipe(map(card => card.cardData));
     }
 
     // Borrar cartas cuando se borra la cuenta
-    deleteCards(userId: string): Promise<Card[]> {
+    async deleteCards(userId: string): Promise<Card[]> {
       console.log(userId)
       return new Promise((resolve, reject) => {
         this.http.delete<{cardData: Card[]}>(baseURL + 'card/deleteall/' + userId)

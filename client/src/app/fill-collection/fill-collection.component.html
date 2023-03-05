@@ -42,16 +42,16 @@
         </div>
         <div fxLayoutAlign="center">
           <div fxFlex="auto" fxLayoutAlign="center">
-            <div fxLayout="row wrap" fxLayoutAlign="center">
-              <div [fxFlex]="(100/3)" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let card of cards let i=index">
-                <mat-card fxLayout="row" id={{card.cardId}}>
+            <div fxLayout="row wrap" fxLayoutAlign="center" style="border: 1px solid black">
+              <div [fxFlex.lg]="(100/2)" [fxFlex.lt-lg]="(100/2)" [fxFlex.lt-md]="(100/1)" *ngFor="let card of cards let i=index">
+                <mat-card fxLayout.gt-sm="row" fxLayout.lt-sm="column" id={{card.cardId}}>
                   <div fxFlex="auto">
                     <mat-card-header>
                       <mat-card-title># {{card.cardId}}</mat-card-title>
                     </mat-card-header>
                   </div>
                   <div fxFlex="auto">
-                    <mat-card-content>
+                    <mat-card-content fxLayoutAlign.lt-md="center start" fxLayoutAlign.gt-md="start start">
                       <div fxLayout="column">
                         <b>{{card.name}}</b>
                         <p>{{card.description}}</p>

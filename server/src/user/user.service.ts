@@ -18,7 +18,7 @@ export class UserService {
       }
       return userData;
     }
-
+    
     async getUser(userId: string): Promise<UserDocument> {
         const userData = await this.userModel.findById(userId);
         if (!userData) {

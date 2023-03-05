@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { User } from '../shared/user';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { baseURL } from '../shared/baseurl';
-import { ProcessHTTPMsgService } from './process-httpmsg.service';
 import { AddressService } from './address.service';
 import { IntermediateService } from './intermediate.service';
 import { CardService } from './card.service';
@@ -12,13 +11,7 @@ import { LoginStatusService } from './loginStatus.service';
     providedIn: 'root'
   })
   export class UserService {
-    constructor(private http: HttpClient,
-        private processHTTPMsgService: ProcessHTTPMsgService,
-        private addressService: AddressService,
-        private cardService: CardService,
-        private intermediateService: IntermediateService,
-        private loginStatusService: LoginStatusService,
-        ) { }
+    constructor(private http: HttpClient) { }
 
     getUser(userId: string): Promise<User> {
       return new Promise((resolve, reject) => {
@@ -63,7 +56,7 @@ import { LoginStatusService } from './loginStatus.service';
       });
     }
 
-    deleteUser(userId: string): Promise<User> {
+    async deleteUser(userId: string): Promise<User> {
       return new Promise((resolve, reject) => {
         this.http.delete<{userData: User}>(baseURL + 'user/delete/' + userId)
         .subscribe(user => {
@@ -106,17 +99,5 @@ import { LoginStatusService } from './loginStatus.service';
           reject(err);
         });
       });
-    }
-
-    deleteAccount(userId: string, addressId: string): Promise<boolean> {
-      return this.cardService.deleteCards(userId)
-        .then(() => this.addressService.deleteAddress(addressId))
-        .then(() => this.intermediateService.deleteIntermediate(userId))
-        .then(() => this.deleteUser(userId))
-        .then(() => { 
-          localStorage.removeItem('token'); 
-          this.loginStatusService.loggedIn = false;
-          return true; })
-        .catch(() => false);
     }
 }

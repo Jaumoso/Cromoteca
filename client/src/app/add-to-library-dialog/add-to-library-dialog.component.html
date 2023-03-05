@@ -1,10 +1,12 @@
-<h1 mat-dialog-title>Añadir a biblioteca</h1>
-<div mat-dialog-content>
-  ¿Quieres añadir la colección <b>{{data.collectionName}}</b> a tu biblioteca?
-</div>
-<br>
-<div class="dialogbutton" style="text-align:right" mat-dialog-actions>
-  <span class="flex-spacer"></span>
-  <button id="no" mat-button (click)="closeDialog()">NO</button>
-  <button id="yes" mat-button cdkFocusInitial [mat-dialog-close]="data" (click)="addToLibrary(data.collectionId)">SI</button>
+<div class="wraper">
+  <h1 mat-dialog-title>Añadir a biblioteca</h1>
+  <div mat-dialog-content>
+    ¿Quieres añadir la colección <b>{{data.collectionName}}</b> a tu biblioteca?
+  </div>
+  <br>
+  <div class="dialogbutton" style="text-align:right" mat-dialog-actions>
+    <span class="flex-spacer"></span>
+    <button id="no" mat-button (click)="closeDialog()">NO</button>
+    <button id="yes" mat-button cdkFocusInitial [mat-dialog-close]="data" (click)="addToLibrary(data.collectionId)">SI</button>
+  </div>
 </div>

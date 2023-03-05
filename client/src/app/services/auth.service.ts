@@ -1,15 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { baseURL } from '../shared/baseurl';
-import { ProcessHTTPMsgService } from './process-httpmsg.service';
 
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
-    constructor(private http: HttpClient,
-        private processHTTPMsgService: ProcessHTTPMsgService) { }
+    constructor(private http: HttpClient) { }
     
     login(username: string, password: string): Promise<any> {
         const httpOptions = {

@@ -8,6 +8,7 @@ import { Card } from '../shared/card';
 export interface DialogData {
   userId: string;
   collectionId: string;
+  card: Card;
 }
 @Component({
   selector: 'app-add-element',
@@ -19,8 +20,6 @@ export class AddElementComponent implements OnInit {
   constructor(
     private dialogRef: MatDialogRef<AddElementComponent>,
     private formBuilder: FormBuilder,
-    private cardService: CardService,
-    private snackBar: MatSnackBar,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
   ) { 
     this.form = this.formBuilder.group({
@@ -53,37 +52,20 @@ export class AddElementComponent implements OnInit {
   }
 
   onSubmit() {
-    let card = new Card;
-
-    card.userId = this.data.userId;
-    card.collectionId = this.data.collectionId;
-    card.cardId = this.cardId.value!;
-    card.name = this.name.value!;
-    card.repeated = this.repeated.value!;
-    card.description = this.description.value!;
+    this.data.card.userId = this.data.userId;
+    this.data.card.collectionId = this.data.collectionId;
+    this.data.card.cardId = this.cardId.value!;
+    this.data.card.name = this.name.value!;
+    this.data.card.repeated = this.repeated.value!;
+    this.data.card.description = this.description.value!;
     // image
-    card.state = this.state.value!;
-    card.price = this.price.value!;
-    
-    this.cardService.createCard(card)
-    .then((card) => {{
-      console.log(card);
-      this.snackBar.open(
-        "Elemento añadido a la colección", 
-        "Aceptar",
-        {
-          verticalPosition: 'top',
-          duration: 6000,
-          panelClass: ['snackbar']
-        }
-        );
-    }}).finally(() => {
-      this.closeDialog();
-    })
+    this.data.card.state = this.state.value!;
+    this.data.card.price = this.price.value!;
+    this.closeDialog();
   }
 
   closeDialog(): void {
-    this.dialogRef.close();
+    this.dialogRef.close(this.data);
   }
 
 }

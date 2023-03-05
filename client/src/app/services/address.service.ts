@@ -1,15 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { baseURL } from '../shared/baseurl';
-import { ProcessHTTPMsgService } from './process-httpmsg.service';
 import { Address } from '../shared/address';
 
 @Injectable({
     providedIn: 'root'
   })
   export class AddressService {
-    constructor(private http: HttpClient,
-        private processHTTPMsgService: ProcessHTTPMsgService) { }
+    constructor(private http: HttpClient) { }
 
     getAddress(addressId: string): Promise<Address> {
       return new Promise((resolve, reject) => {
@@ -55,7 +53,7 @@ import { Address } from '../shared/address';
       });
     }
 
-    deleteAddress(addressId: string): Promise<Address> {
+    async deleteAddress(addressId: string): Promise<Address> {
         return new Promise((resolve, reject) => {
           this.http.delete<{addressData: Address}>(baseURL + 'address/delete/' + addressId)
           .subscribe(address => {

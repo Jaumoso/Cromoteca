@@ -10,6 +10,7 @@ import { CardService } from '../services/card.service';
 import { Card } from '../shared/card';
 import { MatDialog } from '@angular/material/dialog';
 import { AddElementComponent } from '../add-element/add-element.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-fill-collection',
@@ -27,6 +28,7 @@ export class FillCollectionComponent implements OnInit {
     private intermediateService: IntermediateService,
     private cardService: CardService,
     public dialog: MatDialog,
+    private snackBar: MatSnackBar
   ) { }
 
   collection: Collection | undefined;
@@ -55,7 +57,7 @@ export class FillCollectionComponent implements OnInit {
       .then((intermediate) => {
         if(intermediate){
           this.cardService.getUserCardsCollection(decodedToken._id, this.collection?._id!)
-          .then((cards) => {
+          .subscribe((cards) => {
             // Crear un array con el total de elementos en la colección
             const collectionSize = this.collection?.size || 0;
             this.cardList = Array(collectionSize).fill(0);
@@ -84,17 +86,35 @@ export class FillCollectionComponent implements OnInit {
 
   addElement() {
     const dialogRef = this.dialog.open(AddElementComponent, {
-      data: { collectionId: this.collection?._id, userId: this.userId }
+      data: { collectionId: this.collection?._id, userId: this.userId, card: new Card }
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      if(result && result.card){
+        // Se añade el elemento al array de elementos
+        this.cards.push(result.card);
+        this.cardList[result.card.cardId] = 1;
+        // Se añade el elemento a la colección del usuario en la BD
+        this.cardService.createCard(result.card)
+        .then((card) => {
+          console.log(card);
+          this.snackBar.open(
+            "Elemento añadido a la colección", 
+            "Aceptar",
+            {
+              verticalPosition: 'top',
+              duration: 6000,
+              panelClass: ['snackbar']
+            });
+        });
+      }
     });
   }
 
   deleteElement(card: Card) {
     this.cardService.deleteCard(card._id!)
-    .then(() => {
+    .subscribe((returnCard) => {
+      console.log(returnCard)
       const index = this.cards.indexOf(card);
       this.cards.splice(index, 1);
       this.cardList[card.cardId!-1] = 0;
