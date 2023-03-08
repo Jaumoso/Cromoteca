@@ -1,17 +1,6 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose"
 
-export type CollectionDocument = Collection & Document;
-
-/* export enum CollectionFormat {
-    STACKS = 'STACKS',
-    CARDS = 'CARDS',
-}
-
-export enum CollectionTheme {
-    POKEMON = 'POKEMON',
-    FIFA = 'FIFA',
-    DIGIMON = 'DIGIMON',
-} */
+export type CollectionDocument = Collection & Document
 
 @Schema()
 export class Collection {

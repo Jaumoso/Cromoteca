@@ -26,6 +26,7 @@ npm install @nestjs/mapped-types --save
 npm install --save @nestjs/swagger
 npm install --save @nestjs/config
 npm install dotenv --save
+npm i mongodb-memory-server --save
 ```
 Authentication: 
 ```

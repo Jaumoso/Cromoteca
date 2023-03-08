@@ -59,7 +59,7 @@ export class UserService {
             throw new NotFoundException('Users data not found!');
         }
         return userData;
-      }
+    }
 
     async createUser(userDto: CreateUserDto ): Promise<UserDocument> {
         const saltOrRounds = 10;
