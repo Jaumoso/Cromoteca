@@ -22,11 +22,11 @@ export class AccountService {
 
   async createAccount(user: User, address: Address) {
     try {
-      await this.addressService.createAddress(address)
+      this.addressService.createAddress(address)
       .then((address) => {
         console.log("Dirección creada correctamente");
         user.addressId = address._id;
-        await this.userService.createUser(user)
+        this.userService.createUser(user)
         .then((user) => {
           console.log("Usuario creado correctamente");
           let intermediate = new Intermediate;
