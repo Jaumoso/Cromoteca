@@ -10,6 +10,7 @@ import { NewsModule } from './news/news.module';
 import { AuthModule } from './auth/auth.module';
 import { IntermediateModule } from './intermediate/intermediate.module';
 import { CardModule } from './card/card.module';
+import { AdvertModule } from './advert/advert.module';
 
 require('dotenv').config();
 
@@ -27,6 +28,7 @@ require('dotenv').config();
     AuthModule,
     IntermediateModule,
     CardModule,
+    AdvertModule,
   ],
   controllers: [AppController],
   providers: [AppService],

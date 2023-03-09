@@ -1,1 +1,51 @@
-<p>market works!</p>
+<!-- Título y filtros -->
+<div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign.xs="start center"
+    fxLayoutAlign.sm="start center" fxLayoutAlign.gt-sm="center center" fxLayoutGap="10px" class="top-header">
+
+    <div fxFlex fxFlex.gt-sm="30%">
+        <h3><b>Buscador de anuncios</b></h3>
+    </div>
+    <div fxFlex fxFlex.gt-sm="70%">
+        <mat-form-field>
+            <mat-label>Buscar anuncio</mat-label>
+            <input matInput type="text" [(ngModel)]="searchText" (ngModelChange)="searchAdverts()">
+            <mat-icon matPrefix>search</mat-icon>
+        </mat-form-field>
+    </div>
+    <div fxFlex></div>
+</div>
+<br>
+<div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign.xs="start center"
+    fxLayoutAlign.sm="start center" fxLayoutAlign.gt-sm="center center" fxLayoutGap="10px">
+    <div fxLayoutAlign="center">
+        <div fxFlex="auto" fxLayoutAlign="center">
+          <div fxLayout="row wrap" fxLayoutAlign="center" style="border: 1px solid black">
+            <div [fxFlex]="(100/1)" *ngFor="let advert of adverts let i=index">
+              <mat-card fxLayout.gt-sm="row" fxLayout.lt-sm="row">
+                <div fxFlex="auto" fxLayoutAlign="start center">
+                  <mat-card-header>
+                    <mat-card-title>Advert</mat-card-title>
+                  </mat-card-header>
+                </div>
+                <div fxFlex="auto" fxLayoutAlign="start center">
+                  <mat-card-content>
+                    {{advert.state}}
+                    {{advert.price}}
+                    {{advert.quantity}}
+                  </mat-card-content>
+                </div>
+                <div fxFlex="28">
+                  <mat-card-actions style="text-align: right;">
+                    <div fxLayout="column">
+                      <button>Advert</button>
+                    </div>
+                  </mat-card-actions>
+                </div>
+              </mat-card>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+
+<br><br>

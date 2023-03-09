@@ -63,7 +63,17 @@ describe('CardService', () => {
       const result = await service.getAllCards();
       expect(result.length).toBe(1);
     });
+
+    it('Get all cards should return error', async () => {
+    // Try to delete the card again and expect a NotFoundException
+    try {
+      await service.getAllCards();
+    } catch (e) {
+      expect(e).toBeInstanceOf(NotFoundException);
+    }
+
   });
+});
 
   describe('Get Card', () => {
     it('should return the card from the database', async () => {

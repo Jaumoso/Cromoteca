@@ -42,7 +42,7 @@
         </div>
         <div fxLayoutAlign="center">
           <div fxFlex="auto" fxLayoutAlign="center">
-            <div fxLayout="row wrap" fxLayoutAlign="center" style="border: 1px solid black">
+            <div fxLayout="row wrap" fxLayoutAlign="center">
               <div [fxFlex.lg]="(100/2)" [fxFlex.lt-lg]="(100/2)" [fxFlex.lt-md]="(100/1)" *ngFor="let card of cards let i=index">
                 <mat-card fxLayout.gt-sm="row" fxLayout.lt-sm="column" id={{card.cardId}}>
                   <div fxFlex="auto">

@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
+import { JwtStrategy } from 'src/auth/jwt.strategy';
 import { CardController } from './card.controller';
 import { CardService } from './card.service';
 import { CardSchema } from './schema/card.schema';

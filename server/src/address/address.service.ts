@@ -44,7 +44,7 @@ export class AddressService {
     async deleteAddress(addressId: string): Promise<AddressDocument> {
         const deletedAddress = await this.addressModel.findByIdAndDelete(addressId);
       if (!deletedAddress) {
-        throw new NotFoundException(`User #${addressId} not found`);
+        throw new NotFoundException(`Address #${addressId} not found`);
       }
       return deletedAddress;
     }
