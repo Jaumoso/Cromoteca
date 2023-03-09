@@ -8,7 +8,7 @@ Cromoteca es una aplicación web para la colección e intercambio de cromos.
 [![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=jaumoso_cromoteca-server)](https://sonarcloud.io/summary/new_code?id=jaumoso_cromoteca-server)
 
 ---------------------------------------------------------
-## Requerimientos para que todo funcione
+## Requisitos para que todo funcione
 
 NODE Version: 16.10
 
