@@ -11,6 +11,8 @@ import { Card } from '../shared/card';
 import { MatDialog } from '@angular/material/dialog';
 import { AddElementComponent } from '../add-element/add-element.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AdvertService } from '../services/advert.service';
+import { Advert } from '../shared/advert';
 
 @Component({
   selector: 'app-fill-collection',
@@ -28,7 +30,8 @@ export class FillCollectionComponent implements OnInit {
     private intermediateService: IntermediateService,
     private cardService: CardService,
     public dialog: MatDialog,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private advertService: AdvertService,
   ) { }
 
   collection: Collection | undefined;
@@ -118,6 +121,27 @@ export class FillCollectionComponent implements OnInit {
       const index = this.cards.indexOf(card);
       this.cards.splice(index, 1);
       this.cardList[card.cardId!-1] = 0;
+    });
+  }
+
+  // TODO: habrá que hacer otro Dialog
+  createAdvert(card:Card) {
+    let advert = new Advert;
+    advert.elementId = card._id;
+    advert.price = card.price; 
+    advert.quantity = card.repeated;
+    advert.state = card.state;
+    advert.userId = this.userId;
+    this.advertService.createAdvert(advert)
+    .subscribe(data => {
+      this.snackBar.open(
+        "Anuncio creado", 
+        "Aceptar",
+        {
+          verticalPosition: 'top',
+          duration: 6000,
+          panelClass: ['snackbar']
+        });
     });
   }
 

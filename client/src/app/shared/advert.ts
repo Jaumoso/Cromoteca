@@ -1,4 +1,5 @@
 export class Advert {
+    _id: string | undefined;
     elementId: string | undefined;
     userId: string | undefined;
     state: string | undefined;

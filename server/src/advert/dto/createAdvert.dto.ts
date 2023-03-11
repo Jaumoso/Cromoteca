@@ -41,7 +41,7 @@ export class CreateAdvertDto {
     @ApiProperty({
         type: Number,
         description: 'Quantity of cards being sold',
-        example: 1.99
+        example: 1
     })
     @IsNumber()
     @IsNotEmpty()

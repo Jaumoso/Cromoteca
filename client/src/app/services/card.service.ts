@@ -17,9 +17,15 @@ import { map, Observable } from 'rxjs';
     }
 
     // Buscar una carta en concreto
-    getCard(cardId: string): Observable<Card> {
-      return this.http.get<{cardData: Card}>(baseURL + 'card/' + cardId)
-      .pipe(map(card => card.cardData));
+    getCard(cardId: string): Promise<Card> {
+      return new Promise((resolve, reject) => {
+        this.http.get<{cardData: Card}>(baseURL + 'card/' + cardId)
+        .subscribe(card => {
+          resolve(card.cardData);
+        }, err => {
+          reject(err);
+        });
+      });
     }
 
     // Buscar las cartas que tiene un usuario en concreto para una colección

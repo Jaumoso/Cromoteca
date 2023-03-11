@@ -15,8 +15,14 @@ import { map, Observable } from 'rxjs';
       .pipe(map(collections => collections.collectionData));
     }
 
-    getCollection(collectionId: string): Observable<Collection> {
-      return this.http.get<{collectionData: Collection}>(baseURL + 'collection/' + collectionId)
-      .pipe(map(collection => collection.collectionData));
+    getCollection(collectionId: string): Promise<Collection> {
+      return new Promise((resolve, reject) => {
+        this.http.get<{collectionData: Collection}>(baseURL + 'collection/' + collectionId)
+        .subscribe(collection => {
+          resolve(collection.collectionData);
+        }, err => {
+          reject(err);
+        });
+      });
     }
 }

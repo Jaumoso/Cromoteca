@@ -1,8 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { AdvertService } from '../services/advert.service';
-import { JwtService } from '../services/jwt.service';
-import { UserService } from '../services/user.service';
+import { AdvertInfoService } from '../services/advertInfo.service';
 import { Advert } from '../shared/advert';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort, Sort } from '@angular/material/sort';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
+
+export interface AdvertTable {
+  name: string;
+  collection: string;
+  user: string;
+  state: string;
+  quantity: number;
+  price: number;
+}
 
 @Component({
   selector: 'app-market',
@@ -12,45 +23,47 @@ import { Advert } from '../shared/advert';
 export class MarketComponent implements OnInit {
 
   constructor(
-    private advertService: AdvertService,
-    private userService: UserService
+    private advertInfoService: AdvertInfoService,
+    private _liveAnnouncer: LiveAnnouncer
     ) { }
 
     ngOnInit() {
-      this.advertService.getAdverts()
+      this.advertInfoService.getAllAdvertsInfo()
       .subscribe((adverts) => {
-        this.adverts = adverts;
-        this.userService.getUser(adverts.)
-
-      })
+          this.ELEMENT_DATA = adverts;
+          this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+      });
     }
 
-  searchText: string = '';
-  adverts: Advert[] = [];
-  filteredAdverts: Advert[] = [];
-  gridColumns = 4; // ! cantdad de anuncios en una fila CAMBIAR ESTO
+  displayedColumns: string[] = ['name', 'collection', 'user', 'state', 'quantity', 'price'];
+  ELEMENT_DATA: AdvertTable[] = [];
+  dataSource = new MatTableDataSource(this.ELEMENT_DATA);
 
-  searchAdverts(): Advert[] {
-    // If no search text or category is provided, return all advers
-    if (!this.searchText) {
-      return this.adverts;
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
     }
-    // Filter the adverts based on the search text and category
-    return this.filteredAdverts = this.adverts.filter((advert) => {
-      const isMatch = (str: string) =>
-        str
-        .toLowerCase()
-        .normalize('NFD') // descomponer caracteres acentuados en componentes Unicode
-        .replace(/[\u0300-\u036f]/g, '') // eliminar diacríticos mediante una expresión regular
-        .includes(this.searchText.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')); // realizar comparación
-      // TODO: completar
-/*       if(collection.name != undefined && collection.description != undefined){
-        return (
-          (!this.searchText || isMatch(collection.name) || isMatch(collection.description) || isMatch(collection.theme!) || isMatch(collection.format!) || isMatch(collection.year!.toString()))
-        );
-      } */
-      return this.adverts;
-    });
   }
 
+  sort: MatSort | undefined;
+
+  ngAfterViewInit() {
+    this.dataSource.sort = this.sort!;
+  }
+
+    /** Announce the change in sort state for assistive technology. */
+    announceSortChange(sortState: Sort) {
+      // This example uses English messages. If your application supports
+      // multiple language, you would internationalize these strings.
+      // Furthermore, you can customize the message to add additional
+      // details about the values being sorted.
+      if (sortState.direction) {
+        this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
+      } else {
+        this._liveAnnouncer.announce('Sorting cleared');
+      }
+    }
 }

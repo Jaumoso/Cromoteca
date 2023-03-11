@@ -24,7 +24,7 @@ export class IntermediateService {
           if (collectionIds != undefined) {
             for (let collectionId of collectionIds) {
               this.collectionService.getCollection(collectionId)
-                .subscribe((collection) => collections.push(collection));
+                .then((collection) => collections.push(collection));
             }
           }
           if (collections != undefined) {

@@ -22,7 +22,44 @@ $text-color: midnightblue;
     text-align: center;
 }
 
-mat-card {
+
+.adverts{
+    font-size: large;
+    margin-left: 5%;
+    margin-right: 5%;
+
+    .nuevo {
+        margin-left: 10px;
+        border-radius: 3px;
+        padding: 3px;
+        background-color: rgb(87, 243, 87);
+    }
+    .seminuevo {
+        margin-left: 10px;
+        border-radius: 3px;
+        padding: 3px;
+        background-color: rgb(250, 237, 54);
+    }
+    .gastado {
+        margin-left: 10px;
+        border-radius: 3px;
+        padding: 3px;
+        background-color: rgb(255, 166, 33);
+    }
+    .roto {
+        margin-left: 10px;
+        border-radius: 3px;
+        padding: 3px;
+        background-color: rgb(221, 72, 72);
+    }
+}
+
+
+// NO UTILIZADO
+.advert-list{
+    min-height: 500px;
+
+    mat-card {
     box-shadow: 1px 1px 5px 2px rgb(99, 99, 99);
     margin: 10px 50px 0px 50px;
     mat-card-content{
@@ -85,3 +122,5 @@ mat-card {
       }
     }
   }
+}
+

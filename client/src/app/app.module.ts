@@ -20,6 +20,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule} from '@angular/material/icon';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import {ScrollingModule} from '@angular/cdk/scrolling';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 
 import { baseURL } from './shared/baseurl';
 import 'hammerjs';
@@ -92,6 +94,8 @@ import { DeleteAccountDialogComponent } from './delete-account-dialog/delete-acc
     ReactiveFormsModule,
     MatSnackBarModule,
     ScrollingModule,
+    MatPaginatorModule,
+    MatSortModule,
   ],
   providers: [
     { provide: 'BaseURL', useValue: baseURL },

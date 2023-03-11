@@ -24,7 +24,7 @@ export class AdvertController {
         }
     }
 
-    @UseGuards(JwtAuthGuard)
+    /* @UseGuards(JwtAuthGuard) */
     @Get(':id')
     @ApiCreatedResponse({ description: 'This function will get ONE ADVERT from the database.' })
     async getAdvert(@Res() response, @Param('id') advertId: string) {
@@ -57,7 +57,7 @@ export class AdvertController {
         }
     }
 
-    @UseGuards(JwtAuthGuard)
+    /* @UseGuards(JwtAuthGuard) */
     @Put('update/:id')
     @ApiCreatedResponse({ description: 'UPDATE te data of the ADDRESS into the database.' })
     async updateAdvert(@Res() response, @Param('id') aadvertId: string, @Body() updateAdvertDto: UpdateAdvertDto) {

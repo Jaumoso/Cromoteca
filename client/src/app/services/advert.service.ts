@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Advert } from '../shared/advert';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { baseURL } from '../shared/baseurl';
 import { map, Observable } from 'rxjs';
 import { UserService } from './user.service';
+import { User } from '../shared/user';
+import { CardService } from './card.service';
+import { CollectionService } from './collection.service';
 
 @Injectable({
     providedIn: 'root'
@@ -11,7 +14,9 @@ import { UserService } from './user.service';
   export class AdvertService {
     constructor(
         private http: HttpClient,
-        private userService: UserService
+        private userService: UserService,
+        private cardService: CardService,
+        private collectionService: CollectionService
         ) { }
 
     getAdverts(): Observable<Advert[]> {
@@ -24,13 +29,13 @@ import { UserService } from './user.service';
       .pipe(map(advert => advert.advertData));
     }
 
-    getAllAdvertsInfo(): Observable<Advert[]> {
-        const adverts = this.getAdverts()
- /*        .subscribe((adverts) => {
-            adverts.forEach((advert) => {
-                this.userService.getUser(advert.userId!)
-            });
-        }); */
-        return adverts;
+    createAdvert(advert: Advert): Observable<Advert> {
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+      };
+      return this.http.post<{advertData: Advert}>(baseURL + 'advert/new/', advert, httpOptions)
+      .pipe(map(advert => advert.advertData));
     }
 }
