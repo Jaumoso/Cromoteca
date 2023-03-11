@@ -32,7 +32,7 @@ export class PasswordchangeComponent implements OnInit {
   codeValidation = new FormControl('', [Validators.required]);
   sendEmailForm: FormGroup;
   checkCodeForm: FormGroup;
-  code: string | undefined;
+  emailButton: boolean | undefined;
 
   sendEmail() {
     if(this.sendEmailForm.valid){
@@ -41,26 +41,19 @@ export class PasswordchangeComponent implements OnInit {
     .then((userExists) => {
       if(userExists){
         // TODO: FALTA IMPLEMENTAR
-        this.code = this.generateCode();
-        console.log(this.code);
+        this.emailButton = true;
+        console.log(this.emailValidation.value);
       }
     });
     }
-  }
-
-  checkCode() {
-    console.log(this.checkCodeForm.value.code);
   }
 
   goBack() {
     this.location.back();
   }
 
-  generateCode(){
-    let token: string = '';
-    for(let i=0; i < 10; i++){
-      token += Math.floor(Math.random() * 10).toString();
-    }
-    return token;
+  checkCode(){
+    // TODO:
   }
+
 }

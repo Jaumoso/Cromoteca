@@ -96,7 +96,7 @@ export class FillCollectionComponent implements OnInit {
       if(result && result.card){
         // Se añade el elemento al array de elementos
         this.cards.push(result.card);
-        this.cardList[result.card.cardId] = 1;
+        this.cardList[result.card.cardId-1] = 1;
         // Se añade el elemento a la colección del usuario en la BD
         this.cardService.createCard(result.card)
         .then((card) => {

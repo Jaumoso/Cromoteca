@@ -27,6 +27,7 @@ npm install --save @nestjs/swagger
 npm install --save @nestjs/config
 npm install dotenv --save
 npm i mongodb-memory-server --save
+
 ```
 Authentication: 
 ```
@@ -147,7 +148,7 @@ yarn sonar
 
 Generación de códigos de seguridad de recuperación
 ```
-// TO-DO
+// TODO
 ```
 
 # TO-DO:

@@ -14,29 +14,38 @@
     <input matInput (keyup)="applyFilter($event)" placeholder="Buscar anuncio" #input>
   </mat-form-field>
   
-  <table mat-table [dataSource]="dataSource" (matSortChange)="announceSortChange($event)" class="mat-elevation-z8" matSort>
+  // TODO:
+  <mat-paginator #paginator
+  [pageSize]="pageSize"
+  [length]="dataSource.data.length" 
+  pageIndex="0" 
+  [pageSizeOptions]="[5, 10, 25, 100]"  
+  showFirstLastButtons
+  (page)="onPaginatorChange($event)"
+  aria-label="Seleccionar página de la lista de anuncios"></mat-paginator>
+  <table mat-table matSort [dataSource]="dataSource" aria-label="tabla de anuncios" class="mat-elevation-z8">
   
     <!-- Name Column -->
     <ng-container matColumnDef="name">
-      <th mat-header-cell mat-sort-header sortActionDescription="Ordenar por nombre" *matHeaderCellDef> Nombre </th>
+      <th mat-header-cell mat-sort-header *matHeaderCellDef sortActionDescription="Ordenar por nombre"> Nombre </th>
       <td mat-cell *matCellDef="let element"> {{element.cardName}} </td>
     </ng-container>
   
     <!-- Collection Column -->
     <ng-container matColumnDef="collection">
-      <th mat-header-cell mat-sort-header sortActionDescription="Ordenar por colección" *matHeaderCellDef> Colección </th>
+      <th mat-header-cell mat-sort-header *matHeaderCellDef sortActionDescription="Ordenar por colección"> Colección </th>
       <td mat-cell *matCellDef="let element"> {{element.collectionName}} </td>
     </ng-container>
   
     <!-- User Column -->
     <ng-container matColumnDef="user">
-      <th mat-header-cell mat-sort-header sortActionDescription="Ordenar por usuario" *matHeaderCellDef> Usuario </th>
+      <th mat-header-cell mat-sort-header *matHeaderCellDef sortActionDescription="Ordenar por usuario"> Usuario </th>
       <td mat-cell *matCellDef="let element"> {{element.username}} </td>
     </ng-container>
   
     <!-- State Column -->
     <ng-container matColumnDef="state">
-      <th mat-header-cell mat-sort-header sortActionDescription="Ordenar por estado" *matHeaderCellDef> Estado </th>
+      <th mat-header-cell mat-sort-header *matHeaderCellDef sortActionDescription="Ordenar por estado"> Estado </th>
       <td mat-cell *matCellDef="let element">
         <span *ngIf="element.state == 'NUEVO'" class="nuevo"><b>{{element.state}}</b></span>
         <span *ngIf="element.state == 'SEMINUEVO'" class="seminuevo"><b>{{element.state}}</b></span>
@@ -48,13 +57,13 @@
 
     <!-- Quantity Column -->
     <ng-container matColumnDef="quantity">
-      <th mat-header-cell mat-sort-header sortActionDescription="Ordenar por cantidad" *matHeaderCellDef> Cantidad </th>
+      <th mat-header-cell mat-sort-header *matHeaderCellDef sortActionDescription="Ordenar por cantidad"> Cantidad </th>
       <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
     </ng-container>
 
     <!-- Price Column -->
     <ng-container matColumnDef="price">
-      <th mat-header-cell mat-sort-header sortActionDescription="Ordenar por precio" *matHeaderCellDef> Precio </th>
+      <th mat-header-cell mat-sort-header *matHeaderCellDef sortActionDescription="Ordenar por precio"> Precio </th>
       <td mat-cell *matCellDef="let element"> {{element.price}} </td>
     </ng-container>
   
@@ -67,6 +76,5 @@
       <td *ngIf="input.value " class="mat-cell" colspan="6">No se han encontrado anuncios con la información buscada. "{{input.value}}"</td>
     </tr>
   </table>
-  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Selecciona página"></mat-paginator>
 </div>
 <br><br>
