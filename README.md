@@ -156,15 +156,14 @@ Generación de códigos de seguridad de recuperación
 - Paginator en la seccion de colecciones
 - Layout para pantallas pequeñas y grandes
 - Mat Spinner
-- Pattern validators en createaccount
 - Unificar CSS en variables globales
 - RECUPERACIÓN DE CONTRASEÑA A MEDIAS
 - Cuando se borra una colección de library, tiene que borrar los cromos guardados
 - Arreglar la validación de usuarios en createuser y updateuser
 - httpOptions en los services: añadir header Authorization: Bearer Token
-- Buscar información acerca de los tests
 - Cambiar promise por observable
-- El número de un cromo no puede ser mayor al numero de cromos en total de la colección
+- No se tiene que poder crear mas de un anuncio para el mismo elemento
+- Cambiar GASTADO por USADO
 
 ### LATE-STAGE
 - Proteger las rutas y borrar endpoints de desarrollo

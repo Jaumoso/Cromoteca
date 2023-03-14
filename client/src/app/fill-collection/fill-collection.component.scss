@@ -14,6 +14,7 @@ $text-color: midnightblue;
         margin-bottom: 5px;
         font-weight: bold;
         border-radius: 10px;
+        cursor: pointer;
     }
     button:hover {
         background-color: mix($background-dark, black, 80%);
@@ -40,6 +41,7 @@ $text-color: midnightblue;
         .yes {
             background-color: rgb(87, 243, 87);
             color: black;
+            cursor: pointer;
         }
 
         .no {
@@ -104,7 +106,7 @@ mat-card {
         padding: 3px;
         background-color: rgb(250, 237, 54);
     }
-    .gastado {
+    .usado {
         margin-left: 10px;
         border-radius: 3px;
         padding: 3px;

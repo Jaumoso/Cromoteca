@@ -22,6 +22,15 @@ export class CreateAdvertDto {
 
     @ApiProperty({
         type: String, 
+        description: 'Description of the advert.',
+        example: 'example description'
+    })
+    @IsNotEmpty()
+    @IsString()
+    description: string;
+
+    @ApiProperty({
+        type: String, 
         description: 'State of the card or element, in which state it is phisicically.',
         example: 'example state'
     })

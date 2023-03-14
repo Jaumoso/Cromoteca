@@ -28,6 +28,13 @@ $text-color: midnightblue;
     margin-left: 5%;
     margin-right: 5%;
 
+     td:hover{
+/*         border-bottom: 1px solid black;
+        border-top: 1px solid black; */
+        cursor: pointer;
+        background-color:azure;
+    }
+
     .nuevo {
         margin-left: 10px;
         border-radius: 3px;
@@ -40,7 +47,7 @@ $text-color: midnightblue;
         padding: 3px;
         background-color: rgb(250, 237, 54);
     }
-    .gastado {
+    .usado {
         margin-left: 10px;
         border-radius: 3px;
         padding: 3px;
@@ -52,75 +59,5 @@ $text-color: midnightblue;
         padding: 3px;
         background-color: rgb(221, 72, 72);
     }
-}
-
-
-// NO UTILIZADO
-.advert-list{
-    min-height: 500px;
-
-    mat-card {
-    box-shadow: 1px 1px 5px 2px rgb(99, 99, 99);
-    margin: 10px 50px 0px 50px;
-    mat-card-content{
-      
-      .repeated {
-          color: white;
-          background-color: $text-color;
-          padding: 5px;
-          border-radius: 50%;
-          justify-content: center;
-          align-items: center;
-      }
-      .nuevo {
-          margin-left: 10px;
-          border-radius: 3px;
-          padding: 3px;
-          background-color: rgb(87, 243, 87);
-      }
-      .seminuevo {
-          margin-left: 10px;
-          border-radius: 3px;
-          padding: 3px;
-          background-color: rgb(250, 237, 54);
-      }
-      .gastado {
-          margin-left: 10px;
-          border-radius: 3px;
-          padding: 3px;
-          background-color: rgb(255, 166, 33);
-      }
-      .roto {
-          margin-left: 10px;
-          border-radius: 3px;
-          padding: 3px;
-          background-color: rgb(221, 72, 72);
-      }
-      .price {
-          margin-left: 10px;
-          border-radius: 3px;
-          padding: 3px;
-          background-color: rgb(201, 201, 201);
-      }
-    }
-    mat-card-actions {
-      button {
-          width: auto;
-          background-color: $background-light;
-          padding: 5px;
-          margin-bottom: 10px;
-          font-weight: bold;
-          border-radius: 5px;
-      }
-      button:hover {
-          background-color: mix($background-light, black, 80%);
-          font-weight: bold;
-      }
-      .button:active {
-          background-color: mix($background-light, black, 70%);
-          font-weight: bold;
-      }
-    }
-  }
 }
 

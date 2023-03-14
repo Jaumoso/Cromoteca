@@ -47,6 +47,7 @@ import { CloseSessionDialogComponent } from './close-session-dialog/close-sessio
 import { FillCollectionComponent } from './fill-collection/fill-collection.component';
 import { AddElementComponent } from './add-element/add-element.component';
 import { DeleteAccountDialogComponent } from './delete-account-dialog/delete-account-dialog.component';
+import { AddAdvertComponent } from './add-advert/add-advert.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { DeleteAccountDialogComponent } from './delete-account-dialog/delete-acc
     FillCollectionComponent,
     AddElementComponent,
     DeleteAccountDialogComponent,
+    AddAdvertComponent,
   ],
   imports: [
     BrowserModule,

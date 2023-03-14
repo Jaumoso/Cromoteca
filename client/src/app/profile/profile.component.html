@@ -15,6 +15,9 @@
             <button mat-button [routerLink]="['/editprofile',user?._id]" routerLinkActive="router-link-active">Actualizar Información</button>
             <button mat-button (click)="logOut()" routerLinkActive="router-link-active">Cerrar Sesión</button>
         </div>
+        <div fxLayoutAlign="center start" fxLayout="column" fxLayoutGap="10px">
+            <button mat-button [routerLink]="['/useradverts',user?._id]" routerLinkActive="router-link-active">Anuncios</button>
+        </div>
     </div>
     <div fxFlex="60%" fxLayout="column">
         <br>

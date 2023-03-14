@@ -34,10 +34,13 @@ export class MarketComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+    
     this.advertInfoService.getAllAdvertsInfo()
     .subscribe((adverts) => {
         this.ELEMENT_DATA = adverts;
         this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+        this.dataSource.paginator = this.paginator!;
+        this.dataSource.sort = this.sort!;
     });
   }
 
@@ -55,13 +58,10 @@ export class MarketComponent implements OnInit, AfterViewInit {
     }
   }
 
-  // TODO:
-  onPaginatorChange(e: PageEvent) {
-    this.pageSize = e.pageSize;
-    this.pageIndex = e.pageIndex;
-    this.length = e.length;
-
-    this.dataSource = this.dataSource
+  onPageChanged(event: PageEvent) {
+    const startIndex = event.pageIndex * event.pageSize;
+    const endIndex = startIndex + event.pageSize;
+    return this.ELEMENT_DATA.slice(startIndex, endIndex);
   }
   
 }

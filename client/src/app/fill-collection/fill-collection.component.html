@@ -17,8 +17,8 @@
             <p>{{collection?.description}}</p>
             <br>
             <p><b>Total de elementos en la colección: </b>{{collection?.size}}</p>
-            <p><b>Total de elementos reunídos:  <span id="green">{{completed}}</span> / <span id="red">{{collection?.size}}</span> - {{percentage}}%</b></p>
-            <p><b>Faltan: </b> {{ missing }}</p>
+            <p><b>Total de elementos reunídos:  <span id="green">{{completed}}</span> / <span id="red">{{collection?.size}}</span></b></p>
+            <p><b>Faltan: </b> {{ missing }}, completado al <b>{{percentage}}%</b></p>
         </div>
         <div fxLayout="row wrap">
           <div *ngFor="let item of cardList; let i=index"  class="completion-grid" style="border: 1px solid black">
@@ -60,7 +60,7 @@
 
                           <span *ngIf="card.state == 'NUEVO'" class="nuevo"><b>{{card.state}}</b></span>
                           <span *ngIf="card.state == 'SEMINUEVO'" class="seminuevo"><b>{{card.state}}</b></span>
-                          <span *ngIf="card.state == 'GASTADO'" class="gastado"><b>{{card.state}}</b></span>
+                          <span *ngIf="card.state == 'GASTADO'" class="uasdo"><b>{{card.state}}</b></span>
                           <span *ngIf="card.state == 'ROTO'" class="roto"><b>{{card.state}}</b></span>
                           
                           <span *ngIf="card.price != 0" class="price">

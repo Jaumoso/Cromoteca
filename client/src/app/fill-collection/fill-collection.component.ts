@@ -13,6 +13,7 @@ import { AddElementComponent } from '../add-element/add-element.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AdvertService } from '../services/advert.service';
 import { Advert } from '../shared/advert';
+import { AddAdvertComponent } from '../add-advert/add-advert.component';
 
 @Component({
   selector: 'app-fill-collection',
@@ -29,7 +30,8 @@ export class FillCollectionComponent implements OnInit {
     private location: Location,
     private intermediateService: IntermediateService,
     private cardService: CardService,
-    public dialog: MatDialog,
+    public addElementDialog: MatDialog,
+    public createAdvertDialog: MatDialog,
     private snackBar: MatSnackBar,
     private advertService: AdvertService,
   ) { }
@@ -88,8 +90,8 @@ export class FillCollectionComponent implements OnInit {
   }
 
   addElement() {
-    const dialogRef = this.dialog.open(AddElementComponent, {
-      data: { collectionId: this.collection?._id, userId: this.userId, card: new Card }
+    const dialogRef = this.addElementDialog.open(AddElementComponent, {
+      data: { collectionId: this.collection?._id, userId: this.userId, collectionSize: this.collection?.size, card: new Card }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -126,6 +128,15 @@ export class FillCollectionComponent implements OnInit {
 
   // TODO: habrá que hacer otro Dialog
   createAdvert(card:Card) {
+    const dialogRef = this.createAdvertDialog.open(AddAdvertComponent, {
+      data: { 
+        userId: this.userId, 
+        collectionId: this.collection?._id, 
+        card: card,
+        advert: new Advert
+      }
+    });
+
     let advert = new Advert;
     advert.elementId = card._id;
     advert.price = card.price; 

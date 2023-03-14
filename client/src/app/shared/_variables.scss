@@ -1,10 +1,14 @@
 // No Funciona de momento
 :root {
     $fa-font-path: '../node_modules/font-awesome/fonts';
-
     $background-light: powderblue;
     $background-dark: cornflowerblue;
     $background: steelblue;
     $text-color: midnightblue;
+
+    button {
+        cursor: pointer;
+    }
+    
 }
 

@@ -13,6 +13,9 @@ export class Advert {
     userId: mongoose.Types.ObjectId;
 
     @Prop()
+    description: string;
+
+    @Prop()
     state: string;
 
     @Prop()

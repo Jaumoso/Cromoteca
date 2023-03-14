@@ -58,7 +58,11 @@ export class HeaderComponent implements OnInit {
 
   logOut(){
     this.dialog.open(CloseSessionDialogComponent)
-    if(this.router.url == '/profile'){
+    if(
+      this.router.url != '/collections' && 
+      this.router.url != '/market' &&
+      this.router.url != '/about'){
+
       this.router.navigateByUrl('/home');
     }
     this.authService.closeSession();
