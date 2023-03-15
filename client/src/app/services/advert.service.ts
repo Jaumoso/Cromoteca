@@ -29,6 +29,11 @@ import { CollectionService } from './collection.service';
       .pipe(map(advert => advert.advertData));
     }
 
+    getUserAdvers(userId: string): Observable<Advert> {
+      return this.http.get<{advertData: Advert}>(baseURL + 'advert/user/' + userId)
+      .pipe(map(advert => advert.advertData));
+    }
+
     createAdvert(advert: Advert): Observable<Advert> {
       const httpOptions = {
         headers: new HttpHeaders({

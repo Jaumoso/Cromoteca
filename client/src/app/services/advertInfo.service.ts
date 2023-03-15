@@ -36,4 +36,23 @@ export class AdvertInfoService {
       toArray()
     );
   }
+
+  getUserAdvertInfo(userId: string): Observable<any> {
+    return this.advertService.getAdverts().pipe(
+      mergeMap(adverts => from(adverts)),
+      mergeMap(async advert => {
+        const card = await this.cardService.getCard(advert.elementId!);
+        const collection = await this.collectionService.getCollection(card.collectionId!);
+        return {
+          advertId: advert._id,
+          state: advert.state,
+          price: advert.price,
+          quantity: advert.quantity,
+          cardName: card.name,
+          collectionName: collection.name,
+        };
+      }),
+      toArray()
+    );
+  }
 }

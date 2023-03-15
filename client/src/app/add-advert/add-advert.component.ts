@@ -20,7 +20,6 @@ export interface DialogData {
 export class AddAdvertComponent implements OnInit {
 
   form: FormGroup;
-  states: string[] = ['NUEVO','SEMINUEVO','USADO','ROTO'];
 
   price = new FormControl(0, [Validators.required]);
   quantity = new FormControl(1, [Validators.required]);
@@ -37,7 +36,6 @@ export class AddAdvertComponent implements OnInit {
       price: this.price,
       quantity: this.quantity,
       description: this.description,
-      state: this.state,
     })
   }
 
@@ -48,15 +46,22 @@ export class AddAdvertComponent implements OnInit {
         message = "El precio no es válido. Asegúrate de que es un valor positivo.";
       } else {
         message = "La cantidad a vender no puede ser negativa.";
-      }
-    
+      }    
       this.snackBar.open(message, "Aceptar", {
         verticalPosition: 'top',
         duration: 8000,
         panelClass: ['snackbar']
       });
     }
-    // TODO: else if
+    else {
+      this.data.advert.description = this.description.value!;
+      this.data.advert.elementId = this.data.card._id;
+      this.data.advert.price = this.price.value!;
+      this.data.advert.quantity = this.quantity.value!;
+      this.data.advert.state = this.data.card.state;
+      this.data.advert.userId = this.data.card.userId;
+      this.closeDialog();
+    }
   }
 
   closeDialog(): void {

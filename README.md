@@ -163,7 +163,8 @@ Generación de códigos de seguridad de recuperación
 - httpOptions en los services: añadir header Authorization: Bearer Token
 - Cambiar promise por observable
 - No se tiene que poder crear mas de un anuncio para el mismo elemento
-- Cambiar GASTADO por USADO
+- PROBLEMA: No se puede eliminar un cromo recien creado (?)
+- hay que borrar los anuncios si se borra el elemento de la biblioteca
 
 ### LATE-STAGE
 - Proteger las rutas y borrar endpoints de desarrollo

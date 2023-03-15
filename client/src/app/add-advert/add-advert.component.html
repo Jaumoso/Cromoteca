@@ -17,15 +17,6 @@
           <mat-error *ngIf="this.form.get('repeated')?.errors?.['required']">Requerido. Mínimo (1).</mat-error>
         </mat-form-field>
         <mat-form-field>
-          <mat-select [formControl]="state" name="state">
-              <mat-option value="" disabled selected>Selecciona un estado</mat-option>
-              <mat-option *ngFor="let state of states" [value]="state">
-                {{state}}
-              </mat-option>
-            </mat-select>
-            <mat-error *ngIf="this.form.get('state')?.errors?.['required']">Estado requerido.</mat-error>
-        </mat-form-field>
-        <mat-form-field>
             <input matInput [formControl]="price" required placeholder="Precio **.**€" type="number" name="price">
             <mat-error *ngIf="this.form.get('price')?.errors?.['required']">Precio requerido.</mat-error>
         </mat-form-field>

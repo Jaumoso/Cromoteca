@@ -80,4 +80,18 @@ import { map, Observable } from 'rxjs';
         });
       });
     }
+
+    // Borrar cartas cuando se borra la colección de la biblioteca
+    async deleteCardsFromCollection(userId: string, collectionId: string): Promise<Card[]> {
+      console.log(userId)
+      return new Promise((resolve, reject) => {
+        this.http.delete<{cardData: Card[]}>(baseURL + 'card/deletefromcollection/' + userId + '/' + collectionId)
+        .subscribe(cards => {
+          console.log(cards);
+          resolve(cards.cardData);
+        }, err => {
+          reject(err);
+        });
+      });
+    }
 }

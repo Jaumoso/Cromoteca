@@ -53,6 +53,20 @@ export class CardController {
         }
     }
 
+    @Get('user/:userId')
+    @ApiCreatedResponse({ description: 'This function will get ONE CARD INFO from the database.' })
+    async getUserCards(@Res() response, @Param('userId') userId: string) {
+        try {
+            const cardData = await this.cardService.getUserCards(userId);
+            return response.status(HttpStatus.OK).json({
+                message: 'Card data found successfully', cardData,
+            });
+        }
+        catch (err) {
+            return response.status(err.status).json(err.response);
+        }
+    }
+
     @Post('new')
     @ApiCreatedResponse({ description: 'Creation of a NEW CARD and insertion in the database.' })
     async createCard(@Res() response, @Body() createCardDto: CreateCardDto) {
@@ -91,6 +105,21 @@ export class CardController {
     async deleteCard(@Res() response, @Param('id') cardId: string) {
         try {
             const deletedCard = await this.cardService.deleteCard(cardId);
+            return response.status(HttpStatus.OK).json({
+                message: 'Card deleted successfully',
+                deletedCard,
+            });
+        }
+        catch (err) {
+            return response.status(err.status).json(err.response);
+        }
+    }
+
+    @Delete('deletefromcollection/:userId/:collectionId')
+    @ApiCreatedResponse({ description: 'Borrar todos los elementos de colecciones que contengan el id del usuario y el id de colección que se le pasa como argumento.' })
+    async deleteUserCardsFromCollection(@Res() response, @Param('userId') userId: string, @Param('collectionId') collectionId: string) {
+        try {
+            const deletedCard = await this.cardService.deleteUserCardsFromCollection(userId, collectionId);
             return response.status(HttpStatus.OK).json({
                 message: 'Card deleted successfully',
                 deletedCard,

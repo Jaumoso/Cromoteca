@@ -1,4 +1,7 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { RemoveFromLibraryDialogComponent } from '../remove-from-library-dialog/remove-from-library-dialog.component';
+import { CardService } from '../services/card.service';
 import { IntermediateService } from '../services/intermediate.service';
 import { Collection } from '../shared/collection';
 
@@ -10,7 +13,9 @@ import { Collection } from '../shared/collection';
 export class LibraryComponent implements OnInit {
 
   constructor(
-    private intermediateService: IntermediateService
+    private intermediateService: IntermediateService,
+    private cardService: CardService,
+    private dialog: MatDialog
   ) { }
 
   collections: Collection[] = [];
@@ -61,26 +66,37 @@ export class LibraryComponent implements OnInit {
     });
   }
 
-  deleteFromLibrary(collection: Collection){
-    this.intermediateService.getIntermediate(this.userId)
-    .then((intermediate) => {
-      if(intermediate.collectionId != undefined){
-        const index = intermediate.collectionId.indexOf(collection._id!)
-        if(index !== -1) {
-          intermediate.collectionId.splice(index, 1);
-        }
+  deleteFromLibrary(collection: Collection) {
+    // se abre el diálogo
+    const dialogRef = this.dialog.open(RemoveFromLibraryDialogComponent, {
+      data: { deleteCollection: false, collectionName: collection.name }
+    });
+    
+    // tras cerrar el diálogo ...
+    dialogRef.afterClosed().subscribe(result => {
+      // si se le ha dado a OK
+      if(result.deleteCollection) {
+        // borrar elementos de la colección
+        this.cardService.deleteCardsFromCollection(this.userId, collection._id!)
+          .then(() => {
+            // se recupera la información del intermediate
+            this.intermediateService.getIntermediate(this.userId).then((intermediate) => {
+              const index = intermediate.collectionId!.indexOf(collection._id!);
+              if(index !== -1) {
+                // se cambia la información en el intermediate
+                intermediate.collectionId!.splice(index, 1);
+                // se actualiza la tabla intermediate
+                this.intermediateService.updateIntermediate(intermediate._id!, intermediate)
+                  .then(() => {
+                    // se borra la colección del array de colecciones local
+                    const index = this.collections.indexOf(collection);
+                    this.collections.splice(index, 1);
+                  });
+              }
+            });
+          });
       }
-      if(intermediate._id != undefined){
-        this.intermediateService.updateIntermediate(intermediate._id, intermediate)
-        .then(() => {
-          
-          const index = this.collections.indexOf(collection);
-          this.collections.splice(index, 1);
-          
-        });
-      }
-    }
-    )
+    });
   }
 
 }

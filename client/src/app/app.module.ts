@@ -48,6 +48,8 @@ import { FillCollectionComponent } from './fill-collection/fill-collection.compo
 import { AddElementComponent } from './add-element/add-element.component';
 import { DeleteAccountDialogComponent } from './delete-account-dialog/delete-account-dialog.component';
 import { AddAdvertComponent } from './add-advert/add-advert.component';
+import { RemoveFromLibraryDialogComponent } from './remove-from-library-dialog/remove-from-library-dialog.component';
+import { AdvertsComponent } from './adverts/adverts.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +74,8 @@ import { AddAdvertComponent } from './add-advert/add-advert.component';
     AddElementComponent,
     DeleteAccountDialogComponent,
     AddAdvertComponent,
+    RemoveFromLibraryDialogComponent,
+    AdvertsComponent,
   ],
   imports: [
     BrowserModule,

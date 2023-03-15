@@ -1,0 +1,10 @@
+<div mat-dialog-content class="wraper">
+    <b>¿Seguro que quiere <span style="color: red">borrar</span> la colección <span style="color: steelblue;">{{data.collectionName}} </span>de su biblioteca? <br>Esta acción no se puede deshacer, 
+        y borrará todos los elementos que haya añadido.</b> 
+    <br>
+    <div class="dialogbutton" style="text-align:right" mat-dialog-actions>
+        <span class="flex-spacer"></span>
+        <button id="no" mat-button [mat-dialog-close]="data" (click)="closeDialog()">NO</button>
+        <button id="yes" mat-button cdkFocusInitial [mat-dialog-close]="data" (click)="onSubmit()">SI</button>
+    </div>
+</div>

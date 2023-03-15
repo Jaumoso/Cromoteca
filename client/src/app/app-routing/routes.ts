@@ -10,6 +10,7 @@ import { EditprofileComponent } from '../editprofile/editprofile.component';
 import { PasswordchangeComponent } from '../passwordchange/passwordchange.component';
 import { CreateaccountComponent } from '../createaccount/createaccount.component';
 import { FillCollectionComponent } from '../fill-collection/fill-collection.component';
+import { AdvertsComponent } from '../adverts/adverts.component';
 
 export const routes: Routes = [
     { path: 'home', component: HomeComponent},
@@ -22,6 +23,7 @@ export const routes: Routes = [
     { path: 'passwordchange', component: PasswordchangeComponent},
     { path: 'createaccount', component: CreateaccountComponent},
     { path: 'fillcollection/:id', component: FillCollectionComponent},
+    { path: 'adverts/:id', component: AdvertsComponent},
     
     { path: '', redirectTo: '/home', pathMatch: 'full'}
 ];
