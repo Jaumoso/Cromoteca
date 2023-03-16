@@ -50,6 +50,7 @@ import { DeleteAccountDialogComponent } from './delete-account-dialog/delete-acc
 import { AddAdvertComponent } from './add-advert/add-advert.component';
 import { RemoveFromLibraryDialogComponent } from './remove-from-library-dialog/remove-from-library-dialog.component';
 import { AdvertsComponent } from './adverts/adverts.component';
+import { AdvertdetailsComponent } from './advertdetails/advertdetails.component';
 
 @NgModule({
   declarations: [
@@ -76,6 +77,7 @@ import { AdvertsComponent } from './adverts/adverts.component';
     AddAdvertComponent,
     RemoveFromLibraryDialogComponent,
     AdvertsComponent,
+    AdvertdetailsComponent,
   ],
   imports: [
     BrowserModule,

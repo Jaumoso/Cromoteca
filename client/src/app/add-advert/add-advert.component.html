@@ -6,7 +6,7 @@
   
   <form novalidate [formGroup]="form" (ngSubmit)="onSubmit()">
     <mat-dialog-content>
-        {{data.card.cardId}} {{data.card.name}}
+        {{data.card.cardId}} {{data.card.name}} {{data.card.state}}
         <mat-form-field>
           <textarea matInput [formControl]="description" required name="description" placeholder="Descripción del anuncio..."></textarea>
           <mat-error *ngIf="this.form.get('description')?.errors?.['required']">Descripción requerida.</mat-error>

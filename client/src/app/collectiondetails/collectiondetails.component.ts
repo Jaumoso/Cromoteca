@@ -8,8 +8,6 @@ import { Location } from '@angular/common';
 import { AddToLibraryComponent } from '../add-to-library-dialog/add-to-library-dialog.component';
 import { JwtService } from '../services/jwt.service';
 import { IntermediateService } from '../services/intermediate.service';
-
-
 export interface DialogData {
   collectionName: string;
   collectionId: string;

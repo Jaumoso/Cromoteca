@@ -11,6 +11,7 @@ import { PasswordchangeComponent } from '../passwordchange/passwordchange.compon
 import { CreateaccountComponent } from '../createaccount/createaccount.component';
 import { FillCollectionComponent } from '../fill-collection/fill-collection.component';
 import { AdvertsComponent } from '../adverts/adverts.component';
+import { AdvertdetailsComponent } from '../advertdetails/advertdetails.component';
 
 export const routes: Routes = [
     { path: 'home', component: HomeComponent},
@@ -24,6 +25,6 @@ export const routes: Routes = [
     { path: 'createaccount', component: CreateaccountComponent},
     { path: 'fillcollection/:id', component: FillCollectionComponent},
     { path: 'adverts/:id', component: AdvertsComponent},
-    
+    { path: 'advertdetails/:id', component: AdvertdetailsComponent },
     { path: '', redirectTo: '/home', pathMatch: 'full'}
 ];
