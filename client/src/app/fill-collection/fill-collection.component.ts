@@ -46,6 +46,7 @@ export class FillCollectionComponent implements OnInit {
   cardList: number[] = [];
 
   ngOnInit(){
+    // coge el id de la colección pasado como parámetro y recupera la información
     this.route.paramMap.pipe(
       switchMap((params: Params) => {
         return this.collectionService.getCollection(params['get']('id'));
@@ -53,7 +54,8 @@ export class FillCollectionComponent implements OnInit {
       .subscribe(collectionData => {
         this.collection = collectionData;
       });
-
+    
+    // recoge el token de sesión y recupera info de usuario
     const token = localStorage.getItem('token');
     if(token){
       const decodedToken = this.jwtService.decodeToken(token);
@@ -77,16 +79,10 @@ export class FillCollectionComponent implements OnInit {
                 this.cardList[cardIndex! - 1] = 1;
               }
             });
-  
-            console.log(this.cardList);
           });
         }
       })
     }
-  }
-
-  goBack() {
-    this.location.back();
   }
 
   // devuelve el total de cartas con ID único
@@ -108,11 +104,18 @@ export class FillCollectionComponent implements OnInit {
     let unique: boolean = true;
     let count: number = 0;
     this.cards.forEach((card) => {
-      console.log(card.cardId)
       if(card.cardId === cardId){count++}
     })
     if(count > 1){unique = false;}
     return unique;
+  }
+
+  existe(cardId: number): boolean {
+    let existe: boolean = false;
+    for(let i = 0; i < this.cards.length; i++){
+      if(this.cards[i].cardId === cardId){existe = true}
+    }
+    return existe;
   }
 
   addElement() {
@@ -122,31 +125,30 @@ export class FillCollectionComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if(result && result.card){
-        // Se añade el elemento al array de elementos
-        this.cards.push(result.card);
-        this.cardList[result.card.cardId-1] = 1;
-        
-        // si no existe la carta en el array
-        const unique = this.comprobarSiUnico(result.card.cardId);
-        console.log(unique)
-        if(unique){
-          this.missing = this.missing-1;
-          this.completed = this.completed +1;
-        }
-        
-        this.percentage = (this.completed / this.collection!.size! * 100).toFixed(2);
-        // Se añade el elemento a la colección del usuario en la BD
         this.cardService.createCard(result.card)
         .then((card) => {
-          console.log(card);
-          this.snackBar.open(
-            "Elemento añadido a la colección", 
-            "Aceptar",
-            {
-              verticalPosition: 'top',
-              duration: 6000,
-              panelClass: ['snackbar']
-            });
+          // si se ha creado el elemento
+          if(card){
+            this.showSnackBar("Elemento añadido a la colección");
+
+            // Se añade el elemento al array de elementos
+            this.cards.push(card);
+            this.cardList[result.card.cardId-1] = 1;
+
+            // si no existe la carta en el array
+            const unique = this.comprobarSiUnico(result.card.cardId);
+            if(unique){
+              this.missing = this.missing-1;
+              this.completed = this.completed +1;
+            }
+            
+            this.percentage = (this.completed / this.collection!.size! * 100).toFixed(2);
+            // Se añade el elemento a la colección del usuario en la BD
+
+          }
+          else{
+            this.showSnackBar("Ha habido un problema al añadir el elemento");
+          }
         });
       }
     });
@@ -154,52 +156,86 @@ export class FillCollectionComponent implements OnInit {
 
   deleteElement(card: Card) {
     this.cardService.deleteCard(card._id!)
-    .subscribe((returnCard) => {
-      console.log(returnCard)
+    .subscribe(() => {
+      // quitar carta del array
       const index = this.cards.indexOf(card);
       this.cards.splice(index, 1);
-      this.cardList[card.cardId!-1] = 0;
-      
-      // si no existe la carta en el array
-      if(this.comprobarSiUnico(card.cardId!)){
+
+      // TODO: comprobar que esto funciona correctamente
+      // si existe un anuncio, lo borra también
+      this.advertService.deleteAdvertCard(card._id!)
+      .subscribe((deletedAdvert) => {
+        console.log(deletedAdvert);
+      })
+
+      // si no existe en el array
+      if(!this.existe(card.cardId!)){
+        this.cardList[card.cardId!-1] = 0;
         this.missing = this.missing+1;
         this.completed = this.completed -1;
       }
-
+      
       this.percentage = (this.completed / this.collection!.size! * 100).toFixed(2);
+      this.showSnackBar("Elemento " + card.cardId + " eliminado");
     });
   }
 
-  // TODO: habrá que hacer otro Dialog
   createAdvert(card:Card) {
-    const dialogRef = this.createAdvertDialog.open(AddAdvertComponent, {
-      data: { 
-        userId: this.userId, 
-        collectionId: this.collection?._id, 
-        card: card,
-        advert: new Advert
+    // TODO: esto no funciona
+    this.advertService.checkExistingAdvert(card._id!)
+    .then((existe) => {
+      if(existe){
+        this.showSnackBar("Ya has publicado un anuncio para este elemento. Consúltalo en tu perfil.");
       }
-    });
+      else{
+        // Abrir diálogo con formulartio de advert
+        const dialogRef = this.createAdvertDialog.open(AddAdvertComponent, {
+          data: { 
+            userId: this.userId, 
+            collectionId: this.collection?._id, 
+            card: card,
+            advert: new Advert,
+          }
+        });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if(result && result.advert){
-        this.advertService.createAdvert(result.advert)
-        .subscribe(data => {
-          this.snackBar.open(
-            "Anuncio creado", 
-            "Aceptar",
-            {
-              verticalPosition: 'top',
-              duration: 6000,
-              panelClass: ['snackbar']
+        // recuperar información del diálogo y crear el anuncio
+        dialogRef.afterClosed().subscribe(result => {
+          if(result && result.advert){
+            console.log(result.advert)
+            this.advertService.createAdvert(result.advert)
+            .subscribe(data => {
+            /*  this.adverts.push(card.cardId!) */
+              this.showSnackBar("Anuncio creado");
             });
+          }
         });
       }
     });
+
+
   }
 
+  // función para mostrar una MatSnackBar
+  showSnackBar(message: string){
+    this.snackBar.open(
+      message, 
+      "Aceptar",
+      {
+        verticalPosition: 'top',
+        duration: 6000,
+        panelClass: ['snackbar']
+      });
+  }
+
+  // función para hacer scroll hasta el elemento pulsado
   scroll(id: number) {
     let element = document.getElementById(id.toString());
     element!.scrollIntoView({behavior: 'smooth'});
   }
+
+  // devuelve al usuairo a la vista anterior
+  goBack() {
+    this.location.back();
+  }
+  
 }

@@ -25,8 +25,26 @@ export class AdvertService {
         return advertData;
     }
 
+    async getUserAdverts(userId: string): Promise<AdvertDocument[]> {
+        const advertData = await this.advertModel.find({ userId: userId})
+        if (!advertData) {
+            throw new NotFoundException('Advert data not found!');
+        }
+        return advertData;
+    }
+
+    async checkExistingAdvert(elementId: string): Promise<AdvertDocument[]> {
+        const advertData = await this.advertModel.find({ elementId: elementId });
+        if (!advertData) {
+            throw new NotFoundException('Advert data not found!');
+        }
+        return advertData;
+    }
+
     async createAdvert(advertDto: CreateAdvertDto ): Promise<AdvertDocument> {
+        console.log(advertDto);
         const newAdvert = await this.advertModel.create(advertDto);
+        console.log(newAdvert);
         if (!newAdvert) {
             throw new NotFoundException('Could not create advert!');
         }
@@ -45,6 +63,14 @@ export class AdvertService {
         const deletedAdvert = await this.advertModel.findByIdAndDelete(advertId);
       if (!deletedAdvert) {
         throw new NotFoundException(`Advert #${advertId} not found`);
+      }
+      return deletedAdvert;
+    }
+
+    async deleteAdvertCard(cardId: string): Promise<AdvertDocument> {
+        const deletedAdvert = await this.advertModel.findOneAndDelete({cardId: cardId});
+      if (!deletedAdvert) {
+        throw new NotFoundException(`Advert of element #${cardId} not found`);
       }
       return deletedAdvert;
     }

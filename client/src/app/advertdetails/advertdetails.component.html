@@ -42,21 +42,25 @@ fxLayoutGap="10px">
                 <td class="td-grey">{{advert?.description}}</td>
             </tr>
             <tr>
+                <th>Fecha de creación del anuncio:</th>
+                <td>{{advert?.createdDate | date:"dd/MM/yyyy - hh:mm a"}}</td>
+            </tr>
+            <tr>
                 <th>Formato</th>
-                <td>{{collection?.format}}</td>
+                <td class="td-grey">{{collection?.format}}</td>
             </tr>
             <tr>
                 <th>Tema</th>
-                <td class="td-grey">{{collection?.theme}}</td>
+                <td>{{collection?.theme}}</td>
                 </tr>
 
             <tr>
                 <th>Idioma</th>
-                <td>{{collection?.language}}</td>
+                <td class="td-grey">{{collection?.language}}</td>
             </tr>
             <tr>
                 <th>Vendedor:</th>
-                <td class="td-grey">{{seller?.username}} / {{seller?.firstName}}</td>
+                <td>{{seller?.username}} / {{seller?.firstName}}</td>
             </tr>
         </table>
     </div>

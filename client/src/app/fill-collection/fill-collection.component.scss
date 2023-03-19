@@ -84,9 +84,17 @@ $text-color: midnightblue;
 mat-card {
   box-shadow: 1px 1px 5px 2px rgb(99, 99, 99);
   margin: 10px 50px 0px 50px;
+  border: 1px solid black;
+
+    .identifier {
+        padding: 5px;
+        border: 1px solid black;
+        border-radius: 5px;
+    }
+
   mat-card-content{
     
-    .repeated {
+    .quantity {
         color: white;
         background-color: $text-color;
         padding: 5px;
@@ -128,9 +136,10 @@ mat-card {
   mat-card-actions {
     button {
         width: auto;
+        max-width: 200px;
         background-color: $background-light;
-        padding: 5px;
-        margin-bottom: 10px;
+        padding: 8px;
+        margin: 5px;
         font-weight: bold;
         border-radius: 5px;
     }

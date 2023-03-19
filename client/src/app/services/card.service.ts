@@ -42,9 +42,10 @@ import { map, Observable } from 'rxjs';
         })
       };
       return new Promise((resolve, reject) => {
-        this.http.post<{cardData: Card}>(baseURL + 'card/new/', card, httpOptions)
+        this.http.post<{newCard: Card}>(baseURL + 'card/new/', card, httpOptions)
         .subscribe(card => {
-          resolve(card.cardData);
+          console.log(card)
+          resolve(card.newCard);
         }, err => {
           reject(err);
         });

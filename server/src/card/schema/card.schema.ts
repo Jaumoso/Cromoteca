@@ -19,7 +19,7 @@ export class Card {
     name: string;
 
     @Prop()
-    repeated: number;
+    quantity: number;
 
     @Prop()
     description: string;

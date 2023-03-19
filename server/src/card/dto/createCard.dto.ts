@@ -40,11 +40,11 @@ export class CreateCardDto {
   @ApiProperty({
     type: Number,
     description: 'Cantidad de veces repetido (cromo)',
-    example: 0
+    example: 1
   })
   @IsNotEmpty()
   @IsNumber()
-  repeated: number;
+  quantity: number;
 
   @ApiProperty({
     type: String,

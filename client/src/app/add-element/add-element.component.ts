@@ -26,7 +26,7 @@ export class AddElementComponent implements OnInit {
     this.form = this.formBuilder.group({
       cardId: this.cardId,
       name: this.name,
-      repeated: this.repeated,
+      quantity: this.quantity,
       description: this.description,
       // image
       state: this.state,
@@ -37,7 +37,7 @@ export class AddElementComponent implements OnInit {
   // FORM VALIDATION
   cardId = new FormControl(null,[Validators.required]);
   name = new FormControl('',[Validators.required]);
-  repeated = new FormControl(0, [Validators.required]);
+  quantity = new FormControl(1, [Validators.required]);
   description = new FormControl('', [Validators.required]);
   // image
   state = new FormControl('',[Validators.required]);
@@ -52,12 +52,16 @@ export class AddElementComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.price.value! < 0 || this.repeated.value! < 0) {
+    if (this.price.value! < 0 || this.quantity.value! < 1 || this.cardId.value! < 1) {
       let message = "";
       if (this.price.value! < 0) {
         message = "El precio no es válido. Asegúrate de que es un valor positivo.";
-      } else {
-        message = "La cantidad de veces repetido no puede ser negativa.";
+      } 
+      else if(this.cardId.value! < 0) {
+        message = "El identificador del elemento no puede ser 0 ni negativo.";
+      }
+      else {
+        message = "La cantidad que tienes no puede ser 0 ni negativa.";
       }
     
       this.snackBar.open(message, "Aceptar", {
@@ -72,7 +76,7 @@ export class AddElementComponent implements OnInit {
       this.data.card.collectionId = this.data.collectionId;
       this.data.card.cardId = this.cardId.value!;
       this.data.card.name = this.name.value!;
-      this.data.card.repeated = this.repeated.value!;
+      this.data.card.quantity = this.quantity.value!;
       this.data.card.description = this.description.value!;
       // image
       this.data.card.state = this.state.value!;
@@ -81,14 +85,14 @@ export class AddElementComponent implements OnInit {
     }
     else{
       this.snackBar.open(
-        "El identificador no es válido.", 
+        "El identificador no puede ser mayor al tamaño de la colección: " + this.data.collectionSize, 
         "Aceptar",
         {
           verticalPosition: 'top',
           duration: 8000,
           panelClass: ['snackbar']
         }
-        );
+      );
     }
 
   }

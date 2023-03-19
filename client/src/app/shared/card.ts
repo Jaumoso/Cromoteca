@@ -4,7 +4,7 @@ export class Card {
     collectionId: string | undefined;
     cardId: number | undefined;
     name: string | undefined;
-    repeated: number | undefined;
+    quantity: number | undefined;
     description: string | undefined;
     // image: string | undefined;
     state: string | undefined;

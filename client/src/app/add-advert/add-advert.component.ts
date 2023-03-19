@@ -40,11 +40,15 @@ export class AddAdvertComponent implements OnInit {
   }
 
   onSubmit(){
-    if (this.price.value! < 0 || this.quantity.value! < 0) {
+    if (this.price.value! < 0 || this.quantity.value! < 0 || this.quantity.value! > this.data.card.quantity!) {
       let message = "";
       if (this.price.value! < 0) {
         message = "El precio no es válido. Asegúrate de que es un valor positivo.";
-      } else {
+      } 
+      else if( this.quantity.value! > this.data.card.quantity!){
+        message = "No puedes promocionar más cantidad de la que tienes.";
+      }
+      else {
         message = "La cantidad a vender no puede ser negativa.";
       }    
       this.snackBar.open(message, "Aceptar", {
@@ -60,6 +64,7 @@ export class AddAdvertComponent implements OnInit {
       this.data.advert.quantity = this.quantity.value!;
       this.data.advert.state = this.data.card.state;
       this.data.advert.userId = this.data.card.userId;
+      this.data.advert.createdDate = new Date();
       this.closeDialog();
     }
   }

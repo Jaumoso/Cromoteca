@@ -23,5 +23,8 @@ export class Advert {
     
     @Prop()
     quantity: number;
+
+    @Prop()
+    createdDate: Date;
 }
 export const AdvertSchema = SchemaFactory.createForClass(Advert);

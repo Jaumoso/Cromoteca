@@ -31,6 +31,7 @@ export class AdvertInfoService {
           username: user.username,
           cardName: card.name,
           collectionName: collection.name,
+          createdDate: advert.createdDate,
         };
       }),
       toArray()
@@ -38,7 +39,7 @@ export class AdvertInfoService {
   }
 
   getUserAdvertInfo(userId: string): Observable<any> {
-    return this.advertService.getAdverts().pipe(
+    return this.advertService.getUserAdverts(userId).pipe(
       mergeMap(adverts => from(adverts)),
       mergeMap(async advert => {
         const card = await this.cardService.getCard(advert.elementId!);
@@ -50,6 +51,7 @@ export class AdvertInfoService {
           quantity: advert.quantity,
           cardName: card.name,
           collectionName: collection.name,
+          createdDate: advert.createdDate,
         };
       }),
       toArray()

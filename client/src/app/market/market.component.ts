@@ -20,7 +20,7 @@ export interface AdvertTable {
 })
 export class MarketComponent implements OnInit, AfterViewInit {
 
-  displayedColumns: string[] = ['name', 'collection', 'user', 'state', 'quantity', 'price'];
+  displayedColumns: string[] = ['name', 'collection', 'user', 'state', 'quantity', 'price', 'date'];
   ELEMENT_DATA: AdvertTable[] = [];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;

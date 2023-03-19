@@ -12,7 +12,7 @@ export class AdvertController {
 
     @Get()
     @ApiCreatedResponse({ description: 'This function will get ALL the ADVERTS from the database.' })
-    async getAdvertess(@Res() response) {
+    async getAllAdverts(@Res() response) {
         try {
             const advertData = await this.advertService.getAllAdverts();
             return response.status(HttpStatus.OK).json({
@@ -39,9 +39,38 @@ export class AdvertController {
         }
     }
 
+    @Get('user/:id')
+    @ApiCreatedResponse({ description: 'This function will get ONE ADVERT from the database.' })
+    async getUserAdverts(@Res() response, @Param('id') userId: string) {
+        try {
+            const advertData = await this.advertService.getUserAdverts(userId);
+            return response.status(HttpStatus.OK).json({
+                message: 'Advert data found successfully', advertData,
+            });
+        }
+        catch (err) {
+            return response.status(err.status).json(err.response);
+        }
+    }
+
+    @Get('checkadvert/:elementId')
+    @ApiCreatedResponse({ description: 'This function will get ONE ADVERT from the database.' })
+    async checkExistingAdvert(@Res() response, @Param('elementId') elementId: string) {
+        try {
+            const advertData = await this.advertService.checkExistingAdvert(elementId);
+            return response.status(HttpStatus.OK).json({
+                message: 'Advert data found successfully', advertData,
+            });
+        }
+        catch (err) {
+            return response.status(err.status).json(err.response);
+        }
+    }
+
     @Post('new')
     @ApiCreatedResponse({ description: 'Creation of a NEW ADDRESS and insertion in the database.' })
     async createAdvert(@Res() response, @Body() createAdvertDto: CreateAdvertDto) {
+        console.log(createAdvertDto);
         try {
             const newAdvert = await this.advertService.createAdvert(createAdvertDto);
             return response.status(HttpStatus.CREATED).json({
@@ -75,11 +104,26 @@ export class AdvertController {
     
     @Delete('delete/:id')
     @ApiCreatedResponse({ description: 'This function will DELETE the Advert with the ID passed as parameter from the database.' })
-    async deleteAdvert(@Res() response, @Param('id') aadvertId: string) {
+    async deleteAdvert(@Res() response, @Param('id') advertId: string) {
         try {
-            const deletedAdvert = await this.advertService.deleteAdvert(aadvertId);
+            const deletedAdvert = await this.advertService.deleteAdvert(advertId);
             return response.status(HttpStatus.OK).json({
-                message: 'User deleted successfully',
+                message: 'Advert deleted successfully',
+                deletedAdvert,
+            });
+        }
+        catch (err) {
+            return response.status(err.status).json(err.response);
+        }
+    }
+
+    @Delete('deletecard/:id')
+    @ApiCreatedResponse({ description: 'This function will DELETE the Advert with the ID passed as parameter from the database.' })
+    async deleteAdvertCard(@Res() response, @Param('id') cardId: string) {
+        try {
+            const deletedAdvert = await this.advertService.deleteAdvertCard(cardId);
+            return response.status(HttpStatus.OK).json({
+                message: 'Advert deleted successfully',
                 deletedAdvert,
             });
         }

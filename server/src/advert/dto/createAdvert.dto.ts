@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsNotEmpty, IsNumber, IsString } from "class-validator";
+import { IsDate, IsNotEmpty, IsNumber, IsString } from "class-validator";
 import mongoose from "mongoose";
 
 export class CreateAdvertDto {
@@ -55,4 +55,13 @@ export class CreateAdvertDto {
     @IsNumber()
     @IsNotEmpty()
     quantity: number;
+
+    @ApiProperty({
+        type: Date,
+        description: 'Date in which the advert was published',
+        example: new Date(2023, 1, 15).toISOString()
+    })
+    @IsNotEmpty()
+    createdDate: Date;
+    
 }
