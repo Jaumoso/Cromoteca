@@ -44,6 +44,7 @@ export class FillCollectionComponent implements OnInit {
   percentage: string = '';
   gridColumns: number = 3;
   cardList: number[] = [];
+  adverts: number[] = [];
 
   ngOnInit(){
     // coge el id de la colección pasado como parámetro y recupera la información
@@ -78,6 +79,13 @@ export class FillCollectionComponent implements OnInit {
               if (cardIndex! <= collectionSize) {
                 this.cardList[cardIndex! - 1] = 1;
               }
+              // comprueba que exista un advert para el elemento. Si existe, guarda el id del elemento para no crear otro advert
+              this.advertService.checkExistingAdvert(card._id!)
+              .then((exists) => {
+                if(exists){
+                  this.adverts.push(card.cardId!);
+                }
+              });
             });
           });
         }
@@ -165,7 +173,11 @@ export class FillCollectionComponent implements OnInit {
       // si existe un anuncio, lo borra también
       this.advertService.deleteAdvertCard(card._id!)
       .subscribe((deletedAdvert) => {
-        console.log(deletedAdvert);
+        if(deletedAdvert) {
+          // borra del array de adverts el id del elemento.
+          const index = this.adverts.indexOf(card.cardId!);
+          this.adverts.splice(index, 1);
+        }
       })
 
       // si no existe en el array
@@ -181,33 +193,24 @@ export class FillCollectionComponent implements OnInit {
   }
 
   createAdvert(card:Card) {
-    // TODO: esto no funciona
-    this.advertService.checkExistingAdvert(card._id!)
-    .then((existe) => {
-      if(existe){
-        this.showSnackBar("Ya has publicado un anuncio para este elemento. Consúltalo en tu perfil.");
+    // Abrir diálogo con formulartio de advert
+    const dialogRef = this.createAdvertDialog.open(AddAdvertComponent, {
+      data: { 
+        userId: this.userId, 
+        collectionId: this.collection?._id, 
+        card: card,
+        advert: new Advert,
       }
-      else{
-        // Abrir diálogo con formulartio de advert
-        const dialogRef = this.createAdvertDialog.open(AddAdvertComponent, {
-          data: { 
-            userId: this.userId, 
-            collectionId: this.collection?._id, 
-            card: card,
-            advert: new Advert,
-          }
-        });
+    });
 
-        // recuperar información del diálogo y crear el anuncio
-        dialogRef.afterClosed().subscribe(result => {
-          if(result && result.advert){
-            console.log(result.advert)
-            this.advertService.createAdvert(result.advert)
-            .subscribe(data => {
-            /*  this.adverts.push(card.cardId!) */
-              this.showSnackBar("Anuncio creado");
-            });
-          }
+    // recuperar información del diálogo y crear el anuncio
+    dialogRef.afterClosed().subscribe(result => {
+      if(result && result.advert){
+        console.log(result.advert)
+        this.advertService.createAdvert(result.advert)
+        .subscribe(data => {
+          this.adverts.push(card.cardId!);
+          this.showSnackBar("Anuncio creado");
         });
       }
     });

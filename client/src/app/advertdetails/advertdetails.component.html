@@ -30,37 +30,40 @@ fxLayoutGap="10px">
                 <td>{{card?.name}}</td>
             </tr>
             <tr>
-                <th>Número de elemento dentro de la colección:</th>
-                <td class="td-grey">{{card?.cardId}}</td>
+                <th>Descripción del elemento:</th>
+                <td class="td-grey">{{card?.description}}</td>
             </tr>
             <tr>
-                <th>Descripción del elemento:</th>
-                <td>{{card?.description}}</td>
+                <th>Número de elemento dentro de la colección:</th>
+                <td>{{card?.cardId}}</td>
+            </tr>
+            <tr>
+                <th>Estado del elemento:</th>
+                <td class="td-grey">{{card?.state}}</td>
             </tr>
             <tr>
                 <th>Descripción del anuncio:</th>
-                <td class="td-grey">{{advert?.description}}</td>
+                <td>{{advert?.description}}</td>
             </tr>
             <tr>
                 <th>Fecha de creación del anuncio:</th>
-                <td>{{advert?.createdDate | date:"dd/MM/yyyy - hh:mm a"}}</td>
+                <td class="td-grey">{{advert?.createdDate | date:"dd/MM/yyyy - hh:mm a"}}</td>
             </tr>
             <tr>
                 <th>Formato</th>
-                <td class="td-grey">{{collection?.format}}</td>
+                <td>{{collection?.format}}</td>
             </tr>
             <tr>
                 <th>Tema</th>
-                <td>{{collection?.theme}}</td>
-                </tr>
-
+                <td class="td-grey">{{collection?.theme}}</td>
+            </tr>
             <tr>
                 <th>Idioma</th>
-                <td class="td-grey">{{collection?.language}}</td>
+                <td>{{collection?.language}}</td>
             </tr>
             <tr>
                 <th>Vendedor:</th>
-                <td>{{seller?.username}} / {{seller?.firstName}}</td>
+                <td class="td-grey">{{seller?.username}} / {{seller?.firstName}}</td>
             </tr>
         </table>
     </div>

@@ -22,6 +22,11 @@ import { catchError, map, Observable, of } from 'rxjs';
       .pipe(map(advert => advert.advertData));
     }
 
+    getAdvertByCard(cardId: string): Observable<Advert> {
+      return this.http.get<{advertData: Advert}>(baseURL + 'advert/card/' + cardId)
+      .pipe(map(advert => advert.advertData));
+    }
+
     getUserAdverts(userId: string): Observable<Advert[]> {
       return this.http.get<{advertData: Advert[]}>(baseURL + 'advert/user/' + userId)
       .pipe(map(advert => advert.advertData));
@@ -29,12 +34,14 @@ import { catchError, map, Observable, of } from 'rxjs';
 
     checkExistingAdvert(card_id: string): Promise<boolean> {
       return new Promise((resolve, reject) => {
-        this.http.get<{advertData: Advert}>(baseURL + 'advert/checkadvert/' + card_id)
+        this.http.get<{advertData: Advert[]}>(baseURL + 'advert/checkadvert/' + card_id)
         .subscribe(user => {
-          if(user.advertData){
+          if(user.advertData.length > 0){
+            console.log(true);
             resolve(true);
           }
           else{
+            console.log(false);
              resolve(false);
           }
         }, err => {

@@ -29,6 +29,119 @@
         background-color: mix($background-dark, black, 70%);
         font-weight: bold;
     }
+
+    .nuevo {
+        margin-left: 10px;
+        border-radius: 3px;
+        padding: 3px;
+        background-color: rgb(87, 243, 87);
+    }
+    .seminuevo {
+        margin-left: 10px;
+        border-radius: 3px;
+        padding: 3px;
+        background-color: rgb(250, 237, 54);
+    }
+    .usado {
+        margin-left: 10px;
+        border-radius: 3px;
+        padding: 3px;
+        background-color: rgb(255, 166, 33);
+    }
+    .roto {
+        margin-left: 10px;
+        border-radius: 3px;
+        padding: 3px;
+        background-color: rgb(221, 72, 72);
+    }
+
+    .dialogbutton {
+        #yes {
+            background-color: $background-dark;
+            color: white;
+            padding: 10px;
+            margin: 10px;
+            font-weight: bold;
+        }
+        #yes:hover {
+            background-color: mix($background-dark, black, 80%);
+            color: white;
+            font-weight: bold;
+        }
     
+        #yes:active {
+            background-color: mix($background-dark, black, 70%);
+            font-weight: bold;
+        }
+        #no {
+            background-color: rgb(255, 86, 86);
+            color: white;
+            padding: 10px;
+            font-weight: bold;
+        }
+        #no:hover {
+            background-color: mix(rgb(255, 86, 86), black, 80%);
+            color: white;
+            font-weight: bold;
+        }
+    
+        #no:active {
+            background-color: mix(rgb(255, 86, 86), black, 70%);
+            font-weight: bold;
+        }
+
+        .flex-spacer {
+            flex-grow: 1;
+        }
+    }
+
+    mat-dialog-actions {
+        button {
+            border: none;
+            padding: 10px 20px 10px 20px;
+            color: black;
+            font-weight: bold;
+            border-radius: 5px;
+            margin: 5px;
+        }
+    
+        .cancel:hover {
+            background-color: rgb(255, 86, 86);
+        }
+        .cancel:active{
+            background-color: mix(rgb(255, 86, 86), black, $weight: 80%);
+        }
+        .accept:hover {
+            background-color: $background-dark;
+        }
+        .accept:after {
+            background-color: mix($background-dark, black, $weight: 80%);
+        }
+    }
+
+    mat-toolbar {
+        display: flex;
+        background-color: $background;
+        color: white;
+        margin: 0;
+    
+        button {
+            border: none;
+            padding: 10px 20px 10px 20px;
+            background-color: white;
+            color: black;
+            font-weight: bold;
+            font-size:x-large;
+            border-radius: 5px;
+        }
+    
+        .cancel:hover {
+            background-color: rgb(206, 206, 206);
+        }
+        .cancel:active{
+            background-color: mix(rgb(206, 206, 206), black, $weight: 80%);
+        }
+    }
 }
+
 

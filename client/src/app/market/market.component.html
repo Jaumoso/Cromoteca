@@ -48,7 +48,7 @@
       <td mat-cell *matCellDef="let element">
         <span *ngIf="element.state == 'NUEVO'" class="nuevo"><b>{{element.state}}</b></span>
         <span *ngIf="element.state == 'SEMINUEVO'" class="seminuevo"><b>{{element.state}}</b></span>
-        <span *ngIf="element.state == 'GASTADO'" class="usado"><b>{{element.state}}</b></span>
+        <span *ngIf="element.state == 'USADO'" class="usado"><b>{{element.state}}</b></span>
         <span *ngIf="element.state == 'ROTO'" class="roto"><b>{{element.state}}</b></span>
       </td>
     </ng-container>
