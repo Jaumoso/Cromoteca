@@ -33,6 +33,14 @@ export class AdvertService {
         return advertData;
     }
 
+    async getAdvertByCard(cardId: string): Promise<AdvertDocument> {
+        const advertData = await this.advertModel.findOne({ elementId: cardId})
+        if (!advertData) {
+            throw new NotFoundException('Advert data not found!');
+        }
+        return advertData;
+    }
+
     async checkExistingAdvert(elementId: string): Promise<AdvertDocument[]> {
         const advertData = await this.advertModel.find({ elementId: elementId });
         if (!advertData) {

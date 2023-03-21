@@ -13,6 +13,30 @@ $text-color: midnightblue;
     flex-grow: 1;
 }
 
+mat-toolbar {
+    display: flex;
+    background-color: $background;
+    color: white;
+    margin: 0;
+
+    button {
+        border: none;
+        padding: 10px 20px 10px 20px;
+        background-color: white;
+        color: black;
+        font-weight: bold;
+        font-size:x-large;
+        border-radius: 5px;
+    }
+
+    .cancel:hover {
+        background-color: rgb(206, 206, 206);
+    }
+    .cancel:active{
+        background-color: mix(rgb(206, 206, 206), black, $weight: 80%);
+    }
+}
+
 form {
     background-color: $background-light;
     padding: 15px;

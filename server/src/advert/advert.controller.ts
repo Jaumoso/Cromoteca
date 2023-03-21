@@ -53,6 +53,20 @@ export class AdvertController {
         }
     }
 
+    @Get('user/:cardId')
+    @ApiCreatedResponse({ description: 'This function will get ONE ADVERT from the database.' })
+    async getAdvertByCard(@Res() response, @Param('id') cardId: string) {
+        try {
+            const advertData = await this.advertService.getAdvertByCard(cardId);
+            return response.status(HttpStatus.OK).json({
+                message: 'Advert data found successfully', advertData,
+            });
+        }
+        catch (err) {
+            return response.status(err.status).json(err.response);
+        }
+    }
+
     @Get('checkadvert/:elementId')
     @ApiCreatedResponse({ description: 'This function will get ONE ADVERT from the database.' })
     async checkExistingAdvert(@Res() response, @Param('elementId') elementId: string) {

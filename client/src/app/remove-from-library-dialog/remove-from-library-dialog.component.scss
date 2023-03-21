@@ -6,8 +6,49 @@ $text-color: midnightblue;
 .wraper {
     padding: 20px;
     min-height: 100px;
-    button {
-        border-radius: 10px;
-    }
+    .dialogbutton {
+        #yes {
+            background-color: $background-dark;
+            color: white;
+            padding: 10px;
+            padding-left: 15px;
+            padding-right: 15px;
+            margin: 10px;
+            font-weight: bold;
+            border-radius: 10px;
+        }
+        #yes:hover {
+            background-color: mix($background-dark, black, 80%);
+            color: white;
+            font-weight: bold;
+        }
 
+        #yes:active {
+            background-color: mix($background-dark, black, 70%);
+            font-weight: bold;
+        }
+        #no {
+            background-color: rgb(255, 86, 86);
+            color: white;
+            padding: 10px;
+            padding-left: 13px;
+            padding-right: 13px;
+            font-weight: bold;
+            border-radius: 10px;
+        }
+        #no:hover {
+            background-color: mix(rgb(255, 86, 86), black, 80%);
+            color: white;
+            font-weight: bold;
+        }
+
+        #no:active {
+            background-color: mix(rgb(255, 86, 86), black, 70%);
+            font-weight: bold;
+        }
+
+        .flex-spacer {
+            flex-grow: 1;
+        }
+    }
 }

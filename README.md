@@ -158,15 +158,13 @@ Generación de códigos de seguridad de recuperación
 - Unificar CSS en variables globales
 - RECUPERACIÓN DE CONTRASEÑA A MEDIAS
 - Arreglar la validación de usuarios en createuser y updateuser
-- httpOptions en los services: añadir header Authorization: Bearer Token
 - Cambiar promise por observable
 - No se tiene que poder crear mas de un anuncio para el mismo elemento
-- PROBLEMA: No se puede eliminar un cromo recien creado (?)
 - hay que borrar los anuncios si se borra el elemento de la biblioteca
 - si ya tienes el elemento, tiene que aparecer en el anuncio
-- limitar cantidad de venta a lo que tienes
+- el filtrado de elementos no funciona
 
 ### LATE-STAGE
-- Proteger las rutas y borrar endpoints de desarrollo
+- Proteger las rutas y borrar endpoints de desarrollo, httpOptions en los services: añadir header Authorization: Bearer Token
 - Quitar todos los console.log
 - cerrar sesion nunca

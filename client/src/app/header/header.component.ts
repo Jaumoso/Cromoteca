@@ -25,9 +25,17 @@ export class HeaderComponent implements OnInit {
 
     loginSubscription: Subscription | undefined;
     loggedIn: boolean = false;
-    
+    isSmallScreen = false;
 
   ngOnInit() {
+
+    // Detectar si la pantalla es pequeña
+    this.isSmallScreen = window.innerWidth < 768;
+
+    // Escuchar cambios en el tamaño de la pantalla
+    window.addEventListener('resize', () => {
+      this.isSmallScreen = window.innerWidth < 1000;
+    });
     
     if(localStorage.getItem('token')){
       this.loggedIn = true;

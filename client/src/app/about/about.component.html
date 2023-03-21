@@ -1,91 +1,127 @@
-<div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" 
-fxLayoutAlign.xs="start center" fxLayoutAlign.sm="start center" fxLayoutAlign.gt-sm="center center" 
-fxLayoutGap="10px">
-    <div  class="header" fxFlex="40%" fxFlex.gt-sm="100%">
+<div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign.xs="start center"
+    fxLayoutAlign.sm="start center" fxLayoutAlign.gt-sm="center center" fxLayoutGap="10px">
+    <div class="header" fxFlex="40%" fxFlex.gt-sm="100%">
         <br>
-        <h2>Página de Ayuda</h2>
+        <h1>Ayuda</h1>
         <hr>
     </div>
 </div>
 
-<div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" 
-fxLayoutAlign.xs="start center" fxLayoutAlign.sm="start center" fxLayoutAlign.gt-sm="center center" 
-fxLayoutGap="10px">
+<div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign.xs="start center"
+    fxLayoutAlign.sm="start center" fxLayoutAlign.gt-sm="center center" fxLayoutGap="10px">
     <div fxFlex="40%" fxFlex.gt-sm="100%">
-        <div>
+        <!--         <div>
             <ul>
-                <li><i class="fa fa-question-circle"></i><a href="./preguntas.html"> Preguntas frecuentes (FAQ)</a></li>
                 <li><i class="fa fa-question-circle"></i><a href="./preguntas.html"> No encuentro una colección</a></li>
+                <li><i class="fa fa-question-circle"></i><a href="./preguntas.html"> Preguntas frecuentes (FAQ)</a></li>
                 <li><i class="fa fa-question-circle"></i><a href="./preguntas.html"> Normas</a></li>
                 <li><i class="fa fa-question-circle"></i><a href="./preguntas.html"> Consejos</a></li>
                 <li><i class="fa fa-question-circle"></i><a href="./preguntas.html"> Condiciones de uso y política de privacidad</a></li>
             </ul>
+        </div> -->
+        <div class="text-container" fxFlex="60%" fxFlex.gt-sm="100%">
+            <div class="secciones">
+
+                <div (click)="toggleContent('seccion1')">
+                    <h2 class="titulo">No encuentro una colección</h2>
+                    <div class="contenido" #contenido1>
+                        <p>
+                            Si no encuentras una colección, es probable que no la tengamos
+                            en nuesta base de datos. Proporcionanos información sobre la
+                            colección que quieres y la haremos aparecer en un santiamén.
+                            Para contactar con el equipo, búscanos en redes sociales:
+                        </p>
+                        <ul>
+                            <li><span class="fab fa-twitter"></span><a href="twitter.com">Twitter</a></li>
+                            <li><span class="fab fa-facebook"></span><a href="facebook.com">Facebook</a></li>
+                            <li><span class="fab fa-linkedin-in"></span><a href="linkedin.com">LinkedIn</a></li>
+                            <li><span class="fa fa-envelope"></span><a href="mailto:confusion@food.net">Gmail</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="desplegable" (click)="toggleContent('seccion2')">
+                    <h2 class="titulo">¿Cómo se añaden elementos a las colecciones?</h2>
+                    <div class="contenido" #contenido2>
+                        <p>
+                            No te preocupes que es muy fácil.
+                            Aquí te dejamos un vídeo en el que explicamos el proceso.
+                        </p>
+                        <div class="center">
+                            <iframe style="margin: 0 auto;" width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+                <div class="desplegable" (click)="toggleContent('seccion3')">
+                    <h2 class="titulo">¿Cómo creo un anuncio?</h2>
+                    <div class="contenido" #contenido3>
+                        <p>
+                            No te preocupes que es muy fácil.
+                            Aquí te dejamos un vídeo en el que explicamos el proceso.
+                        </p>
+                        <div class="center">
+                            <iframe style="margin: 0 auto;" width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="desplegable" (click)="toggleContent('seccion4')">
+                    <h2 class="titulo">Normas</h2>
+                    <div class="contenido" #contenido4>
+                        <p>
+                            "Lorem ipsum dolor sit amet, consectetur
+                            adipiscing elit, sed do eiusmod tempor
+                            incididunt ut labore et dolore magna aliqua.
+                            Ut enim ad minim veniam, quis nostrud exercitation
+                            ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                            Duis aute irure dolor in reprehenderit in voluptate velit
+                            esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+                            occaecat cupidatat non proident, sunt in culpa qui officia
+                            deserunt mollit anim id est laborum."
+                        </p>
+                    </div>
+                </div>
+
+                <div class="desplegable" (click)="toggleContent('seccion5')">
+                    <h2 class="titulo">Consejos</h2>
+                    <div class="contenido" #contenido5>
+                        <p>
+                            "Lorem ipsum dolor sit amet, consectetur
+                            adipiscing elit, sed do eiusmod tempor
+                            incididunt ut labore et dolore magna aliqua.
+                            Ut enim ad minim veniam, quis nostrud exercitation
+                            ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                            Duis aute irure dolor in reprehenderit in voluptate velit
+                            esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+                            occaecat cupidatat non proident, sunt in culpa qui officia
+                            deserunt mollit anim id est laborum."
+                        </p>
+                    </div>
+                </div>
+
+                <div class="desplegable" (click)="toggleContent('seccion6')">
+                    <h2 class="titulo">Condiciones de uso y política de privacidad</h2>
+                    <div class="contenido" #contenido6>
+                        <p>
+                            "Lorem ipsum dolor sit amet, consectetur
+                            adipiscing elit, sed do eiusmod tempor
+                            incididunt ut labore et dolore magna aliqua.
+                            Ut enim ad minim veniam, quis nostrud exercitation
+                            ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                            Duis aute irure dolor in reprehenderit in voluptate velit
+                            esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+                            occaecat cupidatat non proident, sunt in culpa qui officia
+                            deserunt mollit anim id est laborum."
+                        </p>
+                    </div>
+                </div>
+
+            </div>
         </div>
-    <div class="text-container" fxFlex="60%" fxFlex.gt-sm="100%"> 
-        <h2>Preguntas Frecuentes</h2>
-        <p>
-            "Lorem ipsum dolor sit amet, consectetur 
-            adipiscing elit, sed do eiusmod tempor 
-            incididunt ut labore et dolore magna aliqua. 
-            Ut enim ad minim veniam, quis nostrud exercitation 
-            ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-            Duis aute irure dolor in reprehenderit in voluptate velit 
-            esse cillum dolore eu fugiat nulla pariatur. Excepteur sint 
-            occaecat cupidatat non proident, sunt in culpa qui officia 
-            deserunt mollit anim id est laborum."
-        </p>
-        <hr>
-        <h2>No encuentro una colección</h2>
-        <p>
-            "Lorem ipsum dolor sit amet, consectetur 
-            adipiscing elit, sed do eiusmod tempor 
-            incididunt ut labore et dolore magna aliqua. 
-            Ut enim ad minim veniam, quis nostrud exercitation 
-            ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-            Duis aute irure dolor in reprehenderit in voluptate velit 
-            esse cillum dolore eu fugiat nulla pariatur. Excepteur sint 
-            occaecat cupidatat non proident, sunt in culpa qui officia 
-            deserunt mollit anim id est laborum."
-        </p>
-        <hr>
-        <h2>Normas</h2>
-        <p>
-            "Lorem ipsum dolor sit amet, consectetur 
-            adipiscing elit, sed do eiusmod tempor 
-            incididunt ut labore et dolore magna aliqua. 
-            Ut enim ad minim veniam, quis nostrud exercitation 
-            ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-            Duis aute irure dolor in reprehenderit in voluptate velit 
-            esse cillum dolore eu fugiat nulla pariatur. Excepteur sint 
-            occaecat cupidatat non proident, sunt in culpa qui officia 
-            deserunt mollit anim id est laborum."
-        </p>
-        <hr>
-        <h2>Consejos</h2>
-        <p>
-            "Lorem ipsum dolor sit amet, consectetur 
-            adipiscing elit, sed do eiusmod tempor 
-            incididunt ut labore et dolore magna aliqua. 
-            Ut enim ad minim veniam, quis nostrud exercitation 
-            ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-            Duis aute irure dolor in reprehenderit in voluptate velit 
-            esse cillum dolore eu fugiat nulla pariatur. Excepteur sint 
-            occaecat cupidatat non proident, sunt in culpa qui officia 
-            deserunt mollit anim id est laborum."
-        </p>
-        <hr>
-        <h2>Condiciones de uso y política de privacidad</h2>
-        <p>
-            "Lorem ipsum dolor sit amet, consectetur 
-            adipiscing elit, sed do eiusmod tempor 
-            incididunt ut labore et dolore magna aliqua. 
-            Ut enim ad minim veniam, quis nostrud exercitation 
-            ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-            Duis aute irure dolor in reprehenderit in voluptate velit 
-            esse cillum dolore eu fugiat nulla pariatur. Excepteur sint 
-            occaecat cupidatat non proident, sunt in culpa qui officia 
-            deserunt mollit anim id est laborum."
-        </p>
-        <br><br><br><br>
     </div>
-</div>

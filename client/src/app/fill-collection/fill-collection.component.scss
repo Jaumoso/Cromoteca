@@ -51,6 +51,26 @@ $text-color: midnightblue;
     }
 }
 
+.go-back {
+    width: 100px;
+    background-color: white;
+    color: black;
+    padding: 10px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    border-radius: 10px;
+}
+.go-back:hover {
+    background-color: mix($background-dark, black, 80%);
+    color: white;
+    font-weight: bold;
+}
+
+.go-back:active {
+    background-color: mix($background-dark, black, 70%);
+    font-weight: bold;
+}
+
 .collection-image {
     max-height: 300px;
     max-width: 300px;
@@ -86,6 +106,30 @@ mat-card {
         justify-content: center;
         align-items: center;
     }
+    .nuevo {
+        margin-left: 10px;
+        border-radius: 3px;
+        padding: 3px;
+        background-color: rgb(87, 243, 87);
+    }
+    .seminuevo {
+        margin-left: 10px;
+        border-radius: 3px;
+        padding: 3px;
+        background-color: rgb(250, 237, 54);
+    }
+    .usado {
+        margin-left: 10px;
+        border-radius: 3px;
+        padding: 3px;
+        background-color: rgb(255, 166, 33);
+    }
+    .roto {
+        margin-left: 10px;
+        border-radius: 3px;
+        padding: 3px;
+        background-color: rgb(221, 72, 72);
+    }
     .price {
         margin-left: 10px;
         border-radius: 3px;
@@ -93,7 +137,6 @@ mat-card {
         background-color: rgb(201, 201, 201);
     }
   }
-
   mat-card-actions {
     button {
         width: auto;

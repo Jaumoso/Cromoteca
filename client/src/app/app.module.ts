@@ -22,6 +22,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { MatMenuModule } from '@angular/material/menu';
 
 import { baseURL } from './shared/baseurl';
 import 'hammerjs';
@@ -104,6 +105,7 @@ import { AdvertdetailsComponent } from './advertdetails/advertdetails.component'
     ScrollingModule,
     MatPaginatorModule,
     MatSortModule,
+    MatMenuModule,
   ],
   providers: [
     { provide: 'BaseURL', useValue: baseURL },
