@@ -15,11 +15,11 @@ jobs:
          - name: install
            run: |
             cd client
-            npm install
+            yarn install
          - name: build
            run: |
             cd client
-            npm run build
+            yarn build
          #- name: test
          # run: |
          #  cd client
@@ -40,11 +40,11 @@ jobs:
          - name: install
            run: |
             cd server
-            npm install
+            yarn install
          - name: build
            run: |
             cd server
-            npm run build
+            yarn build
          #- name: test
          #  run: |
          #   cd server
