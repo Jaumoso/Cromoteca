@@ -153,18 +153,9 @@ Generación de códigos de seguridad de recuperación
 
 # TO-DO:
 
-- Layout para pantallas pequeñas y grandes
 - Mat Spinner
-- Unificar CSS en variables globales
 - RECUPERACIÓN DE CONTRASEÑA A MEDIAS
-- Arreglar la validación de usuarios en createuser y updateuser
-- Cambiar promise por observable
-- No se tiene que poder crear mas de un anuncio para el mismo elemento
-- hay que borrar los anuncios si se borra el elemento de la biblioteca
-- si ya tienes el elemento, tiene que aparecer en el anuncio
-- el filtrado de elementos no funciona
+- el filtrado en las tablas de market y adverts no funciona
 
 ### LATE-STAGE
 - Proteger las rutas y borrar endpoints de desarrollo, httpOptions en los services: añadir header Authorization: Bearer Token
-- Quitar todos los console.log
-- cerrar sesion nunca

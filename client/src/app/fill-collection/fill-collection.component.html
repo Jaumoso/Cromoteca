@@ -111,7 +111,7 @@
                 <mat-card-actions fxLayoutAlign.lt-md="center start">
                   <div fxLayout.gt-sm="column" fxLayout.lt-sm="row" fxLayout.sm="row">
                     <!-- TODO: no funciona como debería -->
-                    <button *ngIf="adverts.includes(card.cardId!)" [routerLink]="['/market']">Ver Anuncio</button>
+                    <button *ngIf="adverts.includes(card.cardId!)" [routerLink]="['/adverts']">Ver Anuncio</button>
                     <button (click)="deleteElement(card)">Eliminar</button>
                   </div>
                 </mat-card-actions>

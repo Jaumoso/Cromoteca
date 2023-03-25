@@ -50,9 +50,7 @@ export class AdvertService {
     }
 
     async createAdvert(advertDto: CreateAdvertDto ): Promise<AdvertDocument> {
-        console.log(advertDto);
         const newAdvert = await this.advertModel.create(advertDto);
-        console.log(newAdvert);
         if (!newAdvert) {
             throw new NotFoundException('Could not create advert!');
         }

@@ -43,7 +43,6 @@ export class LoginComponent implements OnInit {
       this.authService.login(this.username.value, this.password.value)
       .then(
         (token) => {
-          console.log(token);
           console.log("User logged in successfully");
           if(token){
             this.loginStatusService.loggedIn = true;

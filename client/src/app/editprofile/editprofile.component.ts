@@ -33,7 +33,6 @@ export class EditprofileComponent implements OnInit {
     private accountService: AccountService,
     private router: Router,
     public dialog: MatDialog,
-    private route: ActivatedRoute,
     private snackBar: MatSnackBar
     ){
       this.form = this.formBuilder.group({
@@ -82,23 +81,29 @@ export class EditprofileComponent implements OnInit {
 
   ngOnInit(): void {
       
-    this.token = localStorage.getItem('token');
-    if (this.token) {
-      this.decodedToken = this.jwtService.decodeToken(this.token);
+    const token = localStorage.getItem('token');
+    if (token) {
+      if(!this.jwtService.isTokenExpired(token)){
+        this.decodedToken = this.jwtService.decodeToken(token);
+      }
+      else{
+          this.router.navigateByUrl('/home');
+      }
     }
 
     // GET User y Address
-    this.route.paramMap.pipe(
-      mergeMap(() => { return this.userService.getUser(this.decodedToken._id) }),
-      mergeMap((userData) => { 
-        this.user = userData;
-        this.user.password = '';
-        return this.addressService.getAddress(this.decodedToken.addressId)}))
-      .subscribe(addressData => {
-        this.address = addressData;
-      });
+
+    this.userService.getUser(this.decodedToken._id)
+    .then((userData) => {
+      this.user = userData;
+      this.user.password = '';
+    });
+    this.addressService.getAddress(this.decodedToken.addressId)
+    .then((addressData) => {
+      this.address = addressData;
+    });
   }
-  private token: any;
+
   private decodedToken: any;
   form: FormGroup;
   updateForm: FormGroup | undefined;

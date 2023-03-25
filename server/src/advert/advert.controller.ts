@@ -23,8 +23,7 @@ export class AdvertController {
             return response.status(err.status).json(err.response);
         }
     }
-
-    /* @UseGuards(JwtAuthGuard) */
+    
     @Get(':id')
     @ApiCreatedResponse({ description: 'This function will get ONE ADVERT from the database.' })
     async getAdvert(@Res() response, @Param('id') advertId: string) {
@@ -39,8 +38,9 @@ export class AdvertController {
         }
     }
 
+    @UseGuards(JwtAuthGuard)
     @Get('user/:id')
-    @ApiCreatedResponse({ description: 'This function will get ONE ADVERT from the database.' })
+    @ApiCreatedResponse({ description: 'This function will get ALL the ADVERTS from one user from the database.' })
     async getUserAdverts(@Res() response, @Param('id') userId: string) {
         try {
             const advertData = await this.advertService.getUserAdverts(userId);
@@ -53,8 +53,9 @@ export class AdvertController {
         }
     }
 
+    @UseGuards(JwtAuthGuard)
     @Get('user/:cardId')
-    @ApiCreatedResponse({ description: 'This function will get ONE ADVERT from the database.' })
+    @ApiCreatedResponse({ description: 'This function will get ONE ADVERT based on the card that contains from the database.' })
     async getAdvertByCard(@Res() response, @Param('id') cardId: string) {
         try {
             const advertData = await this.advertService.getAdvertByCard(cardId);
@@ -67,8 +68,9 @@ export class AdvertController {
         }
     }
 
+    @UseGuards(JwtAuthGuard)
     @Get('checkadvert/:elementId')
-    @ApiCreatedResponse({ description: 'This function will get ONE ADVERT from the database.' })
+    @ApiCreatedResponse({ description: 'This function will check if exists an advert for the element as a parameter.' })
     async checkExistingAdvert(@Res() response, @Param('elementId') elementId: string) {
         try {
             const advertData = await this.advertService.checkExistingAdvert(elementId);
@@ -81,10 +83,10 @@ export class AdvertController {
         }
     }
 
+    @UseGuards(JwtAuthGuard)
     @Post('new')
-    @ApiCreatedResponse({ description: 'Creation of a NEW ADDRESS and insertion in the database.' })
+    @ApiCreatedResponse({ description: 'Creation of a NEW ADVERT and insertion in the database.' })
     async createAdvert(@Res() response, @Body() createAdvertDto: CreateAdvertDto) {
-        console.log(createAdvertDto);
         try {
             const newAdvert = await this.advertService.createAdvert(createAdvertDto);
             return response.status(HttpStatus.CREATED).json({
@@ -100,9 +102,9 @@ export class AdvertController {
         }
     }
 
-    /* @UseGuards(JwtAuthGuard) */
+/*     @UseGuards(JwtAuthGuard)
     @Put('update/:id')
-    @ApiCreatedResponse({ description: 'UPDATE te data of the ADDRESS into the database.' })
+    @ApiCreatedResponse({ description: 'UPDATE te data of the Advert into the database.' })
     async updateAdvert(@Res() response, @Param('id') aadvertId: string, @Body() updateAdvertDto: UpdateAdvertDto) {
         try {
             const existingAdvert = await this.advertService.updateAdvert(aadvertId, updateAdvertDto);
@@ -114,8 +116,9 @@ export class AdvertController {
         catch (err) {
             return response.status(err.status).json(err.response);
         }
-    }
+    } */
     
+    @UseGuards(JwtAuthGuard)
     @Delete('delete/:id')
     @ApiCreatedResponse({ description: 'This function will DELETE the Advert with the ID passed as parameter from the database.' })
     async deleteAdvert(@Res() response, @Param('id') advertId: string) {
@@ -131,6 +134,7 @@ export class AdvertController {
         }
     }
 
+    @UseGuards(JwtAuthGuard)
     @Delete('deletecard/:id')
     @ApiCreatedResponse({ description: 'This function will DELETE the Advert with the ID passed as parameter from the database.' })
     async deleteAdvertCard(@Res() response, @Param('id') cardId: string) {

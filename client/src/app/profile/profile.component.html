@@ -12,11 +12,11 @@
             <img src="/assets/images/profile-default.png" height="150px" width="150px" alt="profile-pic" fxLayoutAlign="center">
         </div>
         <div fxLayoutAlign="center" fxLayout="column" fxLayoutGap="10px">
-            <button mat-button [routerLink]="['/editprofile',user?._id]" routerLinkActive="router-link-active">Actualizar Información</button>
+            <button mat-button [routerLink]="['/editprofile']" routerLinkActive="router-link-active">Actualizar Información</button>
             <button mat-button (click)="logOut()" routerLinkActive="router-link-active">Cerrar Sesión</button>
         </div>
         <div fxLayoutAlign="center start" fxLayout="column" fxLayoutGap="10px">
-            <button mat-button [routerLink]="['/adverts',user?._id]" routerLinkActive="router-link-active">Anuncios</button>
+            <button mat-button [routerLink]="['/adverts']" routerLinkActive="router-link-active">Anuncios</button>
         </div>
     </div>
     <div fxFlex="60%" fxLayout="column">

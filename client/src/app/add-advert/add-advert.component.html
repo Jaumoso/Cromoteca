@@ -5,8 +5,16 @@
   </mat-toolbar>
   
   <form novalidate [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div>
+      <span class="span-id"># {{data.card.cardId}}</span>
+      <span class="span-name">{{data.card.name}}</span>
+      <span *ngIf="data.card.state == 'NUEVO'" class="nuevo span-state">{{data.card.state}}</span>
+      <span *ngIf="data.card.state == 'SEMINUEVO'" class="seminuevo span-state">{{data.card.state}}</span>
+      <span *ngIf="data.card.state == 'USADO'" class="usado span-state">{{data.card.state}}</span>
+      <span *ngIf="data.card.state == 'ROTO'" class="roto span-state">{{data.card.state}}</span>
+    </div>
+    <br>
     <mat-dialog-content>
-        {{data.card.cardId}} {{data.card.name}} {{data.card.state}}
         <mat-form-field>
           <textarea matInput [formControl]="description" required name="description" placeholder="Descripción del anuncio..."></textarea>
           <mat-error *ngIf="this.form.get('description')?.errors?.['required']">Descripción requerida.</mat-error>

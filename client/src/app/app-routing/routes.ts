@@ -20,11 +20,11 @@ export const routes: Routes = [
     { path: 'collectiondetails/:id', component: CollectiondetailsComponent},
     { path: 'market', component: MarketComponent},
     { path: 'profile', component: ProfileComponent},
-    { path: 'editprofile/:id', component: EditprofileComponent},
+    { path: 'editprofile', component: EditprofileComponent},
     { path: 'passwordchange', component: PasswordchangeComponent},
     { path: 'createaccount', component: CreateaccountComponent},
     { path: 'fillcollection/:id', component: FillCollectionComponent},
-    { path: 'adverts/:id', component: AdvertsComponent},
+    { path: 'adverts', component: AdvertsComponent},
     { path: 'advertdetails/:id', component: AdvertdetailsComponent },
     { path: '', redirectTo: '/home', pathMatch: 'full'}
 ];

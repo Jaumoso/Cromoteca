@@ -29,8 +29,7 @@ import { Address } from '../shared/address';
       return new Promise((resolve, reject) => {
         this.http.post<{newAddress: Address}>(baseURL + 'address/new', address, httpOptions)
         .subscribe(address => {
-          resolve(address.newAddress);
-          console.log(address);
+          resolve(address.newAddress)
         }, err => {
           reject(err);
         });

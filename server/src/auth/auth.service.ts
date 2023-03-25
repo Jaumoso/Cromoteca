@@ -17,7 +17,7 @@ export class AuthService {
         if (!passwordValid) {
             throw new NotAcceptableException('La contraseña no es válida');
         }
-        // ! Devuelve el usuario sin username, password ni email, por seguridad.
+        // Devuelve el usuario sin username, password ni email
         if (user && passwordValid) {
             const { password, username, email, ... rest } = user;
             return rest;
@@ -41,7 +41,7 @@ export class AuthService {
             access_token: this.jwtService.sign(payload, {
                 algorithm: 'HS256',
                 secret: process.env.JWT_SECRET,
-                expiresIn: '120m'
+                expiresIn: '120m' // duración de la sesión. Cada 2 horas se necesita iniciar sesión de nuevo
             })
         };
     }

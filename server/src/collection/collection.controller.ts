@@ -39,7 +39,7 @@ export class CollectionController {
     }
 
     // FUNCIONES PARA ADMINISTRADOR
-    @Post('new')
+/*     @Post('new')
     @ApiCreatedResponse({ description: 'Creation of a NEW COLLECTION and insertion in the database.' })
     async createCollection(@Res() response, @Body() collectionDto: CreateCollectionDto) {
         try {
@@ -56,9 +56,9 @@ export class CollectionController {
                 error: 'Bad Request'
             });
         }
-    }
+    } */
 
-    @Put('update/:id')
+/*     @Put('update/:id')
     @ApiCreatedResponse({ description: 'UPDATE te data of the COLLECTION into the database.' })
     async updateCollection(@Res() response, @Param('id') collectionId: string, @Body() updateCollectionDto: UpdateCollectionDto) {
         try {
@@ -71,9 +71,9 @@ export class CollectionController {
         catch (err) {
             return response.status(err.status).json(err.response);
         }
-    }
+    } */
 
-    @Delete('delete/:id')
+/*     @Delete('delete/:id')
     @ApiCreatedResponse({ description: 'This function will DELETE the COLLECTION passed as parameter from the database.' })
     async deleteCollection(@Res() response, @Param('id') collectionId: string) {
         try {
@@ -86,5 +86,5 @@ export class CollectionController {
         catch (err) {
             return response.status(err.status).json(err.response);
         }
-    }
+    } */
 }

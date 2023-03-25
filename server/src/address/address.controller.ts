@@ -10,7 +10,7 @@ import { UpdateAddressDto } from './dto/updateAddress.dto';
 export class AddressController {
     constructor(private readonly addressService: AddressService) { }
 
-    @Get()
+/*     @Get()
     @ApiCreatedResponse({ description: 'This function will get ALL the ADDRESSESS from the database.' })
     async getAddressess(@Res() response) {
         try {
@@ -22,7 +22,7 @@ export class AddressController {
         catch (err) {
             return response.status(err.status).json(err.response);
         }
-    }
+    } */
 
     @UseGuards(JwtAuthGuard)
     @Get(':id')
@@ -73,6 +73,7 @@ export class AddressController {
         }
     }
     
+    @UseGuards(JwtAuthGuard)
     @Delete('delete/:id')
     @ApiCreatedResponse({ description: 'This function will DELETE the Address with the ID passed as parameter from the database.' })
     async deleteAddress(@Res() response, @Param('id') addressId: string) {

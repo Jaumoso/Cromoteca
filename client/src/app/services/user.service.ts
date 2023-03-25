@@ -87,7 +87,6 @@ import { LoginStatusService } from './loginStatus.service';
       return new Promise((resolve, reject) => {
         this.http.get<{userData: User[]}>(baseURL + 'user/checkexistinguser/' + username + '/' + email)
         .subscribe(user => {
-          console.log(user)
           if(user){
             resolve(true);
           }

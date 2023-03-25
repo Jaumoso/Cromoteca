@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { ActivatedRoute, Params} from '@angular/router';
+import { ActivatedRoute, Params, Router} from '@angular/router';
 import { switchMap } from 'rxjs';
 import { CollectionService } from '../services/collection.service';
 import { JwtService } from '../services/jwt.service';
@@ -34,6 +34,7 @@ export class FillCollectionComponent implements OnInit {
     public createAdvertDialog: MatDialog,
     private snackBar: MatSnackBar,
     private advertService: AdvertService,
+    private router: Router,
   ) { }
 
   collection: Collection | undefined;
@@ -57,8 +58,12 @@ export class FillCollectionComponent implements OnInit {
       });
     
     // recoge el token de sesión y recupera info de usuario
+
     const token = localStorage.getItem('token');
     if(token){
+      if(this.jwtService.isTokenExpired(token)){
+        this.router.navigateByUrl('/home');
+      }
       const decodedToken = this.jwtService.decodeToken(token);
       this.userId = decodedToken._id;
       this.intermediateService.getIntermediate(decodedToken._id)
@@ -206,7 +211,6 @@ export class FillCollectionComponent implements OnInit {
     // recuperar información del diálogo y crear el anuncio
     dialogRef.afterClosed().subscribe(result => {
       if(result && result.advert){
-        console.log(result.advert)
         this.advertService.createAdvert(result.advert)
         .subscribe(data => {
           this.adverts.push(card.cardId!);

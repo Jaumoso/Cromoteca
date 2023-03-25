@@ -37,11 +37,9 @@ import { catchError, map, Observable, of } from 'rxjs';
         this.http.get<{advertData: Advert[]}>(baseURL + 'advert/checkadvert/' + card_id)
         .subscribe(user => {
           if(user.advertData.length > 0){
-            console.log(true);
             resolve(true);
           }
           else{
-            console.log(false);
              resolve(false);
           }
         }, err => {

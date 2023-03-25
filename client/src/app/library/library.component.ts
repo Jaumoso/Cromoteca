@@ -31,7 +31,6 @@ export class LibraryComponent implements OnInit {
       .then((collections: Collection[]) => {
         this.collections = collections;
         this.filteredCollections = collections;
-        console.log(this.collections);
       })
       .catch(err => this.errmsg = err);
     }

@@ -10,8 +10,8 @@ import { UpdateCardDto } from "./dto/updateCard.dto";
 @Controller('card')
 export class CardController {
     constructor(private readonly cardService: CardService) { }
-
-    @Get()
+    
+/*     @Get()
     @ApiCreatedResponse({ description: 'This function will get ALL the CARDS from the database.' })
     async getCards(@Res() response) {
         try {
@@ -23,7 +23,7 @@ export class CardController {
         catch (err) {
             return response.status(err.status).json(err.response);
         }
-    }
+    } */
 
     @Get(':id')
     @ApiCreatedResponse({ description: 'This function will get ONE CARD INFO from the database.' })
@@ -38,7 +38,8 @@ export class CardController {
             return response.status(err.status).json(err.response);
         }
     }
-
+    
+    @UseGuards(JwtAuthGuard)
     @Get(':id1/:id2')
     @ApiCreatedResponse({ description: 'This function will get ONE CARD INFO from the database.' })
     async getUserCardsCollection(@Res() response, @Param('id1') userId: string,  @Param('id2') collectionId: string) {
@@ -53,6 +54,7 @@ export class CardController {
         }
     }
 
+    @UseGuards(JwtAuthGuard)
     @Get('user/:userId')
     @ApiCreatedResponse({ description: 'This function will get ONE CARD INFO from the database.' })
     async getUserCards(@Res() response, @Param('userId') userId: string) {
@@ -67,6 +69,7 @@ export class CardController {
         }
     }
 
+    @UseGuards(JwtAuthGuard)
     @Post('new')
     @ApiCreatedResponse({ description: 'Creation of a NEW CARD and insertion in the database.' })
     async createCard(@Res() response, @Body() createCardDto: CreateCardDto) {
@@ -85,6 +88,7 @@ export class CardController {
         }
     }
 
+/*     @UseGuards(JwtAuthGuard)
     @Put('update/:id')
     @ApiCreatedResponse({ description: 'UPDATE te data of the CARD into the database.' })
     async updateCard(@Res() response, @Param('id') cardId: string, @Body() updateCardDto: UpdateCardDto) {
@@ -98,8 +102,9 @@ export class CardController {
         catch (err) {
             return response.status(err.status).json(err.response);
         }
-    }
+    } */
 
+    @UseGuards(JwtAuthGuard)
     @Delete('delete/:id')
     @ApiCreatedResponse({ description: 'This function will DELETE the CARD with the ID passed as parameter from the database.' })
     async deleteCard(@Res() response, @Param('id') cardId: string) {
@@ -115,6 +120,7 @@ export class CardController {
         }
     }
 
+    @UseGuards(JwtAuthGuard)
     @Delete('deletefromcollection/:userId/:collectionId')
     @ApiCreatedResponse({ description: 'Borrar todos los elementos de colecciones que contengan el id del usuario y el id de colección que se le pasa como argumento.' })
     async deleteUserCardsFromCollection(@Res() response, @Param('userId') userId: string, @Param('collectionId') collectionId: string) {
@@ -130,6 +136,7 @@ export class CardController {
         }
     }
 
+    @UseGuards(JwtAuthGuard)
     @Delete('deleteall/:id')
     @ApiCreatedResponse({ description: 'Borrar todos los elementos de colecciones que contengan el id del usuario que se le pasa como argumento.' })
     async deleteUserCards(@Res() response, @Param('id') userId: string) {

@@ -11,12 +11,12 @@ fxLayoutGap="10px">
         <div class="container">
             <h2>Colección: {{collection?.name}}</h2>
             <img src={{collection?.image}} alt={{collection?.name}}>
-            <div> <!--  -->
+            <div>
                 <button mat-button [routerLink]="['/collectiondetails',collection?._id]">Información de la colección a la que pertenece</button>
             </div>
         </div>
-        <div>
-            <button>Ponerse en contacto</button>
+        <div *ngIf="loggedIn">
+            <button (click)="sendEmail()">Ponerse en contacto</button>
         </div>
     </div>
 
@@ -38,32 +38,40 @@ fxLayoutGap="10px">
                 <td>{{card?.cardId}}</td>
             </tr>
             <tr>
-                <th>Estado del elemento:</th>
-                <td class="td-grey">{{card?.state}}</td>
+                <th>Cantidad ofertada:</th>
+                <td class="td-grey">{{advert?.quantity}}</td>
+            </tr>
+            <tr>
+                <th *ngIf="advert?.quantity == 1">Estado del elemento:</th>
+                <th *ngIf="advert?.quantity! > 1">Estado de los elementos:</th>
+                <td *ngIf="card?.state == 'NUEVO'"><span class="nuevo">{{card?.state}}</span></td>
+                <td *ngIf="card?.state == 'SEMINUEVO'"><span class="seminuevo">{{card?.state}}</span></td>
+                <td *ngIf="card?.state == 'USADO'"><span class="usado">{{card?.state}}</span></td>
+                <td *ngIf="card?.state == 'ROTO'"><span class="roto">{{card?.state}}</span></td>
             </tr>
             <tr>
                 <th>Descripción del anuncio:</th>
-                <td>{{advert?.description}}</td>
+                <td class="td-grey">{{advert?.description}}</td>
             </tr>
             <tr>
                 <th>Fecha de creación del anuncio:</th>
-                <td class="td-grey">{{advert?.createdDate | date:"dd/MM/yyyy - hh:mm a"}}</td>
+                <td>{{advert?.createdDate | date:"dd/MM/yyyy - hh:mm a"}}</td>
             </tr>
             <tr>
                 <th>Formato</th>
-                <td>{{collection?.format}}</td>
+                <td class="td-grey">{{collection?.format}}</td>
             </tr>
             <tr>
                 <th>Tema</th>
-                <td class="td-grey">{{collection?.theme}}</td>
+                <td>{{collection?.theme}}</td>
             </tr>
             <tr>
                 <th>Idioma</th>
-                <td>{{collection?.language}}</td>
+                <td class="td-grey">{{collection?.language}}</td>
             </tr>
             <tr>
                 <th>Vendedor:</th>
-                <td class="td-grey">{{seller?.username}} / {{seller?.firstName}}</td>
+                <td>{{seller?.username}} / {{seller?.firstName}}</td>
             </tr>
         </table>
     </div>

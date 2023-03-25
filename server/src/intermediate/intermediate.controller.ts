@@ -1,6 +1,7 @@
 import { Controller, Get, HttpStatus, Res } from '@nestjs/common';
-import { Body, Delete, Param, Post, Put } from '@nestjs/common/decorators';
+import { Body, Delete, Param, Post, Put, UseGuards } from '@nestjs/common/decorators';
 import { ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { CreateIntermediateDto } from './dto/createIntermediate.dto';
 import { UpdateIntermediateDto } from './dto/updateIntermediate.dto';
 import { IntermediateService } from './intermediate.service';
@@ -10,7 +11,7 @@ import { IntermediateService } from './intermediate.service';
 export class IntermediateController {
     constructor(private readonly intermediateService: IntermediateService) { }
 
-    @Get()
+/*     @Get()
     @ApiCreatedResponse({ description: 'This function will get ALL the INTERMEDIATES from the database.' })
     async getIntermediates(@Res() response) {
         try {
@@ -22,8 +23,9 @@ export class IntermediateController {
         catch (err) {
             return response.status(err.status).json(err.response);
         }
-    }
+    } */
 
+    @UseGuards(JwtAuthGuard)
     @Get(':id')
     @ApiCreatedResponse({ description: 'This function will get the INTERMEDIATE data from the intermediate with id passed as a parameter from the database.' })
     async getIntermediate(@Res() response, @Param('id') intermediateId: string) {
@@ -38,6 +40,7 @@ export class IntermediateController {
         }
     }
 
+    @UseGuards(JwtAuthGuard)
     @Get('/user/:id')
     @ApiCreatedResponse({ description: 'This function will get the COLLECTIONS from the USERs LIBRARY with id passed as a parameter from the database.' })
     async getUserIntermediate(@Res() response, @Param('id') userId: string) {
@@ -51,7 +54,7 @@ export class IntermediateController {
             return response.status(err.status).json(err.response);
         }
     }
-
+    
     @Post('new')
     @ApiCreatedResponse({ description: 'Creation of a NEW INTERMEDIATE and insertion in the database.' })
     async createIntermediate(@Res() response, @Body() intermediateDto: CreateIntermediateDto) {
@@ -71,6 +74,7 @@ export class IntermediateController {
         }
     }
 
+    @UseGuards(JwtAuthGuard)
     @Put('update/:id')
     @ApiCreatedResponse({ description: 'UPDATE te data of the INTERMEDIATE into the database.' })
     async updateIntermediate(@Res() response, @Param('id') intermediateId: string, @Body() updateIntermediateDto: UpdateIntermediateDto) {
@@ -86,6 +90,7 @@ export class IntermediateController {
         }
     }
 
+    @UseGuards(JwtAuthGuard)
     @Delete('delete/:id')
     @ApiCreatedResponse({ description: 'This function will DELETE the INTERMEDIATE passed as parameter from the database.' })
     async deleteIntermediate(@Res() response, @Param('id') intermediateId: string) {
@@ -101,6 +106,7 @@ export class IntermediateController {
         }
     }
 
+    @UseGuards(JwtAuthGuard)
     @Delete('deleteuser/:id')
     @ApiCreatedResponse({ description: 'This function will DELETE the INTERMEDIATE passed as parameter from the database.' })
     async deleteUserIntermediate(@Res() response, @Param('id') userId: string) {

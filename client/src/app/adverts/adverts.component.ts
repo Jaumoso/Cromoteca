@@ -8,6 +8,8 @@ import { AdvertInfoService } from '../services/advertInfo.service';
 import { Location } from '@angular/common';
 import { AdvertService } from '../services/advert.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { UserService } from '../services/user.service';
+import { JwtService } from '../services/jwt.service';
 
 export interface AdvertTable {
   name: string;
@@ -39,24 +41,27 @@ export class AdvertsComponent implements OnInit {
     private advertService: AdvertService,
     private route: ActivatedRoute,
     private location: Location,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private jwtService: JwtService,
     ) {
     this.dataSource = new MatTableDataSource(this.ELEMENT_DATA); 
   }
 
   ngOnInit() {
+    const token = localStorage.getItem('token');
+    if(token){
+      if(!this.jwtService.isTokenExpired(token)){
+        const decodedToken = this.jwtService.decodeToken(token);
 
-    this.route.paramMap.pipe(
-      switchMap((params: Params) => {
-        return this.advertInfoService.getUserAdvertInfo(params['get']('id'));
-      }))
-    .subscribe((adverts) => {
-      console.log(adverts);
-        this.ELEMENT_DATA = adverts;
-        this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
-        this.dataSource.paginator = this.paginator!;
-        this.dataSource.sort = this.sort!;
-    });
+        this.advertInfoService.getUserAdvertInfo(decodedToken._id)
+        .subscribe((adverts) => {
+          this.ELEMENT_DATA = adverts;
+          this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+          this.dataSource.paginator = this.paginator!;
+          this.dataSource.sort = this.sort!;
+        });
+      }
+    }
   }
 
   ngAfterViewInit() {

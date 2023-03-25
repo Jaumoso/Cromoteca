@@ -44,7 +44,6 @@ export class AccountService {
 
   async updateAccount(addressId: string, address: Address, userId: string, user: User) {
     try {
-      console.log(address.postalCode)
       this.addressService.updateAddress(addressId, address)
       .then(() => {
         this.userService.updateUser(userId, user);

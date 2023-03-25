@@ -36,13 +36,11 @@ export class PasswordchangeComponent implements OnInit {
 
   sendEmail() {
     if(this.sendEmailForm.valid){
-    console.log(this.sendEmailForm.value.email);
     this.userService.checkEmail(this.sendEmailForm.value.email)
     .then((userExists) => {
       if(userExists){
         // TODO: FALTA IMPLEMENTAR
         this.emailButton = true;
-        console.log(this.emailValidation.value);
       }
     });
     }

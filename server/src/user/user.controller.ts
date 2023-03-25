@@ -11,7 +11,7 @@ import { UserService } from "./user.service";
 export class UserController {
     constructor(private readonly userService: UserService) { }
 
-    @Get()
+/*     @Get()
     @ApiCreatedResponse({ description: 'This function will get ALL the USERS from the database.' })
     async getUsers(@Res() response) {
         try {
@@ -23,7 +23,7 @@ export class UserController {
         catch (err) {
             return response.status(err.status).json(err.response);
         }
-    }
+    } */
 
     @Get(':id')
     @ApiCreatedResponse({ description: 'This function will get ONE USER INFO from the database.' })
@@ -40,7 +40,7 @@ export class UserController {
     }
 
     @Get('checkemail/:id')
-    @ApiCreatedResponse({ description: 'This function will get ONE USER INFO from the database.' })
+    @ApiCreatedResponse({ description: 'This function will check if email exists already in the database.' })
     async checkEmail(@Res() response, @Param('id') email: string) {
         try {
             const userData = await this.userService.checkEmail(email);
@@ -52,9 +52,9 @@ export class UserController {
             return response.status(err.status).json(err.response);
         }
     }
-
+    
     @Get('checkexistinguser/:id1/:id2')
-    @ApiCreatedResponse({ description: 'This function will get ONE USER INFO from the database.' })
+    @ApiCreatedResponse({ description: 'This function will check if a user exists in the database based on email and username' })
     async checkExistingUser(@Res() response, @Param('id1') username: string, @Param('id2') email: string) {
         try {
             const userData = await this.userService.checkExistingUser(username, email);
@@ -85,6 +85,7 @@ export class UserController {
         }
     }
 
+    @UseGuards(JwtAuthGuard)
     @Put('update/:id')
     @ApiCreatedResponse({ description: 'UPDATE te data of the USER into the database.' })
     async updateUser(@Res() response, @Param('id') userId: string, @Body() updateUserDto: UpdateUserDto) {
@@ -100,6 +101,7 @@ export class UserController {
         }
     }
 
+    @UseGuards(JwtAuthGuard)
     @Delete('delete/:id')
     @ApiCreatedResponse({ description: 'This function will DELETE the USER with the ID passed as parameter from the database.' })
     async deleteUser(@Res() response, @Param('id') userId: string) {

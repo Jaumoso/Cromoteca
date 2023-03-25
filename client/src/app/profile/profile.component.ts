@@ -38,7 +38,12 @@ export class ProfileComponent implements OnInit {
 
     this.token = localStorage.getItem('token');
     if (this.token) {
-      this.decodedToken = this.jwtService.decodeToken(this.token);
+      if(!this.jwtService.isTokenExpired(this.token)){
+        this.decodedToken = this.jwtService.decodeToken(this.token);
+      }
+      else{
+        this.router.navigateByUrl('/home');
+      }
     }
     
     // GET User y Address

@@ -14,7 +14,6 @@ export class AuthController {
     @ApiCreatedResponse({ description: 'Función de LOGIN' })
     @Post('/login')
     async login(@Request() req) {
-        /* console.log(req.user._doc) */
         return this.authService.login(req.user._doc);
     }
 

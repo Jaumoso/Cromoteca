@@ -44,7 +44,6 @@ import { map, Observable } from 'rxjs';
       return new Promise((resolve, reject) => {
         this.http.post<{newCard: Card}>(baseURL + 'card/new/', card, httpOptions)
         .subscribe(card => {
-          console.log(card)
           resolve(card.newCard);
         }, err => {
           reject(err);
@@ -71,7 +70,6 @@ import { map, Observable } from 'rxjs';
 
     // Borrar cartas cuando se borra la cuenta
     async deleteCards(userId: string): Promise<Card[]> {
-      console.log(userId)
       return new Promise((resolve, reject) => {
         this.http.delete<{cardData: Card[]}>(baseURL + 'card/deleteall/' + userId)
         .subscribe(cards => {
@@ -84,11 +82,9 @@ import { map, Observable } from 'rxjs';
 
     // Borrar cartas cuando se borra la colección de la biblioteca
     async deleteCardsFromCollection(userId: string, collectionId: string): Promise<Card[]> {
-      console.log(userId)
       return new Promise((resolve, reject) => {
         this.http.delete<{cardData: Card[]}>(baseURL + 'card/deletefromcollection/' + userId + '/' + collectionId)
         .subscribe(cards => {
-          console.log(cards);
           resolve(cards.cardData);
         }, err => {
           reject(err);

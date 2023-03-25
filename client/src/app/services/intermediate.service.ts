@@ -19,7 +19,6 @@ export class IntermediateService {
       this.http.get<{ intermediateData: Intermediate }>(baseURL + 'intermediate/user/' + userId)
         .subscribe(intermediate => {
           const collectionIds = intermediate.intermediateData.collectionId;
-          console.log('Collection IDs: ' + collectionIds);
           let collections: Collection[] = [];
           if (collectionIds != undefined) {
             for (let collectionId of collectionIds) {
@@ -72,7 +71,7 @@ export class IntermediateService {
     return new Promise((resolve, reject) => {
       this.http.put<{ updatedIntermediate: Intermediate }>(baseURL + 'intermediate/update/' + intermediateId, intermediate, httpOptions)
         .subscribe(intermediate => {
-          resolve(intermediate.updatedIntermediate); console.log(intermediate);
+          resolve(intermediate.updatedIntermediate);
         }, err => {
           reject(err);
         });

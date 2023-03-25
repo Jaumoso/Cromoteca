@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { switchMap } from 'rxjs';
 import { CollectionService } from '../services/collection.service';
 import { Collection } from '../shared/collection';
@@ -26,7 +26,8 @@ export class CollectiondetailsComponent implements OnInit {
     private dialog: MatDialog,
     private location: Location,
     private jwtService: JwtService,
-    private intermediateService: IntermediateService
+    private intermediateService: IntermediateService,
+    private router: Router
     ) { }
 
   collection: Collection | undefined;
@@ -36,6 +37,9 @@ export class CollectiondetailsComponent implements OnInit {
 
     const token = localStorage.getItem('token');
     if(token){
+      if(this.jwtService.isTokenExpired(token)){
+        this.router.navigateByUrl('/home');
+      }
       const decodedToken = this.jwtService.decodeToken(token);
       this.intermediateService.getIntermediate(decodedToken._id)
       .then((intermediate) => {
@@ -49,7 +53,6 @@ export class CollectiondetailsComponent implements OnInit {
       }))
       .subscribe(collectionData => {
         this.collection = collectionData;
-        console.log(this.collection._id)
       });
   }
 
