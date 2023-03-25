@@ -11,7 +11,8 @@ import { IntermediateService } from './intermediate.service';
 export class IntermediateController {
     constructor(private readonly intermediateService: IntermediateService) { }
 
-/*     @Get()
+    // ! TODO: habrá que hacer algo
+    @Get()
     @ApiCreatedResponse({ description: 'This function will get ALL the INTERMEDIATES from the database.' })
     async getIntermediates(@Res() response) {
         try {
@@ -23,7 +24,7 @@ export class IntermediateController {
         catch (err) {
             return response.status(err.status).json(err.response);
         }
-    } */
+    }
 
     @UseGuards(JwtAuthGuard)
     @Get(':id')

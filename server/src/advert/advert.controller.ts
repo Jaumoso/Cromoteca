@@ -102,7 +102,8 @@ export class AdvertController {
         }
     }
 
-/*     @UseGuards(JwtAuthGuard)
+    // ! TODO: habrá que hacer algo
+    @UseGuards(JwtAuthGuard)
     @Put('update/:id')
     @ApiCreatedResponse({ description: 'UPDATE te data of the Advert into the database.' })
     async updateAdvert(@Res() response, @Param('id') aadvertId: string, @Body() updateAdvertDto: UpdateAdvertDto) {
@@ -116,7 +117,7 @@ export class AdvertController {
         catch (err) {
             return response.status(err.status).json(err.response);
         }
-    } */
+    }
     
     @UseGuards(JwtAuthGuard)
     @Delete('delete/:id')

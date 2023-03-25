@@ -10,8 +10,9 @@ import { UserService } from "./user.service";
 @Controller('user')
 export class UserController {
     constructor(private readonly userService: UserService) { }
-
-/*     @Get()
+    
+    // ! TODO: habrá que hacer algo
+    @Get()
     @ApiCreatedResponse({ description: 'This function will get ALL the USERS from the database.' })
     async getUsers(@Res() response) {
         try {
@@ -23,7 +24,7 @@ export class UserController {
         catch (err) {
             return response.status(err.status).json(err.response);
         }
-    } */
+    }
 
     @Get(':id')
     @ApiCreatedResponse({ description: 'This function will get ONE USER INFO from the database.' })
