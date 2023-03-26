@@ -15,14 +15,16 @@ export class AuthService {
 
         const passwordValid = await bcrypt.compare(password, user.password)
         if (!passwordValid) {
-            throw new NotAcceptableException('La contraseña no es válida');
+            
         }
         // Devuelve el usuario sin username, password ni email
-        if (user && passwordValid) {
+        if (passwordValid) {
             const { password, username, email, ... rest } = user;
             return rest;
         }
-        return null;
+        else{
+            throw new NotAcceptableException('La contraseña no es válida');
+        }
     }
 
     async login(user: any) {

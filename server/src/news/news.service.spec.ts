@@ -1,7 +1,7 @@
 import { getModelToken } from '@nestjs/mongoose';
 import { Test, TestingModule } from '@nestjs/testing';
 import { MongoMemoryServer } from 'mongodb-memory-server';
-import mongoose, { Connection, Model, connect } from 'mongoose';
+import { Connection, Model, connect } from 'mongoose';
 import { NewsService } from './news.service';
 import { News, NewsSchema } from './schema/news.schema';
 

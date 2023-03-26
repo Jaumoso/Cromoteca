@@ -26,9 +26,8 @@ export class IntermediateService {
                 .then((collection) => collections.push(collection));
             }
           }
-          if (collections != undefined) {
-            resolve(collections);
-          }
+          resolve(collections);
+          
         }, err => {
           reject(err);
         });

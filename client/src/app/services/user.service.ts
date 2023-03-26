@@ -90,7 +90,6 @@ import { baseURL } from '../shared/baseurl';
           }
         }, err => {
           resolve(false);
-          reject(err);
         });
       });
     }

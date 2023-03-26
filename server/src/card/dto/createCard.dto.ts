@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsBoolean, IsNotEmpty, IsNumber, IsString} from 'class-validator';
+import { IsNotEmpty, IsNumber, IsString} from 'class-validator';
 import mongoose from 'mongoose';
 
 export class CreateCardDto {
@@ -63,26 +63,6 @@ export class CreateCardDto {
   @IsNotEmpty()
   @IsString()
   image: string; */
-
-
-// ! NO TIENEN SENTIDO ESTAS DOS
-/*   @ApiProperty({
-    type: Boolean,
-    description: 'Bool de si tengo el cromo o no.',
-    example: true
-  })
-  @IsNotEmpty()
-  @IsBoolean()
-  ihaveit: boolean;
-
-  @ApiProperty({
-    type: Boolean,
-    description: 'Bool de si quiero el cromo o no.',
-    example: false
-  })
-  @IsNotEmpty()
-  @IsBoolean()
-  iwantit: boolean; */
 
   @ApiProperty({
     type: String,

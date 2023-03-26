@@ -68,13 +68,14 @@ export class CardService {
 
     async deleteUserCards(userId: string): Promise<CardDocument[]> {
         const userCards = await this.cardModel.find({ userId: userId });
-        userCards.forEach(async card => {
-            await this.cardModel.findByIdAndDelete({ _id: card._id });
-        });
-
-      if (!userCards) {
-        throw new NotFoundException(`Cards for user ${userId} not found`);
-      }
+        if (!userCards) {
+            throw new NotFoundException(`Cards for user ${userId} not found`);
+        }
+        else{
+            userCards.forEach(async card => {
+                await this.cardModel.findByIdAndDelete({ _id: card._id });
+            });
+        }
       return userCards;
     }
 

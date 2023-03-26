@@ -27,13 +27,6 @@ export class Card {
 /*     @Prop()
     image: string; */
 
-    // ! no tienen sentido estas dos
-/*     @Prop()
-    ihaveit: boolean;
-
-    @Prop()
-    iwantit: boolean; */
-
     @Prop()
     state: string;
 

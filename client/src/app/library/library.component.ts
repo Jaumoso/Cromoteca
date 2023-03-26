@@ -58,9 +58,7 @@ export class LibraryComponent implements OnInit {
         .includes(this.searchText.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')); 
       
       if(collection.name != undefined && collection.description != undefined){
-        return (
-          (!this.searchText || isMatch(collection.name) || isMatch(collection.description) || isMatch(collection.theme!) || isMatch(collection.format!) || isMatch(collection.year!.toString()))
-        );
+        return (!this.searchText || isMatch(collection.name) || isMatch(collection.description) || isMatch(collection.theme!) || isMatch(collection.format!) || isMatch(collection.year!.toString()));
       }
       return this.collections;
     });

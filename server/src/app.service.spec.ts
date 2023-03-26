@@ -1,7 +1,6 @@
-import { getModelToken } from '@nestjs/mongoose';
 import { Test, TestingModule } from '@nestjs/testing';
 import { MongoMemoryServer } from 'mongodb-memory-server';
-import { Connection, Model, connect } from 'mongoose';
+import { Connection, connect } from 'mongoose';
 import { AppService } from './app.service';
 
 describe('AppService', () => {
