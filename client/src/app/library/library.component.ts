@@ -47,14 +47,15 @@ export class LibraryComponent implements OnInit {
     if (!this.searchText) {
       return this.collections;
     }
+    
     // Filter the collections based on the search text and category
-    return this.filteredCollections = this.collections.filter((collection) => {
+    const filteredCollections = this.collections.filter((collection) => {
       const isMatch = (str: string) =>
         str
         .toLowerCase()
-        .normalize('NFD') // descomponer caracteres acentuados en componentes Unicode
-        .replace(/[\u0300-\u036f]/g, '') // eliminar diacríticos mediante una expresión regular
-        .includes(this.searchText.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')); // realizar comparación
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .includes(this.searchText.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')); 
       
       if(collection.name != undefined && collection.description != undefined){
         return (
@@ -63,7 +64,10 @@ export class LibraryComponent implements OnInit {
       }
       return this.collections;
     });
-  }
+    
+    this.filteredCollections = filteredCollections;
+    return filteredCollections;
+}
 
   deleteFromLibrary(collection: Collection) {
     // se abre el diálogo
