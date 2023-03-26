@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { Location } from '@angular/common';
 import { User } from '../shared/user';
@@ -8,7 +8,6 @@ import { AddressService } from '../services/address.service';
 import { MatDialog } from '@angular/material/dialog';
 import { Address } from '../shared/address';
 import { JwtService } from '../services/jwt.service';
-import { mergeMap } from 'rxjs';
 import { LoginComponent } from '../login/login.component';
 import { AuthService } from '../services/auth.service';
 import { ErrorStateMatcher } from '@angular/material/core';

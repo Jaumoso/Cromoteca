@@ -2,11 +2,6 @@ import { Injectable } from '@angular/core';
 import { User } from '../shared/user';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { baseURL } from '../shared/baseurl';
-import { AddressService } from './address.service';
-import { IntermediateService } from './intermediate.service';
-import { CardService } from './card.service';
-import { LoginStatusService } from './loginStatus.service';
-
 @Injectable({
     providedIn: 'root'
   })

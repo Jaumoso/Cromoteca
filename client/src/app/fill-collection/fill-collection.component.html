@@ -44,7 +44,7 @@
           <div fxFlex.lt-sm="100%" fxFlex.sm="100%" fxFlex.gt-sm="50%" *ngFor="let card of cards let i=index">
             
             <!-- Si no tiene anuncio creado -->
-            <mat-card *ngIf="!adverts.includes(card.cardId!)" fxLayout.gt-sm="row" fxFlex="100%" fxLayout.lt-sm="column" id={{card.cardId}}>
+            <mat-card *ngIf="!adverts.includes(card._id!)" fxLayout.gt-sm="row" fxFlex="100%" fxLayout.lt-sm="column" id={{card.cardId}}>
               <div fxFlex="auto">
                 <mat-card-header fxLayoutAlign.lt-md="center start">
                   <mat-card-title class="identifier">#{{card.cardId}}</mat-card-title>
@@ -73,7 +73,7 @@
               <div fxFlex="auto" fxLayoutAlign="end center" fxLayoutAlign.lt-sm="center center">
                 <mat-card-actions fxLayoutAlign.lt-md="center start">
                   <div fxLayout.gt-sm="column" fxLayout.lt-sm="row" fxLayout.sm="row">
-                    <button *ngIf="!adverts.includes(card.cardId!)" (click)="createAdvert(card)">Crear Anuncio</button>
+                    <button *ngIf="!adverts.includes(card._id!)" (click)="createAdvert(card)">Crear Anuncio</button>
                     <button (click)="deleteElement(card)">Eliminar</button>
                   </div>
                 </mat-card-actions>
@@ -81,7 +81,7 @@
             </mat-card>
 
             <!-- Si tiene anuncio creado -->
-            <mat-card class="has-advert" *ngIf="adverts.includes(card.cardId!)" fxLayout.gt-sm="row" fxFlex="100%" fxLayout.lt-sm="column" id={{card.cardId}}>
+            <mat-card class="has-advert" *ngIf="adverts.includes(card._id!)" fxLayout.gt-sm="row" fxFlex="100%" fxLayout.lt-sm="column" id={{card.cardId}}>
               <div fxFlex="auto">
                 <mat-card-header fxLayoutAlign.lt-md="center start">
                   <mat-card-title class="identifier">#{{card.cardId}}</mat-card-title>
@@ -111,7 +111,7 @@
                 <mat-card-actions fxLayoutAlign.lt-md="center start">
                   <div fxLayout.gt-sm="column" fxLayout.lt-sm="row" fxLayout.sm="row">
                     <!-- TODO: no funciona como debería -->
-                    <button *ngIf="adverts.includes(card.cardId!)" [routerLink]="['/adverts']">Ver Anuncio</button>
+                    <button *ngIf="adverts.includes(card._id!)" [routerLink]="['/adverts']">Ver Anuncio</button>
                     <button (click)="deleteElement(card)">Eliminar</button>
                   </div>
                 </mat-card-actions>

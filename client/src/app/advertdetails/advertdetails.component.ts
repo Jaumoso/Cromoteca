@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { AdvertService } from '../services/advert.service';
 import { Location } from '@angular/common';
-import { JwtService } from '../services/jwt.service';
 import { switchMap } from 'rxjs';
 import { Advert } from '../shared/advert';
 import { CardService } from '../services/card.service';

@@ -9,7 +9,6 @@ import { Router } from '@angular/router';
 import { LoginComponent } from '../login/login.component';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { IntermediateService } from '../services/intermediate.service';
-import { Intermediate } from '../shared/intermediate';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AccountService } from '../services/account.service';

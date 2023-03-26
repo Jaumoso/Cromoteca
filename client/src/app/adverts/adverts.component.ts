@@ -2,13 +2,11 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { ActivatedRoute, Params } from '@angular/router';
-import { switchMap } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 import { AdvertInfoService } from '../services/advertInfo.service';
 import { Location } from '@angular/common';
 import { AdvertService } from '../services/advert.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { UserService } from '../services/user.service';
 import { JwtService } from '../services/jwt.service';
 
 export interface AdvertTable {
@@ -95,7 +93,7 @@ export class AdvertsComponent implements OnInit {
           duration: 6000,
           panelClass: ['snackbar']
         });
-        this.ngOnInit(); // TODO: funciona pero chapuza
+        this.ngOnInit();
     });
   }
 

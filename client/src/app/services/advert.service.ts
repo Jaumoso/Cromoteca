@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Advert } from '../shared/advert';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { baseURL } from '../shared/baseurl';
-import { catchError, map, Observable, of } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'

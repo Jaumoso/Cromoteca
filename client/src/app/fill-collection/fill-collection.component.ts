@@ -45,31 +45,37 @@ export class FillCollectionComponent implements OnInit {
   percentage: string = '';
   gridColumns: number = 3;
   cardList: number[] = [];
-  adverts: number[] = [];
+  adverts: string[] = [];
 
-  ngOnInit(){
+  ngOnInit() {
     // coge el id de la colección pasado como parámetro y recupera la información
     this.route.paramMap.pipe(
-      switchMap((params: Params) => {
-        return this.collectionService.getCollection(params['get']('id'));
-      }))
-      .subscribe(collectionData => {
-        this.collection = collectionData;
-      });
-    
+      switchMap((params: Params) => this.collectionService.getCollection(params['get']('id')))
+    ).subscribe(collectionData => {
+      this.collection = collectionData;
+    });
+  
     // recoge el token de sesión y recupera info de usuario
-
     const token = localStorage.getItem('token');
-    if(token){
-      if(this.jwtService.isTokenExpired(token)){
-        this.router.navigateByUrl('/home');
-      }
-      const decodedToken = this.jwtService.decodeToken(token);
-      this.userId = decodedToken._id;
-      this.intermediateService.getIntermediate(decodedToken._id)
+    if (!token) {
+      return;
+    }
+  
+    if (this.jwtService.isTokenExpired(token)) {
+      this.router.navigateByUrl('/home');
+      return;
+    }
+  
+    const decodedToken = this.jwtService.decodeToken(token);
+    this.userId = decodedToken._id;
+  
+    this.intermediateService.getIntermediate(decodedToken._id)
       .then((intermediate) => {
-        if(intermediate){
-          this.cardService.getUserCardsCollection(decodedToken._id, this.collection?._id!)
+        if (!intermediate) {
+          return;
+        }
+  
+        this.cardService.getUserCardsCollection(decodedToken._id, this.collection?._id!)
           .subscribe((cards) => {
             // Crear un array con el total de elementos en la colección
             const collectionSize = this.collection?.size || 0;
@@ -78,24 +84,24 @@ export class FillCollectionComponent implements OnInit {
             this.completed = this.completarSiUnico(cards);
             this.missing = this.collection!.size! - this.completed;
             this.percentage = (this.completed / this.collection!.size! * 100).toFixed(2);
+            
             // Verificar si cada carta está en el array de cartas
             cards.forEach((card) => {
               const cardIndex = card.cardId;
-              if (cardIndex! <= collectionSize) {
-                this.cardList[cardIndex! - 1] = 1;
+  
+              if (cardIndex != undefined && cardIndex <= collectionSize) {
+                this.cardList[cardIndex - 1] = 1;
               }
               // comprueba que exista un advert para el elemento. Si existe, guarda el id del elemento para no crear otro advert
               this.advertService.checkExistingAdvert(card._id!)
-              .then((exists) => {
-                if(exists){
-                  this.adverts.push(card.cardId!);
-                }
-              });
+                .then((exists) => {
+                  if (exists) {
+                    this.adverts.push(card._id!);
+                  }
+                });
             });
           });
-        }
-      })
-    }
+      });
   }
 
   // devuelve el total de cartas con ID único
@@ -125,8 +131,11 @@ export class FillCollectionComponent implements OnInit {
 
   existe(cardId: number): boolean {
     let existe: boolean = false;
-    for(let i = 0; i < this.cards.length; i++){
-      if(this.cards[i].cardId === cardId){existe = true}
+    for(let card of this.cards){
+        if(card.cardId === cardId){
+            existe = true;
+            break;
+        }
     }
     return existe;
   }
@@ -174,13 +183,12 @@ export class FillCollectionComponent implements OnInit {
       const index = this.cards.indexOf(card);
       this.cards.splice(index, 1);
 
-      // TODO: comprobar que esto funciona correctamente
       // si existe un anuncio, lo borra también
       this.advertService.deleteAdvertCard(card._id!)
       .subscribe((deletedAdvert) => {
         if(deletedAdvert) {
           // borra del array de adverts el id del elemento.
-          const index = this.adverts.indexOf(card.cardId!);
+          const index = this.adverts.indexOf(card._id!);
           this.adverts.splice(index, 1);
         }
       })
@@ -212,8 +220,8 @@ export class FillCollectionComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if(result && result.advert){
         this.advertService.createAdvert(result.advert)
-        .subscribe(data => {
-          this.adverts.push(card.cardId!);
+        .subscribe(() => {
+          this.adverts.push(card._id!);
           this.showSnackBar("Anuncio creado");
         });
       }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Collection } from '../shared/collection';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { baseURL } from '../shared/baseurl';
 import { map, Observable } from 'rxjs';
 
