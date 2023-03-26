@@ -14,9 +14,7 @@ export class AuthService {
         }
 
         const passwordValid = await bcrypt.compare(password, user.password)
-        if (!passwordValid) {
-            
-        }
+        
         // Devuelve el usuario sin username, password ni email
         if (passwordValid) {
             const { password, username, email, ... rest } = user;
