@@ -11,6 +11,7 @@ import { Collection } from '../shared/collection';
 import { User } from '../shared/user';
 import { UserService } from '../services/user.service';
 import { LoginStatusService } from '../services/loginStatus.service';
+import { JwtService } from '../services/jwt.service';
 
 @Component({
   selector: 'app-advertdetails',
@@ -32,13 +33,22 @@ export class AdvertdetailsComponent implements OnInit {
     private cardService: CardService,
     private collectionService: CollectionService,
     private userService: UserService,
-    private loginStatusService: LoginStatusService
+    private loginStatusService: LoginStatusService,
+    private jwtService: JwtService,
   ) { }
 
   ngOnInit() {
+    
     this.loginStatusService.loginChanges.subscribe((loggedIn) => {
       this.loggedIn = loggedIn;
     });
+
+    const token = localStorage.getItem('token');
+    if(token){
+      if(!this.jwtService.isTokenExpired(token)){
+        this.loggedIn = true;
+      }
+    }
 
     // se recoge el id que se pasa como parametro en la URL
     this.route.paramMap.pipe(
@@ -72,17 +82,19 @@ export class AdvertdetailsComponent implements OnInit {
     let asunto = '';
     let cuerpo = '';
     if(this.advert?.price == 0){
-      asunto = `CROMOTECA: Solicitud de intercambio para el elemento: ${encodeURIComponent(this.card?.name!)}`;
-      cuerpo = `Yo, usuario de CROMOTECA ${encodeURIComponent(this.seller?.username!)} / ${encodeURIComponent(this.seller?.firstName!)}, 
-      solicito un intercambio para el elemento: ${encodeURIComponent(this.card?.name!)} de la colección ${encodeURIComponent(this.collection?.name!)}.`;
+      asunto = `CROMOTECA: Solicitud de intercambio para el elemento: ${this.card?.name!}`;
+      cuerpo = `Yo, usuario de CROMOTECA ${this.seller?.username!} / ${this.seller?.firstName!}, 
+      solicito un intercambio para el elemento: ${this.card?.name!} de la colección ${this.collection?.name!}.`;
     }
     else{
-      asunto = `CROMOTECA: Solicitud de compra para el elemento: ${encodeURIComponent(this.card?.name!)}`;
-      cuerpo = `Yo, usuario de CROMOTECA ${encodeURIComponent(this.seller?.username!)} / ${encodeURIComponent(this.seller?.firstName!)}, 
-      quiero comprar el elemento: ${encodeURIComponent(this.card?.name!)} de la colección ${encodeURIComponent(this.collection?.name!)}.`;
+      asunto = `CROMOTECA: Solicitud de compra para el elemento: ${this.card?.name!}`;
+      cuerpo = `Yo, usuario de CROMOTECA ${this.seller?.username!} / ${this.seller?.firstName!}, 
+      quiero comprar el elemento: ${this.card?.name!} de la colección ${this.collection?.name!}.`;
     }
 
-    const correo = `mailto:${encodeURIComponent(this.seller?.email!)}?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(cuerpo)}`;
+    /* cuerpo = decodeURIComponent(cuerpo);  */
+
+    const correo = `mailto:${this.seller?.email!}?subject=${asunto}&body=${cuerpo}`;
     window.location.href = correo;
   }
 

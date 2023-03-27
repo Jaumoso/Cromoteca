@@ -37,7 +37,6 @@ export class AdvertsComponent implements OnInit {
   constructor(
     private advertInfoService: AdvertInfoService,
     private advertService: AdvertService,
-    private route: ActivatedRoute,
     private location: Location,
     private snackBar: MatSnackBar,
     private jwtService: JwtService,
