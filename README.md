@@ -4,6 +4,19 @@ Cromoteca es una aplicación web para la colección e intercambio de cromos.
 
 ## SonarCloud Frontend (client) Status
 [![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=jaumoso_cromoteca-client)](https://sonarcloud.io/summary/new_code?id=jaumoso_cromoteca-client)
+
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=jaumoso_cromoteca-client&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=jaumoso_cromoteca-client)
+
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=jaumoso_cromoteca-client&metric=bugs)](https://sonarcloud.io/summary/new_code?id=jaumoso_cromoteca-client)
+
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=jaumoso_cromoteca-client&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=jaumoso_cromoteca-client)
+
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=jaumoso_cromoteca-client&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=jaumoso_cromoteca-client)
+
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=jaumoso_cromoteca-client&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=jaumoso_cromoteca-client)
+
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=jaumoso_cromoteca-client&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=jaumoso_cromoteca-client)
+
 ## SonarCloud Backend (server) Status
 [![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=jaumoso_cromoteca-server)](https://sonarcloud.io/summary/new_code?id=jaumoso_cromoteca-server)
 
