@@ -2,6 +2,11 @@
 Repositorio para el proyecto de TFG de Jaume Civera Soriano. 
 Cromoteca es una aplicación web para la colección e intercambio de cromos.
 
+Frontend (client) | Backend (server)
+----------------- | -----------------
+[![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=jaumoso_cromoteca-client)](https://sonarcloud.io/summary/new_code?id=jaumoso_cromoteca-client)| [![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=jaumoso_cromoteca-server)](https://sonarcloud.io/summary/new_code?id=jaumoso_cromoteca-server)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=jaumoso_cromoteca-client&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=jaumoso_cromoteca-client) | [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=jaumoso_cromoteca-server&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=jaumoso_cromoteca-server)
+
 ## SonarCloud Frontend (client) Status
 [![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=jaumoso_cromoteca-client)](https://sonarcloud.io/summary/new_code?id=jaumoso_cromoteca-client)
 
