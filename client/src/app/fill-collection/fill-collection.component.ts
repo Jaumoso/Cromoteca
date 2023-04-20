@@ -46,6 +46,7 @@ export class FillCollectionComponent implements OnInit {
   gridColumns: number = 3;
   cardList: number[] = [];
   adverts: string[] = [];
+  value: number = 0;
 
   ngOnInit() {
     // coge el id de la colección pasado como parámetro y recupera la información
@@ -85,7 +86,7 @@ export class FillCollectionComponent implements OnInit {
             this.missing = this.collection!.size! - this.completed;
             this.percentage = (this.completed / this.collection!.size! * 100).toFixed(2);
             
-            // Verificar si cada carta está en el array de cartas
+            // Verificar si cada carta está en el array de cartas || sumar valor de la colección
             cards.forEach((card) => {
               const cardIndex = card.cardId;
   
@@ -99,6 +100,9 @@ export class FillCollectionComponent implements OnInit {
                     this.adverts.push(card._id!);
                   }
                 });
+
+              // Sumar precio de las cartas para obtener valor de la colección
+              this.value += card.price!;
             });
           });
       });

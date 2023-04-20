@@ -19,6 +19,7 @@
             <p><b>Total de elementos en la colección: </b>{{collection?.size}}</p>
             <p><b>Total de elementos reunídos:  <span id="green">{{completed}}</span> / <span id="red">{{collection?.size}}</span></b></p>
             <p><b>Faltan: </b> {{ missing }}, completado al <b>{{percentage}}%</b></p>
+            <p><b>Valor de la colección: </b>{{value}} €</p>
         </div>
         <div fxLayout="row wrap">
           <div *ngFor="let item of cardList; let i=index"  class="completion-grid" style="border: 1px solid black">
