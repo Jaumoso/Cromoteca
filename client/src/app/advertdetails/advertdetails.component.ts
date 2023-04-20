@@ -92,8 +92,6 @@ export class AdvertdetailsComponent implements OnInit {
       quiero comprar el elemento: ${this.card?.name!} de la colección ${this.collection?.name!}.`;
     }
 
-    /* cuerpo = decodeURIComponent(cuerpo);  */
-
     const correo = `mailto:${this.seller?.email!}?subject=${asunto}&body=${cuerpo}`;
     window.location.href = correo;
   }

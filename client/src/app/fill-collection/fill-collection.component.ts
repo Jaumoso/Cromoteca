@@ -169,7 +169,7 @@ export class FillCollectionComponent implements OnInit {
             }
             
             this.percentage = (this.completed / this.collection!.size! * 100).toFixed(2);
-            // Se añade el elemento a la colección del usuario en la BD
+            this.value += card.price!;
 
           }
           else{
@@ -205,6 +205,7 @@ export class FillCollectionComponent implements OnInit {
       }
       
       this.percentage = (this.completed / this.collection!.size! * 100).toFixed(2);
+      this.value -= card.price!;
       this.showSnackBar("Elemento " + card.cardId + " eliminado");
     });
   }
