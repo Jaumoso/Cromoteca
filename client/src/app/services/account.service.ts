@@ -27,7 +27,6 @@ export class AccountService {
         .then((user) => {
           if(user){
             console.log("Usuario creado correctamente");
-            //TODO: comprobar que funciona bien 
           }
         });        
       })

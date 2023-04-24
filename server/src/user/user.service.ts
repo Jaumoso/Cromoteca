@@ -46,8 +46,8 @@ export class UserService {
 
     
     async checkExistingUser(username: string, email: string): Promise<UserDocument[]> {
-        var usernameRegex = new RegExp('^' + username + '$','i');
-        var emailRegex = new RegExp('^' + email + '$','i');
+        const usernameRegex = new RegExp('^' + username + '$','i');
+        const emailRegex = new RegExp('^' + email + '$','i');
         const userData = await this.userModel
         .find({ $or: 
             [ 
