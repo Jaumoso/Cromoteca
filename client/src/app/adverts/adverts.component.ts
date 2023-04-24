@@ -24,7 +24,7 @@ export interface AdvertTable {
 })
 export class AdvertsComponent implements OnInit {
 
-  displayedColumns: string[] = ['name', 'collection', 'state', 'quantity', 'price', 'date', 'button'];
+  displayedColumns: string[] = ['name', 'collection', 'state', 'quantity', 'price', 'date', 'details', 'delete'];
   ELEMENT_DATA: AdvertTable[] = [];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
