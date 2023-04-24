@@ -5,7 +5,6 @@ import { LoginStatusService } from './loginStatus.service';
 import { UserService } from './user.service';
 import { Address } from '../shared/address';
 import { User } from '../shared/user';
-import { Intermediate } from '../shared/intermediate';
 
 @Injectable({
   providedIn: 'root'
