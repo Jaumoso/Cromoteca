@@ -56,6 +56,23 @@ import { CollectionService } from './collection.service';
       });
     }
 
+    updateUserContent(userId: string, user: User): Promise<User> {
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+      };
+      return new Promise((resolve, reject) => {
+        const { _id, firstName, lastName, email, password, username, entryDate, admin, addressId, ... rest} = user
+        this.http.put<{existingUser: User}>(baseURL + 'user/update/content/' + userId, rest, httpOptions)
+        .subscribe(user => {
+          resolve(user.existingUser);
+        }, err => {
+          reject(err);
+        });
+      });
+    }
+
     async deleteUser(userId: string): Promise<User> {
       return new Promise((resolve, reject) => {
         this.http.delete<{userData: User}>(baseURL + 'user/delete/' + userId)
@@ -69,9 +86,9 @@ import { CollectionService } from './collection.service';
 
     checkEmail(email: string): Promise<boolean> {
       return new Promise((resolve, reject) => {
-        this.http.get<{userData: User}>(baseURL + 'user/checkemail/' + email)
+        this.http.get<{userData: Boolean}>(baseURL + 'user/checkemail/' + email)
         .subscribe(user => {
-          if(user){
+          if(user.userData != null){
             resolve(true);
           }
           else{

@@ -1,10 +1,11 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import mongoose, { Model } from 'mongoose';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import * as bcrypt from 'bcrypt';
 import { UserDocument } from './schema/user.schema';
+import { UpdateUserContentDto } from './dto/update-user-content.dto';
 
 @Injectable()
 export class UserService {
@@ -79,6 +80,14 @@ export class UserService {
             updateUserDto.password = hashedPassword;   
         }
         const updatedUser = await this.userModel.findByIdAndUpdate(userId, updateUserDto);
+        if (!updatedUser) {
+            throw new NotFoundException('User data not found!');
+        }
+        return updatedUser;
+    }
+
+    async updateUserContent(userId: string, updateUserContentDto: UpdateUserContentDto) {
+        const updatedUser = await this.userModel.findByIdAndUpdate(userId, {collectionId: updateUserContentDto.collectionId},  { new: true });
         if (!updatedUser) {
             throw new NotFoundException('User data not found!');
         }

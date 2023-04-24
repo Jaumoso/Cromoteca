@@ -38,7 +38,7 @@ export class PasswordchangeComponent implements OnInit {
     if(this.sendEmailForm.valid){
     this.userService.checkEmail(this.sendEmailForm.value.email)
     .then((userExists) => {
-      if(userExists){
+      if(userExists == true){
         // TODO: FALTA IMPLEMENTAR
         this.emailButton = true;
       }

@@ -10,8 +10,7 @@ import { UpdateAddressDto } from './dto/updateAddress.dto';
 export class AddressController {
     constructor(private readonly addressService: AddressService) { }
 
-    // ! TODO: habrá que hacer algo
-    @Get()
+/*     @Get()
     @ApiCreatedResponse({ description: 'This function will get ALL the ADDRESSESS from the database.' })
     async getAddressess(@Res() response) {
         try {
@@ -23,7 +22,7 @@ export class AddressController {
         catch (err) {
             return response.status(err.status).json(err.response);
         }
-    }
+    } */
 
     @UseGuards(JwtAuthGuard)
     @Get(':id')

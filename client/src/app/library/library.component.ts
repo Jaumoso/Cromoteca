@@ -87,7 +87,7 @@ export class LibraryComponent implements OnInit {
                 // se cambia la información en el intermediate
                 user.collectionId!.splice(index, 1);
                 // se actualiza la información del user
-                this.userService.updateUser(user._id!, user)
+                this.userService.updateUserContent(user._id!, user)
                   .then(() => {
                     // se borra la colección del array de colecciones local
                     const index = this.collections.indexOf(collection);

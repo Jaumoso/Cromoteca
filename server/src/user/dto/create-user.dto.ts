@@ -16,7 +16,7 @@ export class CreateUserDto {
     @ApiProperty({
         type: String, 
         description: 'Contraseña del usuario. Este campo es obligatorio.',
-        example: 't(Esvx@Ggn*k?[M'
+        example: 'password'
     })
     @MinLength(8)
     @IsNotEmpty()
@@ -72,7 +72,6 @@ export class CreateUserDto {
     @IsNotEmpty()
     admin: boolean;
 
-
     @ApiProperty({ 
         type: mongoose.Types.ObjectId, 
         description: 'Array of type: ObjectId. Relation 1 user to many accounts.',
@@ -80,6 +79,12 @@ export class CreateUserDto {
     })
     addressId: mongoose.Types.ObjectId;
     
+
+    @ApiProperty({
+        type: mongoose.Types.ObjectId,
+        description: 'Collection ID. Requerido.',
+        example: [new mongoose.Types.ObjectId]
+      })
     @IsNotEmpty()
     collectionId: mongoose.Types.ObjectId[];
 }

@@ -39,7 +39,7 @@ export class AddToLibraryComponent implements OnInit {
           user._id = decodedToken._id;
           user.collectionId?.push(collectionId);
           if(user._id != undefined){
-            this.userService.updateUser(user._id, user)
+            this.userService.updateUserContent(user._id, user)
             .then(() => {
               this.closeDialog()
             });

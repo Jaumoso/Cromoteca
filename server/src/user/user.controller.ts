@@ -4,6 +4,8 @@ import { JwtAuthGuard } from "src/auth/jwt-auth.guard";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { UpdateUserDto } from "./dto/update-user.dto";
 import { UserService } from "./user.service";
+import mongoose from "mongoose";
+import { UpdateUserContentDto } from "./dto/update-user-content.dto";
 
 
 @ApiTags('User')
@@ -11,8 +13,7 @@ import { UserService } from "./user.service";
 export class UserController {
     constructor(private readonly userService: UserService) { }
     
-    // ! TODO: habrá que hacer algo
-    @Get()
+/*     @Get()
     @ApiCreatedResponse({ description: 'This function will get ALL the USERS from the database.' })
     async getUsers(@Res() response) {
         try {
@@ -24,7 +25,7 @@ export class UserController {
         catch (err) {
             return response.status(err.status).json(err.response);
         }
-    }
+    } */
 
     @Get(':id')
     @ApiCreatedResponse({ description: 'This function will get ONE USER INFO from the database.' })
@@ -92,6 +93,22 @@ export class UserController {
     async updateUser(@Res() response, @Param('id') userId: string, @Body() updateUserDto: UpdateUserDto) {
         try {
             const existingUser = await this.userService.updateUser(userId, updateUserDto);
+            return response.status(HttpStatus.OK).json({
+                message: 'User has been successfully updated',
+                existingUser,
+            });
+        }
+        catch (err) {
+            return response.status(err.status).json(err.response);
+        }
+    }
+
+  
+    @Put('update/content/:id')
+    @ApiCreatedResponse({ description: 'UPDATE te data of the USER into the database.' })
+    async updateUserContent(@Res() response, @Param('id') userId: string, @Body() updateUserContent: UpdateUserContentDto) {
+        try {
+            const existingUser = await this.userService.updateUserContent(userId, updateUserContent);
             return response.status(HttpStatus.OK).json({
                 message: 'User has been successfully updated',
                 existingUser,

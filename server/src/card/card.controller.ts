@@ -11,8 +11,7 @@ import { UpdateCardDto } from "./dto/updateCard.dto";
 export class CardController {
     constructor(private readonly cardService: CardService) { }
     
-    // ! TODO: habrá que hacer algo
-    @Get()
+/*     @Get()
     @ApiCreatedResponse({ description: 'This function will get ALL the CARDS from the database.' })
     async getCards(@Res() response) {
         try {
@@ -24,7 +23,7 @@ export class CardController {
         catch (err) {
             return response.status(err.status).json(err.response);
         }
-    }
+    } */
 
     @Get(':id')
     @ApiCreatedResponse({ description: 'This function will get ONE CARD INFO from the database.' })
@@ -89,8 +88,7 @@ export class CardController {
         }
     }
 
-    // ! TODO: habrá que hacer algo
-    @UseGuards(JwtAuthGuard)
+/*     @UseGuards(JwtAuthGuard)
     @Put('update/:id')
     @ApiCreatedResponse({ description: 'UPDATE te data of the CARD into the database.' })
     async updateCard(@Res() response, @Param('id') cardId: string, @Body() updateCardDto: UpdateCardDto) {
@@ -104,7 +102,7 @@ export class CardController {
         catch (err) {
             return response.status(err.status).json(err.response);
         }
-    }
+    } */
 
     @UseGuards(JwtAuthGuard)
     @Delete('delete/:id')
