@@ -40,9 +40,9 @@ export class UserController {
         }
     }
 
-    @Get('checkemail/:id')
+    @Get('checkemail/:email')
     @ApiCreatedResponse({ description: 'This function will check if email exists already in the database.' })
-    async checkEmail(@Res() response, @Param('id') email: string) {
+    async checkEmail(@Res() response, @Param('email') email: string) {
         try {
             const userData = await this.userService.checkEmail(email);
             return response.status(HttpStatus.OK).json({
@@ -54,9 +54,9 @@ export class UserController {
         }
     }
     
-    @Get('checkexistinguser/:id1/:id2')
+    @Get('checkexistinguser/:username/:email')
     @ApiCreatedResponse({ description: 'This function will check if a user exists in the database based on email and username' })
-    async checkExistingUser(@Res() response, @Param('id1') username: string, @Param('id2') email: string) {
+    async checkExistingUser(@Res() response, @Param('username') username: string, @Param('email') email: string) {
         try {
             const userData = await this.userService.checkExistingUser(username, email);
             return response.status(HttpStatus.OK).json({

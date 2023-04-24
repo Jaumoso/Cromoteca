@@ -41,9 +41,9 @@ export class CardController {
     }
     
     @UseGuards(JwtAuthGuard)
-    @Get(':id1/:id2')
+    @Get(':userId/:collectionId')
     @ApiCreatedResponse({ description: 'This function will get ONE CARD INFO from the database.' })
-    async getUserCardsCollection(@Res() response, @Param('id1') userId: string,  @Param('id2') collectionId: string) {
+    async getUserCardsCollection(@Res() response, @Param('userId') userId: string,  @Param('collectionId') collectionId: string) {
         try {
             const cardData = await this.cardService.getUserCardsCollection(userId, collectionId);
             return response.status(HttpStatus.OK).json({
@@ -139,9 +139,9 @@ export class CardController {
     }
 
     @UseGuards(JwtAuthGuard)
-    @Delete('deleteall/:id')
+    @Delete('deleteall/:userId')
     @ApiCreatedResponse({ description: 'Borrar todos los elementos de colecciones que contengan el id del usuario que se le pasa como argumento.' })
-    async deleteUserCards(@Res() response, @Param('id') userId: string) {
+    async deleteUserCards(@Res() response, @Param('userId') userId: string) {
         try {
             const deletedCard = await this.cardService.deleteUserCards(userId);
             return response.status(HttpStatus.OK).json({

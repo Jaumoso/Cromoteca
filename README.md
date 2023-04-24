@@ -169,3 +169,8 @@ Generación de códigos de seguridad de recuperación
 
 ### LATE-STAGE
 - Proteger las rutas y borrar endpoints de desarrollo, httpOptions en los services: añadir header Authorization: Bearer Token
+
+### A FUTURO
+
+- Añadir idiomas
+- Exportar colecciones a pdf o excel
