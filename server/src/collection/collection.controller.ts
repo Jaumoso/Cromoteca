@@ -5,7 +5,7 @@ import { CollectionService } from './collection.service';
 import { CreateCollectionDto } from './dto/createCollection.dto';
 import { UpdateCollectionDto } from './dto/updateCollection.dto';
 
-@ApiTags('collection')
+@ApiTags('Collection')
 @Controller('collection')
 export class CollectionController {
     constructor(private readonly collectionService: CollectionService) { }

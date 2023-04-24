@@ -4,11 +4,9 @@ import { Location } from '@angular/common';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { UserService } from '../services/user.service';
 import { Address } from '../shared/address';
-import { AddressService } from '../services/address.service';
 import { Router } from '@angular/router';
 import { LoginComponent } from '../login/login.component';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { IntermediateService } from '../services/intermediate.service';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AccountService } from '../services/account.service';
@@ -24,8 +22,6 @@ export class CreateaccountComponent implements OnInit {
     private location: Location,
     private formBuilder: FormBuilder,
     private userService: UserService,
-    private addressService: AddressService,
-    private intermediateService: IntermediateService,
     private router: Router,
     public dialog: MatDialog,
     public dialog2: MatDialog,
@@ -146,6 +142,7 @@ export class CreateaccountComponent implements OnInit {
             user.entryDate = new Date;
             user.admin = false;
             user.addressId = address._id;
+            user.collectionId = [];
             this.accountService.createAccount(user, address)
             .then(() => {
               this.router.navigateByUrl('/home');

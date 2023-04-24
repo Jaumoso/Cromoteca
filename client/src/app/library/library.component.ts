@@ -2,8 +2,8 @@ import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { RemoveFromLibraryDialogComponent } from '../remove-from-library-dialog/remove-from-library-dialog.component';
 import { CardService } from '../services/card.service';
-import { IntermediateService } from '../services/intermediate.service';
 import { Collection } from '../shared/collection';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-library',
@@ -13,8 +13,8 @@ import { Collection } from '../shared/collection';
 export class LibraryComponent implements OnInit {
 
   constructor(
-    private intermediateService: IntermediateService,
     private cardService: CardService,
+    private userService: UserService,
     private dialog: MatDialog
   ) { }
 
@@ -27,7 +27,7 @@ export class LibraryComponent implements OnInit {
 
   ngOnInit() {
     if(this.userId != null) {
-      this.intermediateService.getCollections(this.userId)
+      this.userService.getCollections(this.userId)
       .then((collections: Collection[]) => {
         this.collections = collections;
         this.filteredCollections = collections;
@@ -80,14 +80,14 @@ export class LibraryComponent implements OnInit {
         // borrar elementos de la colección
         this.cardService.deleteCardsFromCollection(this.userId, collection._id!)
           .then(() => {
-            // se recupera la información del intermediate
-            this.intermediateService.getIntermediate(this.userId).then((intermediate) => {
-              const index = intermediate.collectionId!.indexOf(collection._id!);
+            // se recupera la información del usuario
+            this.userService.getUser(this.userId).then((user) => {
+              const index = user.collectionId!.indexOf(collection._id!);
               if(index !== -1) {
                 // se cambia la información en el intermediate
-                intermediate.collectionId!.splice(index, 1);
-                // se actualiza la tabla intermediate
-                this.intermediateService.updateIntermediate(intermediate._id!, intermediate)
+                user.collectionId!.splice(index, 1);
+                // se actualiza la información del user
+                this.userService.updateUser(user._id!, user)
                   .then(() => {
                     // se borra la colección del array de colecciones local
                     const index = this.collections.indexOf(collection);

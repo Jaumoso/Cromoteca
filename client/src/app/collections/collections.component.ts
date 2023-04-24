@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AddToLibraryComponent } from '../add-to-library-dialog/add-to-library-dialog.component';
 import { CollectionService } from '../services/collection.service';
-import { IntermediateService } from '../services/intermediate.service';
 import { JwtService } from '../services/jwt.service';
 import { Collection } from '../shared/collection';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-collections',
@@ -16,7 +16,7 @@ export class CollectionsComponent implements OnInit {
   constructor(
     private collectionService: CollectionService,
     public dialog: MatDialog,
-    private intermediateService: IntermediateService,
+    private userService: UserService,
     private jwtService: JwtService,
     ) { }
 
@@ -32,9 +32,9 @@ export class CollectionsComponent implements OnInit {
     const token = localStorage.getItem('token');
     if(token){
       const decodedToken = this.jwtService.decodeToken(token);
-      this.intermediateService.getIntermediate(decodedToken._id)
-      .then((intermediate) => {
-        this.collectionIds = intermediate.collectionId!
+      this.userService.getUser(decodedToken._id)
+      .then((user) => {
+        this.collectionIds = user.collectionId!
       })
     }
     this.collectionService.getCollections()

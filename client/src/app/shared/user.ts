@@ -8,4 +8,5 @@ export class User{
     entryDate: Date | undefined;
     admin: boolean | undefined;
     addressId: string | undefined;
+    collectionId: string[] | undefined;
 }

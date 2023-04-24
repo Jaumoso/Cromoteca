@@ -8,16 +8,14 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { CollectiondetailsComponent } from './collectiondetails.component';
 import { CollectionService } from '../services/collection.service';
 import { JwtService } from '../services/jwt.service';
-import { IntermediateService } from '../services/intermediate.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { UserService } from '../services/user.service';
 
 describe('CollectiondetailsComponent', () => {
   let component: CollectiondetailsComponent;
   let fixture: ComponentFixture<CollectiondetailsComponent>;
-  let collectionServiceSpy: jasmine.SpyObj<CollectionService>;
   let jwtServiceSpy: jasmine.SpyObj<JwtService>;
-  let intermediateServiceSpy: jasmine.SpyObj<IntermediateService>;
-  let activatedRoute: ActivatedRoute;
+  let userServiceSpy: jasmine.SpyObj<UserService>;
   let dialog: MatDialog;
 
   const collectionData = {
@@ -37,7 +35,7 @@ describe('CollectiondetailsComponent', () => {
   beforeEach(async () => {
     const collectionSpy = jasmine.createSpyObj('CollectionService', ['getCollection']);
     const jwtSpy = jasmine.createSpyObj('JwtService', ['decodeToken']);
-    const intermediateSpy = jasmine.createSpyObj('IntermediateService', ['getIntermediate']);
+    const userSpy = jasmine.createSpyObj('IntermediateService', ['getIntermediate']);
 
     await TestBed.configureTestingModule({
       declarations: [ CollectiondetailsComponent ],
@@ -45,7 +43,7 @@ describe('CollectiondetailsComponent', () => {
       providers: [
         { provide: CollectionService, useValue: collectionSpy },
         { provide: JwtService, useValue: jwtSpy },
-        { provide: IntermediateService, useValue: intermediateSpy },
+        { provide: UserService, useValue: userSpy },
         {
           provide: ActivatedRoute,
           useValue: {
@@ -75,8 +73,8 @@ describe('CollectiondetailsComponent', () => {
     expect(jwtServiceSpy.decodeToken).toHaveBeenCalledWith('token-value');
   });
 
-  it('should call getIntermediate with the user id', () => {
-    expect(intermediateServiceSpy.getIntermediate).toHaveBeenCalledWith('user-id');
+  it('should call getUser with the user id', () => {
+    expect(userServiceSpy.getUser).toHaveBeenCalledWith('user-id');
   });
 
   it('should set the collectionIds property', async () => {

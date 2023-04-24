@@ -1,8 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { LoginComponent } from '../login/login.component';
-import { IntermediateService } from '../services/intermediate.service';
 import { JwtService } from '../services/jwt.service';
+import { UserService } from '../services/user.service';
 
 export interface DialogData {
   collectionName: string;
@@ -18,7 +18,7 @@ export class AddToLibraryComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<AddToLibraryComponent>, 
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    private intermediateService: IntermediateService,
+    private userService: UserService,
     private jwtService: JwtService,
     private dialog: MatDialog,
   ) {}
@@ -33,13 +33,13 @@ export class AddToLibraryComponent implements OnInit {
     const token = localStorage.getItem('token');
     if(token){
       const decodedToken = this.jwtService.decodeToken(token);
-      this.intermediateService.getIntermediate(decodedToken._id)
-      .then((intermediate) => {
-        if(intermediate.collectionId?.filter(str => str.includes(collectionId)).length === 0){
-          intermediate.userId = decodedToken._id;
-          intermediate.collectionId?.push(collectionId);
-          if(intermediate._id != undefined){
-            this.intermediateService.updateIntermediate(intermediate._id, intermediate)
+      this.userService.getUser(decodedToken._id)
+      .then((user) => {
+        if(user.collectionId?.filter(str => str.includes(collectionId)).length === 0){
+          user._id = decodedToken._id;
+          user.collectionId?.push(collectionId);
+          if(user._id != undefined){
+            this.userService.updateUser(user._id, user)
             .then(() => {
               this.closeDialog()
             });
