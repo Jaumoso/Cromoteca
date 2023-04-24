@@ -79,4 +79,7 @@ export class CreateUserDto {
         example: new mongoose.Types.ObjectId()
     })
     addressId: mongoose.Types.ObjectId;
+    
+    @IsNotEmpty()
+    collectionId: mongoose.Types.ObjectId[];
 }

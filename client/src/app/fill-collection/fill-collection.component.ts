@@ -5,7 +5,6 @@ import { CollectionService } from '../services/collection.service';
 import { JwtService } from '../services/jwt.service';
 import { Collection } from '../shared/collection';
 import { Location } from '@angular/common';
-import { IntermediateService } from '../services/intermediate.service';
 import { CardService } from '../services/card.service';
 import { Card } from '../shared/card';
 import { MatDialog } from '@angular/material/dialog';
@@ -14,6 +13,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { AdvertService } from '../services/advert.service';
 import { Advert } from '../shared/advert';
 import { AddAdvertComponent } from '../add-advert/add-advert.component';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-fill-collection',
@@ -28,7 +28,7 @@ export class FillCollectionComponent implements OnInit {
     private route: ActivatedRoute,
     private jwtService: JwtService,
     private location: Location,
-    private intermediateService: IntermediateService,
+    private userService: UserService,
     private cardService: CardService,
     public addElementDialog: MatDialog,
     public createAdvertDialog: MatDialog,
@@ -70,9 +70,9 @@ export class FillCollectionComponent implements OnInit {
     const decodedToken = this.jwtService.decodeToken(token);
     this.userId = decodedToken._id;
   
-    this.intermediateService.getIntermediate(decodedToken._id)
-      .then((intermediate) => {
-        if (!intermediate) {
+    this.userService.getUser(decodedToken._id)
+      .then((user) => {
+        if (!user) {
           return;
         }
   

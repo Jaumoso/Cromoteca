@@ -7,7 +7,7 @@ import { Collection } from '../shared/collection';
 import { Location } from '@angular/common';
 import { AddToLibraryComponent } from '../add-to-library-dialog/add-to-library-dialog.component';
 import { JwtService } from '../services/jwt.service';
-import { IntermediateService } from '../services/intermediate.service';
+import { UserService } from '../services/user.service';
 export interface DialogData {
   collectionName: string;
   collectionId: string;
@@ -26,7 +26,7 @@ export class CollectiondetailsComponent implements OnInit {
     private dialog: MatDialog,
     private location: Location,
     private jwtService: JwtService,
-    private intermediateService: IntermediateService,
+    private userService: UserService,
     private router: Router
     ) { }
 
@@ -41,9 +41,9 @@ export class CollectiondetailsComponent implements OnInit {
         this.router.navigateByUrl('/home');
       }
       const decodedToken = this.jwtService.decodeToken(token);
-      this.intermediateService.getIntermediate(decodedToken._id)
-      .then((intermediate) => {
-        this.collectionIds = intermediate.collectionId;
+      this.userService.getUser(decodedToken._id)
+      .then((user) => {
+        this.collectionIds = user.collectionId;
       })
     }
 

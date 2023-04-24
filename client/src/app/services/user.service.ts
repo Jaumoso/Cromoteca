@@ -2,11 +2,16 @@ import { Injectable } from '@angular/core';
 import { User } from '../shared/user';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { baseURL } from '../shared/baseurl';
+import { Collection } from '../shared/collection';
+import { CollectionService } from './collection.service';
 @Injectable({
     providedIn: 'root'
   })
   export class UserService {
-    constructor(private http: HttpClient) { }
+    constructor(
+      private http: HttpClient,
+      private collectionService: CollectionService
+      ) { }
 
     getUser(userId: string): Promise<User> {
       return new Promise((resolve, reject) => {
@@ -91,6 +96,25 @@ import { baseURL } from '../shared/baseurl';
         }, err => {
           resolve(false);
         });
+      });
+    }
+
+    getCollections(userId: string): Promise<Collection[]> {
+      return new Promise((resolve, reject) => {
+        this.http.get<{ userData: User }>(baseURL + 'user/' + userId)
+          .subscribe(user => {
+            const collectionIds = user.userData.collectionId;
+            let collections: Collection[] = [];
+            if (collectionIds != undefined) {
+              for (let collectionId of collectionIds) {
+                this.collectionService.getCollection(collectionId)
+                  .then((collection) => collections.push(collection));
+              }
+            }
+            resolve(collections);
+          }, err => {
+            reject(err);
+          });
       });
     }
 }

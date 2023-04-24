@@ -8,7 +8,6 @@ import { CollectionModule } from './collection/collection.module';
 import { ConfigModule } from '@nestjs/config';
 import { NewsModule } from './news/news.module';
 import { AuthModule } from './auth/auth.module';
-import { IntermediateModule } from './intermediate/intermediate.module';
 import { CardModule } from './card/card.module';
 import { AdvertModule } from './advert/advert.module';
 
@@ -26,7 +25,6 @@ require('dotenv').config();
     CollectionModule,
     NewsModule,
     AuthModule,
-    IntermediateModule,
     CardModule,
     AdvertModule,
   ],

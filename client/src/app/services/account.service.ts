@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { AddressService } from './address.service';
-import { IntermediateService } from './intermediate.service';
 import { CardService } from './card.service';
 import { LoginStatusService } from './loginStatus.service';
 import { UserService } from './user.service';
@@ -15,7 +14,6 @@ export class AccountService {
   constructor(
     private addressService: AddressService,
     private cardService: CardService,
-    private intermediateService: IntermediateService,
     private loginStatusService: LoginStatusService,
     private userService: UserService
   ) { }
@@ -28,12 +26,10 @@ export class AccountService {
         user.addressId = address._id;
         this.userService.createUser(user)
         .then((user) => {
-          console.log("Usuario creado correctamente");
-          let intermediate = new Intermediate;
-          intermediate.userId = user._id;
-          intermediate.collectionId = [];
-          this.intermediateService.createIntermediate(intermediate);
-          console.log("Biblioteca creada correctamente");
+          if(user){
+            console.log("Usuario creado correctamente");
+            //TODO: comprobar que funciona bien 
+          }
         });        
       })
     } catch (error) {
@@ -60,7 +56,6 @@ export class AccountService {
     try {
       await this.cardService.deleteCards(userId);
       await this.addressService.deleteAddress(addressId);
-      await this.intermediateService.deleteIntermediate(userId);
       await this.userService.deleteUser(userId);
       localStorage.removeItem('token');
       this.loginStatusService.loggedIn = false;

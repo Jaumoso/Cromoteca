@@ -7,16 +7,16 @@ import { of } from 'rxjs';
 import { FillCollectionComponent } from './fill-collection.component';
 import { CollectionService } from '../services/collection.service';
 import { JwtService } from '../services/jwt.service';
-import { IntermediateService } from '../services/intermediate.service';
 import { CardService } from '../services/card.service';
 import { AddElementComponent } from '../add-element/add-element.component';
+import { UserService } from '../services/user.service';
 
 describe('FillCollectionComponent', () => {
   let component: FillCollectionComponent;
   let fixture: ComponentFixture<FillCollectionComponent>;
   let collectionService: CollectionService;
   let jwtService: JwtService;
-  let intermediateService: IntermediateService;
+  let userService: UserService;
   let cardService: CardService;
   let route: ActivatedRoute;
 
@@ -30,10 +30,10 @@ describe('FillCollectionComponent', () => {
        providers: [
         { provide: CollectionService, useValue: { getCollection: jasmine.createSpy('getCollection').and.returnValue(of({ /* mock collection data */ })) } },
         { provide: JwtService, useValue: { decodeToken: jasmine.createSpy('decodeToken').and.returnValue({ _id: 'user_id' }) } },
-        { provide: IntermediateService, useValue: { getIntermediate: jasmine.createSpy('getIntermediate').and.returnValue(Promise.resolve(/* mock intermediate data */)) } },
+        { provide: userService, useValue: { getUser: jasmine.createSpy('getUser').and.returnValue(Promise.resolve(/* mock user data */)) } },
         { provide: CardService, useValue: { getUserCardsCollection: jasmine.createSpy('getUserCardsCollection').and.returnValue(Promise.resolve(/* mock card data */)) } },
         { provide: ActivatedRoute, useValue: { paramMap: of({ get: (key: string) => 'collection_id' } as Params) } },
-        { provide: IntermediateService, useValue: { getIntermediate: jasmine.createSpy('getIntermediate').and.returnValue(Promise.resolve(/* mock intermediate data */)) } },
+        { provide: userService, useValue: { getUser: jasmine.createSpy('getUser').and.returnValue(Promise.resolve(/* mock user data */)) } },
       ]
     })
     .compileComponents();
@@ -48,7 +48,7 @@ describe('FillCollectionComponent', () => {
     component = fixture.componentInstance;
     collectionService = TestBed.inject(CollectionService);
     jwtService = TestBed.inject(JwtService);
-    intermediateService = TestBed.inject(IntermediateService);
+    userService = TestBed.inject(UserService);
     cardService = TestBed.inject(CardService);
     route = TestBed.inject(ActivatedRoute);
   });
@@ -58,7 +58,7 @@ describe('FillCollectionComponent', () => {
 
   //   expect(collectionService.getCollection).toHaveBeenCalledWith('collection_id');
   //   expect(jwtService.decodeToken).toHaveBeenCalled();
-  //   expect(intermediateService.getIntermediate).toHaveBeenCalledWith('user_id');
+  //   expect(userService.getIntermediate).toHaveBeenCalledWith('user_id');
   //   expect(cardService.getUserCardsCollection).toHaveBeenCalledWith('user_id', /* collection id from mock data */);
 
   //   expect(component.cardList.length).toBe(/* mock collection size */);
