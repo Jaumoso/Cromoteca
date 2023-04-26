@@ -54,7 +54,7 @@ export class CardController {
         }
     }
 
-    @UseGuards(JwtAuthGuard)
+/*     @UseGuards(JwtAuthGuard)
     @Get('user/:userId')
     @ApiCreatedResponse({ description: 'This function will get ONE CARD INFO from the database.' })
     async getUserCards(@Res() response, @Param('userId') userId: string) {
@@ -67,7 +67,7 @@ export class CardController {
         catch (err) {
             return response.status(err.status).json(err.response);
         }
-    }
+    } */
 
     @UseGuards(JwtAuthGuard)
     @Post('new')

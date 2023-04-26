@@ -34,7 +34,14 @@
         <br>
     </div>
 </div>
-
+<div fxLayout="row">
+  <div fxFlex="row"  fxFlexAlign="center">
+    <br>
+    <div *ngIf="isLoading" fxLayout="column" fxLayoutAlign="center center">
+        <mat-spinner></mat-spinner><br><h4>Cargando...</h4>
+    </div>
+  </div>
+</div>
 <div class="element-list" fxLayout.gt-md="row" fxLayout.lt-md="column" fxLayoutAlign="space-around center" fxLayoutGap="10px">
     <div fxFlex.gt-md="auto" fxFlex.lt-md="100" fxLayoutAlign="center start">
       <div fxLayout="column">
@@ -124,3 +131,4 @@
     </div>
 </div>
 <br><br>
+

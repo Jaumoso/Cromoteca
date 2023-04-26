@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, SimpleChanges, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Params, Router} from '@angular/router';
 import { switchMap } from 'rxjs';
 import { CollectionService } from '../services/collection.service';
@@ -48,64 +48,75 @@ export class FillCollectionComponent implements OnInit {
   adverts: string[] = [];
   value: number = 0;
 
+  public isLoading = true;
+
   ngOnInit() {
     // coge el id de la colección pasado como parámetro y recupera la información
     this.route.paramMap.pipe(
       switchMap((params: Params) => this.collectionService.getCollection(params['get']('id')))
     ).subscribe(collectionData => {
       this.collection = collectionData;
-    });
+      // recoge el token de sesión y recupera info de usuario
+      const token = localStorage.getItem('token');
+      if (!token) {
+        this.isLoading = false;
+        return;
+      }
   
-    // recoge el token de sesión y recupera info de usuario
-    const token = localStorage.getItem('token');
-    if (!token) {
-      return;
-    }
+      if (this.jwtService.isTokenExpired(token)) {
+        this.isLoading = false;
+        this.router.navigateByUrl('/home');
+        return;
+      }
   
-    if (this.jwtService.isTokenExpired(token)) {
-      this.router.navigateByUrl('/home');
-      return;
-    }
+      const decodedToken = this.jwtService.decodeToken(token);
+      this.userId = decodedToken._id;
   
-    const decodedToken = this.jwtService.decodeToken(token);
-    this.userId = decodedToken._id;
+      this.userService.getUser(decodedToken._id)
+        .then((user) => {
+          if (!user) {
+            this.isLoading = false;
+            return;
+          }
   
-    this.userService.getUser(decodedToken._id)
-      .then((user) => {
-        if (!user) {
-          return;
-        }
+          this.cardService.getUserCardsCollection(decodedToken._id, this.collection?._id!)
+            .subscribe((cards) => {
+              // Crear un array con el total de elementos en la colección
+              const collectionSize = this.collection?.size || 0;
+              this.cardList = Array(collectionSize).fill(0);
+              this.cards = cards;
+              this.completed = this.completarSiUnico(cards);
+              this.missing = this.collection!.size! - this.completed;
+              this.percentage = (this.completed / this.collection!.size! * 100).toFixed(2);
+              
+              // Verificar si cada carta está en el array de cartas || sumar valor de la colección
+              cards.forEach((card) => {
+                const cardIndex = card.cardId;
+    
+                if (cardIndex != undefined && cardIndex <= collectionSize) {
+                  this.cardList[cardIndex - 1] = 1;
+                }
+                // comprueba que exista un advert para el elemento. Si existe, guarda el id del elemento para no crear otro advert
+                this.advertService.checkExistingAdvert(card._id!)
+                  .then((exists) => {
+                    if (exists) {
+                      this.adverts.push(card._id!);
+                    }
+                  });
   
-        this.cardService.getUserCardsCollection(decodedToken._id, this.collection?._id!)
-          .subscribe((cards) => {
-            // Crear un array con el total de elementos en la colección
-            const collectionSize = this.collection?.size || 0;
-            this.cardList = Array(collectionSize).fill(0);
-            this.cards = cards;
-            this.completed = this.completarSiUnico(cards);
-            this.missing = this.collection!.size! - this.completed;
-            this.percentage = (this.completed / this.collection!.size! * 100).toFixed(2);
-            
-            // Verificar si cada carta está en el array de cartas || sumar valor de la colección
-            cards.forEach((card) => {
-              const cardIndex = card.cardId;
-  
-              if (cardIndex != undefined && cardIndex <= collectionSize) {
-                this.cardList[cardIndex - 1] = 1;
-              }
-              // comprueba que exista un advert para el elemento. Si existe, guarda el id del elemento para no crear otro advert
-              this.advertService.checkExistingAdvert(card._id!)
-                .then((exists) => {
-                  if (exists) {
-                    this.adverts.push(card._id!);
-                  }
-                });
-
-              // Sumar precio de las cartas para obtener valor de la colección
-              this.value += card.price!;
+                // Sumar precio de las cartas para obtener valor de la colección
+                this.value += card.price!;
+              });
+              this.isLoading = false;
             });
-          });
+        });
       });
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.hasOwnProperty('cards')) {
+      this.ngOnInit();
+    }
   }
 
   // devuelve el total de cartas con ID único
