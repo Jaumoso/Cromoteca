@@ -17,6 +17,7 @@ export class AboutComponent implements OnInit {
   @ViewChild('contenido4', { static: true }) contenido4: ElementRef | undefined;
   @ViewChild('contenido5', { static: true }) contenido5: ElementRef | undefined;
   @ViewChild('contenido6', { static: true }) contenido6: ElementRef | undefined;
+  @ViewChild('contenido7', { static: true }) contenido7: ElementRef | undefined;
 
   toggleContent(id: string) {
     const contenidoEl = this.getContenidoElementById(id);
@@ -42,6 +43,7 @@ export class AboutComponent implements OnInit {
       case 'seccion4': return this.contenido4?.nativeElement;
       case 'seccion5': return this.contenido5?.nativeElement;
       case 'seccion6': return this.contenido6?.nativeElement;
+      case 'seccion7': return this.contenido7?.nativeElement;
       default: throw new Error(`No se encontró la sección con el id '${id}'`);
     }
   }
