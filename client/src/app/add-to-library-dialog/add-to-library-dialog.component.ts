@@ -42,9 +42,15 @@ export class AddToLibraryComponent implements OnInit {
             this.userService.updateUserContent(user._id, user)
             .then(() => {
               this.closeDialog()
+            })
+            .catch((error) => {
+              console.error(error);
             });
           }
         }
+      })
+      .catch((error) => {
+        console.error(error);
       });
     }
     else{

@@ -36,4 +36,5 @@ async function bootstrap() {
     console.log(`\nPara ver la documentación de la API: ${await app.getUrl()}/api \n`);
     console.log(`Para descargar el JSON del Swagger API: ${await app.getUrl()}/api-json`);
 }
-bootstrap();
+bootstrap()
+.catch((error) => {console.error(error);});

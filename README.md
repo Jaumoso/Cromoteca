@@ -17,6 +17,18 @@ Frontend (client) | Backend (server)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=jaumoso_cromoteca-client&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=jaumoso_cromoteca-client) | [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=jaumoso_cromoteca-server&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=jaumoso_cromoteca-server)
 
 ---------------------------------------------------------
+
+# Lanzar contenedores
+CLIENTE
+```
+docker run -p 4200:80 --name cromoteca_client <imagen>
+```
+
+SERVIDOR
+```
+docker run -p 3000:3000 -e DB_USER=<usuario> -e DB_PASSWORD=<contraseña> -e JWT_SECRET="<JWT secret>" --name cromoteca_server <imagen>
+```
+
 ## Requisitos para que todo funcione
 
 NODE Version: 16.10

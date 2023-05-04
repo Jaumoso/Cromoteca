@@ -96,11 +96,13 @@ export class EditprofileComponent implements OnInit {
     .then((userData) => {
       this.user = userData;
       this.user.password = '';
-    });
+    })
+    .catch((error) => {console.error(error);});
     this.addressService.getAddress(this.decodedToken.addressId)
     .then((addressData) => {
       this.address = addressData;
-    });
+    })
+    .catch((error) => {console.error(error);});
   }
 
   private decodedToken: any;
@@ -126,7 +128,8 @@ export class EditprofileComponent implements OnInit {
           panelClass: ['snackbar']
         }
         );
-    });
+    })
+    .catch((error) => {console.error(error);});
   }
 
   deleteAccount(){
@@ -149,7 +152,8 @@ export class EditprofileComponent implements OnInit {
               panelClass: ['snackbar']
             }
             );
-        });
+        })
+        .catch((error) => {console.error(error);});;
       }
     });
   }

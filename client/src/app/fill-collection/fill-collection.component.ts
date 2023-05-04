@@ -186,7 +186,8 @@ export class FillCollectionComponent implements OnInit {
           else{
             this.showSnackBar("Ha habido un problema al añadir el elemento");
           }
-        });
+        })
+        .catch((error) => {console.error(error);});
       }
     });
   }

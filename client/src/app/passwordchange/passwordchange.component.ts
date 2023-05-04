@@ -42,7 +42,8 @@ export class PasswordchangeComponent implements OnInit {
         // TODO: FALTA IMPLEMENTAR
         this.emailButton = true;
       }
-    });
+    })
+    .catch((error) => {console.error(error);});
     }
   }
 

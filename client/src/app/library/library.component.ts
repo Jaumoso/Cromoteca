@@ -88,14 +88,16 @@ export class LibraryComponent implements OnInit {
                 user.collectionId!.splice(index, 1);
                 // se actualiza la información del user
                 this.userService.updateUserContent(user._id!, user)
-                  .then(() => {
-                    // se borra la colección del array de colecciones local
-                    const index = this.collections.indexOf(collection);
-                    this.collections.splice(index, 1);
-                  });
+                .then(() => {
+                  // se borra la colección del array de colecciones local
+                  const index = this.collections.indexOf(collection);
+                  this.collections.splice(index, 1);
+                })
+                .catch((error) => {console.error(error);});
               }
             });
-          });
+          })
+          .catch((error) => {console.error(error);});
       }
     });
   }

@@ -28,8 +28,9 @@ export class AccountService {
           if(user){
             console.log("Usuario creado correctamente");
           }
-        });        
+        }).catch((error) => {console.error(error);});        
       })
+      .catch((error) => {console.error(error);});
     } catch (error) {
       console.error("Error creando la cuenta", error);
       throw new Error("No se ha podido crear la cuenta");
@@ -43,6 +44,7 @@ export class AccountService {
         this.userService.updateUser(userId, user);
         console.log("Cuenta actualizada correctamente");
       })
+      .catch((error) => {console.error(error);});
 
     } catch (error) {
       console.error("Error actualizando la cuenta", error);

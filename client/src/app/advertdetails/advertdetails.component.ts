@@ -50,32 +50,35 @@ export class AdvertdetailsComponent implements OnInit {
       }
     }
 
-    // se recoge el id que se pasa como parametro en la URL
-    this.route.paramMap.pipe(
-      switchMap((params: Params) => {
-        // se busca el advert con el id en params
-        return this.advertService.getAdvert(params['get']('id'));
-      }))
-      .subscribe(advertData => {
-        this.advert = advertData;
-        // con el advert se averigua la carta que se quiere recuperar
-        this.cardService.getCard(this.advert.elementId!)
-        .then((card) => {
-          this.card = card;
-          // se averigua la colección a la que pertenece
-          this.collectionService.getCollection(card.collectionId!)
-          .then((collection) => {
-            this.collection = collection;
-          });
+  // se recoge el id que se pasa como parametro en la URL
+  this.route.paramMap.pipe(
+    switchMap((params: Params) => {
+      // se busca el advert con el id en params
+      return this.advertService.getAdvert(params['get']('id'));
+    }))
+    .subscribe(advertData => {
+      this.advert = advertData;
+      // con el advert se averigua la carta que se quiere recuperar
+      this.cardService.getCard(this.advert.elementId!)
+      .then((card) => {
+        this.card = card;
+        // se averigua la colección a la que pertenece
+        this.collectionService.getCollection(card.collectionId!)
+        .then((collection) => {
+          this.collection = collection;
         })
-        // también se recoge la información del vendedor
-        .then(() => {
-          this.userService.getUser(this.advert?.userId!)
-          .then((user) => {
-            this.seller = user;
-          })
+        .catch((error) => {console.error(error);});
+      })
+      // también se recoge la información del vendedor
+      .then(() => {
+        this.userService.getUser(this.advert?.userId!)
+        .then((user) => {
+          this.seller = user;
         })
-      });
+        .catch((error) => {console.error(error);});
+      })
+      .catch((error) => {console.error(error);});
+    });
   }
 
   sendEmail(){

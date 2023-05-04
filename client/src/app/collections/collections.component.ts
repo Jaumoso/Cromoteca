@@ -36,6 +36,7 @@ export class CollectionsComponent implements OnInit {
       .then((user) => {
         this.collectionIds = user.collectionId!
       })
+      .catch((error) => {console.error(error);});
     }
     this.collectionService.getCollections()
     .subscribe(collections => {

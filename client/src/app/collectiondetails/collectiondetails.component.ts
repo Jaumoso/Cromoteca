@@ -45,6 +45,7 @@ export class CollectiondetailsComponent implements OnInit {
       .then((user) => {
         this.collectionIds = user.collectionId;
       })
+      .catch((error) => {console.error(error);});
     }
 
     this.route.paramMap.pipe(

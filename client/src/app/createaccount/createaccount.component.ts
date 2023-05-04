@@ -148,9 +148,11 @@ export class CreateaccountComponent implements OnInit {
               this.router.navigateByUrl('/home');
               this.dialog.open(LoginComponent);
               this.dialog2.open(CreatedAccountDialogComponent);
-            });
+            })
+            .catch((error) => {console.error(error);});
           } 
         })
+        .catch((error) => {console.error(error);});
       }
   }
 

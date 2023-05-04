@@ -125,7 +125,8 @@ import { CollectionService } from './collection.service';
             if (collectionIds != undefined) {
               for (let collectionId of collectionIds) {
                 this.collectionService.getCollection(collectionId)
-                  .then((collection) => collections.push(collection));
+                .then((collection) => collections.push(collection))
+                .catch((error) => {console.error(error);});
               }
             }
             resolve(collections);
