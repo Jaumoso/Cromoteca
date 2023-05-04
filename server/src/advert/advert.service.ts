@@ -67,17 +67,17 @@ export class AdvertService {
 
     async deleteAdvert(advertId: string): Promise<AdvertDocument> {
         const deletedAdvert = await this.advertModel.findByIdAndDelete(advertId);
-      if (!deletedAdvert) {
-        throw new NotFoundException(`Advert #${advertId} not found`);
-      }
-      return deletedAdvert;
+        if (!deletedAdvert) {
+            throw new NotFoundException(`Advert #${advertId} not found`);
+        }
+        return deletedAdvert;
     }
 
     async deleteAdvertCard(cardId: string): Promise<AdvertDocument> {
-        const deletedAdvert = await this.advertModel.findOneAndDelete({cardId: cardId});
-      if (!deletedAdvert) {
-        throw new NotFoundException(`Advert of element #${cardId} not found`);
-      }
-      return deletedAdvert;
+        const deletedAdvert = await this.advertModel.findOneAndDelete({elementId: cardId});
+        if (!deletedAdvert) {
+            throw new NotFoundException(`Advert of element #${cardId} not found`);
+        }
+        return deletedAdvert;
     }
 }

@@ -77,42 +77,41 @@ export class FillCollectionComponent implements OnInit {
           if (!user) {
             this.isLoading = false;
             return;
-          }
+        }
+        this.cardService.getUserCardsCollection(decodedToken._id, this.collection?._id!)
+          .subscribe((cards) => {
+            // Crear un array con el total de elementos en la colección
+            const collectionSize = this.collection?.size || 0;
+            this.cardList = Array(collectionSize).fill(0);
+            this.cards = cards;
+            this.completed = this.completarSiUnico(cards);
+            this.missing = this.collection!.size! - this.completed;
+            this.percentage = (this.completed / this.collection!.size! * 100).toFixed(2);
+            
+            // Verificar si cada carta está en el array de cartas || sumar valor de la colección
+            cards.forEach((card) => {
+              const cardIndex = card.cardId;
   
-          this.cardService.getUserCardsCollection(decodedToken._id, this.collection?._id!)
-            .subscribe((cards) => {
-              // Crear un array con el total de elementos en la colección
-              const collectionSize = this.collection?.size || 0;
-              this.cardList = Array(collectionSize).fill(0);
-              this.cards = cards;
-              this.completed = this.completarSiUnico(cards);
-              this.missing = this.collection!.size! - this.completed;
-              this.percentage = (this.completed / this.collection!.size! * 100).toFixed(2);
-              
-              // Verificar si cada carta está en el array de cartas || sumar valor de la colección
-              cards.forEach((card) => {
-                const cardIndex = card.cardId;
-    
-                if (cardIndex != undefined && cardIndex <= collectionSize) {
-                  this.cardList[cardIndex - 1] = 1;
-                }
-                // comprueba que exista un advert para el elemento. Si existe, guarda el id del elemento para no crear otro advert
-                this.advertService.checkExistingAdvert(card._id!)
-                  .then((exists) => {
-                    if (exists) {
-                      this.adverts.push(card._id!);
-                    }
-                  })
-                  .catch((error) => {console.error(error);});
-  
-                // Sumar precio de las cartas para obtener valor de la colección
-                this.value += card.price!;
-              });
-              this.isLoading = false;
+              if (cardIndex != undefined && cardIndex <= collectionSize) {
+                this.cardList[cardIndex - 1] = 1;
+              }
+              // comprueba que exista un advert para el elemento. Si existe, guarda el id del elemento para no crear otro advert
+              this.advertService.checkExistingAdvert(card._id!)
+                .then((exists) => {
+                  if (exists) {
+                    this.adverts.push(card._id!);
+                  }
+                })
+                .catch((error) => {console.error(error);});
+
+              // Sumar precio de las cartas para obtener valor de la colección
+              this.value += card.price!;
             });
-        })
-        .catch((error) => {console.error(error);});
-      });
+            this.isLoading = false;
+          });
+      })
+      .catch((error) => {console.error(error);});
+    });
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -195,21 +194,22 @@ export class FillCollectionComponent implements OnInit {
   }
 
   deleteElement(card: Card) {
+    // si existe un anuncio para esa carta lo borra
+    this.advertService.deleteAdvertCard(card._id!)
+    .subscribe((deletedAdvert) => {
+      if(deletedAdvert) {
+        console.log(deletedAdvert._id);
+        // borra del array de adverts el id del elemento.
+        const index = this.adverts.indexOf(card._id!);
+        this.adverts.splice(index, 1);
+      }
+    });
+
     this.cardService.deleteCard(card._id!)
     .subscribe(() => {
       // quitar carta del array
       const index = this.cards.indexOf(card);
       this.cards.splice(index, 1);
-
-      // si existe un anuncio, lo borra también
-      this.advertService.deleteAdvertCard(card._id!)
-      .subscribe((deletedAdvert) => {
-        if(deletedAdvert) {
-          // borra del array de adverts el id del elemento.
-          const index = this.adverts.indexOf(card._id!);
-          this.adverts.splice(index, 1);
-        }
-      })
 
       // si no existe en el array
       if(!this.existe(card.cardId!)){
@@ -245,8 +245,6 @@ export class FillCollectionComponent implements OnInit {
         });
       }
     });
-
-
   }
 
   // función para mostrar una MatSnackBar
