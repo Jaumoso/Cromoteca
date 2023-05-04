@@ -95,7 +95,8 @@ export class LibraryComponent implements OnInit {
                 })
                 .catch((error) => {console.error(error);});
               }
-            });
+            })
+            .catch((error) => {console.error(error);});
           })
           .catch((error) => {console.error(error);});
       }

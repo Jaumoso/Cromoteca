@@ -41,7 +41,8 @@ export class AccountService {
     try {
       await this.addressService.updateAddress(addressId, address)
       .then(() => {
-        this.userService.updateUser(userId, user);
+        this.userService.updateUser(userId, user)
+        .catch((error) => {console.error(error);});
         console.log("Cuenta actualizada correctamente");
       })
       .catch((error) => {console.error(error);});

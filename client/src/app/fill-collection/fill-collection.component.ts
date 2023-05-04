@@ -102,14 +102,16 @@ export class FillCollectionComponent implements OnInit {
                     if (exists) {
                       this.adverts.push(card._id!);
                     }
-                  });
+                  })
+                  .catch((error) => {console.error(error);});
   
                 // Sumar precio de las cartas para obtener valor de la colección
                 this.value += card.price!;
               });
               this.isLoading = false;
             });
-        });
+        })
+        .catch((error) => {console.error(error);});
       });
   }
 
