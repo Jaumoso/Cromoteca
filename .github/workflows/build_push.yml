@@ -2,8 +2,10 @@ name: Build Test Run Analyze Containerize Push
 
 on:
   push:
-    branches: [ "main" ]
-
+    branches: 
+      - main
+    paths-ignore:
+      - '**/README.md'
 jobs:
   
   build-run-test-client:
