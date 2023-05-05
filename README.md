@@ -19,14 +19,16 @@ Frontend (client) | Backend (server)
 ---------------------------------------------------------
 
 # Lanzar contenedores
+Se necesita docker o podman instalado en la máquina local, y haber descargado las imágenes previamente.
+
 CLIENTE
 ```
-docker run -p 4200:80 --name cromoteca_client <imagen>
+docker run -p 4200:80 --name cromoteca_client <imagen cliente>
 ```
 
 SERVIDOR
 ```
-docker run -p 3000:3000 -e DB_USER=<usuario> -e DB_PASSWORD=<contraseña> -e JWT_SECRET="<JWT secret>" --name cromoteca_server <imagen>
+docker run -p 3000:3000 -e DB_USER=jaumoso -e DB_PASSWORD=<contraseña> -e JWT_SECRET="<JWT secret>" --name cromoteca_server <imagen servidor>
 ```
 
 ## Requisitos para que todo funcione
