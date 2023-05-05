@@ -19,7 +19,7 @@ Frontend (client) | Backend (server)
 ---------------------------------------------------------
 
 # Lanzar contenedores
-Se necesita docker o podman instalado en la máquina local, y haber descargado las imágenes previamente.
+Se necesita docker o podman instalado en la máquina local y haber descargado las imágenes previamente.
 
 CLIENTE
 ```
