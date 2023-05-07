@@ -198,7 +198,6 @@ export class FillCollectionComponent implements OnInit {
     this.advertService.deleteAdvertCard(card._id!)
     .subscribe((deletedAdvert) => {
       if(deletedAdvert) {
-        console.log(deletedAdvert._id);
         // borra del array de adverts el id del elemento.
         const index = this.adverts.indexOf(card._id!);
         this.adverts.splice(index, 1);

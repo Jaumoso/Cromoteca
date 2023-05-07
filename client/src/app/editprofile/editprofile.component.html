@@ -116,7 +116,7 @@
                     <mat-error *ngIf="this.form.get('country')?.errors?.['required']">País requerido.</mat-error>
             </mat-form-field>
             <br>
-            <button (click)="goBack()" type="button" mat-button>Cancel</button>
+            <button (click)="goBack()" type="button" mat-button>Cancelar</button>
             <button mat-button [disabled]="form.invalid" class="submit-button shake-horizontal" type="submit">Actualizar información</button>
         </div>
     </form>

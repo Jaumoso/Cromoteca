@@ -124,8 +124,14 @@
                 </mat-card-actions>
               </div>
             </mat-card>
-
           </div>
+
+          <div fxFlex="row" fxFlexAlign="center">
+              <div class="collection-not-found" *ngIf="cards.length == 0">
+                  <h2>¡Empieza a añadir coleccionables!</h2>
+              </div>
+          </div>
+
         </div>
       </div>
     </div>

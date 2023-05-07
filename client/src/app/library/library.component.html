@@ -41,7 +41,8 @@
             <mat-spinner></mat-spinner><br><h4>Cargando...</h4>
         </div>
         <div class="collection-not-found" *ngIf="filteredCollections.length == 0">
-            <h2>{{errmsg}}</h2>
+            <h2>No se han encontrado colecciones!</h2>
+            <h2>Para añadir una colección, ve a <button mat-button [routerLink]="['/collections']" routerLinkActive="router-link-active">Colecciones</button></h2>
         </div>
     </div>
     <br><br><br>
