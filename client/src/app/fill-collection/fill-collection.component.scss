@@ -87,7 +87,7 @@ $text-color: midnightblue;
 
 mat-card {
   box-shadow: 1px 1px 5px 2px rgb(99, 99, 99);
-  margin: 10px 50px 0px 50px;
+  margin: 20px 20px 20px 20px;
   border: 1px solid black;
 
     .identifier {
@@ -95,6 +95,16 @@ mat-card {
         border: 1px solid black;
         border-radius: 5px;
     }
+
+    .single-card {
+        display: flex;
+        flex-wrap: wrap;
+      }
+      
+      .double-card {
+        display: flex;
+        flex-wrap: wrap;
+      }
 
   mat-card-content{
     
