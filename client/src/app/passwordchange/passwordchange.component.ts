@@ -14,7 +14,7 @@ export class PasswordchangeComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private location: Location,
-    private userService: UserService
+    private userService: UserService,
   ) { 
     this.sendEmailForm = this.formBuilder.group({
       email: this.emailValidation,
@@ -33,14 +33,21 @@ export class PasswordchangeComponent implements OnInit {
   sendEmailForm: FormGroup;
   checkCodeForm: FormGroup;
   emailButton: boolean | undefined;
+  private code: string | undefined;
 
   sendEmail() {
     if(this.sendEmailForm.valid){
     this.userService.checkEmail(this.sendEmailForm.value.email)
     .then((userExists) => {
-      if(userExists == true){
-        // TODO: FALTA IMPLEMENTAR
+      if(userExists){
         this.emailButton = true;
+        
+        this.code = this.generateCode();
+        console.log(this.code);
+        const to = this.sendEmailForm.value;
+        const subject = "Cromoteca - recuperación de contraseña";
+        const message = "Código de recuperación: " + this.code;
+        /* this.emailService.sendEmail(to, subject, message); */
       }
     })
     .catch((error) => {console.error(error);});
@@ -51,8 +58,13 @@ export class PasswordchangeComponent implements OnInit {
     this.location.back();
   }
 
+  generateCode() {
+    return crypto.randomUUID().toString();
+  }
+
   checkCode(){
-    // TODO:
+    if(this.code == this.codeValidation.value){ return true; }
+    else return false;
   }
 
 }

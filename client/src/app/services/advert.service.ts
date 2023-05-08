@@ -3,16 +3,13 @@ import { Advert } from '../shared/advert';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { baseURL } from '../shared/baseurl';
 import { map, Observable } from 'rxjs';
-import { Card } from '../shared/card';
-import { CardService } from './card.service';
 
 @Injectable({
     providedIn: 'root'
   })
   export class AdvertService {
     constructor(
-        private http: HttpClient,
-        private cardService: CardService
+        private http: HttpClient
         ) { }
 
     getAdverts(): Observable<Advert[]> {

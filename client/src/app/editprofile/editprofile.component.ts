@@ -138,7 +138,7 @@ export class EditprofileComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result && result.deleteAccount){
+      if(result?.deleteAccount){
         // Se borra la cuenta y tods su información
         this.accountService.deleteAccount(this.user!._id!, this.user!.addressId!)
         .then(() => {
