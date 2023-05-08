@@ -4,7 +4,6 @@ import { JwtAuthGuard } from "src/auth/jwt-auth.guard";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { UpdateUserDto } from "./dto/update-user.dto";
 import { UserService } from "./user.service";
-import mongoose from "mongoose";
 import { UpdateUserContentDto } from "./dto/update-user-content.dto";
 
 

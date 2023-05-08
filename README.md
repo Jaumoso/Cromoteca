@@ -170,9 +170,10 @@ yarn sonar
 
 ### Envío de Emails
 
-Generación de códigos de seguridad de recuperación
+Servidor de envío de emails SMTP -> TODO
 ```
 // TODO
+Nodemailer & types/@nodemailer
 ```
 
 # TO-DO:

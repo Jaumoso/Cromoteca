@@ -81,7 +81,7 @@ export class FillCollectionComponent implements OnInit {
         this.cardService.getUserCardsCollection(decodedToken._id, this.collection?._id!)
           .subscribe((cards) => {
             // Crear un array con el total de elementos en la colección
-            const collectionSize = this.collection?.size || 0;
+            const collectionSize = this.collection?.size ?? 0;
             this.cardList = Array(collectionSize).fill(0);
             this.cards = cards;
             this.completed = this.completarSiUnico(cards);
@@ -162,7 +162,7 @@ export class FillCollectionComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result && result.card){
+      if(result?.card){
         this.cardService.createCard(result.card)
         .then((card) => {
           // si se ha creado el elemento
@@ -236,7 +236,7 @@ export class FillCollectionComponent implements OnInit {
 
     // recuperar información del diálogo y crear el anuncio
     dialogRef.afterClosed().subscribe(result => {
-      if(result && result.advert){
+      if(result?.advert){
         this.advertService.createAdvert(result.advert)
         .subscribe(() => {
           this.adverts.push(card._id!);

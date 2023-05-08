@@ -86,7 +86,7 @@ import { CollectionService } from './collection.service';
 
     checkEmail(email: string): Promise<boolean> {
       return new Promise((resolve, reject) => {
-        this.http.get<{userData: Boolean}>(baseURL + 'user/checkemail/' + email)
+        this.http.get<{userData: boolean}>(baseURL + 'user/checkemail/' + email)
         .subscribe(user => {
           if(user.userData != null){
             resolve(true);
