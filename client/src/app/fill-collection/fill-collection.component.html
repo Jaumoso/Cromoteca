@@ -7,6 +7,7 @@
         <div fxFlex="2"></div>
         <div fxLayoutAlign="center" fxLayout="column" fxLayoutGap="10px">
             <button mat-button (click)="addElement()" routerLinkActive="router-link-active">Añadir Elemento</button>
+            <button [routerLink]="['/adverts']">Ver tus anuncios</button>
             <button mat-button (click)="goBack()" routerLinkActive="router-link-active">Atrás</button>
         </div>
     </div>
@@ -62,7 +63,7 @@
                 <mat-card-content fxLayoutAlign.lt-md="center start" fxLayoutAlign.gt-md="start start">
                   <div fxLayout="column">
                     <h2>{{card.name}}</h2>
-                    <p style="min-width: 150px;">{{card.description}}</p>
+                    <p class="description">{{card.description}}</p>
                     <p>
                       <span *ngIf="card.quantity != 0" class="quantity"><b>{{card.quantity}} pcs</b></span>
 
@@ -82,7 +83,8 @@
                 <mat-card-actions fxLayoutAlign.lt-md="center start">
                   <div fxLayout.gt-sm="column" fxLayout.lt-sm="row" fxLayout.sm="row">
                     <button *ngIf="!adverts.includes(card._id!)" (click)="createAdvert(card)">Crear Anuncio</button>
-                    <button (click)="deleteElement(card)">Eliminar</button>
+                    <button (click)="updateElement(card)">Actualizar coleccionable</button>
+                    <button (click)="deleteElement(card)">Eliminar coleccionable</button>
                   </div>
                 </mat-card-actions>
               </div>
@@ -118,8 +120,10 @@
               <div fxFlex="auto" fxLayoutAlign="end center" fxLayoutAlign.lt-sm="center center">
                 <mat-card-actions fxLayoutAlign.lt-md="center start">
                   <div fxLayout.gt-sm="column" fxLayout.lt-sm="row" fxLayout.sm="row">
-                    <button *ngIf="adverts.includes(card._id!)" [routerLink]="['/adverts']">Ver Anuncio</button>
-                    <button (click)="deleteElement(card)">Eliminar</button>
+                    <button *ngIf="adverts.includes(card._id!)" (click)="gotoAdvert(card)">Detalles de Anuncio</button>
+                    <button *ngIf="adverts.includes(card._id!)" (click)="deleteAdvert(card)">Eliminar anuncio</button>
+                    <button *ngIf="adverts.includes(card._id!)" disabled>Actualizar coleccionable</button>
+                    <button (click)="deleteElement(card)">Eliminar coleccionable</button>
                   </div>
                 </mat-card-actions>
               </div>

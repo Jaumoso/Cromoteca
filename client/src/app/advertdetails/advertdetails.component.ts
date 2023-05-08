@@ -25,6 +25,7 @@ export class AdvertdetailsComponent implements OnInit {
   collection: Collection | undefined;
   seller: User | undefined;
   loggedIn: boolean = false;
+  currentUser: string | undefined;
 
   constructor(
     private advertService: AdvertService,
@@ -48,6 +49,8 @@ export class AdvertdetailsComponent implements OnInit {
       if(!this.jwtService.isTokenExpired(token)){
         this.loggedIn = true;
       }
+      const decodedToken = this.jwtService.decodeToken(token);
+      this.currentUser = decodedToken.username;
     }
 
   // se recoge el id que se pasa como parametro en la URL

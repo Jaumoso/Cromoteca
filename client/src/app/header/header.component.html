@@ -4,7 +4,7 @@
       <a mat-button [routerLink]="['/home']" routerLinkActive="active" ><span class="fa fa-home fa-lg"></span> Inicio</a>
       <a mat-button [routerLink]="['/collections']" routerLinkActive="active" ><span class="fa fa-list fa-lg"></span> Colecciones</a>
       <a mat-button [routerLink]="['/market']" routerLinkActive="active" ><span class="fa fa-shopping-cart fa-lg"></span> Mercado</a>
-      <a mat-button (click)="goToProfile()" routerLinkActive="active" ><span class="fa fa-address-card fa-lg"></span> Perfil</a>
+      <a mat-button (click)="goToProfile()" routerLinkActive="active" ><span class="fa fa-address-card fa-lg"></span> Perfil / Biblioteca</a>
       <a mat-button [routerLink]="['/about']" routerLinkActive="active" ><span class="fa fa-info fa-lg"></span> Más Información</a>
       <span class="flex-spacer"></span>
       <a mat-button *ngIf="loggedIn == false" routerLinkActive="active" (click)="openLoginForm()"><span class="fa fa-sign-in fa-lg"></span> Iniciar Sesión</a>

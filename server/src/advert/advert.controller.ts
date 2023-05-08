@@ -54,7 +54,7 @@ export class AdvertController {
     }
 
     @UseGuards(JwtAuthGuard)
-    @Get('user/:cardId')
+    @Get('card/:cardId')
     @ApiCreatedResponse({ description: 'This function will get ONE ADVERT based on the card that contains from the database.' })
     async getAdvertByCard(@Res() response, @Param('cardId') cardId: string) {
         try {

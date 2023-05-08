@@ -25,6 +25,10 @@ $text-color: midnightblue;
         font-weight: bold;
     }
 
+    .disabled {
+        background-color: grey;
+    }
+
     #green{color: rgb(87, 243, 87);}
     #red {color:rgb(221, 72, 72);}
 
@@ -122,6 +126,12 @@ mat-card {
         border-radius: 3px;
         padding: 3px;
         background-color: rgb(201, 201, 201);
+    }
+
+    .description {
+        min-width: 150px;
+        max-width: 300px;
+        word-break: break-all;
     }
   }
 

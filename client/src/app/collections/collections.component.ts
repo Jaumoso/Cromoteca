@@ -5,6 +5,9 @@ import { CollectionService } from '../services/collection.service';
 import { JwtService } from '../services/jwt.service';
 import { Collection } from '../shared/collection';
 import { UserService } from '../services/user.service';
+import { RemoveFromLibraryDialogComponent } from '../remove-from-library-dialog/remove-from-library-dialog.component';
+import { CardService } from '../services/card.service';
+import { AdvertService } from '../services/advert.service';
 
 @Component({
   selector: 'app-collections',
@@ -18,6 +21,8 @@ export class CollectionsComponent implements OnInit {
     public dialog: MatDialog,
     private userService: UserService,
     private jwtService: JwtService,
+    private cardService: CardService,
+    private advertService: AdvertService,
     ) { }
 
   collections: Collection[] = [];
@@ -26,13 +31,14 @@ export class CollectionsComponent implements OnInit {
   gridColumns = 4; // cantdad de colecciones en una fila
   searchText: string = '';
   collectionIds: string[] = [];
+  private decodedToken: any;
 
   ngOnInit() {
 
     const token = localStorage.getItem('token');
     if(token){
-      const decodedToken = this.jwtService.decodeToken(token);
-      this.userService.getUser(decodedToken._id)
+      this.decodedToken = this.jwtService.decodeToken(token);
+      this.userService.getUser(this.decodedToken._id)
       .then((user) => {
         this.collectionIds = user.collectionId!
       })
@@ -70,7 +76,7 @@ export class CollectionsComponent implements OnInit {
     return filteredCollections;
 }
 
-  openDialog(id: number):void {
+  addToLibrary(id: number):void {
     const dialogRef = this.dialog.open(AddToLibraryComponent, {
       data: { collectionName: this.collections[id].name, collectionId: this.collections[id]._id }
     });
@@ -78,5 +84,49 @@ export class CollectionsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       this.collectionIds.push(result.collectionId);
     });
+  }
+
+  deleteFromLibrary(id: number):void {
+    const dialogRef = this.dialog.open(RemoveFromLibraryDialogComponent, {
+      data: { deleteCollection: false, collectionName: this.collections[id].name }
+    });
+
+   // tras cerrar el diálogo ...
+   dialogRef.afterClosed().subscribe(result => {
+    // si se le ha dado a OK
+    if(result.deleteCollection) {
+      // obtener cartas del usuario
+      this.cardService.getUserCardsCollection(this.decodedToken._id, this.collections[id]._id!)
+      .subscribe(cards => {
+        cards.forEach(card => {
+          // borrar los anuncios
+          this.advertService.deleteAdvertCard(card._id!).subscribe(data => {
+            console.log(data);
+          });
+        });
+      });
+    
+      // borrar elementos de la colección
+      this.cardService.deleteCardsFromCollection(this.decodedToken._id, this.collections[id]._id!)
+        .then(() => {
+          // se recupera la información del usuario
+          this.userService.getUser(this.decodedToken._id).then((user) => {
+            const index = user.collectionId!.indexOf(this.collections[id]._id!);
+            if(index !== -1) {
+              // se cambia la información del array colecciones de la biblioteca
+              user.collectionId!.splice(index, 1);
+              // se actualiza la información del user
+              this.userService.updateUserContent(user._id!, user)
+              .then(() => {
+                this.ngOnInit();
+              })
+              .catch((error) => {console.error(error);});
+            }
+          })
+          .catch((error) => {console.error(error);});
+        })
+        .catch((error) => {console.error(error);});
+    }
+  });
   }
 }

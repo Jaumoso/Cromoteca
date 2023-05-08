@@ -14,6 +14,7 @@ import { AdvertService } from '../services/advert.service';
 import { Advert } from '../shared/advert';
 import { AddAdvertComponent } from '../add-advert/add-advert.component';
 import { UserService } from '../services/user.service';
+import { UpdateElementComponent } from '../update-element/update-element.component';
 
 @Component({
   selector: 'app-fill-collection',
@@ -193,6 +194,22 @@ export class FillCollectionComponent implements OnInit {
     });
   }
 
+  updateElement(card: Card) {
+    const dialogRef = this.addElementDialog.open(UpdateElementComponent, {
+      data: { collectionId: this.collection?._id, userId: this.userId, card }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result?.card){
+        this.cardService.updateCard(result.card)
+        .subscribe(() => {
+          // si se ha creado el elemento
+            this.showSnackBar("Elemento modificado");
+        });
+      }
+    });
+  }
+
   deleteElement(card: Card) {
     // si existe un anuncio para esa carta lo borra
     this.advertService.deleteAdvertCard(card._id!)
@@ -243,6 +260,24 @@ export class FillCollectionComponent implements OnInit {
           this.showSnackBar("Anuncio creado");
         });
       }
+    });
+  }
+
+  deleteAdvert(card: Card) {
+    // si existe un anuncio para esa carta lo borra
+    this.advertService.deleteAdvertCard(card._id!)
+    .subscribe(() => {
+        // borra del array de adverts el id del elemento.
+        const index = this.adverts.indexOf(card._id!);
+        this.adverts.splice(index, 1);
+        this.showSnackBar("Anuncio eliminado");
+    });
+  }
+
+  gotoAdvert(card: Card) {
+    this.advertService.getAdvertByCard(card._id!)
+    .subscribe((advert) => {
+      this.router.navigate(['/advertdetails', advert._id]);
     });
   }
 

@@ -51,14 +51,14 @@ import { map, Observable } from 'rxjs';
       });
     }
 
-    // Editar una carta
-    editCard(cardId: string, card: Card): Observable<Card> {
+    // Modificar una carta
+    updateCard(card: Card): Observable<Card> {
       const httpOptions = {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
         })
       };
-      return this.http.put<{cardData: Card}>(baseURL + 'card/edit' + cardId, card, httpOptions)
+      return this.http.put<{cardData: Card}>(baseURL + 'card/update/' + card._id, card, httpOptions)
       .pipe(map(card => card.cardData));
     }
 

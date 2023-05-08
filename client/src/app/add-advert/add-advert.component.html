@@ -21,7 +21,7 @@
           <mat-error *ngIf="this.form.get('description')?.errors?.['maxlength']">Máximo 350 caracteres.</mat-error>
         </mat-form-field>
         <mat-form-field>
-          <input matInput [formControl]="quantity" required placeholder="Cantidad a vender" type="number" name="quantity">
+          <input matInput [formControl]="quantity" required placeholder="Cantidad a vender o intercambiar" type="number" name="quantity">
           <mat-error *ngIf="this.form.get('repeated')?.errors?.['required']">Requerido. Mínimo (1).</mat-error>
         </mat-form-field>
         <mat-form-field>

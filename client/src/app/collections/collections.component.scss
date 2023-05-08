@@ -74,6 +74,13 @@ $text-color: midnightblue;
                 background-color: mix($background-dark, black, 70%);
                 font-weight: bold;
             }
+
+            .delete:hover {
+                background-color: rgb(255, 86, 86);
+            }
+            .delete:active {
+                background-color: mix(rgb(255, 86, 86), black, $weight: 80%);
+            }
         }
     }
     mat-card:hover img{

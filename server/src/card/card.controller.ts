@@ -88,7 +88,7 @@ export class CardController {
         }
     }
 
-/*     @UseGuards(JwtAuthGuard)
+    @UseGuards(JwtAuthGuard)
     @Put('update/:id')
     @ApiCreatedResponse({ description: 'UPDATE te data of the CARD into the database.' })
     async updateCard(@Res() response, @Param('id') cardId: string, @Body() updateCardDto: UpdateCardDto) {
@@ -102,7 +102,7 @@ export class CardController {
         catch (err) {
             return response.status(err.status).json(err.response);
         }
-    } */
+    }
 
     @UseGuards(JwtAuthGuard)
     @Delete('delete/:id')
