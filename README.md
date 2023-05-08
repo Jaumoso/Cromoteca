@@ -178,8 +178,8 @@ Generación de códigos de seguridad de recuperación
 # TO-DO:
 
 - Mat Spinner
-- RECUPERACIÓN DE CONTRASEÑA A MEDIAS
-- el filtrado en las tablas de market y adverts no funciona
+- Recuperación de contraseñas (necesito servidor SMTP)
+- filtrado en las tablas de market y adverts
 
 ### LATE-STAGE
 - Proteger las rutas y borrar endpoints de desarrollo, httpOptions en los services: añadir header Authorization: Bearer Token
