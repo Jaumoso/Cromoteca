@@ -4,6 +4,7 @@ import { RemoveFromLibraryDialogComponent } from '../remove-from-library-dialog/
 import { CardService } from '../services/card.service';
 import { Collection } from '../shared/collection';
 import { UserService } from '../services/user.service';
+import { AdvertService } from '../services/advert.service';
 
 @Component({
   selector: 'app-library',
@@ -15,6 +16,7 @@ export class LibraryComponent implements OnInit {
   constructor(
     private cardService: CardService,
     private userService: UserService,
+    private advertService: AdvertService,
     private dialog: MatDialog
   ) { }
 
@@ -77,6 +79,17 @@ export class LibraryComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       // si se le ha dado a OK
       if(result.deleteCollection) {
+        // obtener cartas del usuario
+        this.cardService.getUserCardsCollection(this.userId, collection._id!)
+        .subscribe(cards => {
+          cards.forEach(card => {
+            // borrar los anuncios
+            this.advertService.deleteAdvertCard(card._id!).subscribe(data => {
+              console.log(data);
+            });
+          });
+        });
+      
         // borrar elementos de la colección
         this.cardService.deleteCardsFromCollection(this.userId, collection._id!)
           .then(() => {

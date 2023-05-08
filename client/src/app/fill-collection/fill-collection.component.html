@@ -62,7 +62,7 @@
                 <mat-card-content fxLayoutAlign.lt-md="center start" fxLayoutAlign.gt-md="start start">
                   <div fxLayout="column">
                     <h2>{{card.name}}</h2>
-                    <p>{{card.description}}</p>
+                    <p style="min-width: 150px;">{{card.description}}</p>
                     <p>
                       <span *ngIf="card.quantity != 0" class="quantity"><b>{{card.quantity}} pcs</b></span>
 
@@ -99,7 +99,7 @@
                 <mat-card-content fxLayoutAlign.lt-md="center start" fxLayoutAlign.gt-md="start start">
                   <div fxLayout="column">
                     <h2>{{card.name}}</h2>
-                    <p>{{card.description}}</p>
+                    <p style="min-width: 150px;">{{card.description}}</p>
                     <p>
                       <span *ngIf="card.quantity != 0" class="quantity"><b>{{card.quantity}} pcs</b></span>
 
@@ -124,8 +124,14 @@
                 </mat-card-actions>
               </div>
             </mat-card>
-
           </div>
+
+          <div fxFlex="row" fxFlexAlign="center">
+              <div class="collection-not-found" *ngIf="cards.length == 0">
+                  <h2>¡Empieza a añadir coleccionables!</h2>
+              </div>
+          </div>
+
         </div>
       </div>
     </div>
