@@ -1,4 +1,4 @@
-import { Component, OnInit, SimpleChanges, ViewEncapsulation } from '@angular/core';
+import { Component, HostListener, OnInit, SimpleChanges, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Params, Router} from '@angular/router';
 import { switchMap } from 'rxjs';
 import { CollectionService } from '../services/collection.service';
@@ -48,6 +48,7 @@ export class FillCollectionComponent implements OnInit {
   cardList: number[] = [];
   adverts: string[] = [];
   value: number = 0;
+  windowScrolled: boolean = false;
 
   public isLoading = true;
 
@@ -302,6 +303,26 @@ export class FillCollectionComponent implements OnInit {
   // devuelve al usuairo a la vista anterior
   goBack() {
     this.location.back();
+  }
+
+  // Botón para volver al tope de la página
+  @HostListener("window:scroll", [])
+  onWindowScroll() {
+    if (window.pageYOffset > 500) {
+      this.windowScrolled = true;
+    } else if (this.windowScrolled && window.pageYOffset < 500) {
+      this.windowScrolled = false;
+    }
+  }
+
+  scrollToTop() {
+    (function smoothscroll() {
+      var currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
+      if (currentScroll > 0) {
+        window.requestAnimationFrame(smoothscroll);
+        window.scrollTo(0, currentScroll - (currentScroll / 8));
+      }
+    })();
   }
   
 }

@@ -41,7 +41,7 @@ export class AuthService {
             access_token: this.jwtService.sign(payload, {
                 algorithm: 'HS256',
                 secret: process.env.JWT_SECRET,
-                expiresIn: '120m' // duración de la sesión. Cada 2 horas se necesita iniciar sesión de nuevo
+                //expiresIn: '120m' // duración de la sesión. Cada 2 horas se necesita iniciar sesión de nuevo
             })
         };
     }

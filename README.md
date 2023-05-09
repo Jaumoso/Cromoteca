@@ -179,6 +179,7 @@ Nodemailer & types/@nodemailer
 - Mat Spinner
 - RECUPERACIÓN DE CONTRASEÑA A MEDIAS
 - el filtrado en las tablas de market y adverts no funciona
+- añadir porcentaje de completado a library
 
 ### LATE-STAGE
 - Proteger las rutas y borrar endpoints de desarrollo, httpOptions en los services: añadir header Authorization: Bearer Token

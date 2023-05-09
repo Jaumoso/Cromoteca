@@ -5,6 +5,7 @@ import { CardService } from '../services/card.service';
 import { Collection } from '../shared/collection';
 import { UserService } from '../services/user.service';
 import { AdvertService } from '../services/advert.service';
+import { Card } from '../shared/card';
 
 @Component({
   selector: 'app-library',
@@ -25,6 +26,7 @@ export class LibraryComponent implements OnInit {
   errmsg: string = 'No se han encontrado colecciones!';
   gridColumns = 4; // cantdad de colecciones en una fila
   searchText: string = '';
+  completed: number[] = [];
   @Input() userId: any;
 
   ngOnInit() {
