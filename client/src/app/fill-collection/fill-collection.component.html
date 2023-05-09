@@ -45,16 +45,16 @@
 </div>
 
 <div class="element-list">
-  <div fxLayout="column" >
+  <div fxLayout="column">
 
     <div fxLayoutAlign="center start">
       <h2><b><u>Elementos Adquiridos</u></b></h2>
     </div>
 
     <div  fxLayout="row wrap" fxLayoutAlign="center">
-      <div fxLayoutAlign="center start" fxFlex.gt-xs="50%" fxFlex.gt-sm="33.33%" fxFlex.gt-md="25%" fxFlex="100%" *ngFor="let card of cards">
+      <div fxLayoutAlign="center start" fxFlex.gt-xs="50%" fxFlex.gt-sm="33.33%" fxFlex.gt-md="25%" fxFlex.gt-lg="20%" fxFlex="100%" *ngFor="let card of cards">
             
-        <div *ngIf="!adverts.includes(card._id!)" class="collection-card" id={{card.cardId}}>
+        <div *ngIf="!adverts.includes(card._id!)" class="collection-card swing-in-top-fwd" id={{card.cardId}}>
             <div class="collection-card-header">
             <h2 class="collection-card-title">#{{card.cardId}}</h2>
             <div class="collection-card-state {{card.state}}">{{card.state}}</div>
@@ -74,7 +74,6 @@
               </div>
               <div class="collection-card-actions">
                 <div>
-                  
                   <button (click)="updateElement(card)">Actualizar coleccionable</button>
                   <button (click)="deleteElement(card)">Eliminar coleccionable</button>
                 </div>
@@ -85,7 +84,7 @@
             </div>
         </div>
 
-        <div *ngIf="adverts.includes(card._id!)" class="collection-card has-advert" id={{card.cardId}}>
+        <div *ngIf="adverts.includes(card._id!)" class="collection-card has-advert swing-in-top-fwd" id={{card.cardId}}>
           <div class="collection-card-header">
           <h2 class="collection-card-title">#{{card.cardId}} - EN VENTA</h2>
           <div class="collection-card-state {{card.state}}">{{card.state}}</div>

@@ -16,6 +16,10 @@ import { AddAdvertComponent } from '../add-advert/add-advert.component';
 import { UserService } from '../services/user.service';
 import { UpdateElementComponent } from '../update-element/update-element.component';
 
+interface CardExpansionState {
+  [key: number]: boolean;
+}
+
 @Component({
   selector: 'app-fill-collection',
   templateUrl: './fill-collection.component.html',
@@ -324,5 +328,5 @@ export class FillCollectionComponent implements OnInit {
       }
     })();
   }
-  
+
 }
