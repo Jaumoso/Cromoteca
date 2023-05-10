@@ -46,14 +46,19 @@ $text-color: midnightblue;
     }
 }
 
+.form-container {
+  margin-right: 5%;
+  margin-left: 5%;
+}
+
 button {
-  width: auto;
+  width: 15em;
   background-color: $background-dark;
   color: white;
   padding: 10px;
-  margin-bottom: 5px;
+  margin: 10px;
   font-weight: bold;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 button:hover {
   background-color: mix($background-dark, black, 80%);

@@ -56,12 +56,14 @@
             
         <div *ngIf="!adverts.includes(card._id!)" class="collection-card swing-in-top-fwd" id={{card.cardId}}>
             <div class="collection-card-header">
-            <h2 class="collection-card-title">#{{card.cardId}}</h2>
-            <div class="collection-card-state {{card.state}}">{{card.state}}</div>
+              <h2 class="collection-card-title">#{{card.cardId}}</h2>
+              <div class="collection-card-state {{card.state}}">
+                {{card.state}}
+              </div>
             </div>
             <div class="collection-card-body">
-            <h2 class="collection-card-name title-container">{{card.name}}</h2>
-            <p class="collection-card-description donotoverflow text-container">{{card.description}}</p>
+              <h2 class="collection-card-name title-container">{{card.name}}</h2>
+              <p class="collection-card-description donotoverflow text-container">{{card.description}}</p>
             </div>
             <div class="collection-card-footer">
               <div>
@@ -86,8 +88,8 @@
 
         <div *ngIf="adverts.includes(card._id!)" class="collection-card has-advert swing-in-top-fwd" id={{card.cardId}}>
           <div class="collection-card-header">
-          <h2 class="collection-card-title">#{{card.cardId}} - EN VENTA</h2>
-          <div class="collection-card-state {{card.state}}">{{card.state}}</div>
+            <h2 class="collection-card-title">#{{card.cardId}} - EN VENTA</h2>
+            <div class="collection-card-state {{card.state}}">{{card.state}}</div>
           </div>
           <div class="collection-card-body">
           <h2 class="collection-card-name title-container">{{card.name}}</h2>

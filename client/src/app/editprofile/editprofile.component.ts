@@ -14,6 +14,7 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DeleteAccountDialogComponent } from '../delete-account-dialog/delete-account-dialog.component';
 import { AccountService } from '../services/account.service';
+import { LoginStatusService } from '../services/loginStatus.service';
 
 @Component({
   selector: 'app-editprofile',
@@ -30,6 +31,7 @@ export class EditprofileComponent implements OnInit {
     private jwtService: JwtService,
     private addressService: AddressService,
     private accountService: AccountService,
+    private loginStatusService: LoginStatusService,
     private router: Router,
     public dialog: MatDialog,
     private snackBar: MatSnackBar
@@ -118,7 +120,11 @@ export class EditprofileComponent implements OnInit {
     .then(() => {
       this.router.navigateByUrl('/home');
       this.authService.closeSession();
-      this.dialog.open(LoginComponent);
+      this.authService.login(this.user?.username!, this.user?.password!)
+      .then((token) => {
+        this.authService.setSession(token);
+      }).catch((error) => {console.error(error);});
+      
       this.snackBar.open(
         "Datos de usuario actualizados.", 
         "Aceptar",
