@@ -178,7 +178,7 @@ Nodemailer & types/@nodemailer
 
 - Mat Spinner
 - RECUPERACIÓN DE CONTRASEÑA A MEDIAS
-- el filtrado en las tablas de market y adverts no funciona
+- el filtrado en las tablas de market y adverts no funciona correctamente
 - añadir porcentaje de completado a library
 
 ### LATE-STAGE

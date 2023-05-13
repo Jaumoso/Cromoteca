@@ -39,8 +39,8 @@
             </mat-form-field>
         </div>
         <div fxFlex="auto">
-            <label for="username">Nombre de Usuario:</label><br>
-            <mat-form-field>
+            <label for="username" id="grey-text">Nombre de Usuario:</label><br>
+            <mat-form-field id="disabled">
                 <input matInput placeholder="Usuario" type="text" [formControl]="username" [(ngModel)]="user!.username"
                     name="username" [readonly]="true" [disabled]="true">
                     <mat-error *ngIf="this.form.get('username')?.errors?.['required']">Usuario requerido.</mat-error>
@@ -49,8 +49,8 @@
             </mat-form-field>
         </div>
         <div fxFlex="auto">
-            <label for="email">Correo electrónico:</label><br>
-            <mat-form-field>
+            <label for="email" id="grey-text">Correo electrónico:</label><br>
+            <mat-form-field id="disabled">
                 <input matInput placeholder="example@example.com" type="email" [readonly]="true" [disabled]="true"
                 [formControl]="email" [(ngModel)]="user!.email" name="email">
                     <mat-error *ngIf="this.form.get('email')?.errors?.['required']">Email requerido.</mat-error>
@@ -60,21 +60,23 @@
         <div fxFlex="auto">
             <label for="password">Contraseña:<span style="color:red;">*</span></label><br>
             <mat-form-field>
-                <input matInput required placeholder="Contraseña" type="password"
+                <input matInput required placeholder="Contraseña" type="{{showPassword ? 'text' : 'password'}}"
                 [formControl]="password" [(ngModel)]="user!.password" name="password">
                     <mat-error *ngIf="this.form.get('password')?.errors?.['required']">Contraseña requerida.</mat-error>
                     <mat-error *ngIf="this.form.get('password')?.errors?.['minlength']">Mínimo 8 caracteres.</mat-error>
                     <mat-error *ngIf="form.hasError('notSame')">Repita bien la contraseña.</mat-error>
+                    <mat-icon type="button" matSuffix (click)="toggleShowPassword()">remove_red_eye</mat-icon>
             </mat-form-field>
         </div>
         <div fxFlex="auto">
             <label for="repeatpassword">Repita la Contraseña:<span style="color:red;">*</span></label><br>
             <mat-form-field>
-                <input matInput required [errorStateMatcher]="matcher" placeholder="Contraseña" type="password"
+                <input matInput required [errorStateMatcher]="matcher" placeholder="Contraseña" type="{{showPassword ? 'text' : 'password'}}"
                 [formControl]="passwordConfirmation" [(ngModel)]="confirmPassword" name="passwordConfirmation">
                     <mat-error *ngIf="this.form.get('passwordConfirmation')?.errors?.['required']">Es necesario repetir la contraseña.</mat-error>
                     <mat-error *ngIf="this.form.get('passwordConfirmation')?.errors?.['minlength']">Mínimo 8 caracteres.</mat-error>
                     <mat-error *ngIf="form.hasError('notSame')">Repita bien la contraseña.</mat-error>
+                    <mat-icon type="button" matSuffix (click)="toggleShowPassword()">remove_red_eye</mat-icon>
             </mat-form-field>
         </div>
         <div fxFlex="auto">
@@ -121,7 +123,8 @@
         <div fxFlex="100" class="form form-buttons" fxLayout="column">
             <div>
                 <br>
-                <p style="text-align: center;"><span style="color: red;"><b>*</b></span> Es obligatorio confirmar los cambios añadiendo la contraseña. Puedes seguir utilizando la misma o cambiarla.</p>
+                <p fxLayoutAlign="center start">El nombre de usuario y el correo electrónico no se pueden cambiar.</p>
+                <p fxLayoutAlign="center start"><span style="color: red;"><b>*</b></span> Es obligatorio confirmar los cambios añadiendo la contraseña. Puedes seguir utilizando la misma o cambiarla.</p>
             </div>
             <div fxFlex="auto" fxLayoutAlign="center start">
                 <button (click)="goBack()" type="button" mat-button>Cancelar</button>

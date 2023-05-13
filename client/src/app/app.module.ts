@@ -23,6 +23,7 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { baseURL } from './shared/baseurl';
 import 'hammerjs';
@@ -108,6 +109,7 @@ import { UpdateElementComponent } from './update-element/update-element.componen
     MatPaginatorModule,
     MatSortModule,
     MatMenuModule,
+    MatTooltipModule,
   ],
   providers: [
     { provide: 'BaseURL', useValue: baseURL },

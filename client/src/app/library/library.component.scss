@@ -67,3 +67,7 @@ button:hover {
 .delete:active {
     background-color: mix(rgb(255, 86, 86), black, $weight: 80%);
 }
+
+#button-margin {
+    margin-right: 5px;
+}

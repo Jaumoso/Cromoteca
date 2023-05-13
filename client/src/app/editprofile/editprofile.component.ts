@@ -31,7 +31,6 @@ export class EditprofileComponent implements OnInit {
     private jwtService: JwtService,
     private addressService: AddressService,
     private accountService: AccountService,
-    private loginStatusService: LoginStatusService,
     private router: Router,
     public dialog: MatDialog,
     private snackBar: MatSnackBar
@@ -113,6 +112,7 @@ export class EditprofileComponent implements OnInit {
   user: User | undefined;
   address: Address | undefined;
   confirmPassword: string | undefined;
+  showPassword: boolean = false;
 
   onSubmit() {
     // Se actualiza la información de la cuenta.
@@ -166,6 +166,10 @@ export class EditprofileComponent implements OnInit {
 
   goBack() {
     this.location.back();
+  }
+
+  toggleShowPassword() {
+    this.showPassword = !this.showPassword;
   }
 }
 

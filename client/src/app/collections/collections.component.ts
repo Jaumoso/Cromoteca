@@ -8,6 +8,7 @@ import { UserService } from '../services/user.service';
 import { RemoveFromLibraryDialogComponent } from '../remove-from-library-dialog/remove-from-library-dialog.component';
 import { CardService } from '../services/card.service';
 import { AdvertService } from '../services/advert.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-collections',
@@ -23,6 +24,7 @@ export class CollectionsComponent implements OnInit {
     private jwtService: JwtService,
     private cardService: CardService,
     private advertService: AdvertService,
+    private snackBar: MatSnackBar
     ) { }
 
   collections: Collection[] = [];
@@ -83,6 +85,16 @@ export class CollectionsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       this.collectionIds.push(result.collectionId);
+
+      this.snackBar.open(
+        "Colección guardada en la biblioteca", 
+        "Aceptar",
+        {
+          verticalPosition: 'top',
+          duration: 6000,
+          panelClass: ['snackbar']
+        }
+        );
     });
   }
 
@@ -127,6 +139,16 @@ export class CollectionsComponent implements OnInit {
         })
         .catch((error) => {console.error(error);});
     }
+  }).add(() => {
+    this.snackBar.open(
+      "Colección borrada de la biblioteca", 
+      "Aceptar",
+      {
+        verticalPosition: 'top',
+        duration: 6000,
+        panelClass: ['snackbar']
+      }
+      );
   });
   }
 }

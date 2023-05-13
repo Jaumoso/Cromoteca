@@ -33,16 +33,17 @@ $text-color: midnightblue;
 .form {
     
     label {
-        color: $background;
-        font-weight: bold;
-        margin-left: 10px;
+      color: $background;
+      font-weight: bold;
+      margin-left: 10px;
     }
 
     mat-form-field {
-        background-color: rgb(239, 239, 239);
-        border-radius: 10px;
-        padding: 10px;
-        margin: 10px;
+      background-color: rgb(239, 239, 239);
+      border-radius: 10px;
+      padding: 10px;
+      margin: 10px;
+      box-sizing: border-box;
     }
 }
 
@@ -77,6 +78,15 @@ button:hover {
 
 .submit-button:disabled {
   background-color: rgb(168, 179, 192);
+}
+
+#disabled {
+  border: 2px solid rgb(117, 120, 124);
+  border-style: dashed;
+}
+
+#grey-text {
+  color: rgb(117, 120, 124);
 }
 
 .shake-horizontal:disabled:active {
