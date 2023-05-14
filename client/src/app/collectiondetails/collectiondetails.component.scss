@@ -39,7 +39,7 @@ $data-table-background: rgb(200, 237, 241);
         background-color: mix($background-dark, black, 80%);
         font-weight: bold;
     }
-    .button:active {
+    button:active {
         background-color: mix($background-dark, black, 70%);
         font-weight: bold;
     }
@@ -65,6 +65,10 @@ $data-table-background: rgb(200, 237, 241);
         .td-grey {
             background-color: $data-table-background;
         }
+    }
+
+    .description {
+        white-space: pre-wrap;
     }
 }
 

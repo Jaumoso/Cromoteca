@@ -14,6 +14,13 @@
     </div>
 </div>
 
+<div *ngIf="!collections" >
+    <mat-spinner></mat-spinner><h4>Loading...</h4>
+</div>
+<div fxLayoutAlign="center start" class="collection-not-found" *ngIf="filteredCollections.length == 0">
+    <h2>{{errmsg}}</h2>
+</div>
+
 <!-- Grid de colecciones -->
 <div class="content" fxLayout="row wrap" fxLayoutGap="16px grid" *ngIf="collections">
     <div [fxFlex]="(100/gridColumns) + '%'" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let collection of filteredCollections; let i=index">
@@ -42,10 +49,4 @@
             </mat-card-actions>
         </mat-card>
     </div>
-</div>
-<div *ngIf="!collections" >
-    <mat-spinner></mat-spinner><h4>Loading...</h4>
-</div>
-<div class="collection-not-found" *ngIf="filteredCollections.length == 0">
-    <h2>{{errmsg}}</h2>
 </div>

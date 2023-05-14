@@ -12,6 +12,8 @@ import { User } from '../shared/user';
 import { UserService } from '../services/user.service';
 import { LoginStatusService } from '../services/loginStatus.service';
 import { JwtService } from '../services/jwt.service';
+import { AddressService } from '../services/address.service';
+import { Address } from '../shared/address';
 
 @Component({
   selector: 'app-advertdetails',
@@ -26,6 +28,9 @@ export class AdvertdetailsComponent implements OnInit {
   seller: User | undefined;
   loggedIn: boolean = false;
   currentUser: string | undefined;
+  city: string | undefined;
+  province: string | undefined;
+  country: string | undefined;
 
   constructor(
     private advertService: AdvertService,
@@ -36,7 +41,12 @@ export class AdvertdetailsComponent implements OnInit {
     private userService: UserService,
     private loginStatusService: LoginStatusService,
     private jwtService: JwtService,
-  ) { }
+    private addressService: AddressService
+  ) { 
+    this.city = '';
+    this.province = '';
+    this.country = '';
+  }
 
   ngOnInit() {
     
@@ -77,6 +87,14 @@ export class AdvertdetailsComponent implements OnInit {
         this.userService.getUser(this.advert?.userId!)
         .then((user) => {
           this.seller = user;
+          this.addressService.getAddress(user.addressId!)
+          .then((address) => {
+            console.log(address.city)
+            this.city = address.city;
+            this.province = address.province;
+            this.country = address.country;
+          })
+          .catch((error) => {console.error(error);});
         })
         .catch((error) => {console.error(error);});
       })

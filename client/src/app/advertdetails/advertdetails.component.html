@@ -31,7 +31,7 @@ fxLayoutGap="10px">
             </tr>
             <tr>
                 <th scope="row">Descripción del elemento:</th>
-                <td class="td-grey">{{card?.description}}</td>
+                <td class="td-grey description">{{card?.description}}</td>
             </tr>
             <tr>
                 <th scope="row">Número de elemento dentro de la colección:</th>
@@ -76,6 +76,10 @@ fxLayoutGap="10px">
             <tr>
                 <th scope="row">Vendedor:</th>
                 <td class="td-grey">{{seller?.username}} / {{seller?.firstName}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Ubicación:</th>
+                <td>{{city}} / {{province}} / {{country}}</td>
             </tr>
         </table>
     </div>

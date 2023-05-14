@@ -41,6 +41,7 @@ export class FillCollectionComponent implements OnInit {
   collection: Collection | undefined;
   userId: string | undefined;
   cards: Card[] = [];
+  filteredCards: Card[] = [];
   completed: number = 0;
   missing: number = 0;
   percentage: string = '';
@@ -49,8 +50,13 @@ export class FillCollectionComponent implements OnInit {
   adverts: string[] = [];
   value: number = 0;
   windowScrolled: boolean = false;
-
   public isLoading = true;
+  nuevo: number = 0;
+  seminuevo: number = 0;
+  usado: number = 0;
+  roto: number = 0;
+
+  searchText: string = '';
 
   ngOnInit() {
     // coge el id de la colección pasado como parámetro y recupera la información
@@ -86,6 +92,7 @@ export class FillCollectionComponent implements OnInit {
             const collectionSize = this.collection?.size ?? 0;
             this.cardList = Array(collectionSize).fill(0);
             this.cards = cards;
+            this.filteredCards = cards;
             this.completed = this.completarSiUnico(cards);
             this.missing = this.collection!.size! - this.completed;
             this.percentage = (this.completed / this.collection!.size! * 100).toFixed(2);
@@ -108,6 +115,11 @@ export class FillCollectionComponent implements OnInit {
 
               // Sumar precio de las cartas para obtener valor de la colección
               this.value += card.price!;
+              // Sumar estados de las cartas
+              if(card.state == 'NUEVO') { this.nuevo++; }
+              else if(card.state == 'SEMINUEVO') { this.seminuevo++; }
+              else if(card.state == 'USADO') { this.usado++; }
+              else if(card.state == 'ROTO') { this.roto++; }
             });
             this.isLoading = false;
           });
@@ -115,6 +127,31 @@ export class FillCollectionComponent implements OnInit {
       .catch((error) => {console.error(error);});
     });
   }
+
+  searchCards(): Card[] {
+    // If no search text or category is provided, return all collections
+    if (!this.searchText) {
+      return this.cards;
+    }
+    
+    // Filter the collections based on the search text and category
+    const filteredCards = this.cards.filter((card) => {
+      const isMatch = (str: string) =>
+        str
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .includes(this.searchText!.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')); 
+      
+      if(card.name != undefined && card.description != undefined){
+        return (!this.searchText || isMatch(card.name) || isMatch(card.description) || isMatch(card.cardId!.toString()) || isMatch(card.price!.toString()) || isMatch(card.quantity!.toString()));
+      }
+      return this.cards;
+    });
+    
+    this.filteredCards = filteredCards;
+    return filteredCards;
+}
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.hasOwnProperty('cards')) {
@@ -173,6 +210,7 @@ export class FillCollectionComponent implements OnInit {
 
             // Se añade el elemento al array de elementos
             this.cards.push(card);
+
             this.cardList[result.card.cardId-1] = 1;
 
             // si no existe la carta en el array
@@ -184,6 +222,11 @@ export class FillCollectionComponent implements OnInit {
             
             this.percentage = (this.completed / this.collection!.size! * 100).toFixed(2);
             this.value += card.price!;
+
+            if(card.state == 'NUEVO') { this.nuevo++; }
+            else if(card.state == 'SEMINUEVO') { this.seminuevo++; }
+            else if(card.state == 'USADO') { this.usado++; }
+            else if(card.state == 'ROTO') { this.roto++; }
 
           }
           else{
@@ -237,6 +280,12 @@ export class FillCollectionComponent implements OnInit {
       
       this.percentage = (this.completed / this.collection!.size! * 100).toFixed(2);
       this.value -= card.price!;
+
+      if(card.state == 'NUEVO') { this.nuevo--; }
+      else if(card.state == 'SEMINUEVO') { this.seminuevo--; }
+      else if(card.state == 'USADO') { this.usado--; }
+      else if(card.state == 'ROTO') { this.roto--; }
+
       this.showSnackBar("Elemento " + card.cardId + " eliminado");
     });
   }

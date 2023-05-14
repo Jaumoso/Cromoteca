@@ -6,21 +6,32 @@
         </div>
         <div fxFlex="2"></div>
         <div fxLayoutAlign="center" fxLayout="column" fxLayoutGap="10px">
-            <button mat-button (click)="addElement()" routerLinkActive="router-link-active">Añadir Elemento</button>
+            <button mat-button (click)="addElement()">Añadir Coleccionable</button>
             <button [routerLink]="['/adverts']">Ver tus anuncios</button>
-            <button mat-button (click)="goBack()" routerLinkActive="router-link-active">Atrás</button>
+            <button mat-button id="go-back" (click)="goBack()">Atrás</button>
         </div>
     </div>
     <div fxFlex="60" fxLayout="column">
-        <br>
         <div fxLayout="column" fxLayoutGap="10px" fxFlex="80">
             <h2><b>{{collection?.name}}</b></h2>
             <p>{{collection?.description}}</p>
             <br>
-            <p><b>Total de elementos en la colección: </b>{{collection?.size}}</p>
-            <p><b>Total de elementos reunídos:  <span id="green">{{completed}}</span> / <span id="red">{{collection?.size}}</span></b></p>
-            <p><b>Faltan: </b> {{ missing }}, completado al <b>{{percentage}}%</b></p>
-            <p><b>Valor de la colección: </b>{{value}} €</p>
+            <div fxLayout="row">
+              <div fxFlex="50%" fxFlex.lt-sm="100%">
+                <p><b>Total de elementos en la colección: </b>{{collection?.size}}</p>
+                <p><b>Total de elementos reunídos:  <span id="green">{{completed}}</span> / <span id="red">{{collection?.size}}</span></b></p>
+                <p><b>Total de elementos añadidos (incluyendo repetidos): </b>{{cards.length}}</p>
+                <p><b>Faltan: </b> {{ missing }}, completado al <b>{{percentage}}%</b></p>
+                <p><b>Valor de la colección: </b>{{value}} €</p>
+              </div>
+              <div fxFlex="17%" fxFlex.lt-sm="100%">
+                
+                <p class="nuevo"><b>NUEVO: {{nuevo}}</b></p>
+                <p class="seminuevo"><b>SEMINUEVO: {{seminuevo}}</b></p>
+                <p class="usado"><b>USADO: {{usado}}</b></p>
+                <p class="roto"><b>ROTO: {{roto}}</b></p>
+              </div>
+            </div>
         </div>
         <div fxLayout="row wrap">
           <div *ngFor="let item of cardList; let i=index"  class="completion-grid" style="border: 1px solid black">
@@ -44,15 +55,29 @@
   </div>
 </div>
 
-<div class="element-list">
+<div class="element-list content">
   <div fxLayout="column">
 
     <div fxLayoutAlign="center start">
       <h2><b><u>Elementos Adquiridos</u></b></h2>
     </div>
+    <div fxLayoutAlign="center start">
+      <mat-form-field>
+          <mat-label>Buscar coleccionable</mat-label>
+          <input matInput type="text" [(ngModel)]="searchText" (ngModelChange)="searchCards()">
+          <mat-icon matPrefix>search</mat-icon>
+      </mat-form-field>
+    </div>
+    <div fxLayoutAlign="center start" *ngIf="cards.length == 0 && !isLoading">
+      <div fxLayout="column">
+        <h2>No se han encontrado coleccionables!</h2>
+        <button mat-button (click)="addElement()">Añadir coleccionable</button>
+      </div>
+
+    </div>
 
     <div  fxLayout="row wrap" fxLayoutAlign="center">
-      <div fxLayoutAlign="center start" fxFlex.gt-xs="50%" fxFlex.gt-sm="33.33%" fxFlex.gt-md="25%" fxFlex.gt-lg="20%" fxFlex="100%" *ngFor="let card of cards">
+      <div fxLayoutAlign="center start" fxFlex.gt-xs="50%" fxFlex.gt-sm="33.33%" fxFlex.gt-md="25%" fxFlex.gt-lg="20%" fxFlex="100%" *ngFor="let card of filteredCards">
             
         <div *ngIf="!adverts.includes(card._id!)" class="collection-card swing-in-top-fwd" id={{card.cardId}}>
             <div class="collection-card-header">
@@ -77,7 +102,7 @@
               <div class="collection-card-actions">
                 <div>
                   <button (click)="updateElement(card)">Actualizar coleccionable</button>
-                  <button (click)="deleteElement(card)">Eliminar coleccionable</button>
+                  <button id="cancel" (click)="deleteElement(card)">Eliminar Coleccionable</button>
                 </div>
                 <div>
                   <button class="full-height" *ngIf="!adverts.includes(card._id!)" (click)="createAdvert(card)">Crear Anuncio</button>
@@ -106,7 +131,7 @@
             </div>
             <div class="collection-card-actions">
                 <button *ngIf="adverts.includes(card._id!)" (click)="gotoAdvert(card)">Detalles de Anuncio</button>
-                <button *ngIf="adverts.includes(card._id!)" (click)="deleteAdvert(card)">Eliminar anuncio</button>
+                <button id="cancel" *ngIf="adverts.includes(card._id!)" (click)="deleteAdvert(card)">Eliminar anuncio</button>
             </div>
           </div>
       </div>
@@ -116,6 +141,10 @@
 
   </div>
 </div>
+
+<button class="add-element-button" (click)="addElement()">
+  Añadir Coleccionable <i class="fa fa-plus"></i>
+</button>
 
 <button class="scroll-top-button" (click)="scrollToTop()">
   <i class="fa fa-arrow-up"></i>
