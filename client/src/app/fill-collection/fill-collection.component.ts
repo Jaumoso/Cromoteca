@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit, SimpleChanges, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener, OnInit, SimpleChanges, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Params, Router} from '@angular/router';
 import { switchMap } from 'rxjs';
 import { CollectionService } from '../services/collection.service';
@@ -55,6 +55,7 @@ export class FillCollectionComponent implements OnInit {
   seminuevo: number = 0;
   usado: number = 0;
   roto: number = 0;
+  totalCards: number = 0;
 
   searchText: string = '';
 
@@ -97,7 +98,7 @@ export class FillCollectionComponent implements OnInit {
             this.missing = this.collection!.size! - this.completed;
             this.percentage = (this.completed / this.collection!.size! * 100).toFixed(2);
             
-            // Verificar si cada carta está en el array de cartas || sumar valor de la colección
+            // Verificar si cada carta está en el array de cartas
             cards.forEach((card) => {
               const cardIndex = card.cardId;
   
@@ -115,17 +116,20 @@ export class FillCollectionComponent implements OnInit {
 
               // Sumar precio de las cartas para obtener valor de la colección
               this.value += card.price!;
+              // Sumar total de cartas
+              this.totalCards += card.quantity!;
               // Sumar estados de las cartas
-              if(card.state == 'NUEVO') { this.nuevo++; }
-              else if(card.state == 'SEMINUEVO') { this.seminuevo++; }
-              else if(card.state == 'USADO') { this.usado++; }
-              else if(card.state == 'ROTO') { this.roto++; }
+              if (card.state == 'NUEVO') {this.nuevo += card.quantity!;} 
+              else if (card.state == 'SEMINUEVO') {this.seminuevo += card.quantity!;} 
+              else if (card.state == 'USADO') {this.usado += card.quantity!;} 
+              else if (card.state == 'ROTO') {this.roto += card.quantity!;}
             });
             this.isLoading = false;
           });
       })
       .catch((error) => {console.error(error);});
     });
+    this.goToTop();
   }
 
   searchCards(): Card[] {
@@ -223,10 +227,12 @@ export class FillCollectionComponent implements OnInit {
             this.percentage = (this.completed / this.collection!.size! * 100).toFixed(2);
             this.value += card.price!;
 
-            if(card.state == 'NUEVO') { this.nuevo++; }
-            else if(card.state == 'SEMINUEVO') { this.seminuevo++; }
-            else if(card.state == 'USADO') { this.usado++; }
-            else if(card.state == 'ROTO') { this.roto++; }
+            this.totalCards += card.quantity!;
+
+            if (card.state == 'NUEVO') {this.nuevo += card.quantity!;} 
+            else if (card.state == 'SEMINUEVO') {this.seminuevo += card.quantity!;} 
+            else if (card.state == 'USADO') {this.usado += card.quantity!;} 
+            else if (card.state == 'ROTO') {this.roto += card.quantity!;}
 
           }
           else{
@@ -247,8 +253,8 @@ export class FillCollectionComponent implements OnInit {
       if(result?.card){
         this.cardService.updateCard(result.card)
         .subscribe(() => {
-          // si se ha creado el elemento
-            this.showSnackBar("Elemento modificado");
+          // si se ha modificado el elemento
+          this.showSnackBar("Elemento modificado");
         });
       }
     });
@@ -280,11 +286,12 @@ export class FillCollectionComponent implements OnInit {
       
       this.percentage = (this.completed / this.collection!.size! * 100).toFixed(2);
       this.value -= card.price!;
+      this.totalCards -= card.quantity!;
 
-      if(card.state == 'NUEVO') { this.nuevo--; }
-      else if(card.state == 'SEMINUEVO') { this.seminuevo--; }
-      else if(card.state == 'USADO') { this.usado--; }
-      else if(card.state == 'ROTO') { this.roto--; }
+      if (card.state == 'NUEVO') {this.nuevo -= card.quantity!;} 
+      else if (card.state == 'SEMINUEVO') {this.seminuevo -= card.quantity!;} 
+      else if (card.state == 'USADO') {this.usado -= card.quantity!;} 
+      else if (card.state == 'ROTO') {this.roto -= card.quantity!;}
 
       this.showSnackBar("Elemento " + card.cardId + " eliminado");
     });
@@ -374,4 +381,7 @@ export class FillCollectionComponent implements OnInit {
     })();
   }
 
+  goToTop() {
+    window.scrollTo(0, 0);
+  }
 }
