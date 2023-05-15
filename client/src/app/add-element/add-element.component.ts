@@ -38,7 +38,7 @@ export class AddElementComponent implements OnInit {
   cardId = new FormControl(null,[Validators.required]);
   name = new FormControl('',[Validators.required]);
   quantity = new FormControl(1, [Validators.required]);
-  description = new FormControl('', [Validators.required]);
+  description = new FormControl('');
   // image
   state = new FormControl('',[Validators.required]);
   price = new FormControl(0, [Validators.required]);

@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { AdvertInfoService } from '../services/advertInfo.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { MatSort,} from '@angular/material/sort';
+import { MatSort } from '@angular/material/sort';
 
 export interface AdvertTable {
   name: string;
@@ -11,6 +11,7 @@ export interface AdvertTable {
   state: string;
   quantity: number;
   price: number;
+  date: string;
 }
 
 @Component({

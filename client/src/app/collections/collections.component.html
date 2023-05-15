@@ -5,8 +5,8 @@
     <div fxFlex fxFlex.gt-sm="30%">
         <h3><b>Buscador de colecciones</b></h3>
     </div>
-    <div fxFlex fxFlex.gt-sm="70%">
-        <mat-form-field>
+    <div fxFlex fxFlex.gt-sm="70%" class="searchbar">
+        <mat-form-field fxFlex="100">
             <mat-label>Buscar colección</mat-label>
             <input matInput type="text" [(ngModel)]="searchText" (ngModelChange)="searchCollections()">
             <mat-icon matPrefix>search</mat-icon>
@@ -14,7 +14,7 @@
     </div>
 </div>
 
-<div *ngIf="!collections" >
+<div *ngIf="!collections">
     <mat-spinner></mat-spinner><h4>Loading...</h4>
 </div>
 <div fxLayoutAlign="center start" class="collection-not-found" *ngIf="filteredCollections.length == 0">

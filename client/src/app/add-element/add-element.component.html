@@ -15,8 +15,7 @@
           <mat-error *ngIf="this.form.get('name')?.errors?.['required']">Nombre / Título requerido.</mat-error>
         </mat-form-field>
         <mat-form-field>
-          <textarea matInput [formControl]="description" required name="description" placeholder="Descripción del elemento..."></textarea>
-          <mat-error *ngIf="this.form.get('description')?.errors?.['required']">Descripción requerida.</mat-error>
+          <textarea matInput [formControl]="description" name="description" placeholder="Descripción del elemento..."></textarea>
         </mat-form-field>
         <mat-form-field>
           <input matInput [formControl]="quantity" required placeholder="Cantidad en poseesión" type="number" name="quantity">
