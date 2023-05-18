@@ -77,7 +77,7 @@ fxLayoutGap="10px">
                 <th scope="row">Vendedor:</th>
                 <td class="td-grey">{{seller?.username}} / {{seller?.firstName}}</td>
             </tr>
-            <tr>
+            <tr *ngIf="city || province || country">
                 <th scope="row">Ubicación:</th>
                 <td>{{city}} / {{province}} / {{country}}</td>
             </tr>

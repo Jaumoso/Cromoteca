@@ -42,11 +42,7 @@ export class AdvertdetailsComponent implements OnInit {
     private loginStatusService: LoginStatusService,
     private jwtService: JwtService,
     private addressService: AddressService
-  ) { 
-    this.city = '';
-    this.province = '';
-    this.country = '';
-  }
+  ) { }
 
   ngOnInit() {
     
@@ -75,6 +71,9 @@ export class AdvertdetailsComponent implements OnInit {
       this.cardService.getCard(this.advert.elementId!)
       .then((card) => {
         this.card = card;
+        if(!this.card.description) {
+          this.card.description = "No se ha proporcionado una descripción."
+        }
         // se averigua la colección a la que pertenece
         this.collectionService.getCollection(card.collectionId!)
         .then((collection) => {
@@ -87,14 +86,20 @@ export class AdvertdetailsComponent implements OnInit {
         this.userService.getUser(this.advert?.userId!)
         .then((user) => {
           this.seller = user;
-          this.addressService.getAddress(user.addressId!)
-          .then((address) => {
-            console.log(address.city)
-            this.city = address.city;
-            this.province = address.province;
-            this.country = address.country;
-          })
-          .catch((error) => {console.error(error);});
+
+          if(token){
+            this.addressService.getAddress(user.addressId!)
+            .then((address) => {
+              console.log(address.city)
+              this.city = address.city;
+              this.province = address.province;
+              this.country = address.country;
+            })
+            .catch((error) => {console.error(error);});
+          }
+          else{
+            
+          }
         })
         .catch((error) => {console.error(error);});
       })
