@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, HostListener, OnInit, SimpleChanges, ViewEncapsulation } from '@angular/core';
+import { Component, HostListener, OnInit, SimpleChanges, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Params, Router} from '@angular/router';
 import { switchMap } from 'rxjs';
 import { CollectionService } from '../services/collection.service';
@@ -125,7 +125,7 @@ export class FillCollectionComponent implements OnInit {
               else if (card.state == 'ROTO') {this.roto += card.quantity!;}
             });
             this.isLoading = false;
-          });
+        });
       })
       .catch((error) => {console.error(error);});
     });
@@ -145,7 +145,7 @@ export class FillCollectionComponent implements OnInit {
         .toLowerCase()
         .normalize('NFD')
         .replace(/[\u0300-\u036f]/g, '')
-        .includes(this.searchText!.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')); 
+        .includes(this.searchText.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')); 
       
       if(card.name != undefined && card.description != undefined){
         return (!this.searchText || isMatch(card.name) || isMatch(card.description) || isMatch(card.cardId!.toString()) || isMatch(card.price!.toString()) || isMatch(card.quantity!.toString()));
@@ -364,16 +364,16 @@ export class FillCollectionComponent implements OnInit {
   // Botón para volver al tope de la página
   @HostListener("window:scroll", [])
   onWindowScroll() {
-    if (window.pageYOffset > 500) {
+    if (window.scrollY > 500) {
       this.windowScrolled = true;
-    } else if (this.windowScrolled && window.pageYOffset < 500) {
+    } else if (this.windowScrolled && window.scrollY < 500) {
       this.windowScrolled = false;
     }
   }
 
   scrollToTop() {
     (function smoothscroll() {
-      var currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
+      const currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
       if (currentScroll > 0) {
         window.requestAnimationFrame(smoothscroll);
         window.scrollTo(0, currentScroll - (currentScroll / 8));

@@ -13,7 +13,6 @@ import { UserService } from '../services/user.service';
 import { LoginStatusService } from '../services/loginStatus.service';
 import { JwtService } from '../services/jwt.service';
 import { AddressService } from '../services/address.service';
-import { Address } from '../shared/address';
 
 @Component({
   selector: 'app-advertdetails',
@@ -96,9 +95,6 @@ export class AdvertdetailsComponent implements OnInit {
               this.country = address.country;
             })
             .catch((error) => {console.error(error);});
-          }
-          else{
-            
           }
         })
         .catch((error) => {console.error(error);});

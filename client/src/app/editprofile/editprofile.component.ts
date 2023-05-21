@@ -8,13 +8,11 @@ import { AddressService } from '../services/address.service';
 import { MatDialog } from '@angular/material/dialog';
 import { Address } from '../shared/address';
 import { JwtService } from '../services/jwt.service';
-import { LoginComponent } from '../login/login.component';
 import { AuthService } from '../services/auth.service';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DeleteAccountDialogComponent } from '../delete-account-dialog/delete-account-dialog.component';
 import { AccountService } from '../services/account.service';
-import { LoginStatusService } from '../services/loginStatus.service';
 
 @Component({
   selector: 'app-editprofile',

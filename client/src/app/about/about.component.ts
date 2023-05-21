@@ -45,7 +45,7 @@ export class AboutComponent implements OnInit {
       case 'seccion5': return this.contenido5?.nativeElement;
       case 'seccion6': return this.contenido6?.nativeElement;
       case 'seccion7': return this.contenido7?.nativeElement;
-      case 'seccion7': return this.contenido8?.nativeElement;
+      case 'seccion8': return this.contenido8?.nativeElement;
       default: throw new Error(`No se encontró la sección con el id '${id}'`);
     }
   }

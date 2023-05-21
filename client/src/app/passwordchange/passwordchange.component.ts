@@ -43,11 +43,7 @@ export class PasswordchangeComponent implements OnInit {
         this.emailButton = true;
         
         this.code = this.generateCode();
-        console.log(this.code);
-        const to = this.sendEmailForm.value;
-        const subject = "Cromoteca - recuperación de contraseña";
-        const message = "Código de recuperación: " + this.code;
-        /* this.emailService.sendEmail(to, subject, message); */
+        // TODO: enviar código vía SMTP
       }
     })
     .catch((error) => {console.error(error);});

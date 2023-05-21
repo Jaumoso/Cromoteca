@@ -5,7 +5,6 @@ import { CardService } from '../services/card.service';
 import { Collection } from '../shared/collection';
 import { UserService } from '../services/user.service';
 import { AdvertService } from '../services/advert.service';
-import { Card } from '../shared/card';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
