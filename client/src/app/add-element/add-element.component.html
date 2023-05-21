@@ -7,8 +7,9 @@
   <form novalidate [formGroup]="form" (ngSubmit)="onSubmit()">
     <mat-dialog-content>
         <mat-form-field>
-          <input matInput [formControl]="cardId" required placeholder="Identificador XXXX" type="number" name="cardId">
+          <input matInput [formControl]="cardId" required placeholder="Identificador nºXXX" type="number" name="cardId">
           <mat-error *ngIf="this.form.get('cardId')?.errors?.['required']">ID requerido.</mat-error>
+          <mat-error *ngIf="cardId.hasError('maxValueExceeded')">El ID excede el valor máximo: {{data.collectionSize}}</mat-error>
         </mat-form-field>
         <mat-form-field>
           <input matInput [formControl]="name" required placeholder="Nombre / Título" type="text" name="name">
@@ -37,7 +38,6 @@
     </mat-dialog-content>
     <mat-dialog-actions>
       <span class="flex-spacer"></span>
-      <button class="cancel" mat-button mat-dialog-close>Cancel</button>
       <button class="accept" mat-button type="submit" [disabled]="form.invalid">Añadir</button>
     </mat-dialog-actions>
   </form>

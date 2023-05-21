@@ -52,16 +52,16 @@ mat-dialog-actions {
         margin: 5px;
     }
 
-    .cancel:hover {
-        background-color: rgb(255, 86, 86);
-    }
-    .cancel:active{
-        background-color: mix(rgb(255, 86, 86), black, $weight: 80%);
-    }
-    .accept:hover {
-        background-color: $background-dark;
-    }
-    .accept:after {
-        background-color: mix($background-dark, black, $weight: 80%);
+    .accept {
+        padding: 20px;
+        margin-bottom: 20px;
+        padding-left: 30px;
+        padding-right: 30px;
+        &:hover {
+            background-color: $background-dark;
+        }
+        &:active {
+            background-color: mix($background-dark, black, $weight: 80%);
+        }
     }
 }

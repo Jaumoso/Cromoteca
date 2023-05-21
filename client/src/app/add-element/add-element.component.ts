@@ -35,13 +35,24 @@ export class AddElementComponent implements OnInit {
   }
 
   // FORM VALIDATION
-  cardId = new FormControl(null,[Validators.required]);
+  cardId = new FormControl(null,[Validators.required, this.maxValueValidator.bind(this)]);
   name = new FormControl('',[Validators.required]);
   quantity = new FormControl(1, [Validators.required]);
   description = new FormControl('');
   // image
   state = new FormControl('',[Validators.required]);
   price = new FormControl(0, [Validators.required]);
+
+  maxValueValidator(control: any) {
+    const inputValue = control.value;
+    const maxValue = this.data.collectionSize;
+
+    if (inputValue > maxValue) {
+      return { maxValueExceeded: true };
+    }
+
+    return null;
+  }
 
   // VARIABLES
   form: FormGroup;
