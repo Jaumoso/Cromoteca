@@ -6,20 +6,32 @@
         </div>
         <div fxFlex="2"></div>
         <div fxLayoutAlign="center" fxLayout="column" fxLayoutGap="10px">
-            <button mat-button (click)="addElement()" routerLinkActive="router-link-active">Añadir Elemento</button>
-            <button mat-button (click)="goBack()" routerLinkActive="router-link-active">Atrás</button>
+            <button mat-button (click)="addElement()">Añadir Coleccionable</button>
+            <button [routerLink]="['/adverts']">Ver tus anuncios</button>
+            <button mat-button id="go-back" (click)="goBack()">Atrás</button>
         </div>
     </div>
     <div fxFlex="60" fxLayout="column">
-        <br>
         <div fxLayout="column" fxLayoutGap="10px" fxFlex="80">
             <h2><b>{{collection?.name}}</b></h2>
             <p>{{collection?.description}}</p>
             <br>
-            <p><b>Total de elementos en la colección: </b>{{collection?.size}}</p>
-            <p><b>Total de elementos reunídos:  <span id="green">{{completed}}</span> / <span id="red">{{collection?.size}}</span></b></p>
-            <p><b>Faltan: </b> {{ missing }}, completado al <b>{{percentage}}%</b></p>
-            <p><b>Valor de la colección: </b>{{value}} €</p>
+            <div fxLayout="row">
+              <div fxFlex="50%" fxFlex.lt-sm="100%">
+                <p><b>Total de elementos en la colección: </b>{{collection?.size}}</p>
+                <p><b>Total de elementos reunídos:  <span id="green">{{completed}}</span> / <span id="red">{{collection?.size}}</span></b></p>
+                <p><b>Total de elementos añadidos (incluyendo repetidos): </b>{{totalCards}}</p>
+                <p><b>Faltan: </b> {{ missing }}, completado al <b>{{percentage}}%</b></p>
+                <p><b>Valor de la colección: </b>{{value}} €</p>
+              </div>
+              <div fxFlex="17%" fxFlex.lt-sm="100%">
+                
+                <p class="nuevo"><b>NUEVO: {{nuevo}}</b></p>
+                <p class="seminuevo"><b>SEMINUEVO: {{seminuevo}}</b></p>
+                <p class="usado"><b>USADO: {{usado}}</b></p>
+                <p class="roto"><b>ROTO: {{roto}}</b></p>
+              </div>
+            </div>
         </div>
         <div fxLayout="row wrap">
           <div *ngFor="let item of cardList; let i=index"  class="completion-grid" style="border: 1px solid black">
@@ -42,99 +54,101 @@
     </div>
   </div>
 </div>
-<div class="element-list" fxLayout.gt-md="row" fxLayout.lt-md="column" fxLayoutAlign="space-around center" fxLayoutGap="10px">
-    <div fxFlex.gt-md="auto" fxFlex.lt-md="100" fxLayoutAlign="center start">
+
+<div class="element-list content">
+  <div fxLayout="column">
+
+    <div fxLayoutAlign="center start">
+      <h2><b><u>Elementos Adquiridos</u></b></h2>
+    </div>
+    <div fxLayoutAlign="center start">
+      <mat-form-field>
+          <mat-label>Buscar coleccionable</mat-label>
+          <input matInput type="text" [(ngModel)]="searchText" (ngModelChange)="searchCards()">
+          <mat-icon matPrefix>search</mat-icon>
+      </mat-form-field>
+    </div>
+    <div fxLayoutAlign="center start" *ngIf="cards.length == 0 && !isLoading">
       <div fxLayout="column">
-        <div fxLayoutAlign="center start">
-            <h2><b><u>Elementos Adquiridos</u></b></h2>
-        </div>
-        <div fxLayout="row wrap" fxLayoutAlign="center">
-          <div fxFlex.lt-sm="100%" fxFlex.sm="100%" fxFlex.gt-sm="50%" *ngFor="let card of cards let i=index">
+        <h2>No se han encontrado coleccionables!</h2>
+        <button mat-button (click)="addElement()">Añadir coleccionable</button>
+      </div>
+
+    </div>
+
+    <div  fxLayout="row wrap" fxLayoutAlign="center">
+      <div fxLayoutAlign="center start" fxFlex.gt-xs="50%" fxFlex.gt-sm="33.33%" fxFlex.gt-md="25%" fxFlex.gt-lg="20%" fxFlex="100%" *ngFor="let card of filteredCards">
             
-            <!-- Si no tiene anuncio creado -->
-            <mat-card *ngIf="!adverts.includes(card._id!)" fxLayout.gt-sm="row" fxFlex="100%" fxLayout.lt-sm="column" id={{card.cardId}}>
-              <div fxFlex="auto">
-                <mat-card-header fxLayoutAlign.lt-md="center start">
-                  <mat-card-title class="identifier">#{{card.cardId}}</mat-card-title>
-                </mat-card-header>
+        <div *ngIf="!adverts.includes(card._id!)" class="collection-card swing-in-top-fwd" id={{card.cardId}}>
+            <div class="collection-card-header">
+              <h2 class="collection-card-title">#{{card.cardId}}</h2>
+              <div class="collection-card-state {{card.state}}">
+                {{card.state}}
               </div>
-              <div fxFlex="auto">
-                <mat-card-content fxLayoutAlign.lt-md="center start" fxLayoutAlign.gt-md="start start">
-                  <div fxLayout="column">
-                    <h2>{{card.name}}</h2>
-                    <p style="min-width: 150px;">{{card.description}}</p>
-                    <p>
-                      <span *ngIf="card.quantity != 0" class="quantity"><b>{{card.quantity}} pcs</b></span>
-
-                      <span *ngIf="card.state == 'NUEVO'" class="nuevo"><b>{{card.state}}</b></span>
-                      <span *ngIf="card.state == 'SEMINUEVO'" class="seminuevo"><b>{{card.state}}</b></span>
-                      <span *ngIf="card.state == 'USADO'" class="usado"><b>{{card.state}}</b></span>
-                      <span *ngIf="card.state == 'ROTO'" class="roto"><b>{{card.state}}</b></span>
-                      
-                      <span *ngIf="card.price != 0" class="price">
-                        {{card.price}}€
-                      </span>
-                    </p>
-                  </div>
-                </mat-card-content>
+            </div>
+            <div class="collection-card-body">
+              <h2 class="collection-card-name title-container">{{card.name}}</h2>
+              <p class="collection-card-description donotoverflow text-container">{{card.description}}</p>
+            </div>
+            <div class="collection-card-footer">
+              <div>
+                <div class="collection-card-quantity">
+                  <span class="collection-card-quantity-label">Cantidad:</span> {{card.quantity}}
+                </div>
+                <div class="collection-card-price">
+                  <span class="collection-card-price-label">Precio:</span> {{card.price}}€
+                </div>
               </div>
-              <div fxFlex="auto" fxLayoutAlign="end center" fxLayoutAlign.lt-sm="center center">
-                <mat-card-actions fxLayoutAlign.lt-md="center start">
-                  <div fxLayout.gt-sm="column" fxLayout.lt-sm="row" fxLayout.sm="row">
-                    <button *ngIf="!adverts.includes(card._id!)" (click)="createAdvert(card)">Crear Anuncio</button>
-                    <button (click)="deleteElement(card)">Eliminar</button>
-                  </div>
-                </mat-card-actions>
+              <div class="collection-card-actions">
+                <div>
+                  <button (click)="updateElement(card)">Actualizar coleccionable</button>
+                  <button id="cancel" (click)="deleteElement(card)">Eliminar Coleccionable</button>
+                </div>
+                <div>
+                  <button class="full-height" *ngIf="!adverts.includes(card._id!)" (click)="createAdvert(card)">Crear Anuncio</button>
+                </div>
               </div>
-            </mat-card>
-
-            <!-- Si tiene anuncio creado -->
-            <mat-card class="has-advert" *ngIf="adverts.includes(card._id!)" fxLayout.gt-sm="row" fxFlex="100%" fxLayout.lt-sm="column" id={{card.cardId}}>
-              <div fxFlex="auto">
-                <mat-card-header fxLayoutAlign.lt-md="center start">
-                  <mat-card-title class="identifier">#{{card.cardId}}</mat-card-title>
-                </mat-card-header>
-              </div>
-              <div fxFlex="auto">
-                <mat-card-content fxLayoutAlign.lt-md="center start" fxLayoutAlign.gt-md="start start">
-                  <div fxLayout="column">
-                    <h2>{{card.name}}</h2>
-                    <p style="min-width: 150px;">{{card.description}}</p>
-                    <p>
-                      <span *ngIf="card.quantity != 0" class="quantity"><b>{{card.quantity}} pcs</b></span>
-
-                      <span *ngIf="card.state == 'NUEVO'" class="nuevo"><b>{{card.state}}</b></span>
-                      <span *ngIf="card.state == 'SEMINUEVO'" class="seminuevo"><b>{{card.state}}</b></span>
-                      <span *ngIf="card.state == 'USADO'" class="usado"><b>{{card.state}}</b></span>
-                      <span *ngIf="card.state == 'ROTO'" class="roto"><b>{{card.state}}</b></span>
-                      
-                      <span *ngIf="card.price != 0" class="price">
-                        {{card.price}}€
-                      </span>
-                    </p>
-                  </div>
-                </mat-card-content>
-              </div>
-              <div fxFlex="auto" fxLayoutAlign="end center" fxLayoutAlign.lt-sm="center center">
-                <mat-card-actions fxLayoutAlign.lt-md="center start">
-                  <div fxLayout.gt-sm="column" fxLayout.lt-sm="row" fxLayout.sm="row">
-                    <button *ngIf="adverts.includes(card._id!)" [routerLink]="['/adverts']">Ver Anuncio</button>
-                    <button (click)="deleteElement(card)">Eliminar</button>
-                  </div>
-                </mat-card-actions>
-              </div>
-            </mat-card>
-          </div>
-
-          <div fxFlex="row" fxFlexAlign="center">
-              <div class="collection-not-found" *ngIf="cards.length == 0">
-                  <h2>¡Empieza a añadir coleccionables!</h2>
-              </div>
-          </div>
-
+            </div>
         </div>
+
+        <div *ngIf="adverts.includes(card._id!)" class="collection-card has-advert swing-in-top-fwd" id={{card.cardId}}>
+          <div class="collection-card-header">
+            <h2 class="collection-card-title">#{{card.cardId}} - EN VENTA</h2>
+            <div class="collection-card-state {{card.state}}">{{card.state}}</div>
+          </div>
+          <div class="collection-card-body">
+          <h2 class="collection-card-name title-container">{{card.name}}</h2>
+          <p class="collection-card-description donotoverflow text-container">{{card.description}}</p>
+          </div>
+          <div class="collection-card-footer">
+            <div>
+              <div class="collection-card-quantity">
+                <span class="collection-card-quantity-label">Cantidad:</span> {{card.quantity}}
+              </div>
+              <div class="collection-card-price">
+                <span class="collection-card-price-label">Precio:</span> {{card.price}}€
+              </div>
+            </div>
+            <div class="collection-card-actions">
+                <button *ngIf="adverts.includes(card._id!)" (click)="gotoAdvert(card)">Detalles de Anuncio</button>
+                <button id="cancel" *ngIf="adverts.includes(card._id!)" (click)="deleteAdvert(card)">Eliminar anuncio</button>
+            </div>
+          </div>
+      </div>
+        
       </div>
     </div>
-</div>
-<br><br>
 
+  </div>
+</div>
+
+<button class="add-element-button" (click)="addElement()">
+  Añadir Coleccionable <i class="fa fa-plus"></i>
+</button>
+
+<button class="scroll-top-button" (click)="scrollToTop()">
+  <i class="fa fa-arrow-up"></i>
+</button>
+
+<br>
+<br>

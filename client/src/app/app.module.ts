@@ -23,6 +23,7 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { baseURL } from './shared/baseurl';
 import 'hammerjs';
@@ -52,6 +53,7 @@ import { AddAdvertComponent } from './add-advert/add-advert.component';
 import { RemoveFromLibraryDialogComponent } from './remove-from-library-dialog/remove-from-library-dialog.component';
 import { AdvertsComponent } from './adverts/adverts.component';
 import { AdvertdetailsComponent } from './advertdetails/advertdetails.component';
+import { UpdateElementComponent } from './update-element/update-element.component';
 
 @NgModule({
   declarations: [
@@ -79,6 +81,7 @@ import { AdvertdetailsComponent } from './advertdetails/advertdetails.component'
     RemoveFromLibraryDialogComponent,
     AdvertsComponent,
     AdvertdetailsComponent,
+    UpdateElementComponent,
   ],
   imports: [
     BrowserModule,
@@ -106,6 +109,7 @@ import { AdvertdetailsComponent } from './advertdetails/advertdetails.component'
     MatPaginatorModule,
     MatSortModule,
     MatMenuModule,
+    MatTooltipModule,
   ],
   providers: [
     { provide: 'BaseURL', useValue: baseURL },

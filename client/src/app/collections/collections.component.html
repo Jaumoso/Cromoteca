@@ -5,14 +5,20 @@
     <div fxFlex fxFlex.gt-sm="30%">
         <h3><b>Buscador de colecciones</b></h3>
     </div>
-    <div fxFlex fxFlex.gt-sm="70%">
-        <mat-form-field>
+    <div fxFlex fxFlex.gt-sm="70%" class="searchbar">
+        <mat-form-field fxFlex="100">
             <mat-label>Buscar colección</mat-label>
             <input matInput type="text" [(ngModel)]="searchText" (ngModelChange)="searchCollections()">
             <mat-icon matPrefix>search</mat-icon>
         </mat-form-field>
     </div>
-    <div fxFlex></div>
+</div>
+
+<div *ngIf="!collections">
+    <mat-spinner></mat-spinner><h4>Loading...</h4>
+</div>
+<div fxLayoutAlign="center start" class="collection-not-found" *ngIf="filteredCollections.length == 0">
+    <h2>{{errmsg}}</h2>
 </div>
 
 <!-- Grid de colecciones -->
@@ -32,16 +38,15 @@
                     <li>Año: {{collection.year}}</li>
                 </ul>
             </mat-card-content>
-            <mat-card-actions>
-                <button mat-button [routerLink]="['/collectiondetails',collection._id]" routerLinkActive="router-link-active">DETALLES</button>
-                <button mat-button *ngIf="!collectionIds.includes(collection._id!)" (click)="openDialog(i)">AÑADIR A LA BIBLIOTECA</button>
+            <mat-card-actions fxLayout="column">
+                <div *ngIf="collectionIds.includes(collection._id!)" fxFlex="100" fxLayout="row">
+                    <button id="button-margin" mat-button [routerLink]="['/collectiondetails',collection._id]" routerLinkActive="router-link-active">DETALLES</button>
+                    <button mat-button [routerLink]="['/fillcollection',collection._id]" routerLinkActive="router-link-active">AÑADIR COLECCIONABLES</button>
+                </div>
+                <button mat-button *ngIf="!collectionIds.includes(collection._id!)" [routerLink]="['/collectiondetails',collection._id]" routerLinkActive="router-link-active">DETALLES</button>
+                <button mat-button *ngIf="!collectionIds.includes(collection._id!)" (click)="addToLibrary(i)">AÑADIR A LA BIBLIOTECA</button>
+                <button mat-button class="delete" *ngIf="collectionIds.includes(collection._id!)" (click)="deleteFromLibrary(i)">ELIMINAR DE LA BIBLIOTECA</button>
             </mat-card-actions>
         </mat-card>
     </div>
-</div>
-<div *ngIf="!collections" >
-    <mat-spinner></mat-spinner><h4>Loading...</h4>
-</div>
-<div class="collection-not-found" *ngIf="filteredCollections.length == 0">
-    <h2>{{errmsg}}</h2>
 </div>

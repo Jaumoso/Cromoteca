@@ -15,14 +15,14 @@ $text-color: midnightblue;
         font-weight: bold;
         border-radius: 10px;
         cursor: pointer;
-    }
-    button:hover {
-        background-color: mix($background-dark, black, 80%);
-        font-weight: bold;
-    }
-    .button:active {
-        background-color: mix($background-dark, black, 70%);
-        font-weight: bold;
+
+        &:hover {
+            background-color: mix($background-dark, black, 80%);
+        }
+
+        &:active {
+            background-color: mix($background-dark, black, 70%);
+        }
     }
 
     #green{color: rgb(87, 243, 87);}
@@ -51,23 +51,15 @@ $text-color: midnightblue;
     }
 }
 
-.go-back {
-    width: 100px;
-    background-color: white;
-    color: black;
-    padding: 10px;
-    margin-bottom: 5px;
-    font-weight: bold;
-    border-radius: 10px;
-}
-.go-back:hover {
-    background-color: mix($background-dark, black, 80%);
+#cancel:hover {
+    background-color: rgb(255, 86, 86);
     color: white;
     font-weight: bold;
 }
 
-.go-back:active {
-    background-color: mix($background-dark, black, 70%);
+#cancel:active {
+    background-color: mix(rgb(255, 86, 86), black, 80%);
+    color: white;
     font-weight: bold;
 }
 
@@ -85,63 +77,257 @@ $text-color: midnightblue;
     background-color: rgb(188, 201, 226);
 }
 
-mat-card {
-  box-shadow: 1px 1px 5px 2px rgb(99, 99, 99);
-  margin: 20px 20px 20px 20px;
-  border: 1px solid black;
-
-    .identifier {
-        padding: 5px;
-        border: 1px solid black;
-        border-radius: 5px;
-    }
-
-    .single-card {
-        display: flex;
-        flex-wrap: wrap;
-      }
-      
-      .double-card {
-        display: flex;
-        flex-wrap: wrap;
-      }
-
-  mat-card-content{
-    
-    .quantity {
-        color: white;
-        background-color: $text-color;
-        padding: 5px;
-        border-radius: 50%;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .price {
-        margin-left: 10px;
-        border-radius: 3px;
-        padding: 3px;
-        background-color: rgb(201, 201, 201);
-    }
+.collection-card {
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 10px;
+    width: 300px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-family: 'Roboto', sans-serif;
+    cursor: pointer;
+    min-height: 400px;
   }
-
-  mat-card-actions {
-    button {
-        width: auto;
-        max-width: 200px;
-        background-color: $background-light;
-        padding: 8px;
-        margin: 5px;
-        font-weight: bold;
-        border-radius: 5px;
-    }
-    button:hover {
-        background-color: mix($background-light, black, 80%);
-        font-weight: bold;
-    }
-    .button:active {
-        background-color: mix($background-light, black, 70%);
-        font-weight: bold;
-    }
-  }
+  
+.collection-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
 }
+
+.collection-card-title {
+    font-size: 28px;
+    margin: 0;
+}
+
+.collection-card-state {
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 10px;
+    text-transform: uppercase;
+}
+
+.collection-card-state.NUEVO {
+    background-color: green;
+}
+  
+.collection-card-state.SEMINUEVO {
+    background-color: yellow;
+    color: black;
+}
+
+.collection-card-state.USADO {
+    background-color: orange;
+}
+
+.collection-card-state.ROTO {
+    background-color: red;
+}
+
+.collection-card-body {
+    flex: 1;
+}
+
+.collection-card-name {
+    font-size: 24px;
+    margin-top: 0;
+}
+  
+.collection-card-description {
+    font-size: 16px;
+    line-height: 1.5;
+    white-space: pre-wrap;
+}
+
+.collection-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.collection-card-quantity-label {
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.collection-card-price-label {
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.collection-card-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.collection-card-actions button {
+    width: auto;
+    border-radius: 5px;
+    margin: 2px;
+    background-color: $background-dark;
+    color: white;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 5px;
+    font-weight: bold;
+
+    &:hover {
+        background-color: mix($background-dark, black, 80%);
+    }
+
+    &:active {
+        background-color: mix($background-dark, black, 70%);
+    }
+}
+
+.full-height{
+    line-height: 33px;
+}
+
+.text-container {
+    display: -webkit-box; /* Utiliza un layout tipo caja */
+    -webkit-box-orient: vertical; /* Establece la orientación vertical */
+    overflow: hidden; /* Oculta el texto que sobresale del contenedor */
+    text-overflow: ellipsis; /* Muestra puntos suspensivos al final del texto oculto */
+    -webkit-line-clamp: 7; /* Limita el número de líneas */
+    max-height: 10.5em; /* Establece la altura máxima */
+
+    &:active {
+        max-height: none;
+        -webkit-line-clamp: unset;
+        text-overflow: unset;
+    }
+}
+
+.title-container {
+    display: -webkit-box; /* Utiliza un layout tipo caja */
+    -webkit-box-orient: vertical; /* Establece la orientación vertical */
+    overflow: hidden; /* Oculta el texto que sobresale del contenedor */
+    text-overflow: ellipsis; /* Muestra puntos suspensivos al final del texto oculto */
+    -webkit-line-clamp: 2; /* Limita el número de líneas */
+    max-height: 3em; /* Establece la altura máxima */
+
+    &:active {
+        max-height: none;
+        -webkit-line-clamp: unset;
+        text-overflow: unset;
+    }
+}
+
+.collection-card:active {
+    height: auto;
+}
+
+.scroll-top-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: $background-dark;
+    color: white;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 999;
+    transition: opacity 0.2s;
+    
+    &:hover {
+        background-color: mix($background-dark, black, 80%);
+    }
+
+    &:active {
+        background-color: mix($background-dark, black, 70%);
+    }
+    
+    &:focus {
+      outline: none;
+    }
+}
+
+.add-element-button {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background-color: $background-dark;
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    z-index: 999;
+    transition: opacity 0.2s;
+    
+    &:hover {
+      background-color: mix($background-dark, black, 80%);
+    }
+
+    &:active {
+        background-color: mix($background-dark, black, 70%);
+    }
+    
+    &:focus {
+      outline: none;
+    }
+}
+
+
+
+// animación de seing para las cartas
+.swing-in-top-fwd {
+	-webkit-animation: swing-in-top-fwd 0.5s cubic-bezier(0.175, 0.885, 0.320, 1.275) both;
+	        animation: swing-in-top-fwd 0.5s cubic-bezier(0.175, 0.885, 0.320, 1.275) both;
+}
+
+/* ----------------------------------------------
+ * Generated by Animista on 2023-5-9 20:54:51
+ * Licensed under FreeBSD License.
+ * See http://animista.net/license for more info. 
+ * w: http://animista.net, t: @cssanimista
+ * ---------------------------------------------- */
+
+/**
+ * ----------------------------------------
+ * animation swing-in-top-fwd
+ * ----------------------------------------
+ */
+ @-webkit-keyframes swing-in-top-fwd {
+    0% {
+      -webkit-transform: rotateX(-100deg);
+              transform: rotateX(-100deg);
+      -webkit-transform-origin: top;
+              transform-origin: top;
+      opacity: 0;
+    }
+    100% {
+      -webkit-transform: rotateX(0deg);
+              transform: rotateX(0deg);
+      -webkit-transform-origin: top;
+              transform-origin: top;
+      opacity: 1;
+    }
+  }
+  @keyframes swing-in-top-fwd {
+    0% {
+      -webkit-transform: rotateX(-100deg);
+              transform: rotateX(-100deg);
+      -webkit-transform-origin: top;
+              transform-origin: top;
+      opacity: 0;
+    }
+    100% {
+      -webkit-transform: rotateX(0deg);
+              transform: rotateX(0deg);
+      -webkit-transform-origin: top;
+              transform-origin: top;
+      opacity: 1;
+    }
+  }
+  

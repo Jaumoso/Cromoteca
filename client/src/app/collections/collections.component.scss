@@ -23,7 +23,7 @@ $text-color: midnightblue;
 
 .content {
     padding: 50px;
-    
+    min-height: 500px;
     mat-card {
         margin-bottom: 16px;
         box-shadow: 1px 1px 5px 2px rgb(99, 99, 99);
@@ -70,9 +70,20 @@ $text-color: midnightblue;
                 background-color: mix($background-dark, black, 80%);
                 font-weight: bold;
             }
-            .button:active {
+            button:active {
                 background-color: mix($background-dark, black, 70%);
                 font-weight: bold;
+            }
+
+            .delete:hover {
+                background-color: rgb(255, 86, 86);
+            }
+            .delete:active {
+                background-color: mix(rgb(255, 86, 86), black, $weight: 80%);
+            }
+
+            #button-margin {
+                margin-right: 5px;
             }
         }
     }

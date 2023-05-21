@@ -15,13 +15,11 @@
     </div>
 </div>
 <br>
-<div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign.xs="start center"
-    fxLayoutAlign.sm="start center" fxLayoutAlign.gt-sm="center center" fxLayoutGap="10px">
-    <form class="form" nonvalidate [formGroup]="form" (ngSubmit)="onSubmit()">
-        
-        <div fxFlex="50" fxFlex.gt-sm="100%" fxLayout="column">
+<form class="form form-container" nonvalidate [formGroup]="form" (ngSubmit)="onSubmit()">
 
-            <label for="firstname">Nombre: </label>
+    <div fxFlex="100%"  class="form" fxLayout="row wrap">
+        <div fxFlex="auto">
+            <label for="firstname">Nombre:</label><br>
             <mat-form-field>
                 <input matInput placeholder="Nombre" type="text" [formControl]="firstName" [(ngModel)]="user!.firstName"
                     name="firstname">
@@ -29,7 +27,9 @@
                     <mat-error *ngIf="this.form.get('firstName')?.errors?.['minlength']">Mínimo 2 caracteres.</mat-error>
                     <mat-error *ngIf="this.form.get('firstName')?.errors?.['maxlength']">Máximo 15 caracteres.</mat-error>
             </mat-form-field>
-            <label for="lastname">Apellidos: </label>
+        </div>
+        <div fxFlex="auto">
+            <label for="lastname">Apellidos:</label><br>
             <mat-form-field>
                 <input matInput placeholder="Apellidos" type="text" [formControl]="lastName" [(ngModel)]="user!.lastName"
                     name="lastname">
@@ -37,90 +37,101 @@
                     <mat-error *ngIf="this.form.get('lastName')?.errors?.['minlength']">Mínimo 2 caracteres.</mat-error>
                     <mat-error *ngIf="this.form.get('lastName')?.errors?.['maxlength']">Máximo 25 caracteres.</mat-error>
             </mat-form-field>
-            <label for="username">Nombre de Usuario: </label>
-            <mat-form-field>
+        </div>
+        <div fxFlex="auto">
+            <label for="username" id="grey-text">Nombre de Usuario:</label><br>
+            <mat-form-field id="disabled">
                 <input matInput placeholder="Usuario" type="text" [formControl]="username" [(ngModel)]="user!.username"
                     name="username" [readonly]="true" [disabled]="true">
                     <mat-error *ngIf="this.form.get('username')?.errors?.['required']">Usuario requerido.</mat-error>
                     <mat-error *ngIf="this.form.get('username')?.errors?.['minlength']">Mínimo 3 caracteres.</mat-error>
                     <mat-error *ngIf="this.form.get('username')?.errors?.['maxlength']">Máximo 18 caracteres.</mat-error>
             </mat-form-field>
-
         </div>
-        
-        <div fxFlex="50" fxFlex.gt-sm="100%" fxLayout="column">
-
-            <label for="email">Correo electrónico: </label>
-            <mat-form-field>
+        <div fxFlex="auto">
+            <label for="email" id="grey-text">Correo electrónico:</label><br>
+            <mat-form-field id="disabled">
                 <input matInput placeholder="example@example.com" type="email" [readonly]="true" [disabled]="true"
                 [formControl]="email" [(ngModel)]="user!.email" name="email">
                     <mat-error *ngIf="this.form.get('email')?.errors?.['required']">Email requerido.</mat-error>
                     <mat-error *ngIf="this.form.get('email')?.errors?.['email']">Formato inválido.</mat-error>
             </mat-form-field>
-
-            <label for="password">Contraseña: <span style="color:red;">*</span></label>
+        </div>
+        <div fxFlex="auto">
+            <label for="password">Contraseña:<span style="color:red;">*</span></label><br>
             <mat-form-field>
-                <input matInput required placeholder="Contraseña" type="password"
+                <input matInput required placeholder="Contraseña" type="{{showPassword ? 'text' : 'password'}}"
                 [formControl]="password" [(ngModel)]="user!.password" name="password">
                     <mat-error *ngIf="this.form.get('password')?.errors?.['required']">Contraseña requerida.</mat-error>
                     <mat-error *ngIf="this.form.get('password')?.errors?.['minlength']">Mínimo 8 caracteres.</mat-error>
                     <mat-error *ngIf="form.hasError('notSame')">Repita bien la contraseña.</mat-error>
+                    <mat-icon type="button" matSuffix (click)="toggleShowPassword()">remove_red_eye</mat-icon>
             </mat-form-field>
-
-            <label for="repeatpassword">Repita la Contraseña: <span style="color:red;">*</span></label>
+        </div>
+        <div fxFlex="auto">
+            <label for="repeatpassword">Repita la Contraseña:<span style="color:red;">*</span></label><br>
             <mat-form-field>
-                <input matInput required [errorStateMatcher]="matcher" placeholder="Contraseña" type="password"
+                <input matInput required [errorStateMatcher]="matcher" placeholder="Contraseña" type="{{showPassword ? 'text' : 'password'}}"
                 [formControl]="passwordConfirmation" [(ngModel)]="confirmPassword" name="passwordConfirmation">
                     <mat-error *ngIf="this.form.get('passwordConfirmation')?.errors?.['required']">Es necesario repetir la contraseña.</mat-error>
                     <mat-error *ngIf="this.form.get('passwordConfirmation')?.errors?.['minlength']">Mínimo 8 caracteres.</mat-error>
                     <mat-error *ngIf="form.hasError('notSame')">Repita bien la contraseña.</mat-error>
+                    <mat-icon type="button" matSuffix (click)="toggleShowPassword()">remove_red_eye</mat-icon>
             </mat-form-field>
-
         </div>
-
-        <div fxFlex="50" fxFlex.gt-sm="100%" fxLayout="column">
-
-            <label for="street">Dirección: </label>
+        <div fxFlex="auto">
+            <label for="street">Dirección:</label><br>
             <mat-form-field>
                 <input matInput placeholder="Dirección" type="text"
                 [formControl]="street" [(ngModel)]="address!.street" name="street">
                     <mat-error *ngIf="this.form.get('street')?.errors?.['required']">Dirección requerida.</mat-error>
             </mat-form-field>
-            <label for="postalCode">Código Postal: </label>
+        </div>
+        <div fxFlex="auto">
+            <label for="postalCode">Código Postal:</label><br>
             <mat-form-field>
                 <input matInput placeholder="XXXXX" type="text"
                 [formControl]="postalCode" [(ngModel)]="address!.postalCode" name="postalCode">
                     <mat-error *ngIf="this.form.get('postalCode')?.errors?.['required']">Código postal requerido.</mat-error>
             </mat-form-field>
-
-            <label for="city">Ciudad: </label>
+        </div>
+        <div fxFlex="auto">
+            <label for="city">Ciudad:</label><br>
             <mat-form-field>
                 <input matInput placeholder="Ciudad" type="text"
                 [formControl]="city" [(ngModel)]="address!.city" name="city">
                     <mat-error *ngIf="this.form.get('city')?.errors?.['required']">Ciudad requerida.</mat-error>
             </mat-form-field>
         </div>
-
-        <div fxFlex="50" fxFlex.gt-sm="100%" fxLayout="column">
-            <label for="province">Provincia: </label>
+        <div fxFlex="auto">
+            <label for="province">Provincia:</label><br>
             <mat-form-field>
                 <input matInput placeholder="Provincia" type="text"
                 [formControl]="province" [(ngModel)]="address!.province" name="province">
                     <mat-error *ngIf="this.form.get('province')?.errors?.['required']">Provincia requerido.</mat-error>
             </mat-form-field>
-
-            <label for="country">País: </label>
+        </div>
+        <div fxFlex="auto">
+            <label for="country">País:</label><br>
             <mat-form-field>
                 <input matInput placeholder="País" type="text"
                 [formControl]="country" [(ngModel)]="address!.country" name="country">
                     <mat-error *ngIf="this.form.get('country')?.errors?.['required']">País requerido.</mat-error>
             </mat-form-field>
-            <br>
-            <button (click)="goBack()" type="button" mat-button>Cancelar</button>
-            <button mat-button [disabled]="form.invalid" class="submit-button shake-horizontal" type="submit">Actualizar información</button>
         </div>
-    </form>
-</div>
+
+        <div fxFlex="100" class="form form-buttons" fxLayout="column">
+            <div>
+                <br>
+                <p fxLayoutAlign="center start">El nombre de usuario y el correo electrónico no se pueden cambiar.</p>
+                <p fxLayoutAlign="center start"><span style="color: red;"><b>*</b></span> Es obligatorio confirmar los cambios añadiendo la contraseña. Puedes seguir utilizando la misma o cambiarla.</p>
+            </div>
+            <div fxFlex="auto" fxLayoutAlign="center start">
+                <button (click)="goBack()" type="button" mat-button>Cancelar</button>
+                <button mat-button [disabled]="form.invalid" class="submit-button shake-horizontal" type="submit">Actualizar información</button>
+            </div>
+        </div>
+    </div>
+</form>
 <br>
-<p style="text-align: center;"><span style="color: red;"><b>*</b></span> Es obligatorio confirmar los cambios añadiendo la contraseña. Puedes seguir utilizando la misma o cambiarla.</p>
 <br>

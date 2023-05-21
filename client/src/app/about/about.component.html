@@ -64,8 +64,20 @@
                 </div>
 
                 <div class="desplegable" (click)="toggleContent('seccion4')">
-                    <h2 class="titulo">Sitemap de la aplicación</h2>
+                    <h2 class="titulo">¿Cómo borro mi cuenta?</h2>
                     <div class="contenido" #contenido4>
+                        <p>
+                            ¡Sentimos verte marchar! <br><br>
+                            Para borrar tu cuenta, entra en <b>"Perfil" > "Actualizar información"</b> 
+                            donde encotrarás un botón en la parte superior derecha para borrar todos tus datos. <br><br>
+                            Ten en cuenta que <u><b><span style="color: red;">NO</span> se puede deshacer</b></u>.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="desplegable" (click)="toggleContent('seccion5')">
+                    <h2 class="titulo">Mapa de la aplicación</h2>
+                    <div class="contenido" #contenido5>
                         <p>
                             Aquí se muestran todas las vistas de la aplicación y desde donde llegar a ellas.
                         </p>
@@ -75,54 +87,118 @@
                     </div>
                 </div>
 
-                <div class="desplegable" (click)="toggleContent('seccion5')">
-                    <h2 class="titulo">Normas</h2>
-                    <div class="contenido" #contenido5>
-                        <p>
-                            "Lorem ipsum dolor sit amet, consectetur
-                            adipiscing elit, sed do eiusmod tempor
-                            incididunt ut labore et dolore magna aliqua.
-                            Ut enim ad minim veniam, quis nostrud exercitation
-                            ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                            Duis aute irure dolor in reprehenderit in voluptate velit
-                            esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                            occaecat cupidatat non proident, sunt in culpa qui officia
-                            deserunt mollit anim id est laborum."
-                        </p>
-                    </div>
-                </div>
-
                 <div class="desplegable" (click)="toggleContent('seccion6')">
-                    <h2 class="titulo">Consejos</h2>
+                    <h2 class="titulo">Normas</h2>
                     <div class="contenido" #contenido6>
-                        <p>
-                            "Lorem ipsum dolor sit amet, consectetur
-                            adipiscing elit, sed do eiusmod tempor
-                            incididunt ut labore et dolore magna aliqua.
-                            Ut enim ad minim veniam, quis nostrud exercitation
-                            ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                            Duis aute irure dolor in reprehenderit in voluptate velit
-                            esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                            occaecat cupidatat non proident, sunt in culpa qui officia
-                            deserunt mollit anim id est laborum."
-                        </p>
+	
+                        <h2>Reglas generales</h2>
+                        <ul>
+                            <li>Todos los usuarios deben ser respetuosos y corteses entre sí.</li>
+                            <li>No se permiten intercambios ilegales o que infrinjan los derechos de propiedad intelectual.</li>
+                            <li>No se permite la venta de objetos no coleccionablesen la aplicación.</li>
+                            <li>Los usuarios deben cumplir con las leyes aplicables en su jurisdicción.</li>
+                        </ul>
+                        
+                        <h2>Publicación de coleccionables</h2>
+                        <ul>
+                            <li>Los usuarios deben publicar coleccionables de su propiedad y que estén disponibles para intercambiar.</li>
+                            <li>No se permiten publicaciones falsas o engañosas.</li>
+                            <li>Se deben proporcionar detalles precisos sobre el estado del coleccionable.</li>
+                            <li>No se permiten publicaciones de objetos que no estén relacionados con la temática de las colecciones.</li>
+                        </ul>
+                        
+                        <h2>Intercambio de coleccionables</h2>
+                        <ul>
+                            <li>Los usuarios deben comunicarse de manera clara y respetuosa sobre los términos del intercambio.</li>
+                            <li>Los usuarios deben cumplir con los términos del intercambio acordados.</li>
+                            <li>Se recomienda a los usuarios que acuerden el método de envío y aseguren adecuadamente los objetos.</li>
+                            <li>No se permite el intercambio de coleccionables ilegales o que infrinjan los derechos de propiedad intelectual.</li>
+                            <li>No se permite el intercambio de coleccionables que no estén relacionados con la temática de las colecciones.</li>
+                        </ul>
+                        
+                        <h2>Modificación de las normas</h2>
+                        <ul>
+                            <li>La administración se reserva el derecho de modificar estas normas en cualquier momento.</li>
+                            <li>Los usuarios serán notificados por correo electrónico sobre cualquier cambio importante en las normas.</li>
+                            <li>Los usuarios deben revisar regularmente las normas de la aplicación para asegurarse de estar al día.</li>
+                        </ul>
                     </div>
                 </div>
 
                 <div class="desplegable" (click)="toggleContent('seccion7')">
-                    <h2 class="titulo">Condiciones de uso y política de privacidad</h2>
+                    <h2 class="titulo">Consejos</h2>
                     <div class="contenido" #contenido7>
-                        <p>
-                            "Lorem ipsum dolor sit amet, consectetur
-                            adipiscing elit, sed do eiusmod tempor
-                            incididunt ut labore et dolore magna aliqua.
-                            Ut enim ad minim veniam, quis nostrud exercitation
-                            ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                            Duis aute irure dolor in reprehenderit in voluptate velit
-                            esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                            occaecat cupidatat non proident, sunt in culpa qui officia
-                            deserunt mollit anim id est laborum."
-                        </p>
+                        <h2>Publicación de coleccionables</h2>
+                        <ul>
+                            <li>Antes de publicar un coleccionable, asegúrate de que esté en buen estado y sea auténtico.</li>
+                            <li>Proporciona detalles precisos sobre el estado del coleccionable, como cualquier daño o desgaste.</li>
+                            <li>Investiga los precios de mercado para determinar el valor aproximado del coleccionable.</li>
+                            <li>No publiques información personal en la descripción del coleccionable.</li>
+                        </ul>
+                        
+                        <h2>Intercambio de coleccionables</h2>
+                        <ul>
+                            <li>Comunícate claramente con el otro usuario para acordar los términos del intercambio.</li>
+                            <li>Si no estás seguro de que el coleccionable que estás intercambiando sea auténtico, investiga su autenticidad antes de realizar el intercambio.</li>
+                            <li>Asegúrate de empacar adecuadamente el coleccionable para evitar daños durante el envío.</li>
+                            <li>Utiliza un método de envío seguro y rastreable.</li>
+                            <li>Si el coleccionable que estás recibiendo no cumple con las descripciones proporcionadas por el otro usuario, comunícate con ellos para resolver la situación.</li>
+                        </ul>
+                        
+                        <h2>Mantén una comunicación cordial</h2>
+                        <ul>
+                            <li>Mantén una comunicación respetuosa y cordial con los demás usuarios.</li>
+                            <li>Respeta las opiniones y puntos de vista de los demás usuarios.</li>
+                            <li>Si tienes algún problema con otro usuario, comunícate con ellos de manera respetuosa para resolver la situación.</li>
+                            <li>No hagas comentarios ofensivos o inapropiados en los mensajes de correo privados.</li>
+                        </ul>
+                        
+                        <h2>Protege tus datos personales</h2>
+                        <ul>
+                            <li>No publiques información personal en los correos privados o en los anuncios.</li>
+                            <li>No compartas información personal, como tu dirección o número de teléfono, con otros usuarios, a menos que sea para llegar a un acuerdo de intercambio o venta.</li>
+                            <li>No accedas a enlaces que no sean seguros o de confianza.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="desplegable" (click)="toggleContent('seccion8')">
+                    <h2 class="titulo">Condiciones de uso y política de privacidad</h2>
+                    <div class="contenido" #contenido8>
+                        <h1>Aceptación de las condiciones de uso</h1>
+                        <p>Al utilizar esta aplicación web, aceptas las siguientes condiciones de uso:</p>
+                        <ul>
+                            <li>No utilizar la aplicación web con fines ilegales.</li>
+                            <li>No compartir información personal de otros usuarios sin su consentimiento.</li>
+                            <li>No utilizar la aplicación web para acosar o molestar a otros usuarios.</li>
+                            <li>No utilizar la aplicación web para publicar contenido ofensivo o inapropiado.</li>
+                            <li>No utilizar la aplicación web para infringir los derechos de autor o la propiedad intelectual de otros usuarios.</li>
+                            <li>Aceptar la responsabilidad de cualquier acción que realices en la aplicación web.</li>
+                            <li>Aceptar que la aplicación web no se hace responsable de cualquier daño o pérdida que puedas sufrir al utilizarla.</li>
+                        </ul>
+                        
+                        <h2>Modificaciones a las condiciones de uso</h2>
+                        <p>La aplicación web se reserva el derecho de modificar estas condiciones de uso en cualquier momento sin previo aviso. 
+                            Es tu responsabilidad revisar estas condiciones de uso periódicamente para estar al tanto de cualquier cambio.</p>
+                        
+                        <h2>Resolución de conflictos</h2>
+                        <p>Cualquier conflicto relacionado con el uso de la aplicación web se resolverá a través de medios amistosos y de negociación.
+                             Si no se puede resolver de manera amistosa, se someterá a la jurisdicción de los tribunales competentes.</p>
+                        
+                        <h1>Política de privacidad</h1>
+                        
+                        <h2>Recopilación de información personal</h2>
+                        <p>La aplicación web recopila información personal de los usuarios, incluyendo nombre, correo electrónico y dirección de envío, 
+                            con el fin de facilitar la publicación y el intercambio de coleccionables. 
+                            La aplicación web se compromete a proteger la privacidad de los usuarios y no compartirá información personal con terceros sin el consentimiento expreso del usuario.</p>
+                        
+                        <h2>Seguridad de la información</h2>
+                        <p>La aplicación web utiliza medidas de seguridad razonables para proteger la información personal de los usuarios contra el acceso no autorizado y la divulgación. 
+                            Sin embargo, la aplicación web no puede garantizar la seguridad absoluta de la información personal.</p>
+                        
+                        <h2>Modificaciones a la política de privacidad</h2>
+                        <p>La aplicación web se reserva el derecho de modificar esta política de privacidad en cualquier momento sin previo aviso. 
+                            Es tu responsabilidad revisar esta política de privacidad periódicamente para estar al tanto de cualquier cambio.</p>
                     </div>
                 </div>
             </div>

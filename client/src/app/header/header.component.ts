@@ -29,12 +29,12 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
 
-    // Detectar si la pantalla es pequeña
-    this.isSmallScreen = window.innerWidth < 768;
+    // Detectar si la pantalla es pequeña 768
+    this.isSmallScreen = window.innerWidth < 600;
 
     // Escuchar cambios en el tamaño de la pantalla
     window.addEventListener('resize', () => {
-      this.isSmallScreen = window.innerWidth < 1000;
+      this.isSmallScreen = window.innerWidth < 1200;
     });
     
     if(localStorage.getItem('token')){

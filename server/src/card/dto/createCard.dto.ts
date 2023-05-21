@@ -51,7 +51,6 @@ export class CreateCardDto {
     description: 'Descripción del cromo.',
     example: 'Descripción del cromo (o anuncio)'
   })
-  @IsNotEmpty()
   @IsString()
   description: string;
 

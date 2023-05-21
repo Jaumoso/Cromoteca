@@ -5,6 +5,8 @@ import { CardService } from '../services/card.service';
 import { Collection } from '../shared/collection';
 import { UserService } from '../services/user.service';
 import { AdvertService } from '../services/advert.service';
+import { Card } from '../shared/card';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-library',
@@ -17,7 +19,8 @@ export class LibraryComponent implements OnInit {
     private cardService: CardService,
     private userService: UserService,
     private advertService: AdvertService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar
   ) { }
 
   collections: Collection[] = [];
@@ -25,6 +28,7 @@ export class LibraryComponent implements OnInit {
   errmsg: string = 'No se han encontrado colecciones!';
   gridColumns = 4; // cantdad de colecciones en una fila
   searchText: string = '';
+  completed: number[] = [];
   @Input() userId: any;
 
   ngOnInit() {
@@ -110,6 +114,17 @@ export class LibraryComponent implements OnInit {
               }
             })
             .catch((error) => {console.error(error);});
+          })
+          .then(() => {
+            this.snackBar.open(
+              "Colección borrada de la biblioteca", 
+              "Aceptar",
+              {
+                verticalPosition: 'top',
+                duration: 6000,
+                panelClass: ['snackbar']
+              }
+              );
           })
           .catch((error) => {console.error(error);});
       }

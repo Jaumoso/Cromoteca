@@ -14,6 +14,7 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DeleteAccountDialogComponent } from '../delete-account-dialog/delete-account-dialog.component';
 import { AccountService } from '../services/account.service';
+import { LoginStatusService } from '../services/loginStatus.service';
 
 @Component({
   selector: 'app-editprofile',
@@ -111,6 +112,7 @@ export class EditprofileComponent implements OnInit {
   user: User | undefined;
   address: Address | undefined;
   confirmPassword: string | undefined;
+  showPassword: boolean = false;
 
   onSubmit() {
     // Se actualiza la información de la cuenta.
@@ -118,7 +120,11 @@ export class EditprofileComponent implements OnInit {
     .then(() => {
       this.router.navigateByUrl('/home');
       this.authService.closeSession();
-      this.dialog.open(LoginComponent);
+      this.authService.login(this.user?.username!, this.user?.password!)
+      .then((token) => {
+        this.authService.setSession(token);
+      }).catch((error) => {console.error(error);});
+      
       this.snackBar.open(
         "Datos de usuario actualizados.", 
         "Aceptar",
@@ -160,6 +166,10 @@ export class EditprofileComponent implements OnInit {
 
   goBack() {
     this.location.back();
+  }
+
+  toggleShowPassword() {
+    this.showPassword = !this.showPassword;
   }
 }
 

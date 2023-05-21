@@ -1,4 +1,4 @@
-import { Component, OnInit, SimpleChanges, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener, OnInit, SimpleChanges, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Params, Router} from '@angular/router';
 import { switchMap } from 'rxjs';
 import { CollectionService } from '../services/collection.service';
@@ -14,6 +14,7 @@ import { AdvertService } from '../services/advert.service';
 import { Advert } from '../shared/advert';
 import { AddAdvertComponent } from '../add-advert/add-advert.component';
 import { UserService } from '../services/user.service';
+import { UpdateElementComponent } from '../update-element/update-element.component';
 
 @Component({
   selector: 'app-fill-collection',
@@ -40,6 +41,7 @@ export class FillCollectionComponent implements OnInit {
   collection: Collection | undefined;
   userId: string | undefined;
   cards: Card[] = [];
+  filteredCards: Card[] = [];
   completed: number = 0;
   missing: number = 0;
   percentage: string = '';
@@ -47,8 +49,15 @@ export class FillCollectionComponent implements OnInit {
   cardList: number[] = [];
   adverts: string[] = [];
   value: number = 0;
-
+  windowScrolled: boolean = false;
   public isLoading = true;
+  nuevo: number = 0;
+  seminuevo: number = 0;
+  usado: number = 0;
+  roto: number = 0;
+  totalCards: number = 0;
+
+  searchText: string = '';
 
   ngOnInit() {
     // coge el id de la colección pasado como parámetro y recupera la información
@@ -84,11 +93,12 @@ export class FillCollectionComponent implements OnInit {
             const collectionSize = this.collection?.size ?? 0;
             this.cardList = Array(collectionSize).fill(0);
             this.cards = cards;
+            this.filteredCards = cards;
             this.completed = this.completarSiUnico(cards);
             this.missing = this.collection!.size! - this.completed;
             this.percentage = (this.completed / this.collection!.size! * 100).toFixed(2);
             
-            // Verificar si cada carta está en el array de cartas || sumar valor de la colección
+            // Verificar si cada carta está en el array de cartas
             cards.forEach((card) => {
               const cardIndex = card.cardId;
   
@@ -106,13 +116,46 @@ export class FillCollectionComponent implements OnInit {
 
               // Sumar precio de las cartas para obtener valor de la colección
               this.value += card.price!;
+              // Sumar total de cartas
+              this.totalCards += card.quantity!;
+              // Sumar estados de las cartas
+              if (card.state == 'NUEVO') {this.nuevo += card.quantity!;} 
+              else if (card.state == 'SEMINUEVO') {this.seminuevo += card.quantity!;} 
+              else if (card.state == 'USADO') {this.usado += card.quantity!;} 
+              else if (card.state == 'ROTO') {this.roto += card.quantity!;}
             });
             this.isLoading = false;
           });
       })
       .catch((error) => {console.error(error);});
     });
+    this.goToTop();
   }
+
+  searchCards(): Card[] {
+    // If no search text or category is provided, return all collections
+    if (!this.searchText) {
+      return this.cards;
+    }
+    
+    // Filter the collections based on the search text and category
+    const filteredCards = this.cards.filter((card) => {
+      const isMatch = (str: string) =>
+        str
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .includes(this.searchText!.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')); 
+      
+      if(card.name != undefined && card.description != undefined){
+        return (!this.searchText || isMatch(card.name) || isMatch(card.description) || isMatch(card.cardId!.toString()) || isMatch(card.price!.toString()) || isMatch(card.quantity!.toString()));
+      }
+      return this.cards;
+    });
+    
+    this.filteredCards = filteredCards;
+    return filteredCards;
+}
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.hasOwnProperty('cards')) {
@@ -171,6 +214,7 @@ export class FillCollectionComponent implements OnInit {
 
             // Se añade el elemento al array de elementos
             this.cards.push(card);
+
             this.cardList[result.card.cardId-1] = 1;
 
             // si no existe la carta en el array
@@ -183,12 +227,35 @@ export class FillCollectionComponent implements OnInit {
             this.percentage = (this.completed / this.collection!.size! * 100).toFixed(2);
             this.value += card.price!;
 
+            this.totalCards += card.quantity!;
+
+            if (card.state == 'NUEVO') {this.nuevo += card.quantity!;} 
+            else if (card.state == 'SEMINUEVO') {this.seminuevo += card.quantity!;} 
+            else if (card.state == 'USADO') {this.usado += card.quantity!;} 
+            else if (card.state == 'ROTO') {this.roto += card.quantity!;}
+
           }
           else{
             this.showSnackBar("Ha habido un problema al añadir el elemento");
           }
         })
         .catch((error) => {console.error(error);});
+      }
+    });
+  }
+
+  updateElement(card: Card) {
+    const dialogRef = this.addElementDialog.open(UpdateElementComponent, {
+      data: { collectionId: this.collection?._id, userId: this.userId, card }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result?.card){
+        this.cardService.updateCard(result.card)
+        .subscribe(() => {
+          // si se ha modificado el elemento
+          this.showSnackBar("Elemento modificado");
+        });
       }
     });
   }
@@ -219,6 +286,13 @@ export class FillCollectionComponent implements OnInit {
       
       this.percentage = (this.completed / this.collection!.size! * 100).toFixed(2);
       this.value -= card.price!;
+      this.totalCards -= card.quantity!;
+
+      if (card.state == 'NUEVO') {this.nuevo -= card.quantity!;} 
+      else if (card.state == 'SEMINUEVO') {this.seminuevo -= card.quantity!;} 
+      else if (card.state == 'USADO') {this.usado -= card.quantity!;} 
+      else if (card.state == 'ROTO') {this.roto -= card.quantity!;}
+
       this.showSnackBar("Elemento " + card.cardId + " eliminado");
     });
   }
@@ -246,6 +320,24 @@ export class FillCollectionComponent implements OnInit {
     });
   }
 
+  deleteAdvert(card: Card) {
+    // si existe un anuncio para esa carta lo borra
+    this.advertService.deleteAdvertCard(card._id!)
+    .subscribe(() => {
+        // borra del array de adverts el id del elemento.
+        const index = this.adverts.indexOf(card._id!);
+        this.adverts.splice(index, 1);
+        this.showSnackBar("Anuncio eliminado");
+    });
+  }
+
+  gotoAdvert(card: Card) {
+    this.advertService.getAdvertByCard(card._id!)
+    .subscribe((advert) => {
+      this.router.navigate(['/advertdetails', advert._id]);
+    });
+  }
+
   // función para mostrar una MatSnackBar
   showSnackBar(message: string){
     this.snackBar.open(
@@ -268,5 +360,28 @@ export class FillCollectionComponent implements OnInit {
   goBack() {
     this.location.back();
   }
-  
+
+  // Botón para volver al tope de la página
+  @HostListener("window:scroll", [])
+  onWindowScroll() {
+    if (window.pageYOffset > 500) {
+      this.windowScrolled = true;
+    } else if (this.windowScrolled && window.pageYOffset < 500) {
+      this.windowScrolled = false;
+    }
+  }
+
+  scrollToTop() {
+    (function smoothscroll() {
+      var currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
+      if (currentScroll > 0) {
+        window.requestAnimationFrame(smoothscroll);
+        window.scrollTo(0, currentScroll - (currentScroll / 8));
+      }
+    })();
+  }
+
+  goToTop() {
+    window.scrollTo(0, 0);
+  }
 }

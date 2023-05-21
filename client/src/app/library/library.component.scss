@@ -60,3 +60,14 @@ button:hover {
     background-color: mix($background-dark, black, 70%);
     font-weight: bold;
 }
+
+.delete:hover {
+    background-color: rgb(255, 86, 86);
+}
+.delete:active {
+    background-color: mix(rgb(255, 86, 86), black, $weight: 80%);
+}
+
+#button-margin {
+    margin-right: 5px;
+}

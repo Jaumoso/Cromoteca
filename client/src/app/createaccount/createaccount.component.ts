@@ -77,6 +77,7 @@ export class CreateaccountComponent implements OnInit {
   }
 
   form: FormGroup;
+  showPassword: boolean = false;
 
   user = {
     firstName: '',
@@ -154,6 +155,10 @@ export class CreateaccountComponent implements OnInit {
         })
         .catch((error) => {console.error(error);});
       }
+  }
+  
+  toggleShowPassword() {
+    this.showPassword = !this.showPassword;
   }
 
   goBack() {

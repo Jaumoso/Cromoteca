@@ -15,7 +15,7 @@ fxLayoutGap="10px">
                 <button mat-button [routerLink]="['/collectiondetails',collection?._id]">Información de la colección a la que pertenece</button>
             </div>
         </div>
-        <div *ngIf="loggedIn">
+        <div *ngIf="loggedIn && currentUser != seller?.username">
             <button (click)="sendEmail()">Ponerse en contacto</button>
         </div>
     </div>
@@ -31,7 +31,7 @@ fxLayoutGap="10px">
             </tr>
             <tr>
                 <th scope="row">Descripción del elemento:</th>
-                <td class="td-grey">{{card?.description}}</td>
+                <td class="td-grey description">{{card?.description}}</td>
             </tr>
             <tr>
                 <th scope="row">Número de elemento dentro de la colección:</th>
@@ -51,27 +51,35 @@ fxLayoutGap="10px">
             </tr>
             <tr>
                 <th scope="row">Descripción del anuncio:</th>
-                <td class="td-grey">{{advert?.description}}</td>
+                <td class="td-grey description">{{advert?.description}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Precio:</th>
+                <td>{{advert?.price}} €</td>
             </tr>
             <tr>
                 <th scope="row">Fecha de creación del anuncio:</th>
-                <td>{{advert?.createdDate | date:"dd/MM/yyyy - hh:mm a"}}</td>
+                <td class="td-grey">{{advert?.createdDate | date:"dd/MM/yyyy - hh:mm a"}}</td>
             </tr>
             <tr>
                 <th scope="row">Formato</th>
-                <td class="td-grey">{{collection?.format}}</td>
+                <td>{{collection?.format}}</td>
             </tr>
             <tr>
                 <th scope="row">Tema</th>
-                <td>{{collection?.theme}}</td>
+                <td class="td-grey">{{collection?.theme}}</td>
             </tr>
             <tr>
                 <th scope="row">Idioma</th>
-                <td class="td-grey">{{collection?.language}}</td>
+                <td>{{collection?.language}}</td>
             </tr>
             <tr>
                 <th scope="row">Vendedor:</th>
-                <td>{{seller?.username}} / {{seller?.firstName}}</td>
+                <td class="td-grey">{{seller?.username}} / {{seller?.firstName}}</td>
+            </tr>
+            <tr *ngIf="city || province || country">
+                <th scope="row">Ubicación:</th>
+                <td>{{city}} / {{province}} / {{country}}</td>
             </tr>
         </table>
     </div>
