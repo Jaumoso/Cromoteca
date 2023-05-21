@@ -20,6 +20,7 @@ Frontend (client) | Backend (server)
 
 # Lanzar contenedores
 Se necesita docker o podman instalado en la máquina local y haber descargado las imágenes previamente.
+Consultad _docker-compose.yml_ para obtener las variables de entorno.
 
 ### Lanzar contenedores por separado
 CLIENTE
