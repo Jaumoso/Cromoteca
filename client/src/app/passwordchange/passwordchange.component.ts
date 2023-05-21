@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
 import { UserService } from '../services/user.service';
+import { EmailService } from '../services/email.service';
 
 @Component({
   selector: 'app-passwordchange',
@@ -15,6 +16,7 @@ export class PasswordchangeComponent implements OnInit {
     private formBuilder: FormBuilder,
     private location: Location,
     private userService: UserService,
+    private emailService: EmailService
   ) { 
     this.sendEmailForm = this.formBuilder.group({
       email: this.emailValidation,
@@ -43,7 +45,16 @@ export class PasswordchangeComponent implements OnInit {
         this.emailButton = true;
         
         this.code = this.generateCode();
-        // TODO: enviar código vía SMTP
+        
+        const emailData = {
+          email: this.sendEmailForm.value.email,
+          _subject: "Cambio de contraseña CROMOTECA",
+          message: "Si no has solicitado un cambio de contraseña, puedes ignorar este mensaje. El código de recuperación es: " + this.code,
+        };
+        this.emailService.SendEmail(emailData)
+        .subscribe((response) => {
+          console.log(response);
+        })
       }
     })
     .catch((error) => {console.error(error);});

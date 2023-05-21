@@ -55,6 +55,8 @@ import { AdvertsComponent } from './adverts/adverts.component';
 import { AdvertdetailsComponent } from './advertdetails/advertdetails.component';
 import { UpdateElementComponent } from './update-element/update-element.component';
 
+import { EmailService } from './services/email.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -117,6 +119,7 @@ import { UpdateElementComponent } from './update-element/update-element.componen
     useClass: AuthInterceptorService,
     multi: true 
   },
+  EmailService
   ],
   bootstrap: [AppComponent]
 })
