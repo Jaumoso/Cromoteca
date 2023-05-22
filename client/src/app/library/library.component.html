@@ -4,7 +4,7 @@
         <h3><b>Buscar colección:</b></h3>
     </div>
     <div fxFlex fxFlex.gt-sm="auto" fxLayoutAlign="center center">
-        <mat-form-field>
+        <mat-form-field fxFlex="100">
             <mat-label>Buscar colección</mat-label>
             <input matInput type="text" [(ngModel)]="searchText" (ngModelChange)="searchCollections()">
             <mat-icon matPrefix>search</mat-icon>

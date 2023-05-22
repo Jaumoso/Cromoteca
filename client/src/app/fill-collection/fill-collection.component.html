@@ -58,11 +58,11 @@
 <div class="element-list content">
   <div fxLayout="column">
 
-    <div fxLayoutAlign="center start">
+    <div fxLayoutAlign="center start" fxFlex="auto">
       <h2><b><u>Elementos Adquiridos</u></b></h2>
     </div>
-    <div fxLayoutAlign="center start">
-      <mat-form-field>
+    <div fxLayoutAlign="center start" fxFlex="auto">
+      <mat-form-field fxFlex="40">
           <mat-label>Buscar coleccionable</mat-label>
           <input matInput type="text" [(ngModel)]="searchText" (ngModelChange)="searchCards()">
           <mat-icon matPrefix>search</mat-icon>
