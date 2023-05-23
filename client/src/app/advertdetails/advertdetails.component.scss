@@ -43,6 +43,17 @@ $data-table-background: rgb(200, 237, 241);
         background-color: mix($background-dark, black, 70%);
         font-weight: bold;
     }
+
+    .seller{
+        background-color: rgb(255, 86, 86);
+
+        &:hover {
+            background-color: mix(rgb(255, 86, 86), black, $weight: 80%);
+        }
+        &:active {
+            background-color: mix(rgb(255, 86, 86), black, $weight: 70%);
+        }
+    }
 }
 
 .right-details {

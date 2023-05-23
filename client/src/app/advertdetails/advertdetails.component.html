@@ -16,7 +16,7 @@ fxLayoutGap="10px">
             </div>
         </div>
         <div *ngIf="loggedIn && currentUser != seller?.username">
-            <button (click)="sendEmail()">Ponerse en contacto</button>
+            <button class="seller" (click)="sendEmail()">Ponerse en contacto</button>
         </div>
     </div>
 
