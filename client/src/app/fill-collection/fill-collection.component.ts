@@ -148,7 +148,7 @@ export class FillCollectionComponent implements OnInit {
         .includes(this.searchText.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')); 
       
       if(card.name != undefined && card.description != undefined){
-        return (!this.searchText || isMatch(card.name) || isMatch(card.description) || isMatch(card.cardId!.toString()) || isMatch(card.price!.toString()) || isMatch(card.quantity!.toString()));
+        return (!this.searchText || isMatch(card.name) || isMatch(card.description) || isMatch(card.state!.toLowerCase()) || isMatch(card.cardId!.toString()) || isMatch(card.price!.toString()) || isMatch(card.quantity!.toString()));
       }
       return this.cards;
     });
