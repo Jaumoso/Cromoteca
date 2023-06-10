@@ -4,6 +4,7 @@ import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { AddressService } from './address.service';
 import { CreateAddressDto } from './dto/createAddress.dto';
 import { UpdateAddressDto } from './dto/updateAddress.dto';
+import { sanitizeFilter } from 'mongoose';
 
 @ApiTags('Address')
 @Controller('address')
@@ -62,7 +63,7 @@ export class AddressController {
     @ApiCreatedResponse({ description: 'UPDATE te data of the ADDRESS into the database.' })
     async updateAddress(@Res() response, @Param('id') addressId: string, @Body() updateAddressDto: UpdateAddressDto) {
         try {
-            const existingAddress = await this.addressService.updateAddress(addressId, updateAddressDto);
+            const existingAddress = await this.addressService.updateAddress(addressId, sanitizeFilter(updateAddressDto));
             return response.status(HttpStatus.OK).json({
                 message: 'Address has been successfully updated',
                 existingAddress,
