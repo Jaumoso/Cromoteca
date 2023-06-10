@@ -5,6 +5,7 @@ import { CreateUserDto } from "./dto/create-user.dto";
 import { UpdateUserDto } from "./dto/update-user.dto";
 import { UserService } from "./user.service";
 import { UpdateUserContentDto } from "./dto/update-user-content.dto";
+import { sanitizeFilter } from "mongoose";
 
 
 @ApiTags('User')
@@ -91,7 +92,7 @@ export class UserController {
     @ApiCreatedResponse({ description: 'UPDATE te data of the USER into the database.' })
     async updateUser(@Res() response, @Param('id') userId: string, @Body() updateUserDto: UpdateUserDto) {
         try {
-            const existingUser = await this.userService.updateUser(userId, updateUserDto);
+            const existingUser = await this.userService.updateUser(userId, sanitizeFilter(updateUserDto));
             return response.status(HttpStatus.OK).json({
                 message: 'User has been successfully updated',
                 existingUser,
@@ -107,7 +108,7 @@ export class UserController {
     @ApiCreatedResponse({ description: 'UPDATE te data of the USER into the database.' })
     async updateUserContent(@Res() response, @Param('id') userId: string, @Body() updateUserContent: UpdateUserContentDto) {
         try {
-            const existingUser = await this.userService.updateUserContent(userId, updateUserContent);
+            const existingUser = await this.userService.updateUserContent(userId, sanitizeFilter(updateUserContent));
             return response.status(HttpStatus.OK).json({
                 message: 'User has been successfully updated',
                 existingUser,

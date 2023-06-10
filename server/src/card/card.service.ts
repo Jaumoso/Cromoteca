@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Model, sanitizeFilter } from 'mongoose';
 import { CardDocument } from './schema/card.schema';
 import { CreateCardDto } from './dto/createCard.dto';
 import { UpdateCardDto } from './dto/updateCard.dto';
@@ -51,7 +51,7 @@ export class CardService {
     }
 
     async updateCard(cardId: string, updateCardDto: UpdateCardDto) {
-        const updatedCard = await this.cardModel.findByIdAndUpdate(cardId, updateCardDto);
+        const updatedCard = await this.cardModel.findByIdAndUpdate(cardId, sanitizeFilter(updateCardDto));
         if (!updatedCard) {
             throw new NotFoundException('Card data not found!');
         }

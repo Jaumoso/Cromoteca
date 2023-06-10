@@ -6,6 +6,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import * as bcrypt from 'bcrypt';
 import { UserDocument } from './schema/user.schema';
 import { UpdateUserContentDto } from './dto/update-user-content.dto';
+import { escapeRegExp } from 'lodash';
 
 @Injectable()
 export class UserService {
@@ -47,8 +48,11 @@ export class UserService {
 
     
     async checkExistingUser(username: string, email: string): Promise<UserDocument[]> {
-        const usernameRegex = new RegExp('^' + username + '$','i');
-        const emailRegex = new RegExp('^' + email + '$','i');
+        const sanitizedUsername = escapeRegExp(username);
+        const sanitizedEmail = escapeRegExp(email);
+
+        const usernameRegex = new RegExp('^' + sanitizedUsername + '$','i');
+        const emailRegex = new RegExp('^' + sanitizedEmail + '$','i');
         const userData = await this.userModel
         .find({ $or: 
             [ 

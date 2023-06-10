@@ -4,6 +4,7 @@ import { JwtAuthGuard } from "src/auth/jwt-auth.guard";
 import { CardService } from "./card.service";
 import { CreateCardDto } from "./dto/createCard.dto";
 import { UpdateCardDto } from "./dto/updateCard.dto";
+import { sanitizeFilter } from "mongoose";
 
 
 @ApiTags('Card')
@@ -93,7 +94,7 @@ export class CardController {
     @ApiCreatedResponse({ description: 'UPDATE te data of the CARD into the database.' })
     async updateCard(@Res() response, @Param('id') cardId: string, @Body() updateCardDto: UpdateCardDto) {
         try {
-            const existingCard = await this.cardService.updateCard(cardId, updateCardDto);
+            const existingCard = await this.cardService.updateCard(cardId, sanitizeFilter(updateCardDto));
             return response.status(HttpStatus.OK).json({
                 message: 'Card has been successfully updated',
                 existingCard,
