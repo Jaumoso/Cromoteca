@@ -6,4 +6,4 @@ RUN --mount=type=cache,target=/root/.npm npm install
 COPY . .
 RUN --mount=type=cache,target=/root/.npm npm run build
 EXPOSE 3000
-CMD ["npm", "run", "start:prod"]
+#CMD ["npm", "run", "start:prod"]
