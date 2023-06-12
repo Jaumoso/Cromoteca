@@ -1,6 +1,7 @@
 name: Build Test Run Analyze Containerize Push
 
 on:
+  workflow_dispatch:
   push:
     branches: 
       - main
@@ -14,7 +15,14 @@ jobs:
        steps:
          - name: Checkout code
            uses: actions/checkout@v3
-         - name: install
+           
+         - name: Cache dependencies
+           uses: actions/cache@v3
+           with:
+            path: ~/.yarn
+            key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
+            
+         - name: Install dependencies
            run: |
             cd client
             yarn install
