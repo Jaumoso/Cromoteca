@@ -188,5 +188,5 @@ jobs:
       - name: Output Report
         run: |
           echo "Something went wrong."
-          echo "${{ github }}
+          echo "${{ github }}"
 
