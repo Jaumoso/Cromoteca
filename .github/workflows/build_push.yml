@@ -19,19 +19,17 @@ jobs:
          - name: Cache
            uses: actions/cache@v3.2.6
            with:
-            # A list of files, directories, and wildcard patterns to cache and restore
               path: ~/.npm
-              # An explicit key for restoring and saving the cache
               key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
             
          - name: Install dependencies
            run: |
             cd client
-            yarn install
+            npm ci
          - name: build
            run: |
             cd client
-            yarn build
+            npm run build
          #- name: test
          # run: |
          #  cd client
