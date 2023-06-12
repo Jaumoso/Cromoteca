@@ -15,21 +15,14 @@ jobs:
        steps:
          - name: Checkout code
            uses: actions/checkout@v3
-           
-         - name: Cache
-           uses: actions/cache@v3.2.6
-           with:
-              path: ~/.npm
-              key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
-            
          - name: Install dependencies
            run: |
             cd client
-            npm ci
+            yarn install
          - name: build
            run: |
             cd client
-            npm run build
+            yarn build
          #- name: test
          # run: |
          #  cd client
