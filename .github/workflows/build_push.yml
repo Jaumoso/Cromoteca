@@ -180,13 +180,4 @@ jobs:
       run: |
         echo ${{ steps.docker_build_client.outputs.digests }}
         echo ${{ steps.docker_build_server.outputs.digests }}
-  report:
-    needs: build-docker-images-and-publish
-    if: failure()
-    runs-on: ubuntu-latest
-    steps:
-      - name: Output Report
-        run: |
-          echo "Something went wrong."
-          echo "${{ github }}"
 
