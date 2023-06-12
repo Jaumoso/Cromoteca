@@ -181,7 +181,7 @@ jobs:
         echo ${{ steps.docker_build_client.outputs.digests }}
         echo ${{ steps.docker_build_server.outputs.digests }}
   report:
-    needs: [build-run-test-client,build-run-test-server,sonar-client,sonar-server,build-docker-images-and-publish]
+    needs: build-docker-images-and-publish
     if: failure()
     runs-on: ubuntu-latest
     steps:
